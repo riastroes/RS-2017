@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+<title>W3.CSS Template</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<script src="/functions.js" type="text/javascript"></script>
+<style>
+body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
+</style>
+<body class="w3-light-grey">
+
+<!-- w3-content defines a container for fixed size centered content,
+and is wrapped around the whole page content, except for the footer in this example -->
+<div class="w3-content" style="max-width:1400px">
+
+<!-- Header -->
+<header class="w3-container w3-center w3-padding-32">
+  <button class="w3-button w3-padding-large w3-white w3-border" onclick=goHome()><b><< TERUG</b></button>
+  <h1><b>BREIEN OP DE 3D-PRINTER</b></h1>
+  <p>Het verhaal van een één draad ... </p>
+</header>
+
+<!-- Blog entry -->
+  <div class="w3-card-4 w3-margin w3-white">
+    <div class="w3-container">
+      <h1><b>Mijn eigen 3D-printer</b></h1><br/><br/>
+
+    </div>
+    <div class="w3-row">
+       <div class="w3-container w3-half">
+        <iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Fria.stroes%2Fvideos%2Fvb.584099564%2F10154423259674565%2F%3Ftype%3D3&show_text=0&width=560" width="560" height="315" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allowFullScreen="true"></iframe>
+       </div>
+       <div class="w3-container w3-half">
+          <p>Mijn eigen 3D printer. <br/>
+             Zelf in elkaar gezet.<br/>
+             Anet is haar naam en ze print prima!<br/>
+             Op het facebook filmpje kun je haar aan het werk zien.<br/>
+             De eerste printjes waren natuurlijk nog niet je van het...</p>
+             <img src="_images/eerste prints.png" alt="Eerste prints" style="height:200px"/><br/><br/>
+
+       </div>
+    </div>
+  </div>
+
+  <div class="w3-card-4 w3-margin w3-white">
+    <div class="w3-container">
+      <h1><b>Van javascript naar .gcode</b></h1><br/><br/>
+    </div>
+    <div class="w3-row">
+      <div class="w3-container w3-one">
+        <p>De 'normale' werkwijze voor een 3D printer is dat je eerst een 3d model maakt, hiervoor kun je gebruik maken van verschillende 3D software pakketten. Vervolgens wordt een 3D-model 'gesliced',
+        dat betekent dat het model in hele dunne (ongeveer 0.2 mm ) laagjes wordt 'gesneden'. Het resultaat van deze bewerking is een bestand in .gcode, waarmee de 3D-printer wordt aangestuurd.<br/>
+        Cura, is bijvoorbeeld een softwarepakket, die dit proces uitvoert. In de .gcode kunnen ook de instellingen voor een bepaalde printer en voor het gekozen filament worden opgenomen.<br/><br/>
+        Mijn werkwijze wijkt af van de hierboven beschreven werkwijze. Ik maak mijn ontwerp in javascript en genereer direct de .gcode. Ook stuur ik direct instructies voor de printer en het filament
+        mee in deze .gcode. Het resultaat kan via een SD-kaartje of USB naar de printer  worden gestuurd.<br/><br/>
+        In javascript genereer ik 'breicode'. waarbij een sterke flexibele structuur gemaakt wordt met één draad.
+       </p>
+     </div>
+      <div class="w3-row">
+        <div class="w3-col m8 s12">
+          <p><button class="w3-button w3-padding-large w3-white w3-border" onclick=goHome()><b><< Home</b></button></p>
+        </div>
+        <div class="w3-col m4 w3-hide-small">
+          <p><span class="w3-padding-large w3-right"><b>Comments  </b> <span class="w3-tag">0</span></span></p>
+        </div>
+      </div>
+    </div>
+  </div>
+    <div class="w3-card-4 w3-margin w3-white">
+      <div class="w3-container">
+        <h1><b>Breien</b></h1><br/><br/>
+      </div>
+      <div class="w3-row">
+        <div class="w3-container  w3-half">
+      <p>Breien is een schitterende techniek, waarbij met  één draad in een regelmatig patroon een flexibel en sterk materiaal wordt gevormd. Op Makerversity in Amsterdam kan ik gebruik maken van 3D printers, maar voor deze experimenten was een eigen 3D printer onmisbaar. Ik heb een 3D printer in China besteld: Anet
+De 3D printer bevalt goed en ik vind het erg prettig dat ik deze printer met een USB kabel kan verbinden met mijn Computer.
+Anet is minder precies als de Ultimakers op Makerversity, maar ik heb niet voor alle experimenten zo'n nauwkeurige printer nodig.</p>
+      </div>
+      <div class="w3-container w3-half">
+        <img src="_images/breisteken.png" alt="armband"/>
+    </div>
+    </div>
+    <div class="w3-row">
+      <div class="w3-container w3-half">
+        <img src="_images/armband.jpg" alt="armband"/>
+      </div>
+      <div class="w3-container  w3-half">
+    <p>Het zoeken naar de vorm van een breisteek, die op de printer toont als breiwerk is nog een hele speurtocht geweest. Diverse ontwerpen zijn gemaakt, weer weggegooid en opnieuw gemaakt.
+      Soms afhankelijk van het gekozen materiaal en de grootte van de steek, soms afhankelijk van de hoogte van nozzle, als de breisteek 'valt' dan verandert de vorm...  ,
+      als de printer sneller print verandert de vorm... ,ander filament levert weer een andere vorm op ... etc. </p>   </div>
+  </div>
+  </div>
+  <hr>
+
+  <!-- Blog entry -->
+  <div class="w3-card-4 w3-margin w3-white">
+  <img src="/w3images/bridge.jpg" alt="Norway" style="width:100%">
+    <div class="w3-container">
+      <h3><b>Breien op de 3D-printer</b></h3>
+      <h5>Title description, <span class="w3-opacity">April, 2017</span></h5>
+    </div>
+
+    <div class="w3-container">
+      <p>De hangers zijn een onderdeel van het project "Breien op de 3D-printer."</p>
+      <div class="w3-row">
+        <div class="w3-col m8 s12">
+          <p><button class="w3-button w3-padding-large w3-white w3-border"><b>READ MORE »</b></button></p>
+        </div>
+        <div class="w3-col m4 w3-hide-small">
+          <p><span class="w3-padding-large w3-right"><b>Comments  </b> <span class="w3-badge">2</span></span></p>
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- END BLOG ENTRIES -->
+</div>
+
+<!-- Introduction menu -->
+<div class="w3-col l4">
+  <!-- About Card -->
+  <div class="w3-card-2 w3-margin w3-margin-top">
+  <img src="/Images/ria.jpg" style="width:100%">
+    <div class="w3-container w3-white">
+      <h4><b>Ria Stroes</b></h4>
+      <p>Just me.</p>
+    </div>
+  </div><hr>
+
+  <!-- Posts -->
+  <div class="w3-card-2 w3-margin">
+    <div class="w3-container w3-padding">
+      <h4>Popular Posts</h4>
+    </div>
+    <ul class="w3-ul w3-hoverable w3-white">
+      <li class="w3-padding-16">
+        <img src="/w3images/workshop.jpg" alt="Image" class="w3-left w3-margin-right" style="width:50px">
+        <span class="w3-large">Lorem</span><br>
+        <span>Sed mattis nunc</span>
+      </li>
+      <li class="w3-padding-16">
+        <img src="/w3images/gondol.jpg" alt="Image" class="w3-left w3-margin-right" style="width:50px">
+        <span class="w3-large">Ipsum</span><br>
+        <span>Praes tinci sed</span>
+      </li>
+      <li class="w3-padding-16">
+        <img src="/w3images/skies.jpg" alt="Image" class="w3-left w3-margin-right" style="width:50px">
+        <span class="w3-large">Dorum</span><br>
+        <span>Ultricies congue</span>
+      </li>
+      <li class="w3-padding-16 w3-hide-medium w3-hide-small">
+        <img src="/w3images/rock.jpg" alt="Image" class="w3-left w3-margin-right" style="width:50px">
+        <span class="w3-large">Mingsum</span><br>
+        <span>Lorem ipsum dipsum</span>
+      </li>
+    </ul>
+  </div>
+  <hr>
+
+  <!-- Labels / tags -->
+  <div class="w3-card-2 w3-margin">
+    <div class="w3-container w3-padding">
+      <h4>Tags</h4>
+    </div>
+    <div class="w3-container w3-white">
+    <p><span class="w3-tag w3-black w3-margin-bottom">Travel</span> <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">New York</span> <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">London</span>
+      <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">IKEA</span> <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">NORWAY</span> <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">DIY</span>
+      <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Ideas</span> <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Baby</span> <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Family</span>
+      <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">News</span> <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Clothing</span> <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Shopping</span>
+      <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Sports</span> <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Games</span>
+    </p>
+    </div>
+  </div>
+
+<!-- END Introduction Menu -->
+</div>
+
+<!-- END GRID -->
+</div><br>
+
+<!-- END w3-content -->
+</div>
+
+<!-- Footer -->
+<footer class="w3-container w3-dark-grey w3-padding-32 w3-margin-top">
+  <button class="w3-button w3-black w3-disabled w3-padding-large w3-margin-bottom">Previous</button>
+  <button class="w3-button w3-black w3-padding-large w3-margin-bottom">Next »</button>
+  <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
+</footer>
+
+</body>
+</html>
