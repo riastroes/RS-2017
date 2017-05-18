@@ -16,8 +16,14 @@ function setFilter(filter){
   }
 }
 function goHome(){
-  document.location.href = "/index.html"
+
+  window.location.assign("/RS-2017/index.html")
 }
 function show(projectname){
-  document.location.href = "/Projects/" + projectname + "/index.html"
+  window.location.assign("/RS-2017/Projects/" + projectname + "/index.html");
+
+}
+function photos(projectname){
+  window.location.assign("/RS-2017/Photos/" + projectname + "/index.html");
+
 }
