@@ -9,7 +9,7 @@
 <style>
 body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
 </style>
-<body class="w3-light-grey">
+<body class="w3-light-grey w3-content" style="max-width:1600px">
 
 <!-- w3-content defines a container for fixed size centered content,
 and is wrapped around the whole page content, except for the footer in this example -->
@@ -62,6 +62,7 @@ De hangers zijn een onderdeel van het project "Breien op de 3D-printer." In java
     </div>
   </div>
   <div class="w3-third w3-container">
+    
     <img src="/RS-2017/Images/Ria.jpg" style="width:45%;" class="w3-round">
    
     <div id="my-cart-11561118" class ="w3-right">
@@ -103,12 +104,6 @@ Hiervoor schrijf ik code in javascript. Hiermee genereer ik gcode, waarmee ik de
     </div>
   </div>
 
-      <div class="w3-row">
-        <div class="w3-col m8 s12">
-          <p><button class="w3-button w3-padding-large w3-white w3-border" onclick=goHome()><b><< Terug</b></button></p>
-        </div>
-      </div>
-<!-- END BLOG ENTRIES -->
 </div>
 
 <!-- END GRID -->
@@ -133,12 +128,12 @@ Hiervoor schrijf ik code in javascript. Hiermee genereer ik gcode, waarmee ik de
   <button type="submit" class="w3-button w3-black w3-margin-bottom"><i class="fa fa-paper-plane w3-margin-right"></i>Verstuur email</button>
 </form>
 </div>
-<!-- Footer -->
-<footer class="w3-container w3-dark-grey w3-padding-32 w3-margin-top">
-  <button class="w3-button w3-black w3-disabled w3-padding-large w3-margin-bottom">Previous</button>
-  <button class="w3-button w3-black w3-padding-large w3-margin-bottom">Next »</button>
-  <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
-</footer>
-
+<div class="w3-row">
+       <div class="w3-one w3-center">
+        <button class="w3-button w3-padding-large w3-white  w3-border " onclick="javascript:goHome();"><b><< HOME</b></button>
+        <button class="w3-button w3-padding-large w3-white  w3-border" onclick="javascript:show('Breien op de 3D-printer');"><b><< VORIGE</b></button>
+        <button class="w3-button w3-padding-large w3-white  w3-border" onclick="javascript:show('Breien op de 3D-printer/Vaas met Bloemen');"><b>VOLGENDE >></b></button>
+        </div>
+</div
 </body>
 </html>

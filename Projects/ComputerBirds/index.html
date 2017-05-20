@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<title>TotemFlowers</title>
+<title>ComputerBirds</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -10,26 +10,81 @@
 <style>
 body,h1 {font-family: "Raleway", sans-serif}
 body, html {height: 100%}
-.bgimg {
-    background-image: url('images/totemflowers.png');
-    background-repeat:no-repeat;
-    color: darkred;
-    min-height: 100%;
-    background-position: center;
-    background-size: cover -  50px;
-}
+
 </style>
 <body>
 
 <div class="bgimg w3-display-container w3-animate-opacity w3-text-white">
-  <div class="w3-display-topleft w3-padding-large w3-xlarge">
-    TotemFlowers
-  </div>
-  <div class="w3-display-bottomleft">
-     <button class="w3-button w3-padding-large w3-white w3-border w3-left" onclick="javascript:goHome();"><b><< TERUG</b></button>
-  </div>
+  
+  
   
 </div>
+<div class="w3-row">
+  <div class="w3-one">
 
+<div class="w3-content w3-display-container">
+  <img class="mySlides" src="images/computerbirds7.jpg" style="width:100%">
+  <img class="mySlides" src="images/computerbirds1.jpg" style="width:100%">
+  <img class="mySlides" src="images/computerbirds2.jpg" style="width:100%">
+  <img class="mySlides" src="images/computerbirds3.jpg" style="width:100%">
+  <img class="mySlides" src="images/computerbirds4.jpg" style="width:100%">
+  <img class="mySlides" src="images/computerbirds5.jpg" style="width:100%">
+  <img class="mySlides" src="images/computerbirds6.jpg" style="width:100%">
+   <img class="mySlides" src="images/computerbirds8.jpg" style="width:100%">
+  <img class="mySlides" src="images/computerbirds9.jpg" style="width:100%">
+  <img class="mySlides" src="images/computerbirds10.jpg" style="width:100%">
+
+  <button class="w3-button w3-black w3-display-left" onclick="plusDivs(-1)">&#10094;</button>
+  <button class="w3-button w3-black w3-display-right" onclick="plusDivs(1)">&#10095;</button>
+</div>
+
+<script>
+var slideIndex = 1;
+showDivs(slideIndex);
+
+function plusDivs(n) {
+  showDivs(slideIndex += n);
+}
+
+function showDivs(n) {
+  var i;
+  var x = document.getElementsByClassName("mySlides");
+  if (n > x.length) {slideIndex = 1}    
+  if (n < 1) {slideIndex = x.length}
+  for (i = 0; i < x.length; i++) {
+     x[i].style.display = "none";  
+  }
+  x[slideIndex-1].style.display = "block";  
+}
+</script>
+    </div>
+  </div>
+<div class="w3-row">
+  <div class="w3-one w3-container">
+   
+    <h1 class="w3-center">ComputerBirds</h1>
+    <p>De ComputerBirds zijn gemaakt voor softwarebedrijf Compano BV.</p>
+    <p>De print, een pdf, is ontwikkeld in processing (java) en zal elke keer anders zijn. De posititie, de houding, de samenstelling en de hoogte van de torens wordt random bepaald.
+      Op de achtergrond is de code van het programma afgedrukt.
+      Deze print is uitgevoerd in behang van 9 meter bij 2.70.<br/>
+      Voor de verkoopafdeling in Arnhem zijn 2 prints gemaakt waarbij de ComputerBirds met elkaar communiceren. Hiervoor is een beperking aan het algoritme toegevoegd, waarbij de ene keer de computerbirds alleen maar naar links kijken en de andere keer alle vogels naar rechts kijken.
+      Deze prints zijn uitgevoerd op Alu-duobond, 160cm bij 120cm.
+    </div>
+  </div>
+<div class="w3-row">
+<div class="w3-half">
+  <img src="images/computerbirds-links.png" alt="ComputerBirds2 Links" />
+</div>
+<div class="w3-half">
+  <img src="images/computerbirds-rechts.png" alt="ComputerBirds2 Rechts" />
+</div>
+</div>
+<div class="w3-row">
+       <div class="w3-one w3-center">
+        <button class="w3-button w3-padding-large w3-white  w3-border " onclick="javascript:goHome();"><b><< HOME</b></button>
+        <button class="w3-button w3-padding-large w3-white  w3-border" onclick="javascript:show('Breien op de 3D-printer/Vaas met Bloemen');"><b><< VORIGE</b></button>
+        <button class="w3-button w3-padding-large w3-white  w3-border" onclick="javascript:show('Totemflowers');"><b>VOLGENDE >></b></button>
+        </div>
+    </div>
 </body>
 </html>

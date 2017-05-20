@@ -10,24 +10,24 @@
 <style>
 body,h1 {font-family: "Raleway", sans-serif}
 body, html {height: 100%}
-.bgimg {
-    background-image: url('images/totemflowers.png');
-    background-repeat:no-repeat;
-    color: darkred;
-    min-height: 100%;
-    background-position: center;
-    background-size: cover -  50px;
-}
+
 </style>
 <body>
 
-<div class="bgimg w3-display-container w3-animate-opacity w3-text-white">
-  <div class="w3-display-topleft w3-padding-large w3-xlarge">
+<div class=" w3-display-container w3-animate-opacity w3-white">
+  <h1 class="w3-center">
     TotemFlowers
+  </h1>
+  <div class="w3-container">
+      <img src="images/totemflowers.png" alt="TotemFlowers" style="width:100%" />
   </div>
-  <div class="w3-display-bottomleft">
-     <button class="w3-button w3-padding-large w3-white w3-border w3-left" onclick="javascript:goHome();"><b><< TERUG</b></button>
-  </div>
+  <div class="w3-row">
+       <div class="w3-one w3-center">
+        <button class="w3-button w3-padding-large w3-white  w3-border " onclick="javascript:goHome();"><b><< HOME</b></button>
+        <button class="w3-button w3-padding-large w3-white  w3-border" onclick="javascript:show('ComputerBirds');"><b>VORIGE</b></button>
+        <button class="w3-button w3-padding-large w3-white  w3-border" onclick="javascript:show('comming soon');"><b>VOLGENDE</b></button>
+        </div>
+    </div>
   
 </div>
 

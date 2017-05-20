@@ -33,8 +33,7 @@ and is wrapped around the whole page content, except for the footer in this exam
        <div class="w3-container w3-half">
         <iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Fria.stroes%2Fvideos%2Fvb.584099564%2F10154423259674565%2F%3Ftype%3D3&show_text=0&width=560"  style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allowFullScreen="true"></iframe>
 <br/><br/><br/>
-        <button class="w3-button w3-padding-large w3-white w3-border w3-left" onclick="javascript:goHome();"><b><< TERUG</b></button>
-
+       
      </div>
        <div class="w3-container w3-half">
           <p>Mijn eigen 3D printer. <br/>
@@ -101,50 +100,33 @@ Anet is minder precies als de Ultimakers op Makerversity, maar ik heb niet voor 
 
   <!-- Blog entry -->
   <div class="w3-row">
-    <div class="w3-containter  w3-half">
-      <img src="/RS-2017/Images/hanger-wit.jpg" alt="Hangers-wit" style="width:100%">
-
+    <div class="w3-containter  w3-third w3-center" onclick="javascript:show('Breien op de 3D-printer/Hangers-wit');">
+      
       <h3><b>Hangers (wit)</b></h3>
-        <div class="w3-col m8 s12">
-        <p><button class="w3-button w3-padding-large w3-white w3-border"  onclick="javascript:show('Breien op de 3D-printer/Hangers-wit');"><b>LEES MEER >></b></button>
-          </p>
-      </div>
+      <img src="/RS-2017/Images/hanger-wit.jpg" alt="Hangers-wit" style="width:100%">
+   
     </div>
-    <div class="w3-containter   w3-half">
+    <div class="w3-containter    w3-third w3-center" onclick="javascript:show('Breien op de 3D-printer/Vaas met Bloemen');">
+      <h3><b>Vaas met Bloemen</b></h3>
       <img src="/RS-2017/Images/vaas met bloemen.jpg" alt="Vaas met Bloemen" style="width:100%">
-
-      <h3><b>Vaas met bloemen</b></h3>
-      <div class="w3-col m8 s12">
-        <p><button class="w3-button w3-padding-large w3-white w3-border"  onclick="javascript:show('Breien op de 3D-printer/Vaas met Bloemen');"><b>LEES MEER >></b></button>
-          </p>
-      </div>
     </div>
-    <div class="w3-row">
-        <div class="w3-containter w3-half">
-          <p><button class="w3-button w3-padding-large w3-white w3-border"  onclick="javascript:goHome();"><b><< TERUG</b></button>
-            </p>
-        </div>
-        <div class="w3-containter w3-half">
-          <p><span class="w3-padding-large w3-right"><b>Reacties  </b> <span class="w3-badge">0</span></span></p>
-        </div>
+    <div class="w3-containter    w3-third w3-center" onclick="javascript:show('Breien op de 3D-printer/Hangers');">
+      <h3><b>Wordt verwacht...</b></h3>
+      <img src="/RS-2017/Images/hangers.jpg" alt="Hangers" style="width:100%">
     </div>
+    
   </div>
 <!-- END BLOG ENTRIES -->
 </div>
-
-<!-- Introduction menu -->
-
-
-<!-- END GRID -->
 </div><br>
-
-<!-- END w3-content -->
+<div class="w3-row">
+       <div class="w3-one w3-center">
+        <button class="w3-button w3-padding-large w3-white  w3-border " onclick="javascript:goHome();"><b><< HOME</b></button>
+        <button class="w3-button w3-padding-large w3-white  w3-border" onclick="javascript:show('Breien op de 3D-printer/Hangers-wit');"><b><< VORIGE</b></button>
+         <button class="w3-button w3-padding-large w3-white  w3-border" onclick="javascript:show('Breien op de 3D-printer/Vaas met Bloemen');"><b><< VORIGE</b></button>
+        </div>
+    </div>
 </div>
-
-<!-- Footer -->
-<footer class="w3-container w3-dark-grey w3-padding-32 w3-margin-top">
-  <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
-</footer>
 
 </body>
 </html>

@@ -1,0 +1,20 @@
+<head>
+    <style>
+        #square {
+            position:absolute;
+            left:200px;
+            top:200px;
+            width:20px;
+            height:20px;
+            background:red;
+        }
+    </style>
+    <script type="text/javascript">
+       
+    </script>
+</head>
+<body onkeydown="ToggleCapture ();"> <br />
+    <h3 style="text-align:center">Press any key to toggle capture!</h3>
+    While mouse events are captured, the square follows the mouse.
+    <div id="square" onmousemove="MoveSquare (event);" onlosecapture="OnLoseCapture ()"></div>
+</body>

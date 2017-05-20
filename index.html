@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<title>RS-2017</title>
+<title>Ria Stroes Website</title>
 <meta charset="UTF-8">
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -28,6 +28,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif;}
   </div>
   <div class="w3-bar-block">
     <a href="#projecten" onclick="w3_close()" class="w3-bar-item w3-button w3-padding w3-text-teal"><i class="fa fa-th-large fa-fw w3-margin-right"></i>PROJECTEN</a>
+    <a href="/RS-2017/Photos/index.html" onclick="w3_close()" class="w3-bar-item w3-button w3-padding w3-text-teal"><i class="fa fa-th-large fa-fw w3-margin-right"></i>FOTO series</a>
     <a href="http://www.riastroes.nl/CCC" onclick="w3_close()" class="w3-bar-item w3-button w3-padding w3-text-teal"><i class="fa fa-th-large fa-fw w3-margin-right"></i>CURSUS CREATIVE CODING</a>
     <a href="#overmij" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-user fa-fw w3-margin-right"></i>OVER MIJ</a>
     <a href="#contact" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-envelope fa-fw w3-margin-right"></i>CONTACT</a>
@@ -48,7 +49,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif;}
 <div class="w3-main" style="margin-left:300px">
 
   <!-- Header -->
-  <a id="pag1"></a>
+ 
   <header id="projecten">
     <a href="#overmij"><img src="Images/Ria.jpg" style="width:65px;" class="w3-circle w3-right w3-margin w3-hide-large w3-hover-opacity"></a>
     <span class="w3-button w3-hide-large w3-xxlarge w3-hover-text-grey" onclick="w3_open()"><i class="fa fa-bars"></i></span>
@@ -57,11 +58,11 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif;}
     <div class="w3-section w3-bottombar w3-padding-16">
       <span class="w3-margin-right w3-hide-small">Filter:</span>
       <button class="w3-button w3-black w3-hide-small" onclick="javascript:setFilter('all')">ALL</button>
-      <button class="w3-button w3-white w3-hide-small" onclick="javascript:setFilter('3D-printer')"><i class="material-icons w3-margin-right"  style="font-size:18px;">devices</i>3D-printer</button>
-      <button class="w3-button w3-white w3-hide-small" onclick="javascript:setFilter('photos')"><i class="material-icons w3-margin-right" style="font-size:18px;">photo_library</i>Foto's</button>
-      <button class="w3-button w3-white w3-hide-small" onclick="javascript:setFilter('code')"><i class="material-icons w3-margin-right" style="font-size:18px;">code</i>Programmeren</button>
-      <button class="w3-button w3-white w3-hide-small" onclick="javascript:setFilter('art')"><i class="material-icons w3-margin-right" style="font-size:18px;">palette</i>Kunst</button>
-    </div>
+      <button class="w3-button w3-white w3-hide-small" onclick="javascript:setFilter('3D-printer')">3D-printer</button>
+      <button class="w3-button w3-white w3-hide-small" onclick="javascript:setFilter('code')">Code</button>
+      <button class="w3-button w3-white w3-hide-small" onclick="javascript:setFilter('animatie')">Animatie</button>
+      <button class="w3-button w3-white w3-hide-small" onclick="javascript:setFilter('diversen')">Diversen</button>
+   </div>
     </div>
   </header>
 
@@ -99,70 +100,14 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif;}
         Techniek: Javascript</p>
       </div>
     </div>
-  
-    <div class="w3-third w3-container w3-margin-bottom card w3-white  photos" onclick="photos('NZ people')">
-      <img src="Images/nz people.jpg" alt="NZ people" style="width:100%" class="w3-hover-opacity">
+    <div class="w3-third w3-container w3-margin-bottom card w3-white diversen" onclick="show('Lucas')">
+      <img src="Images/lucas.jpg" alt="Lucas" style="width:100%" class="w3-hover-opacity">
       <div class="w3-container cardtext">
-        <p><b>Nieuw Zeeland, familie en vrienden</b></p>
-        <p class="cardtext">Een fantastische reis naar Nieuw Zeeland, met heel veel dank aan Leo, Hanna en Ad!</p>
-      </div>
-    </div>
-    <div class="w3-third w3-container w3-margin-bottom card w3-white  photos" onclick="photos('NZ dogs')">
-      <img src="Images/nz dogs.jpg" alt="NZ dogs" style="width:100%" class="w3-hover-opacity">
-      <div class="w3-container cardtext">
-        <p><b>Nieuw Zeeland, de honden</b></p>
-        <p class="cardtext">Alle honden, die ons vermaakt hebben in de vakantie.</p>
+        <p><b>Waar is Lucas?</b></p>
+        <p class="cardtext">Lucas is een jaar geleden verdwenen ...</p>
       </div>
     </div>
     
-    <div class="w3-third w3-container w3-margin-bottom card w3-white  photos" onclick="photos('NZ animals')">
-      <img src="Images/nz animals.jpg" alt="NZ animals" style="width:100%;" class="w3-hover-opacity">
-      <div class="w3-container cardtext">
-        <p><b>Nieuw Zeeland, andere dieren</b></p>
-        <p class="cardtext">De dieren, die we tegen kwamen in Nieuw Zeeland.</p>
-      </div>
-    </div>
-    </a>
-    <a id="pag2">
-    <div class="w3-third w3-container w3-margin-bottom card w3-white  photos" onclick="photos('NZ flowers')">
-      <img src="Images/nz flower.jpg" alt="NZ flowers" style="width:100%;" class="w3-hover-opacity">
-      <div class="w3-container cardtext">
-        <p><b>Nieuw Zeeland, bloemen</b></p>
-        <p class="cardtext">De prachtig bloeiende bloemen in Nieuw Zeeland.</p>
-      </div>
-    </div>
-
-
-     <div class="w3-third w3-container w3-margin-bottom card w3-white  photos" onclick="photos('NZ trees')">
-      <img src="Images/nz trees.jpg" alt="NZ trees" style="width:100%" class="w3-hover-opacity">
-      <div class="w3-container cardtext">
-        <p><b>Nieuw Zeeland, Bomen</b></p>
-        <p>De bomen waren grandioos.</p>
-      </div>
-    </div>
-    
-   
-     <div class="w3-third w3-container w3-margin-bottom card w3-white  photos" onclick="photos('NZ coast')">
-      <img src="Images/nz coast.jpg" alt="NZ coast" style="width:100%" class="w3-hover-opacity">
-      <div class="w3-container cardtext">
-        <p><b>Nieuw Zeeland, De kust</b></p>
-        <p>De kust, overal anders, hier nog mooier dan daar.</p>
-      </div>
-    </div>
-    <div class="w3-third w3-container w3-margin-bottom card w3-white  photos" onclick="photos('NZ art')">
-      <img src="Images/nz art.jpg" alt="NZ trees" style="width:100%" class="w3-hover-opacity">
-      <div class="w3-container cardtext">
-        <p><b>Nieuw Zeeland, Kunst</b></p>
-        <p>Van Da Vinci tot maori- en landschapskunst.</p>
-      </div>
-    </div>
-    <div class="w3-third w3-container w3-margin-bottom card w3-white  photos" onclick="photos('WinterWandeling')">
-      <img src="Images/winter3.jpg" alt="Winter Wandeling" style="width:100%;" class="w3-hover-opacity">
-      <div class="w3-container cardtext">
-       <p><b>Winter Wandeling</b></p>
-       <p>Samen met mijn zoon en klein kinderen een prachtige wandeling gemaakt, bij ons in het bos van Gaasterland.</p>
-      </div>
-    </div>
 </div>
 
   <!-- Pagination -->
@@ -290,8 +235,7 @@ Op vrijdag werk ik samen met Jori Stoop aan diverse projecten.</p>
   </div>
   </footer>
 
-  <div class="w3-black w3-center w3-padding-24">Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-opacity">w3.css</a></div>
-
+  
 <!-- End page content -->
 </div>
 
