@@ -86,6 +86,6 @@ Lapje.prototype.create = function(showgrid, ischanged, institches, inrows, inlay
 }
 Lapje.prototype.save = function(){
   this.gcode.generate(this.layers,this.skirt, this.knittings);
-  this.gcode.save(this.name + this.settings.materialcode + this.settings.style + this.rows + "x"+ this.stitches);
+  this.gcode.save(this.settings.materialcode + this.settings.style + this.rows + "x"+ this.stitches + "x" + this.maxlayers);
   this.isSaved = true;
 }

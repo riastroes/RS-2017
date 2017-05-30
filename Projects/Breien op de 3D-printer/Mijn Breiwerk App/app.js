@@ -26,6 +26,7 @@ var func;
 
 function setup() {
     var canvas = createCanvas(1000,1000);
+    canvas.parent("divcanvas");
     pos = createVector(0,0);
     offset = createVector(0,15);
     //background(255,0,0);
@@ -34,8 +35,10 @@ function setup() {
     changeStitches();
     changeRows();
     changeLayers();
+    selectPrinter();
+    
     func ="none";
-    printer = "Ultimaker2+";
+    
     checkShowGrid = document.getElementById("showgrid");
     checkShowPointDrawing = document.getElementById("showpointdrawing");
     checkShowLineDrawing = document.getElementById("showlinedrawing");
@@ -44,12 +47,12 @@ function setup() {
     //institches =  floor(int(sliderStitches.value));
    // inrows = floor(int(sliderRows.value));
     linepath = [];
-    ischanged = false;
+    
     
   
     lapje = new Lapje(printer, "PLA", "normal", pos, institches, inrows, checkShowGrid.checked  );
     if(checkShowGrid.checked){
-      lapje.createGrid(2,2,3);
+      lapje.createGrid(3,3,3);
       lapje.showGrid();
     }
     //lapje.createGrid(3,3,3);
@@ -64,22 +67,19 @@ function draw(){
   // fill(0);
   
   
-  //showPath(checkShowPointDrawing.checked, checkShowLineDrawing.checked);
+  showPath(checkShowPointDrawing.checked);
   
 }
-function showPath(showPoints, showLines){
-  
-    stroke(0);
+function showPath(showPoints){
+   if(showPoints){
+    stroke(255, 0, 0);
     noFill();
     for(var i =0; i < linepath.length; i++){
-      if(showPoints){
+     
         strokeWeight(5);
         point(linepath[i].x + offset.x , linepath[i].y + offset.y);
       }
-      if(i > 0 && showLines){
-        strokeWeight(2);
-        line(linepath[i-1].x+ offset.x, linepath[i-1].y + offset.y, linepath[i].x+ offset.x, linepath[i].y + offset.y);
-      }
+     
     }
   
 }
@@ -112,13 +112,37 @@ function create(){
   
   pos = createVector(6,3);
   if(inrows  > 0 && institches >0){
-    ischanged = true;
+   
     
     lapje.create(checkShowGrid.checked, ischanged,institches, inrows,inlayers, linepath, func.value, ina, inb);
-    ischanged = false;
+   
   }
-}
+  if(ischanged){
+    
+     changePrice();
+   
 
+    
+  }
+   ischanged = false;
+}
+function changePrice(){
+    var price = 0;
+    for(var l = 1; l <=inlayers; l++){
+        price += institches * inrows  * (0.01 / l);
+    }
+    document.getElementById("price").innerHTML = price.toFixed(2) + " euro."
+    if(document.getElementById("checkOphalen").checked){
+      document.getElementById("postadres").required = false;
+       w3.addClass("#divpostadres", "hidden");
+      document.getElementById("emailprice").value = price.toFixed(2) + " euro."
+    }
+    else{
+      w3.removeClass("#divpostadres", "hidden");
+      document.getElementById("postadres").required = true;
+      document.getElementById("emailprice").value = (price + 3.95).toFixed(2) + " euro."
+    }
+ }
 function downloadKnitting(){
 
     if(!lapje.isSaved){
@@ -133,7 +157,7 @@ function mousePressed(){
     v.y = mouseY - offset.y;
     append(linepath, v);
     ischanged = true;
-    showPath(checkShowPointDrawing.checked, checkShowLineDrawing.checked);
+    
     create();
   } 
     
@@ -154,6 +178,7 @@ function changeStitches(){
   document.getElementById("spinstitches").innerHTML = document.getElementById("sliderstitches").value;
   institches = floor(int(document.getElementById("sliderstitches").value));
   ischanged = true;
+  
  
 }
 function changeRows(){
@@ -166,7 +191,9 @@ function changeLayers(){
   inlayers = floor(int(document.getElementById("sliderlayers").value));
   ischanged = true;
  }
-
+function selectPrinter(){
+   printer = document.getElementById("selectprinter")
+}
 function selectDisorderFunction(){
   func = document.getElementById("disorderfunctions")
   if(func.value =="none"){
