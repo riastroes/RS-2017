@@ -77,6 +77,7 @@ app.controller("MainController", function($scope, DataSource){
                      
                      
                  }
+                 $scope.combiwords += "," + "-spreekwoordenboek";
             }
             $scope.words.push({
                         id: $scope.words.length + 1,

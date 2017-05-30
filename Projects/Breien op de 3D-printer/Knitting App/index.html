@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>3D Knitting</title>
+<META NAME="COPYRIGHT" CONTENT="&copy; Ria Stroes">
+<META HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE">
+<title>Knitting App</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<script src="/RS-2017/functions.js" type="text/javascript"></script>
+<script src="/RS-2017/libraries/p5.min.js" type="text/javascript"></script>
+<script src="/RS-2017/libraries/p5.dom.min.js" type="text/javascript"></script>
+<script src="https://www.w3schools.com/lib/w3.js"></script>
+
+<script src="settings.js" type="text/javascript"></script>
+<script src="gcode.js" type="text/javascript"></script>
+<script src="sketch.js" type="text/javascript"></script>
+<script src="layer.js" type="text/javascript"></script>
+<script src="skirt.js" type="text/javascript"></script>
+<script src="knitting.js" type="text/javascript"></script>
+<script src="pattern.js" type="text/javascript"></script>
+<script src="stitch.js" type="text/javascript"></script>
+<script src="pos.js" type="text/javascript"></script>
+<script src="grid.js" type="text/javascript"></script>
+<script src="freeform.js" type="text/javascript"></script>
+<script src="knitgrid.js" type="text/javascript"></script>
+<script src="moreless.js" type="text/javascript"></script>
+
+<script src="lapje.js" type="text/javascript"></script>
+<script src="app.js" type="text/javascript"></script>
+<style>
+body{ margin:0;}
+label{width:200px;}
+.hidden{
+  display:none;
+}
+</style>
+</head>
+<body>
+  <div class="w3-container">
+  <h1>Create a knitting for my 3D Printer</h1>
+  </div>
+  <div class="w3-row">
+   <div id="divSettings1" class="w3-third w3-container">
+       <label>show grid:</label><input id="showgrid" type="checkbox" checked></input></br>
+        <label>Stitches: </label><input id="sliderstitches" type="range" min="2" max="50" value="10" step="1"  onchange="javascript:changeStitches();"/><span id="spinstitches"></span></br>
+        <label>Rows: </label><input  id="sliderrows" type="range" min="2" max="49" value="10" step="1"  onchange="javascript:changeRows();"/><span id="spinrows"></span></br>
+        <label>Layers: </label><input  id="sliderlayers" type="range" min="1" max="5" value="1" step="1"  onchange="javascript:changeLayers();"/><span id="spinlayers"></span></br>
+        <button id="btnGenerate" onclick="javascript:create();"><strong>G</strong>enerate Knitting</button>
+        <button id="btnSave" onclick="javascript:downloadKnitting();"><strong>D</strong>ownload Knitting</button>
+    </div>
+    <div id="divSettings2" class="w3-third w3-container">
+        Select a disorder function:
+        <select id="disorderfunctions" onchange="javascript:selectDisorderFunction();">
+          <option value="none">None</option>
+          <option value="circles">Circles</option>
+          <option value="sin">Sinus</option>
+          <option value="cos">Cosinus</option>
+          <option value="delete">Delete</option>
+        </select><br/>
+
+    <div id="circlefunction" class="hidden">
+        <label>show pointdrawing:</label><input id="showpointdrawing" type="checkbox" checked></input></br>
+        <label>show linedrawing:</label><input id="showlinedrawing" type="checkbox" checked></input></br>
+        <label>radius: </label><input id="sliderradius" type="range" min="2" max="250" value="20" step="1" onchange="javascript:changeRadius();"/><span id="spinradius"></span></br>
+        <label>force: </label><input id="sliderforce" type="range" min="1" max="50" value="5" step="1" onchange="javascript:changeForce();"/><span id="spinforce"></span></br>
+       
+    </div>
+     <div id="sinfunction" class="hidden">
+        <label>sin: </label><input id="slidersinradius" type="range" min="2" max="200" value="20" step="1" onchange="javascript:changeSinus();"/><span id="spinsinradius"></span></br>
+        <label>force: </label><input id="slidersinforce" type="range" min="1" max="20" value="5" step="1" onchange="javascript:changeSinForce();"/><span id="spinsinforce"></span></br>
+       
+    </div>
+     <div id="cosfunction" class="hidden">
+        <label>cos: </label><input id="slidercosradius" type="range" min="2" max="200" value="20" step="1" onchange="javascript:changeCosinus();"/><span id="spincosradius"></span></br>
+        <label>force: </label><input id="slidercosforce" type="range" min="1" max="20" value="5" step="1" onchange="javascript:changeCosForce();"/><span id="spincosforce"></span></br>
+       
+    </div>
+     <div id="deletefunction" class="hidden">
+        <label>delete: </label><input id="sliderdelete" type="range" min="1" max="100" value="1" step="1" onchange="javascript:changeDelete();"/><span id="spindelete"></span></br>
+       
+    </div>
+
+
+    </div>
+    <div id="divInfo" class="w3-third w3-container">
+        Create your own knitting, when you are finished, push the download button and send the .gcode file to me. I will print your knitting and send it back to you.
+        The price for your knitting is 5 euro for a small knitting and 10 euro for large knitting, excluding shipping costs. if you want to make more knittings please contact me. 
+    </div>
+  </div>
+</body>
+</html>
