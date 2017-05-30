@@ -1,17 +1,19 @@
 <!DOCTYPE html>
 <html>
-<title>RS-2017</title>
+<title>Ria Stroes Website</title>
 <meta charset="UTF-8">
-<base href="/Sites/RS-2017/">
+
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<script src="libraries/google.js" type="text/javascript"></script>
 <script src="functions.js" type="text/javascript"></script>
 <style>
-body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
-.card{height:370px; }
+body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif;}
+.cardtext {height:150px;}
+
 </style>
 <body class="w3-light-grey w3-content" style="max-width:1600px">
 
@@ -27,16 +29,17 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
   </div>
   <div class="w3-bar-block">
     <a href="#projecten" onclick="w3_close()" class="w3-bar-item w3-button w3-padding w3-text-teal"><i class="fa fa-th-large fa-fw w3-margin-right"></i>PROJECTEN</a>
+    <a href="/RS-2017/Photos/index.html" onclick="w3_close()" class="w3-bar-item w3-button w3-padding w3-text-teal"><i class="fa fa-th-large fa-fw w3-margin-right"></i>FOTO series</a>
     <a href="http://www.riastroes.nl/CCC" onclick="w3_close()" class="w3-bar-item w3-button w3-padding w3-text-teal"><i class="fa fa-th-large fa-fw w3-margin-right"></i>CURSUS CREATIVE CODING</a>
     <a href="#overmij" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-user fa-fw w3-margin-right"></i>OVER MIJ</a>
     <a href="#contact" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-envelope fa-fw w3-margin-right"></i>CONTACT</a>
   </div>
   <div class="w3-panel w3-large">
-    <a href="www.facebook.com/ria.stroes"><i class="fa fa-facebook-official w3-hover-opacity"></i></a>
-    <a href="www.riastroes.tumblr.com"><i class="fa fa-tumblr w3-hover-opacity"></i></a>
-    <a href="www.instagram.com/riastroes"><i class="fa fa-instagram w3-hover-opacity"></i></a>
-    <a href="nl.pinterest.com/riastroes"><i class="fa fa-pinterest-p w3-hover-opacity"></i></a>
-    <a href="www.linkedin.com/in/ria-stroes-13648b127/"><i class="fa fa-linkedin w3-hover-opacity"></i></a>
+    <a href="http://www.facebook.com/ria.stroes"><i class="fa fa-facebook-official w3-hover-opacity"></i></a>
+    <a href="http://www.riastroes.tumblr.com"><i class="fa fa-tumblr w3-hover-opacity"></i></a>
+    <a href="http://www.instagram.com/riastroes"><i class="fa fa-instagram w3-hover-opacity"></i></a>
+    <a href="http://nl.pinterest.com/riastroes"><i class="fa fa-pinterest-p w3-hover-opacity"></i></a>
+    <a href="http://www.linkedin.com/in/ria-stroes-13648b127/"><i class="fa fa-linkedin w3-hover-opacity"></i></a>
   </div>
 </nav>
 
@@ -47,104 +50,86 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
 <div class="w3-main" style="margin-left:300px">
 
   <!-- Header -->
+ 
   <header id="projecten">
-    <a href="#"><img src="Images/Ria.jpg" style="width:65px;" class="w3-circle w3-right w3-margin w3-hide-large w3-hover-opacity"></a>
+    <a href="#overmij"><img src="Images/Ria.jpg" style="width:65px;" class="w3-circle w3-right w3-margin w3-hide-large w3-hover-opacity"></a>
     <span class="w3-button w3-hide-large w3-xxlarge w3-hover-text-grey" onclick="w3_open()"><i class="fa fa-bars"></i></span>
     <div class="w3-container">
     <h1><b>Projecten</b></h1>
     <div class="w3-section w3-bottombar w3-padding-16">
-      <span class="w3-margin-right">Filter:</span>
-      <button class="w3-button w3-black w3-hide-small" onclick=setFilter("all")>ALL</button>
-      <button class="w3-button w3-white w3-hide-small" onclick=setFilter( "3D-printer")><i class="material-icons w3-margin-right"  style="font-size:18px;">devices</i>3D-printer</button>
-      <button class="w3-button w3-white w3-hide-small" onclick=setFilter("photos")><i class="material-icons w3-margin-right" style="font-size:18px;">photo_library</i>Foto's</button>
-      <button class="w3-button w3-white w3-hide-small" onclick=setFilter("code")><i class="material-icons w3-margin-right" style="font-size:18px;">code</i>Programmeren</button>
-      <button class="w3-button w3-white w3-hide-small" onclick=setFilter("art")><i class="material-icons w3-margin-right" style="font-size:18px;">palette</i>Kunst</button>
-    </div>
+      <span class="w3-margin-right w3-hide-small">Filter:</span>
+      <button class="w3-button w3-black w3-hide-small" onclick="javascript:setFilter('all')">ALL</button>
+      <button class="w3-button w3-white w3-hide-small" onclick="javascript:setFilter('3D-printer')">3D-printer</button>
+      <button class="w3-button w3-white w3-hide-small" onclick="javascript:setFilter('code')">Code</button>
+      <button class="w3-button w3-white w3-hide-small" onclick="javascript:setFilter('animatie')">Animatie</button>
+      <button class="w3-button w3-white w3-hide-small" onclick="javascript:setFilter('diversen')">Diversen</button>
+   </div>
     </div>
   </header>
 
   <!-- First Photo Grid-->
+  
   <div class="w3-row-padding">
-    <div class="w3-third w3-container w3-margin-bottom card  3D-printer" onclick="show('Breien op de 3D-printer/Hangers-wit')">
+    <div class="w3-third w3-container w3-margin-bottom card w3-white 3D-printer" onclick="show('Breien op de 3D-printer/Hangers-wit')">
       <img src="Images/hanger-wit.jpg" alt="Hanger" style="width:100%" class="w3-hover-opacity">
-      <div class="w3-container w3-white">
+      <div class="w3-container cardtext">
         <p><b>Hangers</b></p>
-        <p>De hangers zijn geprint in een breimotief en kun je aan de hals van een T-shirt, blouse of jurk dragen. </p>
+        <p class="cardtext">De hangers zijn geprint in een breimotief en kun je aan de hals van een T-shirt, blouse of jurk dragen. </p>
       </div>
     </div>
-    <div class="w3-third w3-container w3-margin-bottom card  3D-printer" onclick="show('Breien op de 3D-printer/vaas met bloemen')">
+    <div class="w3-third w3-container w3-margin-bottom card w3-white 3D-printer" onclick="show('Breien op de 3D-printer/vaas met bloemen')">
       <img src="Images/vaas met bloemen.jpg" alt="Vaas met bloemen" style="width:100%" class="w3-hover-opacity">
-      <div class="w3-container w3-white">
+      <div class="w3-container cardtext">
         <p><b>Vaas met Bloemen</b></p>
-        <p>De vaas en de bloemen zijn 'gebreid' op de 3D-printer</p>
+        <p class="cardtext">De vaas en de bloemen zijn 'gebreid' op de 3D-printer.</p>
       </div>
     </div>
-  </div>
-
-  <!-- Second Photo Grid-->
-  <div class="w3-row-padding">
-    <div class="w3-third w3-container w3-margin-bottom card w3-white  photos" onclick="photos('NZ people')">
-      <img src="Images/nz people.jpg" alt="NZ people" style="width:100%" class="w3-hover-opacity">
-      <div class="w3-container">
-        <p><b>Nieuw Zeeland, familie en vrienden</b></p>
-        <p>Een fantastische reis naar Nieuw Zeeland, met heel veel dank aan Leo en Hanna!</p>
+    <div class="w3-third w3-container w3-margin-bottom card w3-white code" onclick="show('ComputerBirds')">
+      <img src="Images/computerbirds.jpg" alt="ComputerBirds" style="width:100%" class="w3-hover-opacity">
+      <div class="w3-container cardtext">
+        <p><b>ComputerBirds</b></p>
+        <p class="cardtext">Een behang en een dubbel-print voor Compano BV.<br/>
+        Techniek: Processing (Java)
+        </p>
       </div>
     </div>
-    <div class="w3-third w3-container w3-margin-bottom card w3-white  photos" onclick="photos('NZ dogs')">
-      <img src="Images/nz dogs.jpg" alt="NZ dogs" style="width:100%" class="w3-hover-opacity">
-      <div class="w3-container">
-        <p><b>Nieuw Zeeland, de honden</b></p>
-        <p>Alle honden, die ons vermaakt hebben in de vakantie.</p>
+    <div class="w3-third w3-container w3-margin-bottom card w3-white code" onclick="show('TotemFlowers')">
+      <img src="Images/totemflowers.jpg" alt="ComputerBirds" style="width:100%" class="w3-hover-opacity">
+      <div class="w3-container cardtext">
+        <p><b>TotemFlowers</b></p>
+        <p class="cardtext">Digitale Print (160x120 cm), 2017, Compano BV<br/>
+        Techniek: Javascript</p>
       </div>
     </div>
-    <div class="w3-third w3-container w3-margin-bottom card w3-white  photos" onclick="photos('NZ animals')">
-      <img src="Images/nz animals.jpg" alt="NZ animals" style="width:100%;" class="w3-hover-opacity">
-      <div class="w3-container">
-        <p><b>Nieuw Zeeland, andere dieren</b></p>
-        <p>De dieren, die we tegen kwamen in Nieuw Zeeland.</p>
+    <div class="w3-third w3-container w3-margin-bottom card w3-white diversen" onclick="show('Lucas')">
+      <img src="Images/lucas.jpg" alt="Lucas" style="width:100%" class="w3-hover-opacity">
+      <div class="w3-container cardtext">
+        <p><b>Waar is Lucas?</b></p>
+        <p class="cardtext">Lucas is een jaar geleden verdwenen ...</p>
       </div>
     </div>
-    <div class="w3-third w3-container w3-margin-bottom card w3-white  photos" onclick="photos('NZ flowers')">
-      <img src="Images/nz flower.jpg" alt="NZ flowers" style="width:100%;" class="w3-hover-opacity">
-      <div class="w3-container">
-        <p><b>Nieuw Zeeland, bloemen</b></p>
-        <p>De prachtig bloeiende bloemen in Nieuw Zeeland.</p>
+    <div class="w3-third w3-container w3-margin-bottom card w3-white code animatie" onclick="show('Bugs')">
+      <img src="Images/bugs.jpg" alt="Bugs" style="width:100%" class="w3-hover-opacity">
+      <div class="w3-container cardtext">
+        <p><b>Bugs</b></p>
+        <p class="cardtext">Graveerplaat (60x60 cm), 2017, Compano BV.
+          In dit project is ook de interactieve animatie te zien van BUGS.
+        </p>
       </div>
     </div>
-     <div class="w3-third w3-container w3-margin-bottom card w3-white  photos" onclick="photos('NZ trees')">
-      <img src="Images/nz trees.jpg" alt="NZ trees" style="width:100%" class="w3-hover-opacity">
-      <div class="w3-container">
-        <p><b>Nieuw Zeeland, Bomen</b></p>
-        <p>De bomen waren grandioos.</p>
-      </div>
-    </div>
-     <div class="w3-third w3-container w3-margin-bottom card w3-white  photos" onclick="photos('NZ coast')">
-      <img src="Images/nz coast.jpg" alt="NZ coast" style="width:100%" class="w3-hover-opacity">
-      <div class="w3-container">
-        <p><b>Nieuw Zeeland, De kust</b></p>
-        <p>De kust, overal anders, hier nog mooier dan daar.</p>
-      </div>
-    </div>
-    <div class="w3-third w3-container w3-margin-bottom card w3-white  photos" onclick="photos('WinterWandeling')">
-      <img src="Images/winter3.jpg" alt="Winter Wandeling" style="width:100%;" class="w3-hover-opacity">
-      <div class="w3-container">
-        <p><b>Winter Wandeling</b></p>
-        <p>Samen met mijn zoon en klein kinderen een prachtige wandeling gemaakt, bij ons in het bos van Gaasterland.</p>
-      </div>
-    </div>
-  </div>
+</div>
 
   <!-- Pagination -->
   <div class="w3-center w3-padding-32">
-    <div class="w3-bar">
-      <a href="#" class="w3-bar-item w3-button w3-hover-black">«</a>
-      <a href="#" class="w3-bar-item w3-black w3-button">1</a>
-      <a href="#" class="w3-bar-item w3-button w3-hover-black">2</a>
-      <a href="#" class="w3-bar-item w3-button w3-hover-black">3</a>
-      <a href="#" class="w3-bar-item w3-button w3-hover-black">4</a>
-      <a href="#" class="w3-bar-item w3-button w3-hover-black">»</a>
+    <div class="w3-bar"></p>
+      <div class="w3-left" style="padding-top:10px">andere sites:</div>
+      
+      <a href="http://www.riastroes.nl/CCC" class="w3-bar-item w3-button">CCC</a>
+      <a href="http://www.riastroes.nl/RS-Website" class="w3-bar-item w3-button w3-hover-black">2016</a>
+      <a href="http://www.riastroes.nl/2016" class="w3-bar-item w3-button w3-hover-black">2016</a>
+      <a href="http://www.riastroes.nl/2015" class="w3-bar-item w3-button w3-hover-black">2015</a>
+      <a href="http://www.riastroes.nl/2013/index2.html" class="w3-bar-item w3-button w3-hover-black">2013</a>
     </div>
-  </div>
 
   <!-- Images of Me -->
   <div class="w3-row-padding w3-padding-16" id="overmij">
@@ -254,8 +239,7 @@ Op vrijdag werk ik samen met Jori Stoop aan diverse projecten.</p>
   </div>
   </footer>
 
-  <div class="w3-black w3-center w3-padding-24">Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-opacity">w3.css</a></div>
-
+  
 <!-- End page content -->
 </div>
 
