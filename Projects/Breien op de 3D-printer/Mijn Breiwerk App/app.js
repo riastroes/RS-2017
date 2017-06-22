@@ -1,6 +1,7 @@
 
 "use strict";
 var printer;
+var material;
 var lapje;
 var stitches;
 var rows;
@@ -27,15 +28,14 @@ var func;
 function setup() {
     var canvas = createCanvas(1000,1000);
     canvas.parent("divcanvas");
-    pos = createVector(0,0);
-    offset = createVector(0,15);
-    //background(255,0,0);
     
+    offset = createVector(0,15);
     pos = createVector(6,3);
     changeStitches();
     changeRows();
     changeLayers();
     selectPrinter();
+    selectMaterial();
     
     func ="none";
     
@@ -50,14 +50,6 @@ function setup() {
     
     
   
-    lapje = new Lapje(printer, "PLA", "normal", pos, institches, inrows, checkShowGrid.checked  );
-    if(checkShowGrid.checked){
-      lapje.createGrid(3,3,3);
-      lapje.showGrid();
-    }
-    //lapje.createGrid(3,3,3);
-    //create();
-   
 }
 function draw(){
   
@@ -85,18 +77,27 @@ function showPath(showPoints){
 }
 function create(){
   background(255);
+  lapje = new Lapje(printer, material, "normal",  institches, inrows, checkShowGrid.checked  );
+    if(checkShowGrid.checked){
+      lapje.createGrid(3,3,2);
+      lapje.showGrid();
+    }
   var ina,inb;
   if(checkShowGrid.checked){
-    lapje.createGrid(3,3,3);
+    lapje.createGrid(3,3,2);
     lapje.showGrid();
   }
   if(func.value == "none"){
-    ina = document.getElementById("sliderradius").value;
-    inb = document.getElementById("sliderforce").value;
+    ina =0;
+    inb =0;
   }
-  else if(func.value == "circles"){
-    ina = document.getElementById("sliderradius").value;
-    inb = document.getElementById("sliderforce").value;
+  else if(func.value == "circlesin"){
+    ina = document.getElementById("sliderradiusin").value;
+    inb = document.getElementById("sliderforcein").value;
+  }
+  else if(func.value == "circlesout"){
+    ina = document.getElementById("sliderradiusout").value;
+    inb = document.getElementById("sliderforceout").value;
   }
   else if(func.value == "sin"){
     ina = document.getElementById("slidersinradius").value;
@@ -106,11 +107,13 @@ function create(){
     ina = document.getElementById("slidercosradius").value;
     inb = document.getElementById("slidercosforce").value;
   }
-  else if(func.value == "delete"){
-    ina = document.getElementById("sliderdelete").value;
+  else if(func.value == "vert"){
+    ina = document.getElementById("slidervert").value;
+  }
+  else if(func.value == "hor"){
+    ina = document.getElementById("sliderhor").value;
   }
   
-  pos = createVector(6,3);
   if(inrows  > 0 && institches >0){
    
     
@@ -126,11 +129,18 @@ function create(){
   }
    ischanged = false;
 }
+function changePosx(){
+  pos.x = parseInt(document.getElementById("inx").value);
+}
+function changePosy(){
+  pos.y = parseInt(document.getElementById("iny").value);
+}
 function changePrice(){
     var price = 0;
     for(var l = 1; l <=inlayers; l++){
-        price += institches * inrows  * (0.01 / l);
+        price += institches * inrows  * (0.005 / l);
     }
+    
     document.getElementById("price").innerHTML = price.toFixed(2) + " euro."
     if(document.getElementById("checkOphalen").checked){
       document.getElementById("postadres").required = false;
@@ -148,6 +158,7 @@ function downloadKnitting(){
     if(!lapje.isSaved){
       lapje.save();
     }
+    document.location.href ="#email";
 }
 function mousePressed(){
   if(mouseX > offset.x && mouseY > offset.y){
@@ -192,59 +203,108 @@ function changeLayers(){
   ischanged = true;
  }
 function selectPrinter(){
-   printer = document.getElementById("selectprinter")
+   printer = document.getElementById("selectprinter").value
+}
+function selectMaterial(){
+   material = document.getElementById("selectmaterial").value
 }
 function selectDisorderFunction(){
   func = document.getElementById("disorderfunctions")
   if(func.value =="none"){
-    w3.addClass("#circlefunction", "hidden");
+    w3.addClass("#circlesinfunction", "hidden");
+    w3.addClass("#circlesoutfunction", "hidden");
     w3.addClass("#sinfunction", "hidden");
     w3.addClass("#cosfunction", "hidden");
-    w3.addClass("#deletefunction", "hidden");
+    w3.addClass("#vertfunction", "hidden");
+    w3.addClass("#horfunction", "hidden");
+    
     linepath =[];
     create();
     
   }
-  else if(func.value =="circles"){
-    w3.removeClass("#circlefunction", "hidden");
+  else if(func.value =="circlesin"){
+    w3.removeClass("#circlesinfunction", "hidden");
+    w3.addClass("#circlesoutfunction", "hidden");
     w3.addClass("#sinfunction", "hidden");
     w3.addClass("#cosfunction", "hidden");
-    w3.addClass("#deletefunction", "hidden");
-    document.getElementById("spinradius").innerHTML = document.getElementById("sliderradius").value;
-    document.getElementById("spinforce").innerHTML = document.getElementById("sliderforce").value;
+    w3.addClass("#vertfunction", "hidden");
+    w3.addClass("#horfunction", "hidden");
+    
+    document.getElementById("spinradiusin").innerHTML = document.getElementById("sliderradiusin").value;
+    document.getElementById("spinforcein").innerHTML = document.getElementById("sliderforcein").value;
+    
+  }
+  else if(func.value =="circlesout"){
+    w3.removeClass("#circlesoutfunction", "hidden");
+    w3.addClass("#circlesinfunction", "hidden");
+    w3.addClass("#sinfunction", "hidden");
+    w3.addClass("#cosfunction", "hidden");
+    w3.addClass("#vertfunction", "hidden");
+    w3.addClass("#horfunction", "hidden");
+    
+    document.getElementById("spinradiusout").innerHTML = document.getElementById("sliderradiusout").value;
+    document.getElementById("spinforceout").innerHTML = document.getElementById("sliderforceout").value;
     
   }
   else if(func.value =="sin"){
-    w3.addClass("#circlefunction", "hidden");
+    w3.addClass("#circlesinfunction", "hidden");
+    w3.addClass("#circlesoutfunction", "hidden");
     w3.removeClass("#sinfunction", "hidden");
     w3.addClass("#cosfunction", "hidden");
-    w3.addClass("#deletefunction", "hidden");
+    w3.addClass("#vertfunction", "hidden");
+    w3.addClass("#horfunction", "hidden");
+    
 
     document.getElementById("spinsinradius").innerHTML = document.getElementById("slidersinradius").value;
     document.getElementById("spinsinforce").innerHTML = document.getElementById("slidersinforce").value;
   }
   else if(func.value =="cos"){
-    w3.addClass("#circlefunction", "hidden");
+    w3.addClass("#circlesinfunction", "hidden");
+    w3.addClass("#circlesoutfunction", "hidden");
     w3.addClass("#sinfunction", "hidden");
     w3.removeClass("#cosfunction", "hidden");
-    w3.addClass("#deletefunction", "hidden");
+    w3.addClass("#vertfunction", "hidden");
+    w3.addClass("#horfunction", "hidden");
+    
     document.getElementById("spincosradius").innerHTML = document.getElementById("slidercosradius").value;
     document.getElementById("spincosforce").innerHTML = document.getElementById("slidercosforce").value;
   }
-  else if(func.value =="delete"){
-    w3.addClass("#circlefunction", "hidden");
+  else if(func.value =="vert"){
+    w3.addClass("#circlesinfunction", "hidden");
+    w3.addClass("#circlesoutfunction", "hidden");
     w3.addClass("#sinfunction", "hidden");
     w3.addClass("#cosfunction", "hidden");
-    w3.removeClass("#deletefunction", "hidden");
-    document.getElementById("spindelete").innerHTML = document.getElementById("sliderdelete").value;
+    w3.removeClass("#vertfunction", "hidden");
+    w3.addClass("#horfunction", "hidden");
+   
+    document.getElementById("spinvert").innerHTML = document.getElementById("slidervert").value;
   }
+  else if(func.value =="hor"){
+    w3.addClass("#circlesinfunction", "hidden");
+    w3.addClass("#circlesoutfunction", "hidden");
+    w3.addClass("#sinfunction", "hidden");
+    w3.addClass("#cosfunction", "hidden");
+    w3.addClass("#vertfunction", "hidden");
+    w3.removeClass("#horfunction", "hidden");
+    
+    document.getElementById("spinhor").innerHTML = document.getElementById("sliderhor").value;
+  }
+  
 }
-function changeRadius(){
-  document.getElementById("spinradius").innerHTML = document.getElementById("sliderradius").value;
+function changeRadiusIn(){
+  document.getElementById("spinradiusin").innerHTML = document.getElementById("sliderradiusin").value;
 
 }
-function changeForce(){
-  document.getElementById("spinforce").innerHTML = document.getElementById("sliderforce").value;
+function changeForceIn(){
+  document.getElementById("spinforcein").innerHTML = document.getElementById("sliderforcein").value;
+
+}
+function changeRadiusOut(){
+  document.getElementById("spinradiusout").innerHTML = document.getElementById("sliderradiusout").value;
+
+}
+function changeForceOut(){
+  document.getElementById("spinforceout").innerHTML = document.getElementById("sliderforceout").value;
 
 }
 function changeSinus(){
@@ -263,7 +323,12 @@ function changeCosForce(){
   document.getElementById("spincosforce").innerHTML = document.getElementById("slidercosforce").value;
 
 }
-function changeDelete(){
-  document.getElementById("spindelete").innerHTML = document.getElementById("sliderdelete").value;
+function changeVert(){
+  document.getElementById("spinvert").innerHTML = document.getElementById("slidervert").value;
 
 }
+function changeHor(){
+  document.getElementById("spinhor").innerHTML = document.getElementById("sliderhor").value;
+
+}
+

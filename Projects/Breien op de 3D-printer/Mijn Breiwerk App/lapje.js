@@ -1,17 +1,17 @@
-function Lapje(printer, material,style, ppos,  pstitches, prows,  showgrid){
+function Lapje(pprinter, material,style,  pstitches, prows,  showgrid){
   //TEST OK VOOR:
   //printer:   Anet
   //materiaal: BRICK
   //style:     normal, fine
   //TEST NIET OK VOOR:
   //  style:     extrafine
-
+  this.printer = pprinter
   this.name = "Lapje";
   this.rows = prows;
   this.stitches = pstitches;
-  this.pos = ppos;
+  
   this.isSaved = false;
-  this.settings =new Settings(printer, material, style);
+  this.settings =new Settings(this.printer, material, style);
   this.gcode = new Gcode(this.settings);
   this.createGrid(2,2,3);
   this.grid.testPos(pos.x,pos.y); //row, stitches
@@ -34,7 +34,7 @@ Lapje.prototype.create = function(showgrid, ischanged, institches, inrows, inlay
   for(var i = 0; i < this.maxlayers; i++){
     this.layers[i] = new Layer(i, this.settings);
   }
-  this.skirt = new Skirt(this.grid, 2,30, this.pos, 5);
+  this.skirt = new Skirt(this.grid, 2,30, 5);
   this.skirt.draw(offset);
   this.skirt.gcode(this.gcode, this.layers[0]);12
   this.knittings = [];
@@ -43,8 +43,11 @@ Lapje.prototype.create = function(showgrid, ischanged, institches, inrows, inlay
     if(i == 0){                   //biggrid, stitchnr,row, stitches,rows
       this.knitgrid = new Knitgrid(this.grid,pos.x,pos.y,this.stitches,this.rows);
       
-      if(func == "circles"){
-        this.knitgrid.disorderRadius(linepath, a, b);
+      if(func == "circlesin"){
+        this.knitgrid.disorderRadiusIn(linepath, a, b);
+      }
+      else if(func == "circlesout"){
+        this.knitgrid.disorderRadiusOut(linepath, a, b);
       }
       else if(func == "sin"){
         this.knitgrid.disorderSin(linepath, a, b);
@@ -52,8 +55,14 @@ Lapje.prototype.create = function(showgrid, ischanged, institches, inrows, inlay
       else if(func == "cos"){
         this.knitgrid.disorderCos(linepath, a, b);
       }
+      else if(func == "vert"){
+        this.knitgrid.disorderVert(linepath, a);
+      }
+      else if(func == "hor"){
+        this.knitgrid.disorderHor(linepath, a);
+      }
        else if(func == "delete"){
-        this.knitgrid.disorderDelete(linepath, a, b);
+        this.knitgrid.disorderDelete(linepath, a);
       }
     
       if(showgrid){
@@ -75,7 +84,7 @@ Lapje.prototype.create = function(showgrid, ischanged, institches, inrows, inlay
     this.knittings[i].createPattern("straight", 1,this.rows);
     this.knittings[i].createPattern("end",this.rows,this.rows);
     this.knittings[i].patternToGrid();
-    this.knittings[i].gotoStart(this.pos, offset);
+    this.knittings[i].gotoStart(pos, offset);
     this.knittings[i].drawPattern(offset);
     this.knittings[i].gcode(this.gcode, this.layers[i]);
 
@@ -86,6 +95,13 @@ Lapje.prototype.create = function(showgrid, ischanged, institches, inrows, inlay
 }
 Lapje.prototype.save = function(){
   this.gcode.generate(this.layers,this.skirt, this.knittings);
-  this.gcode.save(this.settings.materialcode + this.settings.style + this.rows + "x"+ this.stitches + "x" + this.maxlayers);
+  var code =""
+  if(this.printer =="Anet"){
+    code = "A";
+  }
+  else{
+    code = "U";
+  }
+  this.gcode.save(code + material + this.rows + "x"+ this.stitches + "x" + this.maxlayers);
   this.isSaved = true;
 }

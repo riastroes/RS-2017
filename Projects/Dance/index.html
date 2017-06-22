@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Dance</title>
+<META NAME="COPYRIGHT" CONTENT="&copy; Ria Stroes">
+<META NAME="description" CONTENT="Dance animation created by Ria Stroes">
+<META HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<script src="/RS-2017/libraries/google.js" type="text/javascript"></script>
+<script src="/RS-2017/functions.js" type="text/javascript"></script>
+<script src="/RS-2017/libraries/p5.min.js" type="text/javascript"></script>
+<script src="/RS-2017/libraries/p5.sound.min.js" type="text/javascript"></script>
+<script src="/RS-2017/libraries/p5.dom.min.js" type="text/javascript"></script>
+<script src="https://www.w3schools.com/lib/w3.js"></script>
+
+
+<script src="sketch.js" type="text/javascript"></script>
+<script src="palette.js" type="text/javascript"></script>
+<script src="ritme.js" type="text/javascript"></script>
+<script src="dancer.js" type="text/javascript"></script>
+<script src="dance.js" type="text/javascript"></script>
+<script src="patroon.js" type="text/javascript"></script>
+<script src="step.js" type="text/javascript"></script>
+<script src="choreo.js" type="text/javascript"></script>
+<style>
+
+</style>
+</head>
+<body>
+  <div class="w3-container">
+    <h1>Dans<img src="/RS-2017/Images/Ria.jpg" style="width:50px" class="w3-round w3-right" alt="Ria Stroes"/></h1>
+    <p>Deze aninamtie heeft muziek nodig en het maakt gebruik van de microfoon in je browser. 
+      Kies je eigen muziek en start dan de animantie.</p>
+  </div>
+
+  
+  <div class="w3-row">
+    <div class="w3-container w3-third ">
+     <button onclick="startAnimation();" class="w3-button w3_border w3_red">Start</button> <label>Snelheid:</label><input id="inspeed" type="range" min="1" max ="60" value="40" step="1" onchange="changeSpeed();"/>
+    </div>
+    
+  </div>
+  <div class="w3-row">
+    <div id=divcanvas class="w3-container w3-one w3-center">
+    </div>
+  </div>
+   </body>
+</html>

@@ -24,7 +24,7 @@ Settings.prototype.init = function(){
 Settings.prototype.initMaterial = function(){
   switch(this.printer){
     case "Anet":{
-      this.scale = 0.2;         //canvas = 2200 px, bed = 220 mm
+      this.scale = 0.2;         //canvas = 1000 px, bed = 220 mm
       this.filement = 1.75;
 
       switch(this.material){
@@ -125,21 +125,30 @@ Settings.prototype.initMaterial = function(){
       }
       break;
     }
+     case "Ultimaker2+0.6":{ //nozzle 0.6
+
+      this.scale = 0.23;         //canvas = 1000 px, bed = 230 mm
+      this.filement = 2.85;
+      if(this.material == "PETGCARBON" && this.style == "normal" ){
+        this.initStyle(0.4, 0.02, 1600);  //volgende keer lack gebruiken.
+      }
+      break;
+     }
     case "Ultimaker2+":{ //nozzle 0.4
 
-      this.scale = 0.1;         //canvas = 2300 px, bed = 230 mm
+      this.scale = 0.23;         //canvas = 1000 px, bed = 230 mm
       this.filement = 2.85;
       if(this.material == "PLA" && this.style == "normal" ){
         this.initStyle(0.4, 0.03, 1600);  //0.4, 0.03, 1600 ok
       }
       if(this.material == "PETGCARBON" && this.style == "normal" ){
-        this.initStyle(0.4, 0.03, 1200);  //0.4, 0.03, 1600 ok
+        this.initStyle(0.4, 0.02, 1200);  //0.4, 0.03, 1600 ok
       }
       else if(this.material == "PETGCARBON" && this.style == "fat" ){
         this.initStyle(0.3, 1, 1200);  //0.4, 0.03, 1600 ok
       }
       else if(this.material == "PETGCARBON" && this.style == "fine" ){
-        this.initStyle(0.2, 0.3, 1200);  //0.4, 0.03, 1600 ok
+        this.initStyle(0.3, 0.2, 1200);  //0.4, 0.03, 1600 ok
       }
       else if(this.material == "PLABRO" && this.style == "normal" ){
           this.initStyle(0.4, 0.03, 1200); //test ok armband.
@@ -150,6 +159,7 @@ Settings.prototype.initMaterial = function(){
       else if(this.material == "PLAHennep" && this.style == "fat" ){
           this.initStyle(0.3, 0.1, 1200); //test ok armband.
       }
+      break;
     }
     case "Ultimaker2++":{ //nozzle 0.8
       this.scale = 0.23;         //canvas = 1000 px, bed = 230 mm
@@ -173,8 +183,8 @@ Settings.prototype.initMaterial = function(){
 Settings.prototype.initPrinter = function(){
     switch(this.material){
     case "PLA":{
-      this.nozzletemp = 210;
-      this.bedtemp = 50;
+      this.nozzletemp = 210; 
+      this.bedtemp = 50;  
       break;
     }
     case "TPCFLEX":{

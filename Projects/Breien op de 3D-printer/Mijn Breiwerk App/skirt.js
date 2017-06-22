@@ -1,5 +1,5 @@
 
-function Skirt(grid, skirtwidth, skirtheight, pos, stitchnr){
+function Skirt(grid, skirtwidth, skirtheight, stitchnr){
 
   this.commands = new Array(";skirt");
   this.grid = grid.grid;
@@ -7,7 +7,7 @@ function Skirt(grid, skirtwidth, skirtheight, pos, stitchnr){
   this.stitchnr = stitchnr;
   this.length = skirtwidth;
   this.height = skirtheight;
-  this.pos = pos.copy();
+  
   append(this.commands,";param length: " + this.length);
   append(this.commands,";param height: " + this.height);
   this.skirt = [];
@@ -18,8 +18,8 @@ Skirt.prototype.createRect = function(){
     this.skirt[0] = this.grid[this.gridmarge][this.gridmarge];
     this.skirt[1] = this.grid[this.gridmarge][this.gridmarge + this.height];
     this.skirt[2] = this.grid[this.gridmarge + this.length][this.gridmarge + this.height];
-    this.skirt[3] = this.grid[this.gridmarge + this.length][this.pos.y].copy();
-    this.skirt[4] = this.grid[this.pos.x][this.pos.y].copy();
+    this.skirt[3] = this.grid[this.gridmarge + this.length][pos.y].copy();
+    this.skirt[4] = this.grid[pos.x][pos.y].copy();
 
 }
 Skirt.prototype.createZigZag = function(){

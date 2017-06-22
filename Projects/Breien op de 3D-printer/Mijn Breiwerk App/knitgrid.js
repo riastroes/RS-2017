@@ -19,7 +19,7 @@ Knitgrid.prototype.create = function(biggrid){
     }
   }
 }
-Knitgrid.prototype.disorderRadius= function(linepath, radius,  force){
+Knitgrid.prototype.disorderRadiusIn= function(linepath, radius,  force){
     var dis;
     var distance = 0;
    
@@ -40,6 +40,27 @@ Knitgrid.prototype.disorderRadius= function(linepath, radius,  force){
       }
     }  
   }
+  Knitgrid.prototype.disorderRadiusOut= function(linepath, radius,  force){
+    var dis;
+    var distance = 0;
+   
+   for(var s = 0; s <= this.kstitches ; s++){
+     for(var r = 0; r <= this.krows ; r++){
+       for(var i = 0; i < linepath.length; i++)
+       {
+        distance = dist(linepath[i].x, linepath[i].y,this.grid[s][r].x, this.grid[s][r].y);
+        
+        if(distance < radius){
+          dis = linepath[i].copy();
+          dis.sub(this.grid[s][r]);
+          dis.normalize();
+          dis.mult(force);
+          this.grid[s][r].sub(dis);
+        }
+       }
+      }
+    }  
+  }
 
   Knitgrid.prototype.disorderSin= function(linepath, radius, force){
     var dis;
@@ -53,7 +74,8 @@ Knitgrid.prototype.disorderRadius= function(linepath, radius,  force){
         distance = dist(linepath[i].x, linepath[i].y,this.grid[s][r].x, this.grid[s][r].y);
         
         if(distance < radius){
-          this.grid[s][r].y += map(sin(a),-1,1, force*4, -force*4);
+          //this.grid[s][r].y += map(sin(a),-1,1, force*4, -force*4);
+          this.grid[s][r].y -= force;
           a += 0.1
         }
        }
@@ -72,7 +94,8 @@ Knitgrid.prototype.disorderRadius= function(linepath, radius,  force){
         distance = dist(linepath[i].x, linepath[i].y,this.grid[s][r].x, this.grid[s][r].y);
         
         if(distance < radius){
-          this.grid[s][r].x += map(cos(a),-1,1, force*4, -force*4);
+          //this.grid[s][r].x += map(cos(a),-1,1, force*4, -force*4);
+          this.grid[s][r].x -= force;
           a += 0.1
         }
        }
@@ -80,7 +103,29 @@ Knitgrid.prototype.disorderRadius= function(linepath, radius,  force){
       }
     }  
   }
-  Knitgrid.prototype.disorderDelete= function(linepath, radius){
+  
+Knitgrid.prototype.disorderVert= function(linepath, force){
+   
+    var distance = 0;
+    
+   
+   for(var s = 0; s <= this.kstitches ; s++){
+     for(var r = 0; r <= this.krows ; r++){
+       for(var i = 0; i < linepath.length; i++)
+       {
+        distance = abs(linepath[i].x-this.grid[s][r].x);
+        
+        if(distance < force){
+          if(s <this.kstitches){
+           this.grid[s][r].x -= force;
+          }        
+       }
+       
+      }
+    }  
+  }
+}
+Knitgrid.prototype.disorderHor= function(linepath, force){
     var dis;
     var distance = 0;
     var a = 0;
@@ -89,11 +134,11 @@ Knitgrid.prototype.disorderRadius= function(linepath, radius,  force){
      for(var r = 0; r <= this.krows ; r++){
        for(var i = 0; i < linepath.length; i++)
        {
-        distance = dist(linepath[i].x, linepath[i].y,this.grid[s][r].x, this.grid[s][r].y);
+        distance = abs(linepath[i].y - this.grid[s][r].y);
         
-        if(distance < radius){
+        if(distance < force){
           if(s <this.kstitches){
-           this.grid[s][r].x = this.grid[s+1][r].x;
+           this.grid[s][r].y -= force;
           }        
        }
        
