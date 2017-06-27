@@ -107,7 +107,7 @@ Choreo.prototype.createAct = function(nr){
             
             var groupsize = 15;
             this.startmaat = this.endmaat;
-            this.endmaat = this.startmaat + 2;
+            this.endmaat = this.startmaat + 1;
             var maten = (this.endmaat - this.startmaat);
             this.d = this.dances.length;
             for(var i = 0; i < groupsize; i++){
@@ -201,7 +201,7 @@ Choreo.prototype.createAct = function(nr){
             //group 4 rennen over het toneel van rechts naar links,voor.
             this.group[4].join(this.group[3]);
             this.group[4].join(this.group[2]);
-            var groupsize = 12;
+            var groupsize = 9;
             this.startmaat = this.endmaat;
             this.endmaat = this.startmaat + 2;
             var maten = (this.endmaat - this.startmaat);

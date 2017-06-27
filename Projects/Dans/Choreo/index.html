@@ -23,20 +23,36 @@
 <script src="https://www.w3schools.com/lib/w3.js"></script>
 
 
-<script src="sketch.js" type="text/javascript"></script>
-<script src="movement.js" type="text/javascript"></script>
-<script src="circle.js" type="text/javascript"></script>
 
+<script src="movement.js" type="text/javascript"></script>
+<script src="dancer.js" type="text/javascript"></script>
+<script src="sketch.js" type="text/javascript"></script>
+<style>
+  body{
+    overflow:hidden;
+    
+  }
+</style>
 </head>
 <body>
   <div class="w3-container">
     <h1>Choreography<img src="/RS-2017/Images/Ria.jpg" onclick="goHome();" style="width:50px" class="w3-round w3-right" alt="Ria Stroes"/></h1>
-    <p></p>
+    <p>In deze animatie ben jij de choreograaf. Begin bij het bepalen van het aantal dansers dat je wilt gebruiken. De dansers bewegen vrij door de ruimte. Jij kunt dit patroon veranderen door bewegingen te activeren in de ruimte. Zodra een danser in de buurt komt van jou bewegingen, zal hij het patroon overnemen.</p>
   </div>  
   <div class="w3-row">
-    <div class="w3-container w3-third ">
-     <button id="btnStart" onclick="divcanvas.scrollIntoView(btnStart);startAnimation();" class="w3-button w3-border">Start</button> 
-     <span id="total"></span>
+    <div class="w3-container">
+      <button id="btnMouse" onclick="scrollIntoView(btnMouse);addMousePath()" class="w3-button w3-border">Mouse</button>
+    </div>
+  </div>
+  <div class="w3-row">
+    <div class="w3-container">
+      <button id="btnGroup" onclick="addGroup();" class="w3-button w3-border">Groep maken</button> 
+     <!--<input type="text" id="indancers" size="3" value="5" onchange="changeDancers()"/> <label>Dansers</label>-->
+     <span id="divbuttons" ></span>
+     <button id="btnAddDancers" style="color:lightgray" onclick="addDancers();" class="w3-button w3-border">Dansers toevoegen</button> 
+     <button id="btnTraining" onclick="scrollIntoView(btnMouse);startTraining();" class="w3-button w3-border">Start Training</button> 
+     <button id="btnDancing" onclick="scrollIntoView(divcanvas);startDance();" class="w3-button w3-border">Start Dans</button> 
+     
     </div>  
   </div>
   <div class="w3-row">

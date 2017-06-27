@@ -26,7 +26,7 @@ var ischanged;
 var func;
 
 function setup() {
-    var canvas = createCanvas(1000,1000);
+    var canvas = createCanvas(1200,1200);
     canvas.parent("divcanvas");
     
     offset = createVector(0,15);
@@ -57,8 +57,7 @@ function draw(){
   // noStroke();
   // rect(290,60, 60,40);
   // fill(0);
-  
-  
+   
   showPath(checkShowPointDrawing.checked);
   
 }
@@ -76,15 +75,15 @@ function showPath(showPoints){
   
 }
 function create(){
-  background(255);
+  
   lapje = new Lapje(printer, material, "normal",  institches, inrows, checkShowGrid.checked  );
     if(checkShowGrid.checked){
-      lapje.createGrid(3,3,2);
+      lapje.createGrid(2,2,2);
       lapje.showGrid();
     }
   var ina,inb;
   if(checkShowGrid.checked){
-    lapje.createGrid(3,3,2);
+    lapje.createGrid(2,2,2);
     lapje.showGrid();
   }
   if(func.value == "none"){

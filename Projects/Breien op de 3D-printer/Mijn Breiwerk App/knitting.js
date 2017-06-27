@@ -158,7 +158,7 @@ Knitting.prototype.createPattern = function(patternname, from, to){
       }
 
   }
-  println(this.strpattern);
+  console.log(this.strpattern);
 }
 Knitting.prototype.patternToGrid = function( ){
 

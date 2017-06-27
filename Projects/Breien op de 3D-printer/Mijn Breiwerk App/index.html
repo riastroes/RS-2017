@@ -17,7 +17,7 @@
 
 <script src="settings.js" type="text/javascript"></script>
 <script src="gcode.js" type="text/javascript"></script>
-<script src="sketch.js" type="text/javascript"></script>
+
 <script src="layer.js" type="text/javascript"></script>
 <script src="skirt.js" type="text/javascript"></script>
 <script src="knitting.js" type="text/javascript"></script>
@@ -25,14 +25,12 @@
 <script src="stitch.js" type="text/javascript"></script>
 <script src="pos.js" type="text/javascript"></script>
 <script src="grid.js" type="text/javascript"></script>
-<script src="freeform.js" type="text/javascript"></script>
 <script src="knitgrid.js" type="text/javascript"></script>
-<script src="moreless.js" type="text/javascript"></script>
-
 <script src="lapje.js" type="text/javascript"></script>
 <script src="app.js" type="text/javascript"></script>
 <style>
-body{ margin:0; background-image:url('/RS-2017/Images/knittingapp.jpg'); background-blend-mode:soft-light; background-repeat:vertical; background-size: 100%; color:white; }
+body{font-size:18px; font-family: "Raleway", sans-serif;}
+#header{ margin:0; background-image:url('/RS-2017/Images/knittingapp.jpg'); background-blend-mode:soft-light; background-size: 100%; color:white; height:300px ; background-position-y :-500px}
 label{display:inline-block; width:150px;}
 label.large{display:inline-block; width:400px;}
 
@@ -41,12 +39,18 @@ label.large{display:inline-block; width:400px;}
   display:none;
 }
 button{background-color:brown;color:white}
-.waarschuwing{color:yellow}
+.waarschuwing{color:red}
+.border{padding:10px; border-image:url('/RS-2017/Images/knittingapp.jpg')30 stretch ; border-style: solid; border-width: 10px}
+
 </style>
 </head>
 <body>
-  <div class="w3-container">
-  <h1>Ontwerp je eigen breiwerkje op mijn 3D-printer.<img src="/RS-2017/Images/Ria.jpg" style="width:50px" class="w3-round w3-right" alt="Ria Stroes"/></h1>
+  <div id="header" class="w3-header">
+  </div>
+  
+  <div class ="w3-container border" >
+  <div class="w3-container w3-center">
+  <h1 >Ontwerp je eigen breiwerkje op mijn 3D-printer.<img src="/RS-2017/Images/Ria.jpg" style="width:50px" class="w3-round w3-right" alt="Ria Stroes"/></h1>
   
   </div>
   <div class="w3-row">
@@ -60,13 +64,15 @@ button{background-color:brown;color:white}
    </div>
  
   <div class="w3-row">
-   <div id="divSettings1" class="w3-third w3-container">
+   <div id="divSettings1" class="w3-half w3-container">
        <label>Mijn 3D-printer in:</label>
        <select id="selectprinter" onchange="selectPrinter();">
           <option value="Anet">Nijemirdum (Friesland)</option>
           <option value="Ultimaker2+0.6">Amsterdam</option>
        </select><br/>
+       <label>Kies materiaal:</label>
         <select id="selectmaterial" onchange="selectMaterial();">
+          <option value="ABS">ABS neutraal/wit</option>
           <option value="PLA">Black Plastic</option>
           <option value="PETGCARBON">PETG carbon</option>
           <option value="SATIN">Satijn licht blauw</option>
@@ -76,7 +82,8 @@ button{background-color:brown;color:white}
        <label>show grid:</label><input id="showgrid" type="checkbox" checked></input></br>
        
         <label class="small">Start positie x:  </label><input id="inx" type="text" size="5" value="6"  onchange="changePosx();">
-        <label class="small">Start positie y:  </label><input id="iny" type="text" size="5" value="3"  onchange="changePosy();">
+        <label class="small">y:  </label><input id="iny" type="text" size="5" value="2"  onchange="changePosy();">
+        <br/>
       
         <label>Aantal steken: </label><input id="sliderstitches" type="range" min="2" max="50" value="10" step="1"  onchange="changeStitches();"/><span id="spinstitches"></span></br>
         <label>Aantal pennen: </label><input  id="sliderrows" type="range" min="2" max="50" value="10" step="1"  onchange="changeRows();"/><span id="spinrows"></span></br>
@@ -85,7 +92,7 @@ button{background-color:brown;color:white}
         <button id="btnGenerate" onclick="create();"><strong>G</strong>eneer Breiwerk</button>
          
     </div>
-    <div id="divSettings2" class="w3-third w3-container">
+    <div id="divSettings2" class="w3-half w3-container">
         <p>
         Op het breiwerk kun je met je muis punten aangeven waar je het breiwerk wilt manipuleren. Het regelmatige patroon van het breiwerk wordt dan verstoord door één van onderstaande functies. Probeer maar ...</p>
        
@@ -136,25 +143,28 @@ button{background-color:brown;color:white}
         <p>Een 3D-print van jouw ontwerp kost: <span id="price">...</span> <br/>
         De verzendkosten zijn 3.95 euro, maar je mag het ook ophalen.</p>
         <button id="btnSave" onclick="downloadKnitting();"><strong>D</strong>ownload Breiwerk (.gcode)</button>
+        <br/><br/><br/>
 
 
     </div>
     
-      <div id="divInfo" class="w3-third w3-container">
-        <h3>Recept Armband</h3>
-        <p>Maak een breiwerk met 10 steken en 50 pennen en 3 lagen.<br/>
-        Zet een aantal punten op het breiwerk.<br/>
-        Manipuleer nu het regelmatige breipatroon met een manipuleer functie.<br/>
-        Laat het ontwerp printen. Vergeet niet het .gcode bestand te versturen als bijlage bij je email.<br/>
-        Betaal de kosten van je breiwerk. <br/> 
-        Als je de print thuis hebt gekregen, neem je een glas of beker met heet water, laat de print langzaam zacht worden in het hete water en druk de print met een smallere glas of beker tegen de rand aan.
-        Laat de print weer afkoelen, door in de binnenste glas koud water te gieten. Als de print koud is blijft hij in de juiste vorm en is je armband klaar.
-      </div>
+      
 
    </div>
    <div class="w3-row">
-        <div id="divcanvas" class ="w3-one w3-container  w3-center">
-        </div>
+    <div id="divcanvas"  class="w3-half border">
+    </div>
+    <div id="divInfo" class="w3-half border">
+    <h3>Recept Armband</h3>
+    <p>Maak een breiwerk met 10 steken en 50 pennen en 3 lagen.<br/>
+    Zet een aantal punten op het breiwerk.<br/>
+    Manipuleer nu het regelmatige breipatroon met een manipuleer functie.<br/>
+    Laat het ontwerp printen. Vergeet niet het .gcode bestand te versturen als bijlage bij je email.<br/>
+    Betaal de kosten van je breiwerk. <br/> 
+    Als je de print thuis hebt gekregen, neem je een glas of beker met heet water, laat de print langzaam zacht worden in het hete water en druk de print met een smallere glas of beker tegen de rand aan.
+    Laat de print weer afkoelen, door in de binnenste glas koud water te gieten. Als de print koud is blijft hij in de juiste vorm en is je armband klaar.
+    </div>
+
     </div>
     <div class="w3-row">
     <div class="w3-half w3-container">
@@ -189,7 +199,7 @@ button{background-color:brown;color:white}
         <label >Vraag of Opmerking:</label>
         <textarea class="w3-input w3-border email" type="text" size="3" name="Pas op!" >Vergeet de bijlage niet! </textarea>
       </div>
-      <button type="submit" class="w3-right">Maak Email</button>
+      <button type="submit" class="w3-right">Maak Email</button><br/><br/><br/>
     </form>
     </div>
      <div class="w3-half w3-container">
@@ -205,7 +215,7 @@ button{background-color:brown;color:white}
   </div>
   </div>
  <br>
-
+</div>
 <div class="w3-row">
        <div class="w3-one w3-center">
         <button class="w3-button w3-padding-large w3-white  w3-border " onclick="goHome();"><b><< HOME</b></button>

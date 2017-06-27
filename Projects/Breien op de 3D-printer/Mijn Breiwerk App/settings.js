@@ -97,7 +97,11 @@ Settings.prototype.initMaterial = function(){
         case "ABS":{
           this.materialcode ="ABS";
           if(this.style == "normal"){
-            this.initStyle(0.5, 0.2, 800);//NIET GETEST
+            this.initStyle(0.3, 0.1, 800);  
+            //this.initStyle(0.2, 0.05, 800);  te dun
+            //this.initStyle(0.2, 0.2, 800);te laag , te vet 
+            //this.initStyle(0.2, 0.1, 800); te vet 
+            //this.initStyle(0.3, 0.05, 800); te hoog
           }
           if(this.style == "fine"){
             this.initStyle(0.2, 0.1, 800);//NIET GETEST

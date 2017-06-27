@@ -72,6 +72,8 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif;}
   
   
     <!-- 
+    // Dansende duinen heeft HTTPS nodig, anders mag je de microfoon niet gebruiken.
+
     <div class="w3-third w3-container w3-margin-bottom card w3-white code animatie" onclick="show('Dansende Duinen')">
       <img src="Images/dansende duinen.png" alt="Hanger" style="width:100%" class="w3-hover-opacity">
       <div class="w3-container cardtext">
@@ -80,7 +82,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif;}
           <br/> <span class="link">Bekijk project ...</span></p>
       </div>
     </div>
-    -->
+   
     <div class="w3-third w3-container w3-margin-bottom card w3-white 3D-printer" onclick="show('Dance 3')">
       <img src="Images/dummy.jpg" alt="Hanger" style="width:100%" class="w3-hover-opacity">
       <div class="w3-container cardtext">
@@ -97,19 +99,46 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif;}
           <br/> <span class="link">Bekijk project ...</span></p>
       </div>
     </div>
-     <div class="w3-third w3-container w3-margin-bottom card w3-white 3D-printer" onclick="show('Dansende Duinen')">
-      <img src="Images/dummy.jpg" alt="Hanger" style="width:100%" class="w3-hover-opacity">
+     -->
+     <div class="w3-third w3-container w3-margin-bottom card w3-white 3D-printer app" onclick="show('Breien op de 3D-printer/Mijn Breiwerk App')">
+      <img src="Images/knittingapp.jpg" alt="Hanger" style="width:100%" class="w3-hover-opacity">
       <div class="w3-container cardtext">
-        <p><b>Dansende Duinen</b></p>
-        <p class="cardtext">  
+         <p><b>Mijn Breiwerk App</b></p>
+        <p class="cardtext">Zelf een breiwerkje ontwerpen.
+          <br/> <span class="link">Bekijk project ...</span></p>
+        
+      </div>
+    </div>
+     <div class="w3-third w3-container w3-margin-bottom card w3-white 3D-printer" onclick="show('Dans/Dansende Duinen')">
+      <img src="Images/dansende duinen.png" alt="Hanger" style="width:100%" class="w3-hover-opacity">
+      <div class="w3-container cardtext">
+         <p><b>Dansende Duinen</b></p>
+        <p class="cardtext">Dansende Duinen is een animatie, die gebruik maakt van de microfoon in je browser.
+          <br/> <span class="link">Bekijk project ...</span></p>
+        
+      </div>
+    </div>
+     <div class="w3-third w3-container w3-margin-bottom card w3-white 3D-printer" onclick="show('Dans/Sunset Dance')">
+      <img src="Images/sunset dance.jpg" alt="Hanger" style="width:100%" class="w3-hover-opacity">
+      <div class="w3-container cardtext">
+        <p><b>Sunset Dance</b></p>
+        <p class="cardtext">Op het strand als de zon ondergaat...
           <br/> <span class="link">Bekijk project ...</span></p>
       </div>
     </div>
-     <div class="w3-third w3-container w3-margin-bottom card w3-white 3D-printer" onclick="show('Dance')">
-      <img src="Images/dummy.jpg" alt="Hanger" style="width:100%" class="w3-hover-opacity">
+     <div class="w3-third w3-container w3-margin-bottom card w3-white 3D-printer" onclick="show('Dans/Choreo')">
+      <img src="Images/Choreo.jpg" alt="Hanger" style="width:100%" class="w3-hover-opacity">
       <div class="w3-container cardtext">
-        <p><b>Dance</b></p>
-        <p class="cardtext">  
+        <p><b>Choreo</b></p>
+        <p class="cardtext">In Choreo kun je zelf een choreography maken.
+          <br/> <span class="link">Bekijk project ...</span></p>
+      </div>
+    </div>
+    <div class="w3-third w3-container w3-margin-bottom card w3-white 3D-printer" onclick="show('Breien op de 3D-printer/Hangers-wit')">
+      <img src="Images/hanger-wit.jpg" alt="Hangers" style="width:100%" class="w3-hover-opacity">
+      <div class="w3-container cardtext">
+        <p><b>Hangers</b></p>
+        <p class="cardtext">De hangers zijn geprint in een breimotief. Je kunt ze aan de hals van een T-shirt of jurk hangen. 
           <br/> <span class="link">Bekijk project ...</span></p>
       </div>
     </div>
@@ -161,26 +190,27 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif;}
         
       </div>
     </div>
-</div>
+
 
   <!-- Pagination -->
-  <div class="w3-center w3-padding-32">
-    <div class="w3-bar"></p>
-      <div class="w3-left" style="padding-top:10px">Bekijk ook mijn andere websites:</div>
-      
-      <a href="http://www.riastroes.nl/CCC" class="w3-bar-item w3-button">CCC</a>
-      <a href="http://www.riastroes.nl/RS-Website" class="w3-bar-item w3-button w3-hover-black">2016</a>
-      <a href="http://www.riastroes.nl/2016" class="w3-bar-item w3-button w3-hover-black">2016</a>
-      <a href="http://www.riastroes.nl/2015" class="w3-bar-item w3-button w3-hover-black">2015</a>
-      <a href="http://www.riastroes.nl/2013/index2.html" class="w3-bar-item w3-button w3-hover-black">2013</a>
-    </div>
+ 
 
   <!-- Images of Me -->
-  <div class="w3-row-padding w3-padding-16" id="overmij">
-    <div class="w3-col m6">
+  <div class="w3-row w3-container" id="overmij">
+    <div class="w3-third">
       <img src="Images/Ria.jpg" alt="Ria Stroes" style="width:100%">
     </div>
-    <div class="w3-col m6">
+    <div class="w3-third">
+      <h3>Bekijk ook mijn andere websites:</h3>
+      <ul class="w3-list">
+        <li><a href="http://www.riastroes.nl/CCC" class="w3-bar-item w3-button">Creative Coding Course</a></li>
+        <li><a href="http://www.riastroes.nl/RS-Website" class="w3-bar-item w3-button w3-hover-black">Website II 2016</a></li>
+        <li><a href="http://www.riastroes.nl/2016" class="w3-bar-item w3-button w3-hover-black">Website I 2016</a></li>
+        <li><a href="http://www.riastroes.nl/2015" class="w3-bar-item w3-button w3-hover-black">Website 2015</a></li>
+      <li><a href="http://www.riastroes.nl/2013/index2.html" class="w3-bar-item w3-button w3-hover-black">Website 2013</a></li>
+      </ul>
+    </div>
+    <div class="w3-third">
       <img src="Images/Ria1.jpg" alt="Ria Stroes" style="width:100%">
     </div>
   </div>
