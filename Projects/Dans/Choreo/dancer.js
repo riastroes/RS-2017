@@ -147,9 +147,9 @@ Dancer.prototype.draw = function(){
                 endShape(CLOSE);
                
                 
-                if(time % 20 == 0){
-                    this.dance.pop();
-                }
+                // if(time % 20 == 0){
+                //     this.dance.pop();
+                // }
                 
             }
             else{

@@ -4,6 +4,7 @@
 // waar de choreography een beweging heeft gedefinieerd, dan voert hij deze uit.
 
 var time;
+var stopwatch;
 var groups;
 var totdancers;
 var groupMode;
@@ -53,6 +54,7 @@ function draw(){
     }
     if(frameCount % 1 == 0){
         time++;
+        stopwatch++;
     }
         
  
@@ -181,6 +183,9 @@ function changeDancers(){
     }
     
 }
+function touchStarted(){
+    stopwatch = 0;
+}
 function touchMoved() {
     if(isTraining){
         mousepath.push(createVector(mouseX, mouseY));
@@ -192,7 +197,7 @@ function touchMoved() {
 }
 function touchEnded(){
     if(isTraining){
-        addMousePath();
+        addMousePath(stopwatch);
     }
     return false;
 }
@@ -312,7 +317,7 @@ function addMousePath(){
         }
     }
     if(mousepath.length > 0 && agroup != undefined){
-        movement = new Movement(50);
+        movement = new Movement(stopwatch);
         movement.addMouse(mousepath,100);
         append(agroup.movements, movement);
         movement.draw(0);

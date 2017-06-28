@@ -173,7 +173,7 @@ Knitting.prototype.patternToGrid = function( ){
 Knitting.prototype.gotoStart = function(pos, offset){
       var last = this.layer.p.length-1;
       var lastp = this.layer.p[last].copy();
-      lastp.y += 100;
+      lastp.y += 50;
       lastp.z =0;
        point(lastp.x + offset.x, lastp.y + offset.y);
        append(this.layer.p, lastp);

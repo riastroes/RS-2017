@@ -30,7 +30,7 @@
 <script src="app.js" type="text/javascript"></script>
 <style>
 body{font-size:18px; font-family: "Raleway", sans-serif;}
-#header{ margin:0; background-image:url('/RS-2017/Images/knittingapp.jpg'); background-blend-mode:soft-light; background-size: 100%; color:white; height:300px ; background-position-y :-500px}
+#header{ margin:0; background-image:url('Images/mask.jpg'); background-blend-mode:soft-light; background-size: 100%; color:white; height:300px ; background-position-y :-150px}
 label{display:inline-block; width:150px;}
 label.large{display:inline-block; width:400px;}
 
@@ -40,7 +40,7 @@ label.large{display:inline-block; width:400px;}
 }
 button{background-color:brown;color:white}
 .waarschuwing{color:red}
-.border{padding:10px; border-image:url('/RS-2017/Images/knittingapp.jpg')30 stretch ; border-style: solid; border-width: 10px}
+.border{padding:10px; border-image:url('Images/mask.jpg')30 stretch ; border-style: solid; border-width: 10px}
 
 </style>
 </head>
@@ -85,8 +85,8 @@ button{background-color:brown;color:white}
         <label class="small">y:  </label><input id="iny" type="text" size="5" value="2"  onchange="changePosy();">
         <br/>
       
-        <label>Aantal steken: </label><input id="sliderstitches" type="range" min="2" max="50" value="10" step="1"  onchange="changeStitches();"/><span id="spinstitches"></span></br>
-        <label>Aantal pennen: </label><input  id="sliderrows" type="range" min="2" max="50" value="10" step="1"  onchange="changeRows();"/><span id="spinrows"></span></br>
+        <label>Aantal steken: </label><input id="sliderstitches" type="range" min="2" max="40" value="10" step="1"  onchange="changeStitches();"/><span id="spinstitches"></span></br>
+        <label>Aantal pennen: </label><input  id="sliderrows" type="range" min="2" max="40" value="10" step="1"  onchange="changeRows();"/><span id="spinrows"></span></br>
         <label>Aantal lagen: </label><input  id="sliderlayers" type="range" min="1" max="5" value="1" step="1"  onchange="changeLayers();"/><span id="spinlayers"></span></br>
         <p id="infolayers">met 1 laag ontstaat een flexibel materiaal, 0.2mm dik. Als je 5 lagen kiest, is stug, niet flexibel, 1mm dik. In heet water kun je het materiaal vormen.</p>
         <button id="btnGenerate" onclick="create();"><strong>G</strong>eneer Breiwerk</button>
@@ -152,17 +152,18 @@ button{background-color:brown;color:white}
 
    </div>
    <div class="w3-row">
-    <div id="divcanvas"  class="w3-half border">
+    <div id="divcanvas"  class="w3-twothird border center">
     </div>
-    <div id="divInfo" class="w3-half border">
+    <div id="divInfo" class="w3-third w3-container">
     <h3>Recept Armband</h3>
-    <p>Maak een breiwerk met 10 steken en 50 pennen en 3 lagen.<br/>
+    <p>Maak een breiwerk met 8 steken en 40 pennen en 3 lagen.<br/>
     Zet een aantal punten op het breiwerk.<br/>
     Manipuleer nu het regelmatige breipatroon met een manipuleer functie.<br/>
     Laat het ontwerp printen. Vergeet niet het .gcode bestand te versturen als bijlage bij je email.<br/>
     Betaal de kosten van je breiwerk. <br/> 
     Als je de print thuis hebt gekregen, neem je een glas of beker met heet water, laat de print langzaam zacht worden in het hete water en druk de print met een smallere glas of beker tegen de rand aan.
     Laat de print weer afkoelen, door in de binnenste glas koud water te gieten. Als de print koud is blijft hij in de juiste vorm en is je armband klaar.
+    <img alt="Breien op de 3D-printer" src="images/breien3DPRINTER.jpg"/>
     </div>
 
     </div>
@@ -172,7 +173,7 @@ button{background-color:brown;color:white}
     <a id="email"/>
         <h3>Bestelformulier </h3>
     <form method="post" action="mailto:riastroes@gmail.nl?subject=Ontwerp voor 3D-printer" enctype="text/plain">
-   
+      <input id="hidgcode" type="hidden" name="gcode" value="" ><br/>
       <div class="w3-section">
         <label >Naam:</label>
         <input class="w3-input w3-border email" type="text" name="Naam" required><br/>
@@ -181,7 +182,7 @@ button{background-color:brown;color:white}
         <label >Email:</label>
         <input class="w3-input w3-border email" type="text" name="Email" required><br/>
       </div>
-     
+    
       <div class="w3-section">
         <label class="large" >Ik kom mijn 3D PRINT zelf ophalen:</label>
         <input id="checkOphalen" class="email" type="checkbox" name="ophalen" checked onchange="changePrice()">
@@ -193,7 +194,7 @@ button{background-color:brown;color:white}
       <div class="w3-section">
         <label >Ik betaal:</label>
         <input id="emailprice" name="prijs" class="w3-input w3-border email" type="text" value=""><br/>
-       <label ></label> <textarea class="w3-input w3-border email" type="text" size="3" >Ik betaal op rekeningnr NL23 SNSB 0870 8412 03 t.a.v. Ria Stroes, Ontwerp 3D-PRINT</textarea>
+       <label ></label> <textarea class="w3-input w3-border email" type="text" size="3" >Ik betaal op rekeningnr NL23 SNSB 0870 8412 03 t.a.v. Ria Stroes, Ontwerp 3D-PRINT </textarea>
       </div>
       <div class="w3-section">
         <label >Vraag of Opmerking:</label>

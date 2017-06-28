@@ -74,10 +74,11 @@ Settings.prototype.initMaterial = function(){
         case "SATIN":{
           this.materialcode ="SATIN";
           if(this.style == "fine"){
-            this.initStyle(0.3, 0.1, 600);//test ok 0.25, 0.1, 600
+            this.initStyle(0.25, 0.1, 600);//test ok 0.25, 0.1, 600
           }
           else if(this.style == "normal"){
-            this.initStyle(0.5, 0.2, 800);//test ok (iphone etui)
+           // this.initStyle(0.5, 0.2, 800);//test ok (iphone etui)
+            this.initStyle(0.3, 0.25, 800);  //getest met knittingapp
           }
           break;
         }
@@ -97,7 +98,7 @@ Settings.prototype.initMaterial = function(){
         case "ABS":{
           this.materialcode ="ABS";
           if(this.style == "normal"){
-            this.initStyle(0.3, 0.1, 800);  
+            this.initStyle(0.4, 0.1, 800);  //TEST OK getest met knittingapp
             //this.initStyle(0.2, 0.05, 800);  te dun
             //this.initStyle(0.2, 0.2, 800);te laag , te vet 
             //this.initStyle(0.2, 0.1, 800); te vet 

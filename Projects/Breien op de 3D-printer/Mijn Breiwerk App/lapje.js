@@ -9,6 +9,7 @@ function Lapje(pprinter, material,style,  pstitches, prows,  showgrid){
   this.name = "Lapje";
   this.rows = prows;
   this.stitches = pstitches;
+  this.filename = "";
   
   this.isSaved = false;
   this.settings =new Settings(this.printer, material, style);
@@ -95,13 +96,16 @@ Lapje.prototype.create = function(showgrid, ischanged, institches, inrows, inlay
 }
 Lapje.prototype.save = function(){
   this.gcode.generate(this.layers,this.skirt, this.knittings);
-  var code =""
+  var code ="";
   if(this.printer =="Anet"){
     code = "A";
   }
   else{
     code = "U";
   }
-  this.gcode.save(code + material + this.rows + "x"+ this.stitches + "x" + this.maxlayers);
+  this.filename = code + material + this.rows + "x"+ this.stitches + "x" + this.maxlayers;
+  var hide = document.getElementById("hidgcode");
+  hide.value = this.filename;
+  this.gcode.save(this.filename);
   this.isSaved = true;
 }

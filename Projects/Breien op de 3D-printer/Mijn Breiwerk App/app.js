@@ -30,7 +30,7 @@ function setup() {
     canvas.parent("divcanvas");
     
     offset = createVector(0,15);
-    pos = createVector(6,3);
+    pos = createVector(6,2);
     changeStitches();
     changeRows();
     changeLayers();
@@ -137,7 +137,7 @@ function changePosy(){
 function changePrice(){
     var price = 0;
     for(var l = 1; l <=inlayers; l++){
-        price += institches * inrows  * (0.005 / l);
+        price += institches * inrows  * (0.01 / l);
     }
     
     document.getElementById("price").innerHTML = price.toFixed(2) + " euro."
@@ -157,7 +157,7 @@ function downloadKnitting(){
     if(!lapje.isSaved){
       lapje.save();
     }
-    document.location.href ="#email";
+    //document.location.href ="#email";
 }
 function mousePressed(){
   if(mouseX > offset.x && mouseY > offset.y){
@@ -330,4 +330,5 @@ function changeHor(){
   document.getElementById("spinhor").innerHTML = document.getElementById("sliderhor").value;
 
 }
+
 
