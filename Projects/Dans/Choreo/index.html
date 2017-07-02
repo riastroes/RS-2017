@@ -50,8 +50,11 @@
      <!--<input type="text" id="indancers" size="3" value="5" onchange="changeDancers()"/> <label>Dansers</label>-->
      <span id="divbuttons" ></span>
      <button id="btnAddDancers" style="color:lightgray" onclick="addDancers();" class="w3-button w3-border">Dansers toevoegen</button> 
+     <button id="btnDelDancers" style="color:lightgray" onclick="deleteDancers();" class="w3-button w3-border">Dansers verwijderen</button> 
      <button id="btnTraining" onclick="scrollIntoView(btnMouse);startTraining();" class="w3-button w3-border">Start Training</button> 
      <button id="btnDancing" onclick="scrollIntoView(divcanvas);startDance();" class="w3-button w3-border">Start Dans</button> 
+      <button id="btnMode" onclick="changeMode();" class="w3-button w3-border">Mode</button> 
+     <label>Snelheid: <input type="range"  id="inputspeed" min="0" max="60" onchange="changeSpeed();" value="20" step="1"/> <span id="spnspeed"></span>
      
     </div>  
   </div>

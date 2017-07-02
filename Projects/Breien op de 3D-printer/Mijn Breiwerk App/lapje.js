@@ -33,6 +33,10 @@ Lapje.prototype.create = function(showgrid, ischanged, institches, inrows, inlay
   this.layers = [];
   this.maxlayers= inlayers;
   for(var i = 0; i < this.maxlayers; i++){
+    if(i == 1){
+      this.settings.style ="fine";
+      this.settings.initMaterial();
+    }
     this.layers[i] = new Layer(i, this.settings);
   }
   this.skirt = new Skirt(this.grid, 2,30, 5);
@@ -79,6 +83,7 @@ Lapje.prototype.create = function(showgrid, ischanged, institches, inrows, inlay
       //this.knitgrid.disorderHeight(0,100, 20, 34);
       //this.knitgrid.disorderHeight(0,100, -20, 14);
     }
+    
 
     this.knittings[i] = new Knitting(this.grid, this.knitgrid, this.layers[i],0,0,this.stitches);
     this.knittings[i].createPattern("setup", 0,1);

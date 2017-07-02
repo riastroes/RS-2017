@@ -12,7 +12,7 @@ Group.prototype.dancing = function(){
     }
 }
 Group.prototype.addDancer = function(pos,speed){
-    var d = this.dancers.push(new Dancer(pos,10, this.acolor, this.bcolor, speed))
+    var d = this.dancers.push(new Dancer(pos,30, this.acolor, this.bcolor, speed))
                 
     for(var m = 0; m < this.movements.length; m++){
         this.dancers[d-1].addMovementToDance(this.movements[m]);
@@ -36,6 +36,11 @@ function Dancer(pos, size, acolor,bcolor, speed){
     this.yo = 0;
     this.seed1 = random(100);
     this.seed2 = random(100);
+
+    this.a = 0;
+    this.b = 0;
+    this.distx = 0;
+    this.disty = 0;
     
     this.isTraining = false;
     this.isDancing = false;
@@ -88,17 +93,17 @@ Dancer.prototype.startTraining = function(){
 }
 Dancer.prototype.stopTraining = function(){
     this.step = 0;
-    this.size = 20;
+   // this.size = 20;
     this.isTraining = false;
 }
 Dancer.prototype.startDancing = function(){
     this.step = 0;
-    this.size = 20;
+   // this.size = 20;
     this.isDancing = true;
  }
  Dancer.prototype.stopDancing = function(){
     this.step = 0;
-    this.size = 20;
+   // this.size = 20;
     this.isDancing = false;
     this.pos = this.start.copy();
  }
@@ -123,38 +128,81 @@ Dancer.prototype.jump = function(){
 
 Dancer.prototype.draw = function(){
    
-    push();
-        this.pos = this.start.copy();
-        if(this.dance.length > 0){
-            this.pos.add(this.dance[time% this.dance.length]);
-        }
+    
+   
+    this.pos = this.start.copy();
+    if(this.dance.length > 1){
+        var i = (time % ( this.dance.length-1));
+        i += 1
+        this.distx = floor(  (this.dance[i].x - this.dance[i-1].x) *100)/100;
+        this.disty = floor(  (this.dance[i].y - this.dance[i-1].y) *100)/100;
+        this.pos.add(this.dance[i]);
+        this.a = atan2(this.dance[time% this.dance.length].y - this.dance[(time-1)% this.dance.length].y, this.dance[time% this.dance.length].x- this.dance[(time-1)% this.dance.length].x);
+        // a = constrain(a,0, TWO_PI);
+        this.a =map(this.disty, -30,30,  PI/5*4,-PI/5*4);
+        this.b =map(this.distx, -30,30,  PI/5*4,-PI/5*4);
         
+        
+        
+    }
+    push();   
         translate(this.pos.x, this.pos.y);
         strokeWeight(1);
-        //noStroke();//stroke(255);
         stroke(this.bcolor);
         fill(this.acolor);
-        //fill(this.acolor);
-            if(this.pos != undefined){
-               // ellipse(this.pos.x, this.pos.y, this.size, this.size);
-               
-                beginShape();
-                for(var d = 0; d < this.dance.length; d++){
-                    if (d % floor(random(10)) == 0){
-                    curveVertex(this.dance[d].x, this.dance[d].y);
-                    }
-                }
-                endShape(CLOSE);
-               
-                
-                // if(time % 20 == 0){
-                //     this.dance.pop();
-                // }
-                
-            }
-            else{
-                ellipse(0,0, this.size*2, this.size*2);  
-            }
+        
+        if(this.dance.length >= 0){
+                            
+            rotate(this.a);
+            this.drawBody();
+            this.drawHead();
+            this.drawSkirt(0,30);
+            this.drawArms(0,-20,this.b);
+            
+            translate(0,50);
+            //rotate(1 +(-a % 2)*4);
+            line(0,0,0,100);
+            rotate((this.a%4)*-4);
+            line(0,0,100,0);
+            pop();
+        }
+        else{
+            ellipse(0,0, this.size, this.size);  
+        }
     pop();
     
+}
+Dancer.prototype.drawBody = function(a){
+    
+    stroke(255,0,0);
+    line(0,-50,0,50);
+        
+    
+}
+Dancer.prototype.drawHead = function(){
+     fill(red(this.acolor),green(this.acolor),blue(this.acolor),100);
+     noStroke();
+    ellipse(0,-50, this.size, this.size);  
+}
+Dancer.prototype.drawSkirt = function(x,y){
+    fill(red(this.acolor),green(this.acolor),blue(this.acolor),100);
+   noStroke();
+    var a = createVector(x+50 - random(10), y+50 + random(10));
+    var b = createVector(x-50 + random(10), y+50 + random(10));
+    quad(x-random(5),y-10, x +random(5),y-10, a.x, a.y, b.x, b.y);
+    fill(this.acolor);
+    stroke(this.bcolor);
+
+}
+Dancer.prototype.drawArms = function (x,y,a){
+    push();
+        translate(x,y);
+        rotate(a*3);
+      
+        curve(-80,-50,-80,0,0,0,0,-50)
+
+        rotate(-a);
+       curve(80,-50,80,0,0,0,0,-50)
+       
+    pop();
 }

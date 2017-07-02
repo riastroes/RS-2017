@@ -74,11 +74,28 @@ Settings.prototype.initMaterial = function(){
         case "SATIN":{
           this.materialcode ="SATIN";
           if(this.style == "fine"){
-            this.initStyle(0.25, 0.1, 600);//test ok 0.25, 0.1, 600
+            this.initStyle(0.5, 0.15, 600); //test OK
+            //this.initStyle(0.4, 0.1, 600);//test ok 
+           /// this.initStyle(0.3, 0.1, 600);//test ok 
+           // this.initStyle(0.25, 0.15, 600);//test ok  
           }
           else if(this.style == "normal"){
-           // this.initStyle(0.5, 0.2, 800);//test ok (iphone etui)
-            this.initStyle(0.3, 0.25, 800);  //getest met knittingapp
+           // this.initStyle(0.5, 0.2, 800); //test ok (iphone etui)
+            this.initStyle(0.3, 0.2, 800);  //getest met knittingapp
+          }
+          break;
+        }
+        case "SATIN2":{
+          this.materialcode ="SAT2N";
+          if(this.style == "fine"){
+            this.initStyle(0.5, 0.15, 600); //test OK
+            //this.initStyle(0.4, 0.1, 600);//test ok 
+           /// this.initStyle(0.3, 0.1, 600);//test ok 
+           // this.initStyle(0.25, 0.15, 600);//test ok  
+          }
+          else if(this.style == "normal"){
+           // this.initStyle(0.5, 0.2, 800); //test ok (iphone etui)
+            this.initStyle(0.3, 0.2, 800);  //getest met knittingapp
           }
           break;
         }
@@ -223,8 +240,8 @@ Settings.prototype.initPrinter = function(){
       break;
     }
     case "SATIN":{
-      this.nozzletemp =200;
-      this.bedtemp = 0;
+      this.nozzletemp =185;  //200
+      this.bedtemp = 50;
       break;
     }
     case "BRICK":{
