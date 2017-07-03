@@ -38,7 +38,7 @@ function setup(){
 }
 function draw(){
      blendMode(BLEND)
-  background(0,120,180,20);
+  background(0,120,180);
     selectMode(mode) ;
    fill(255);
    rect(0,0,100,120);

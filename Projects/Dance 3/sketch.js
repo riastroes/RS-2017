@@ -63,8 +63,8 @@ osc = new p5.Oscillator();
 }
 function draw(){
    
-    background(bg);
-    acolor = color( hue, saturation, brightness, 100);
+        background(bg);
+         acolor = color( hue, saturation, brightness, 100);
         
         
         push();
@@ -73,9 +73,9 @@ function draw(){
         stroke(acolor);
         line(-w,hi, w,hi);
         pop();
-    var r = random(0,100);
-    var s = random(0,10);
-    speed = map((s % 4), 0, 10, 0.8, 5);
+        var r = random(0,100);
+        var s = random(0,10);
+        speed = map((s % 4), 0, 10, 0.8, 5);
 
     if(r >= 0 && r <= 10){
         strokeWeight(map(r, 0,10, 0, 300));
@@ -101,32 +101,16 @@ function draw(){
        play(0, 0);
 
     }
-    
-    // if(frameCount % parseInt(random(20)) == 0){
-    //     //for(i = 0 ; i < 10; i++){
-    //      play(0.5, 523.25);
-    //     //}
-       
-    // }
-    // else if(frameCount %  parseInt(random(20)) == 0){
-    //     play(0.5, 659.25);
-        
-    // }
-    // else if(frameCount  %  parseInt(random(20)) == 0){
-    //     play(0.5, 1369.91);
-        
-    // }
-    // else if(frameCount %  parseInt(random(20)) == 0){
-    //     play(0.5, 196);
-        
-    // }
+    for(var i = 0; i < 10; i++){
+         play(0.5, 329.63);
+    }
+   
     if(frameCount % 25 == 0){
         play(0.5, 349.23);
        
     }
    
     
-
     if(frameCount % 1 == 0){
          time++;
          playing = false;

@@ -127,7 +127,7 @@ Dancer.prototype.jump = function(){
 }
 
 Dancer.prototype.draw = function(){
-   
+    var inscale = 1;
     
    
     this.pos = this.start.copy();
@@ -142,11 +142,12 @@ Dancer.prototype.draw = function(){
         this.a =map(this.disty, -30,30,  PI/5*4,-PI/5*4);
         this.b =map(this.distx, -30,30,  PI/5*4,-PI/5*4);
         
-        
+        inscale = map(this.pos.y, 0,height, 0.2, 1);
         
     }
     push();   
         translate(this.pos.x, this.pos.y);
+        scale(inscale);
         strokeWeight(1);
         stroke(this.bcolor);
         fill(this.acolor);
