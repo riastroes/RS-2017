@@ -16,10 +16,17 @@ var isDancing;
 var mode;
 var min, max;
 
+var pg;
+var delay;
+var activegroup;
+
+
 
 function setup(){
     var canvas = createCanvas(windowWidth-31, windowHeight-3)
     canvas.parent(document.getElementById("divcanvas"));
+    pg  = createGraphics(width,height);
+    
     time = 0;
     background(0,120,180);
     strokeWeight(1);
@@ -30,125 +37,126 @@ function setup(){
     isTraining = false;
     isDancing = false;
     groupMode = false;
-    blendMode(BURN)
+    blendMode(BLEND)
     frameRate(20);
     mode = 0;
     min = 100;
     max = -100;
 }
 function draw(){
-     blendMode(BLEND)
-  background(0,120,180);
-    selectMode(mode) ;
-   fill(255);
-   rect(0,0,100,120);
+    
+   
+ pg.blendMode(BLEND)
+ pg.background(0,120,180);
+ image(pg,0,0);
    
    
-   if(time > 0 && isDancing){
+   if(isDancing){
        for(var g = 0; g < groups.length; g++){
            if(groups[g].isActive){
-             groups[g].dancing();
-           }  
-            
-       }
+             groups[g].dancing(g);
+            }  
+        }
     }
-    if(time > 0 && isTraining){
+    else if(isTraining){
        for(var g = 0; g < groups.length; g++){
            if(groups[g].isActive){
                for(var m = 0; m < groups[g].movements; m++){
                    groups[g].movements[m].draw();
                }
-            
            }      
        }
+     }
+    else{
+        for(var g = 0; g < groups.length; g++){
+            if(groups[g].isActive){
+                groups[g].draw();
+            }
+        }
     }
-    if(groups.length > 0 && groups[0].dancers.length> 0){
-        var t = floor( groups[0].dancers[0].a * 100)/100
-        if ( t < min){min = t}
-        if(t > max){ max = t}
-        fill(0);
-        noStroke();
-        textSize(10);
-        text(t, 10,30);
-        text("min: " + min, 10,50);
-        text("max: " + max, 10,70);
-        text("distx: " + groups[0].dancers[0].distx, 10,90);
-        text("disty: " + groups[0].dancers[0].disty, 10,110);
-    }   
+
     if(frameCount % 1 == 0){
         time++;
         stopwatch++;
     }
-        
- 
-    
-    
-
 }
 function changeMode(){
-    mode = (mode+1) % 14
+    mode = (mode+1) % 13
 }
 function selectMode(){
+  var btn = document.getElementById("btnMode");
   switch(mode){
-      case 0:{
-          blendMode(BLEND);
-          break;
-      }
-      case 1:{
-          blendMode(ADD);
-           break;
-      }
-      case 2:{
-          blendMode(DARKEST);
-           break;
-      }
-      case 3:{
-          blendMode(LIGHTEST);
-           break;
-      }
-      case 4:{
-          blendMode(DIFFERENCE);
-           break;
-      }
-      case 5:{
-          blendMode(EXCLUSION);
-           break;
-      }
-      case 6:{
-          blendMode(MULTIPLY);
-           break;
-      }
-      case 7:{
-          blendMode(SCREEN);
-           break;
-      }
-      case 8:{
-          blendMode(REPLACE);
-           break;
-      }
-      case 9:{
-          blendMode(OVERLAY);
-           break;
-      }
-      case 10:{
-          blendMode(HARD_LIGHT);
-           break;
-      }
-      case 11:{
-          blendMode(SOFT_LIGHT);
-           break;
-      }
-      case 12:{
-          blendMode(DODGE);
-           break;
-      }
-      case 13:{
-          blendMode(BURN);
-           break;
-      }
-     
+    case 0:{
+    blendMode(BLEND);
+    btn.innerHTML ="Mode:BLEND";
+    break;
+    }
+    case 1:{
+    blendMode(ADD);
+    btn.innerHTML ="Mode:ADD";
+    break;
+    }
+    case 2:{
+    blendMode(DARKEST);
+    btn.innerHTML ="Mode:DARKEST";
+    break;
+    }
+    case 3:{
+    blendMode(LIGHTEST);
+    btn.innerHTML ="Mode:LIGHTEST";
+    break;
+    }
+    case 4:{
+    blendMode(DIFFERENCE);
+    btn.innerHTML ="Mode:DIFFERENCE";
+    break;
+    }
+    case 5:{
+    blendMode(EXCLUSION);
+    btn.innerHTML ="Mode:EXCLUSION";
+    break;
+    }
+    case 6:{
+    blendMode(MULTIPLY);
+    btn.innerHTML ="Mode:MULTIPLY";
+    break;
+    }
+    case 7:{
+    blendMode(SCREEN);
+    btn.innerHTML ="Mode:SCREEN";
+    break;
+    }
+    case 8:{
+    blendMode(REPLACE);
+    btn.innerHTML ="Mode:REPLACE";
+    break;
+    }
+    case 8:{
+    blendMode(OVERLAY);
+    btn.innerHTML ="Mode:OVERLAY";
+    break;
+    }
+    case 9:{
+    blendMode(HARD_LIGHT);
+    btn.innerHTML ="Mode:HARD_LIGHT";
+    break;
+    }
+    case 10:{
+    blendMode(SOFT_LIGHT);
+    btn.innerHTML ="Mode:SOFT_LIGHT";
+    break;
+    }
+    case 11:{
+    blendMode(DODGE);
+    btn.innerHTML ="Mode:DODGE";
+    break;
+    }
+    case 12:{
+    blendMode(BURN);
+    btn.innerHTML ="Mode:BURN";
+    break;
+    }   
   }
-  
 }
 
 function randomColor(alpha){
@@ -165,42 +173,59 @@ function changeSpeed(){
     spn.innerHTML = inspeed.value;
     frameRate(parseInt( inspeed.value));
 }
+function changeDelay(){
+    var indelay = document.getElementById("inputdelay");
+    var spn = document.getElementById("spndelay");
+    spn.innerHTML = indelay.value;
+    delay = indelay.value;
+}
 function addGroup(){
     //creat a group and make it active.
     var i = groups.length;
-    groups[i] = new Group();
-    for(var g = 0; g < groups.length; g++){
-        if(g == i){
-            groups[g].isActive = true;
-            
-        }     
-    }
-    
-
     buttons[i] = createButton(0,i);
     buttons[i].parent(document.getElementById("divbuttons"));
     buttons[i].mousePressed(activateGroup);
-    buttons[i].style("background-color:" + groups[i].bcolor);
+   
+    groups[i] = new Group(createGraphics(width,height));
+    for(var g = 0; g < groups.length; g++){
+        if(g == i){
+            groups[g].isActive = true;
+            buttons[g].style("background-color:" + groups[g].bcolor);
+            activegroup = g;
+            
+        }   
+        else{
+            groups[g].isActive = false;
+            buttons[g].style("background-color:lightgray");
+        }  
+    }
+    
+
+    
 }
 function addDancers(){
     var btnDancers = document.getElementById("btnAddDancers");
     if(!groupMode){
         groupMode = true;
-        btnDancers.style.color = "black";
+        btnDancers.style.backgroundColor = groups[activegroup].acolor;
     }
     else{
         groupMode = false;
-        btnDancers.style.color = "lightgray";
+        btnDancers.style.backgroundColor = "lightgray";
     }
     
 }
 function deleteDancers(){
     var btnDancers = document.getElementById("btnDelDancers");
+    btnDancers.style.backgroundColor = groups[activegroup].acolor;
     for(var g = 0; g < groups.length; g++){
         if(groups[g].isActive){
             groups[g].dancers.pop();
             buttons[g].innerHTML = groups[g].length;
         }
+    }
+    if(groups[g].dancers.length == 0){
+        btnDancers.style.backgroundColor = "lightgray";
     }
 
 
@@ -219,6 +244,7 @@ function activateGroup(){
         //activate
         groups[g].isActive = true;
         buttons[g].elt.style.backgroundColor =groups[g].bcolor;
+        activegroup = g;
     }
 
 }
@@ -234,9 +260,9 @@ function startTraining(){
         var btn = document.getElementById('btnTraining');
         btn.innerHTML = "Stop Training";
         var btn = document.getElementById('btnDancing');
-        btn.innerHTML = "Start Dancing";
+        btn.innerHTML = "Start Dansen";
         var btn = document.getElementById('btnAddDancers');
-         btn.style.color = "lightgray";
+         btn.style.backgrounColor = "lightgray";
         
     }
     else{
@@ -259,38 +285,19 @@ function startDance(){
         btn.innerHTML = "Start Training";
         
         var btn = document.getElementById('btnDancing');
-        btn.innerHTML = "Stop Dancing";
+        btn.innerHTML = "Stop Dansen";
     }
     else{
         isDancing = false;
         groupMode = true;
         var btn = document.getElementById('btnDancing');
-        btn.innerHTML = "Start Dancing";
+        btn.innerHTML = "Start Dansen";
     }
     
    
 
 }
-// function changeDancers(){
-//     dancers = [];
-//     buttons = [];
-//     var divbuttons = document.getElementById("divbuttons");
-//     divbuttons.innerHTML ="";
 
-//     totdancers = parseInt(document.getElementById("indancers").value);
-//     for(var i = 0; i < totdancers; i++){
-//         var pos = randomPos(width,height);
-//         dancers[i] = new Dancer(pos,10,randomColor(100), 5);
-//         dancers[i].draw();
-    
-//         buttons[i] = createButton(i+1,"off");
-//         buttons[i].parent(document.getElementById("divbuttons"));
-//         buttons[i].mousePressed(trainDancer);
-       
-        
-//     }
-    
-// }
 function touchStarted(){
     stopwatch = 0;
 }
@@ -299,7 +306,7 @@ function touchMoved() {
         mousepath.push(createVector(mouseX, mouseY));
         stroke(255);
         strokeWeight(3);
-        point(mouseX, mouseY);
+        pg.point(mouseX, mouseY);
     }
     return false;
 }
@@ -324,23 +331,7 @@ function mousePressed(){
     
 
 }
-// function trainDancer(){
-//     var i = parseInt(this.elt.textContent)-1;
-    
-    
-//     if(buttons[i].value != "on"){
-//         buttons[i].style("background-color:" + dancers[i].acolor);
-//         buttons[i].value = "on";
-//         dancers[i].startTraining();
-        
-//     }
-//     else{
-//         buttons[i].style("background-color:lightgray");
-//         buttons[i].value = "off";
-//         dancers[i].isTraining = false;
-//     }
-    
-// }
+
 function keyPressed(){
     console.log(key);
     var movement = new Movement(speed);

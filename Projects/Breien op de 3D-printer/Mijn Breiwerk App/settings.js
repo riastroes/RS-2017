@@ -51,8 +51,13 @@ Settings.prototype.initMaterial = function(){
         }
         case "PLABRO":{
           this.materialcode ="PLABRO";
-          if(this.style == "normal"){
+          if(this.style == "fine"){
             this.initStyle(0.4, 0.12, 800); //test
+             this.initStyle(0.3, 0.12, 800); //OK in second layer
+            //this.initStyle(0.4, 0.15, 800); //test ok armband.
+          }
+           if(this.style == "normal"){
+            this.initStyle(0.2, 0.12, 800); //ok
             //this.initStyle(0.4, 0.15, 800); //test ok armband.
           }
           break;
@@ -71,10 +76,26 @@ Settings.prototype.initMaterial = function(){
           }
           break;
         }
-        case "SATIN":{
-          this.materialcode ="SATIN";
+        case "SAT1N":{
+          this.materialcode ="SAT1N";
           if(this.style == "fine"){
-            this.initStyle(0.5, 0.15, 600); //test OK
+            this.initStyle(0.5, 0.1, 600); //test OK mooi
+            //this.initStyle(0.5, 0.15, 600); //test OK
+            //this.initStyle(0.4, 0.1, 600);//test ok 
+           //this.initStyle(0.3, 0.1, 600);//test ok 
+           //this.initStyle(0.25, 0.15, 600);//test ok  
+          }
+          else if(this.style == "normal"){
+           // this.initStyle(0.5, 0.2, 800); //test ok (iphone etui)
+            this.initStyle(0.2, 0.2, 800);  //getest met knittingapp
+          }
+          break;
+        }
+         case "SAT2N":{
+          this.materialcode ="SAT2N";
+          if(this.style == "fine"){
+            this.initStyle(0.5, 0.1, 600); //niet getest
+           // this.initStyle(0.5, 0.15, 600); //test OK
             //this.initStyle(0.4, 0.1, 600);//test ok 
            /// this.initStyle(0.3, 0.1, 600);//test ok 
            // this.initStyle(0.25, 0.15, 600);//test ok  
@@ -85,10 +106,11 @@ Settings.prototype.initMaterial = function(){
           }
           break;
         }
-        case "SATIN2":{
-          this.materialcode ="SAT2N";
+        case "SAT3N":{
+          this.materialcode ="SAT3N";
           if(this.style == "fine"){
-            this.initStyle(0.5, 0.15, 600); //test OK
+            this.initStyle(0.5, 0.1, 600); //niet getest
+            //this.initStyle(0.5, 0.15, 600); //test OK
             //this.initStyle(0.4, 0.1, 600);//test ok 
            /// this.initStyle(0.3, 0.1, 600);//test ok 
            // this.initStyle(0.25, 0.15, 600);//test ok  
@@ -101,15 +123,16 @@ Settings.prototype.initMaterial = function(){
         }
         case "BRICK":{
           this.materialcode ="BRICK";
-          if(this.style == "normal"){
-            this.initStyle(0.5, 0.2, 800);//
-          }
-          if(this.style == "fine"){
-            this.initStyle(0.18, 0.1, 800);//
-          }
           if(this.style == "extrafine"){
             this.initStyle(0.08, 0.07, 800);//
           }
+          if(this.style == "fine"){
+            this.initStyle(0.5, 0.15, 600);//
+          }
+          if(this.style == "normal"){
+            this.initStyle(0.3, 0.2, 800);//
+          }
+          
           break;
         }
         case "ABS":{
@@ -225,8 +248,8 @@ Settings.prototype.initPrinter = function(){
       break;
     }
     case "PLABRO":{
-      this.nozzletemp = 190;
-      this.bedtemp = 50;
+      this.nozzletemp = 160;
+      this.bedtemp = 40;
       break;
     }
     case "PURECOPER":{
@@ -239,7 +262,17 @@ Settings.prototype.initPrinter = function(){
       this.bedtemp = 30;
       break;
     }
-    case "SATIN":{
+    case "SAT1N":{         //SATIN SILVER
+      this.nozzletemp =210;  
+      this.bedtemp = 50;
+      break;
+    }
+     case "SAT2N":{
+      this.nozzletemp =185;  //200
+      this.bedtemp = 50;
+      break;
+    }
+     case "SAT3N":{
       this.nozzletemp =185;  //200
       this.bedtemp = 50;
       break;

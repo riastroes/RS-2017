@@ -37,24 +37,30 @@
 <body>
   <div class="w3-container">
     <h1>Choreography<img src="/RS-2017/Images/Ria.jpg" onclick="goHome();" style="width:50px" class="w3-round w3-right" alt="Ria Stroes"/></h1>
-    <p>In deze animatie ben jij de choreograaf. Begin bij het bepalen van het aantal dansers dat je wilt gebruiken. De dansers bewegen vrij door de ruimte. Jij kunt dit patroon veranderen door bewegingen te activeren in de ruimte. Zodra een danser in de buurt komt van jou bewegingen, zal hij het patroon overnemen.</p>
+    <p>In deze animatie ben jij de choreograaf. <br/>
+    <strong>Groepen</strong><br/>
+     Maak één of meer groepen. Voor elke nieuwe groep wordt een groepsknop aangemaakt. Hiermee kun je de groep activeren. Als de groepsknop gekleurd is, dan is de groep actief en kunnen dansers toegevoegd worden.<br/>
+     <strong>Dansers</strong><br/>
+     Maak één groep actief en voeg dansers toe, door ergens op het scherm te klikken.<br/>
+     Op de groepsknop wordt aangegeven hoeveel dansers er in de groep zitten.<br/>
+     <strong>Trainen</strong><br/>
+     Je kunt een actieve groep trainen, door met je muis over het scherm te bewegen, hou hierbij de linker-muisknop ingedrukt.<br/>
+     Je kunt meerdere beweging toevoegen aan het danspatroon van een actieve groep.</p>
+     
   </div>  
-  <div class="w3-row">
-    <div class="w3-container">
-      <button id="btnMouse" onclick="scrollIntoView(btnMouse);addMousePath()" class="w3-button w3-border">Mouse</button>
-    </div>
-  </div>
+ 
   <div class="w3-row">
     <div class="w3-container">
       <button id="btnGroup" onclick="addGroup();" class="w3-button w3-border">Groep maken</button> 
      <!--<input type="text" id="indancers" size="3" value="5" onchange="changeDancers()"/> <label>Dansers</label>-->
      <span id="divbuttons" ></span>
-     <button id="btnAddDancers" style="color:lightgray" onclick="addDancers();" class="w3-button w3-border">Dansers toevoegen</button> 
-     <button id="btnDelDancers" style="color:lightgray" onclick="deleteDancers();" class="w3-button w3-border">Dansers verwijderen</button> 
-     <button id="btnTraining" onclick="scrollIntoView(btnMouse);startTraining();" class="w3-button w3-border">Start Training</button> 
+     <button id="btnAddDancers"  onclick="addDancers();" class="w3-button w3-border">Dansers toevoegen</button> 
+     <button id="btnDelDancers" onclick="deleteDancers();" class="w3-button w3-border">Dansers verwijderen</button> 
+     <button id="btnTraining" onclick="scrollIntoView(btnTraining);startTraining();" class="w3-button w3-border">Start Training</button> 
      <button id="btnDancing" onclick="scrollIntoView(divcanvas);startDance();" class="w3-button w3-border">Start Dans</button> 
-      <button id="btnMode" onclick="changeMode();" class="w3-button w3-border">Mode</button> 
+     <button id="btnMode" onclick="changeMode();" class="w3-button w3-border">Mode</button> 
      <label>Snelheid: <input type="range"  id="inputspeed" min="0" max="60" onchange="changeSpeed();" value="20" step="1"/> <span id="spnspeed"></span>
+     <label>Vertraging: <input type="range"  id="inputdelay" min="0" max="255" onchange="changeDelay();" value="5" step="1"/> <span id="spndelay"></span>
      
     </div>  
   </div>
@@ -64,7 +70,7 @@
   </div>
   <div class="w3-row">
        <div class="w3-one w3-center">
-        <button class="w3-button w3-padding-large w3-white  w3-border " onclick="goHome();"><b><< HOME</b></button>
+        <button class="w3-button w3-padding-large w3-white  w3-border" onclick="goHome();"><b><< HOME</b></button>
         <button class="w3-button w3-padding-large w3-white  w3-border" onclick="show('Bugs');"><b><< VORIGE</b></button>
         <button class="w3-button w3-padding-large w3-white  w3-border" onclick="show('Totemflowers');"><b>VOLGENDE >></b></button>
         </div>

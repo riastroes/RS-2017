@@ -128,7 +128,7 @@ Movement.prototype.draw = function(acolor){
     stroke(255);
     strokeWeight(this.size/10);
     for(var p = 0; p < this.pos.length; p++){
-        point(this.pos[p].x + mouseX, this.pos[p].y + mouseY);
+        pg.point(this.pos[p].x + mouseX, this.pos[p].y + mouseY);
     }
 
 }

@@ -135,10 +135,16 @@ function changePosy(){
   pos.y = parseInt(document.getElementById("iny").value);
 }
 function changePrice(){
+  if(institches >0 && inrows > 0 && inlayers >0){
     var price = 0;
-    for(var l = 1; l <=inlayers; l++){
-        price += institches * inrows  * (0.01 / l);
+    var mat = 0.01;
+    if(material == "PLABRO"){
+      mat = 0.015;
     }
+
+   
+    price = institches * inrows  * mat * inlayers;
+    
     
     document.getElementById("price").innerHTML = price.toFixed(2) + " euro."
     if(document.getElementById("checkOphalen").checked){
@@ -151,7 +157,10 @@ function changePrice(){
       document.getElementById("postadres").required = true;
       document.getElementById("emailprice").value = (price + 3.95).toFixed(2) + " euro."
     }
+  }
+  
  }
+
 function downloadKnitting(){
 
     if(!lapje.isSaved){
@@ -188,24 +197,27 @@ function changeStitches(){
   document.getElementById("spinstitches").innerHTML = document.getElementById("sliderstitches").value;
   institches = floor(int(document.getElementById("sliderstitches").value));
   ischanged = true;
-  
+  changePrice();
  
 }
 function changeRows(){
   document.getElementById("spinrows").innerHTML = document.getElementById("sliderrows").value;
   inrows = floor(int(document.getElementById("sliderrows").value));
   ischanged = true;
+  changePrice();
  }
 function changeLayers(){
   document.getElementById("spinlayers").innerHTML = document.getElementById("sliderlayers").value;
   inlayers = floor(int(document.getElementById("sliderlayers").value));
   ischanged = true;
+  changePrice();
  }
 function selectPrinter(){
    printer = document.getElementById("selectprinter").value
 }
 function selectMaterial(){
    material = document.getElementById("selectmaterial").value
+   changePrice();
 }
 function selectDisorderFunction(){
   func = document.getElementById("disorderfunctions")
