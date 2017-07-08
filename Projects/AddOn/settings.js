@@ -36,6 +36,9 @@ Settings.prototype.initMaterial = function(){
             else if(this.style == "normal"){
               this.initStyle(0.4, 0.12, 800); //test OK
             }
+            else if(this.style == "double" ){
+              this.initStyle(0.8, 0.07, 800); // ok getest in addon app
+            }
             break;
           }
         case "TPCFLEX":{
@@ -189,6 +192,9 @@ Settings.prototype.initMaterial = function(){
       if(this.material == "PLA" && this.style == "normal" ){
         this.initStyle(0.2, 0.05, 800); // ok getest in knitting app
       }
+
+
+
       if(this.material == "PETGCARBON" && this.style == "normal" ){
         this.initStyle(0.4, 0.02, 1200);  //0.4, 0.03, 1600 ok
       }
