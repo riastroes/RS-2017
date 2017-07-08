@@ -183,8 +183,8 @@ Settings.prototype.initMaterial = function(){
 
       this.scale = 0.21;         //canvas = 1000 px, bed = 230 mm
       this.filement = 2.85;
-      if(this.material == "PLA" && this.style == "fine" ){
-        this.initStyle(0.4, 0.04, 800); // ok getest in knitting app
+      if(this.material == "PLA" && this.style == "double" ){
+        this.initStyle(0.6, 0.04, 800); // ok getest in addon app
       }
       if(this.material == "PLA" && this.style == "normal" ){
         this.initStyle(0.2, 0.05, 800); // ok getest in knitting app
