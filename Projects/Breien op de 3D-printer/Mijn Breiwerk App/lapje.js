@@ -32,12 +32,13 @@ Lapje.prototype.create = function(showgrid, ischanged, institches, inrows, inlay
   this.rows = inrows;
   this.layers = [];
   this.maxlayers= inlayers;
+  totlayerheight = 0;
   for(var i = 0; i < this.maxlayers; i++){
     if(i == 1){
       this.settings.style ="fine";
       this.settings.initMaterial();
     }
-    this.layers[i] = new Layer(i, this.settings);
+    this.layers[i] = new Layer(i, this.settings, totlayerheight);
   }
   this.skirt = new Skirt(this.grid, 2,30, 5);
   this.skirt.draw(offset);

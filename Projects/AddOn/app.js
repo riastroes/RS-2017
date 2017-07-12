@@ -1,27 +1,14 @@
 
 "use strict";
-var printer;
-var material;
-var settings;
-var gcode;
-var pos;
-var path;
-var printer;
-var printer3d;
-var layers;
-var maxlayers;
+
 var ok;
-var totlayerheight
+var myApp;
+
 
 function setup() {
     var canvas = createCanvas(1200,1200);
     canvas.parent("divcanvas");
-    
-    printer = document.getElementById("selectprinter").value;
-    material = document.getElementById("selectmaterial").value;
-    maxlayers = 5;
-    totlayerheight = 0;
-    initSettings(maxlayers);
+    myApp = new App();
     ok = true;
    
 }
@@ -32,58 +19,80 @@ function draw(){
   noFill();
    
    if(ok){
-    for(var l = 0; l < layers.length; l++){
-      printer3d.draw(layers[l]);
+    if(myApp.ischanged){
+      myApp.init();
     }
+    
+      myApp.draw();
+    
    }
     
    
   
 }
+function App(){
+  this.ischanged = true;
 
-
-function initSettings(maxlayers){
-    ok = false;
-    
-    pos = createVector(width/2, height/2, 0);
-    createLayers(maxlayers);
-    createSpiral(pos.x,pos.y, 100, 10, 50);
-    printer3d = new Printer();
-    ok = true;
 }
-function createLayers(maxlayers){
-  layers = [];
-  settings =[];
-  totlayerheight = 0;
-  for(var i = 0; i < maxlayers; i++){
+
+App.prototype.init = function(){
+  ok = false;
+    this.totlayerheight = 0;
+    this.settings = [];
+    this.layers = [];
+    this.pos = createVector(0,0);
+    changePosx();
+    changePosy();
+    changeLayers();
+    this.printer = selectPrinter();
+    this.material = selectMaterial();
+    this.createLayers();
+    this.createSpiral(this.pos.x,this.pos.y, 300, 30, 300);
+  ok = true;
+}
+App.prototype.createLayers = function(){
+  this.layers = [];
+  this.settings =[];
+  this.totlayerheight = 0;
+  this.printer = selectPrinter();
+  this.material = selectMaterial();
+  
+  for(var i = 0; i < this.maxlayers; i++){
     if(i ==0){
-      settings[i] =new Settings(printer, material, "normal");
+      this.settings[i] =new Settings(this.printer, this.material, "normal");
     }
     else{
-      settings[i] =new Settings(printer, material, "double");
+      this.settings[i] =new Settings(this.printer, this.material, "double");
     }
-    layers[i] = new Layer(i, settings[i], totlayerheight);
-    totlayerheight += layers[i].layerheight;
+    this.layers[i] = new Layer(i, this.settings[i], this.totlayerheight);
+    this.totlayerheight += this.layers[i].layerheight;
 
   }
-  gcode = new Gcode(settings[0]);
+  this.gcode = new Gcode(this.settings[0]);
+  this.ischanged = false;
 }
 
-
-
-function createSpiral(x,y, radius, part, steps){
-  var p =[];
-  for(var l = 0; l< layers.length; l++){
-    
-    
-       layers[l].p = p.concat(pointsOnSpiral(x,y, radius, part, steps));
-       
-   
-    // for (var i = 0; i < layers[l].p.length; i++){
-    //     point(layers[l].p[i].x, layers[l].p[i].y);
-    // } 
+App.prototype.createSpiral = function(x,y, radius, part, steps){
+  
+  for(var l = 0; l< this.layers.length; l++){
+    this.layers[l].p = this.layers[l].p.concat(pointsOnSpiral(x,y, radius, part, steps));
   } 
 }
+
+App.prototype.generate = function(){
+   for(var l = 0; l < this.layers.length; l++){
+    this.layers[l].generate(this.gcode);
+  } 
+}
+App.prototype.draw = function(){
+  
+  for(var l = 0; l < this.layers.length; l++){
+    this.layers[l].draw();
+    
+  }
+    
+}
+
 
 function pointsOnSpiral(x,y, radius, stepsize, steps){
   var p = [];
@@ -103,49 +112,85 @@ function pointsOnSpiral(x,y, radius, stepsize, steps){
     r += radius/ steps;
     append(p, c.copy());
   }
-  
- 
   return p;
 }
 /***** INTERFACE *****/
 function changePosx(){
-  pos.x = parseInt(document.getElementById("inx").value);
-  if(pos.x < 50 || pos.x > width - 50){
-    pos.x = width/2;
+  myApp.pos.x = parseInt(document.getElementById("inx").value);
+  if(myApp.pos.x < 50 || myApp.pos.x > width - 50){
+    myApp.pos.x = width/2;
   }
-  initSettings(maxlayers);
+  myApp.ischanged = true;
 }
 function changePosy(){
-  pos.y = parseInt(document.getElementById("iny").value);
-  if(pos.y < 50 || pos.y > height - 50){
-    pos.y = height/2;
+  myApp.pos.y = parseInt(document.getElementById("iny").value);
+  if(myApp.pos.y < 50 || myApp.pos.y > height - 50){
+    myApp.pos.y = height/2;
   }
-  initSettings(maxlayers);
+  myApp.ischanged = true;
 }
 function changeLayers(){
-  maxlayers = parseInt(document.getElementById("inlayers").value);
-  if(maxlayers>0 && maxlayers <= 10){
-    initSettings(maxlayers);
+  myApp.maxlayers = parseInt(document.getElementById("inlayers").value);
+  if(myApp.maxlayers>0 && myApp.maxlayers <= 10){
+     myApp.ischanged = true;
   }
   else{
     document.getElementById("inlayers").value = 1;
-    maxlayers = 1;
-    initSettings(maxlayers);
+    myApp.maxlayers = 1;
+    myApp.ischanged = true;
   }
   
 }
 function selectPrinter(){
-   printer = document.getElementById("selectprinter").value
-   initSettings(maxlayers);
+  var selmaterial = document.getElementById("selectmaterial");
+  
+  
+  var printer = document.getElementById("selectprinter").value;
+  if(printer == "Anet"){
+   
+    selmaterial.options.remove("PLAz");
+    selmaterial.options.remove("SAT1N");
+    selmaterial.options.remove("SAT2N");
+    selmaterial.options.remove("SAT3N");
+
+    var option1 = document.createElement("option");
+    option1.text ="Satijn Zilver"
+    option1.value =  "SAT1N";
+    selmaterial.options.add(option1);
+
+    var option2 = document.createElement("option");
+    option2.text ="Satijn Goud"
+    selmaterial.options.add(option2);
+    option2.value =  "SAT2N";
+    var option3 = document.createElement("option");
+    option3.text ="Satijn Lavendel blauw"
+    option3.value =  "SAT3N";
+    selmaterial.options.add(option3);
+    
+  }
+  else if(printer == "Ultimaker2+"){
+    selmaterial.options.remove("PLAz");
+    selmaterial.options.remove("SAT1N");
+    selmaterial.options.remove("SAT2N");
+    selmaterial.options.remove("SAT3N");
+    var option1 = document.createElement("option");
+    option1.text ="PLA zwart"
+    option1.value =  "PLAz";
+    selmaterial.options.add(option1);
+   
+  }
+  return printer; 
    
 }
 function selectMaterial(){
-   material = document.getElementById("selectmaterial").value
-   initSettings(maxlayers);
+   var material = document.getElementById("selectmaterial").value
+   return material;
    
 }
 
 function downloadAddOn(){
-  gcode.generate(layers ,printer3d);
-  gcode.save("AddOn");
+  myApp.generate();
+ 
+  myApp.gcode.generate(myApp.layers);
+  myApp.gcode.save("AddOn");
 }

@@ -65,14 +65,13 @@ Gcode.prototype.save = function(name){
     save(this.commands,name + ".gcode");
     console.log(name + " is saved.");
 }
-Gcode.prototype.generate = function(layers, printer){
+Gcode.prototype.generate = function(layers){
   this.startCode();
-  this.getCodeToStart(createVector(0,0), pos, layers[0]);
+  this.getCodeToStart(createVector(0,0), layers[0].p[0], layers[0]);
   
 
   for(var l = 0; l < layers.length; l++){
     this.getCode(layers[l].commands);
-    this.getCode(printer.generate(this, layers[l]));
   }
   this.endCode();
 }

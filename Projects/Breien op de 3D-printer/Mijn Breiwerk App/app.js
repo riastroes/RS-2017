@@ -24,6 +24,7 @@ var checkShowLineDrawing;
 var linepath;
 var ischanged;
 var func;
+var totlayerheight;
 
 function setup() {
     var canvas = createCanvas(1200,1200);
@@ -36,7 +37,7 @@ function setup() {
     changeLayers();
     selectPrinter();
     selectMaterial();
-    
+    totlayerheight = 0;
     func ="none";
     
     checkShowGrid = document.getElementById("showgrid");
