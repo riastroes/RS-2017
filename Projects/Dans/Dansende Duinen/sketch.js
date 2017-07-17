@@ -5,7 +5,6 @@ var fft;
 var time;
 
 
-
 function preload() {
 
   bg = loadImage("Images/dancewiththenight.jpg");
@@ -22,8 +21,7 @@ function setup(){
     rectMode(CENTER);
     imageMode(CENTER);
 
-    mic.start();
-    fft.setInput(mic);
+    
 
     time = 0;
     image(bg,width/2,height/2, width, height);
@@ -40,12 +38,15 @@ function setup(){
 
     fill(255,0,0);
     noStroke(0);
-
+    mic.start();
+    fft.setInput(mic);
 
 }
 function draw(){
     blendMode(BLEND);
-    //image(bg,width/2,height/2, width, height);
+    if(frameCount%100 == 0){
+        image(bg,width/2,height/2, width, height);
+    }
     
     if(time > 0){
         var spectrum = fft.analyze();
