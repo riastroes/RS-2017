@@ -16,20 +16,24 @@ var isDancing;
 var mode;
 var min, max;
 
-var pg;
+
 var delay;
 var activegroup;
+var decor;
 
-
+function preload(){
+   decor = loadImage("resources/egg-water-glass.jpg")
+   decor.resize(windowWidth, windowHeight);
+}
 
 function setup(){
     var canvas = createCanvas(windowWidth-31, windowHeight-3)
     canvas.parent(document.getElementById("divcanvas"));
-    pg  = createGraphics(width,height);
+    
     
     time = 0;
-    background(0,120,180);
-    strokeWeight(1);
+    
+    //strokeWeight(1);
    
     groups = [];
     mousepath = [];
@@ -37,36 +41,40 @@ function setup(){
     isTraining = false;
     isDancing = false;
     groupMode = false;
-    blendMode(BLEND)
+    
     frameRate(20);
     mode = 0;
     min = 100;
     max = -100;
+
+    blendMode(BLEND);
+    background(decor);
+
 }
 function draw(){
 
    
- pg.blendMode(BLEND)
- pg.background(0,120,180, 20);
- image(pg,0,0);
-   
-   
    if(isDancing){
-        
+       blendMode(BLEND);
+       background(decor);
+       blendMode(DIFFERENCE);
        for(var g = 0; g < groups.length; g++){
            if(groups[g].isActive){
              groups[g].dancing(g);
+             image(groups[g].pg,0,0);
             }  
         }
     }
     else if(isTraining){
-        pg.blendMode(BLEND)
-        pg.background(0,120,180, 20);
-        image(pg,0,0);
+        blendMode(BLEND);
+        background(decor);
+        blendMode(DIFFERENCE);
+       
        for(var g = 0; g < groups.length; g++){
            if(groups[g].isActive){
                for(var m = 0; m < groups[g].movements; m++){
                    groups[g].movements[m].draw();
+                   image(groups[g].pg,0,0);
                }
            }      
        }
@@ -75,6 +83,7 @@ function draw(){
         for(var g = 0; g < groups.length; g++){
             if(groups[g].isActive){
                 groups[g].draw();
+                image(groups[g].pg,0,0);
             }
         }
     }
@@ -189,8 +198,8 @@ function addGroup(){
     buttons[i] = createButton(0,i);
     buttons[i].parent(document.getElementById("divbuttons"));
     buttons[i].mousePressed(activateGroup);
-   
-    groups[i] = new Group(createGraphics(width,height));
+
+    groups[i] = new Group();
     for(var g = 0; g < groups.length; g++){
         if(g == i){
             groups[g].isActive = true;

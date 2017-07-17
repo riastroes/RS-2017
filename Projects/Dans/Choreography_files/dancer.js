@@ -1,5 +1,5 @@
-function Group(apg){
-    this.pg = apg;
+function Group(){
+    this.pg = createGraphics(width,height);
     this.dancers = [];
     this.movements = [];
     this.isActive = true;
@@ -9,7 +9,7 @@ function Group(apg){
 Group.prototype.dancing = function(g){
    this.pg.blendMode(BLEND)
    this.pg.background(0,120,180,parseInt(delay));
-   selectMode(mode) ;
+  // selectMode(mode) ;
    
     for(var d =0; d < this.dancers.length; d++){
         this.dancers[d].dancing();
@@ -22,7 +22,7 @@ Group.prototype.dancing = function(g){
 Group.prototype.draw = function(g){
    //this.pg.blendMode(BLEND)
    //this.pg.background(0,120,180,parseInt(delay));
-   selectMode(mode) ;
+   //selectMode(mode) ;
    
     for(var d =0; d < this.dancers.length; d++){
        this.dancers[d].draw();
@@ -44,7 +44,7 @@ function Dancer(apg, pos, size, acolor,bcolor, speed){
     this.dance = [];
     this.step = 0;
     this.start = pos.copy();
-    this.pos;
+    this.pos
     this.size = size;
     this.radius = this.size/2;
    
@@ -59,7 +59,7 @@ function Dancer(apg, pos, size, acolor,bcolor, speed){
     this.b = 0;
     this.distx = 0;
     this.disty = 0;
-    this.inscale = 1;
+    //this.inscale = 1;
     
     this.isTraining = false;
     this.isDancing = false;
@@ -146,7 +146,17 @@ Dancer.prototype.jump = function(){
 }
 
 Dancer.prototype.draw = function(){
+    /*
+    blendMode(OVERLAY);
+    this.pg.background(0,0);
     
+    this.pg.fill(255);
+    this.pg.noStroke();
+    this.create();
+    //this.pg.ellipse(50,50,100,100);
+    blendMode(DIFFERENCE);
+    image(this.pg,x-100,y-100);
+    */
    
     this.pos = this.start.copy();
     
@@ -157,27 +167,39 @@ Dancer.prototype.draw = function(){
         this.disty = floor(  (this.dance[i].y - this.dance[i-1].y) *100)/100;
         this.pos.add(this.dance[i]);
         this.a = atan2(this.dance[time% this.dance.length].y - this.dance[(time-1)% this.dance.length].y, this.dance[time% this.dance.length].x- this.dance[(time-1)% this.dance.length].x);
-        // a = constrain(a,0, TWO_PI);
+       
         this.a =map(this.disty/3, -30,30,  PI/5*4,-PI/5*4);
         this.b =map(this.distx, -30,30,  PI/5*4,-PI/5*4);
+
+        this.pg.push();  
+            this.pg.background(0,0);
+            this.pg.fill(255);
+            this.pg.noStroke();
+
+            this.pg.translate(this.pos.x, this.pos.y);
+        // this.pg.scale(this.inscale);
+            this.pg.strokeWeight(1);
+            this.pg.stroke(this.bcolor);
+            this.pg.fill(this.acolor);
+                            
+            this.pg.rotate(this.a);
+            this.drawBody();
+            this.drawHead();
+            this.drawSkirt(0,0);
+            this.drawArms(0,-20,this.b);
+            this.drawLegs(0,10, this.a);
+             
+        this.pg.pop();
         
     }
-    this.inscale = map(this.pos.y, 0,height, 0.4,1.5);
-    this.pg.push();   
-        this.pg.translate(this.pos.x, this.pos.y);
-        this.pg.scale(this.inscale);
-        this.pg.strokeWeight(1);
-        this.pg.stroke(this.bcolor);
-        this.pg.fill(this.acolor);
-                           
-        this.pg.rotate(this.a);
-        this.drawBody();
-        this.drawHead();
-        this.drawSkirt(0,0);
-        this.drawArms(0,-20,this.b);
-        this.drawLegs(0,10, this.a);
-             
-   this.pg.pop();
+    else{
+        this.pg.noStroke();
+        this.pg.fill(0);
+        this.pg.ellipse(this.start.x, this.start.y, this.size, this.size);
+        image(this.pg, 0,0);
+    }
+   
+    
     
 }
 Dancer.prototype.drawBody = function(a){
@@ -214,14 +236,14 @@ Dancer.prototype.drawLegs = function(x,y, a){
     }
  }
 Dancer.prototype.drawStep= function(x,y ){
-    pg.fill(random(200,255),random(200,255),random(200,255),10);
-    pg.noStroke();
-    pg.ellipse(x,y,this.inscale* 10,this.inscale* 10);
+    this.pg.fill(random(200,255),random(200,255),random(200,255),10);
+    this.pg.noStroke();
+    this.pg.ellipse(x,y,this.inscale* 10,this.inscale* 10);
 }
 
 Dancer.prototype.drawHead = function(){
-    pg.stroke(this.bcolor);
-    pg.fill(this.acolor);
+    this.pg.stroke(this.bcolor);
+    this.pg.fill(this.acolor);
     this.pg.ellipse(0,-60, this.size, this.size);  
     this.pg.ellipse(0,-50, this.size/2, this.size);  
 }

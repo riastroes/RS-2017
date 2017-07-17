@@ -16,6 +16,7 @@ function preload() {
 function setup(){
     var canvas = createCanvas(windowWidth-31, windowHeight-3)
     canvas.parent(document.getElementById("divcanvas"));
+    fullscreen();
     mic = new p5.AudioIn();
     fft = new p5.FFT();
     rectMode(CENTER);

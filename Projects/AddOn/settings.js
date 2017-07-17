@@ -28,8 +28,8 @@ Settings.prototype.initMaterial = function(){
       this.filement = 1.75;
 
       switch(this.material){
-        case "PLAz":{
-            this.materialcode ="PLAz"; 
+        case "PLA":{
+            this.materialcode ="PLA"; 
             if(this.style == "fine"){
               this.initStyle(0.4, 0.07, 800); //test OK 0.3, 0.07, 800
             }
@@ -37,24 +37,10 @@ Settings.prototype.initMaterial = function(){
               this.initStyle(0.4, 0.12, 800); //test OK
             }
             else if(this.style == "double" ){
-              this.initStyle(0.8, 0.07, 800); // ok getest in addon app
+              this.initStyle(0.8, 0.07, 800); // 
             }
             break;
           }
-          case "PLAw":{
-            this.materialcode ="PLAw"; 
-            if(this.style == "fine"){
-              this.initStyle(0.4, 0.07, 800); //test OK 0.3, 0.07, 800
-            }
-            else if(this.style == "normal"){
-              this.initStyle(0.4, 0.12, 800); //test OK
-            }
-            else if(this.style == "double" ){
-              this.initStyle(0.8, 0.07, 800); // ok getest in addon app
-            }
-            break;
-          }
-
         case "TPCFLEX":{
           this.materialcode ="TPCFLEX";
           if(this.style == "normal"){
@@ -104,10 +90,7 @@ Settings.prototype.initMaterial = function(){
           }
           else if(this.style == "normal"){
            // this.initStyle(0.5, 0.2, 800); //test ok (iphone etui)
-            this.initStyle(0.2, 0.15, 800);   //getest met knittingapp
-          }
-          else if(this.style == "double"){
-            this.initStyle(0.4, 0.1, 800);  //getest met knittingapp
+            this.initStyle(0.2, 0.2, 800);  //getest met knittingapp
           }
           break;
         }
@@ -122,10 +105,7 @@ Settings.prototype.initMaterial = function(){
           }
           else if(this.style == "normal"){
            // this.initStyle(0.5, 0.2, 800); //test ok (iphone etui)
-            this.initStyle(0.2, 0.15, 800); 
-          }
-          else if(this.style == "double"){
-            this.initStyle(0.4, 0.1, 800);  
+            this.initStyle(0.3, 0.2, 800);  //getest met knittingapp
           }
           break;
         }
@@ -140,10 +120,7 @@ Settings.prototype.initMaterial = function(){
           }
           else if(this.style == "normal"){
            // this.initStyle(0.5, 0.2, 800); //test ok (iphone etui)
-            this.initStyle(0.2, 0.15, 800);  
-          }
-          else if(this.style == "double"){
-            this.initStyle(0.4, 0.1, 800); 
+            this.initStyle(0.3, 0.2, 800);  //getest met knittingapp
           }
           break;
         }
@@ -209,19 +186,10 @@ Settings.prototype.initMaterial = function(){
 
       this.scale = 0.21;         //canvas = 1000 px, bed = 230 mm
       this.filement = 2.85;
-      
-      if(this.material == "PLAz" && this.style == "double" ){
+      if(this.material == "PLA" && this.style == "double" ){
         this.initStyle(0.6, 0.04, 800); // ok getest in addon app
       }
-      if(this.material == "PLAz" && this.style == "normal" ){
-        this.initStyle(0.2, 0.05, 800); // ok getest in knitting app
-      }
-
-
-      if(this.material == "PLAw" && this.style == "double" ){
-        this.initStyle(0.6, 0.04, 800); // ok getest in addon app
-      }
-      if(this.material == "PLAw" && this.style == "normal" ){
+      if(this.material == "PLA" && this.style == "normal" ){
         this.initStyle(0.2, 0.05, 800); // ok getest in knitting app
       }
 
