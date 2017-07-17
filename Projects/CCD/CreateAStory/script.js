@@ -125,24 +125,8 @@ function selectLoopMode(){
 function download(){
     save(inimage1  +"-"+ inimage2 +"-"+ inimage3 +".jpg");
 
-    var f = canvas.elt.toBlob(function(blob) {
-      var newImg = document.createElement('img'),
-      url = URL.createObjectURL(blob);
-
-    //   uriContent = "data:application/octet-stream," + encodeURIComponent(content);
-    //   location.href = uriContent;
-      
-  //f.save("https://drive.google.com/drive/folders/0Bwz0_HF7ZKGHYUdRT2FwMjZZVG8/" + inimage1  +"-"+ inimage2 +"-"+ inimage3 +".jpg");
-    newImg.onload = function() {
-    // no longer need to read the blob so it's revoked
-    URL.revokeObjectURL(url);
-  };
-
-  newImg.src = url;
-  document.body.appendChild(newImg);
-});
-
 }
+
 function App(){
      this.mode = 2;
 }
