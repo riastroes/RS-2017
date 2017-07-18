@@ -1,8 +1,9 @@
-function Layer(layer, settings, totlayerheight){
+function Layer(layer, settings){
   this.layer = layer;
   this.layerheight = settings.layerheight;
-  this.totallayerheight = totlayerheight;
   totlayerheight += this.layerheight;
+  this.totallayerheight = totlayerheight;
+  
   this.thickness = settings.thickness;
   this.speed = settings.speed;
   this.scale = settings.scale;

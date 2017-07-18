@@ -32,12 +32,13 @@ function setup() {
     
     offset = createVector(0,15);
     pos = createVector(6,2);
+    totlayerheight = 0;
     changeStitches();
     changeRows();
     changeLayers();
     selectPrinter();
     selectMaterial();
-    totlayerheight = 0;
+
     func ="none";
     
     checkShowGrid = document.getElementById("showgrid");

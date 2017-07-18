@@ -38,7 +38,7 @@ Lapje.prototype.create = function(showgrid, ischanged, institches, inrows, inlay
       this.settings.style ="fine";
       this.settings.initMaterial();
     }
-    this.layers[i] = new Layer(i, this.settings, totlayerheight);
+    this.layers[i] = new Layer(i, this.settings);
   }
   this.skirt = new Skirt(this.grid, 2,30, 5);
   this.skirt.draw(offset);
