@@ -186,29 +186,37 @@ Settings.prototype.initMaterial = function(){
       this.scale = 0.21;         //canvas = 1000 px, bed = 230 mm
       this.filement = 2.85;
       if(this.material == "PLA" && this.style == "fine" ){
-        this.initStyle(0.4, 0.04, 800); // ok getest in knitting app
+        this.initStyle(0.5, 0.04, 800); // ok getest in knitting app  // ok getest in DUBAI KNITTING APP
       }
       if(this.material == "PLA" && this.style == "normal" ){
-        this.initStyle(0.2, 0.05, 800); // ok getest in knitting app
+        this.initStyle(0.4, 0.05, 800); // ok getest in knitting app  // ok getest in DUBAI KNITTING APP
+      }
+
+      if(this.material == "PETGCARBON" && this.style == "fine" ){
+        this.initStyle(0.4, 0.02, 800);  //0.4, 0.03, 1600 ok
       }
       if(this.material == "PETGCARBON" && this.style == "normal" ){
-        this.initStyle(0.4, 0.02, 1200);  //0.4, 0.03, 1600 ok
+        this.initStyle(0.4, 0.02, 800);  //0.4, 0.03, 1600 ok
       }
-      else if(this.material == "PETGCARBON" && this.style == "fat" ){
+      if(this.material == "PETGCARBON" && this.style == "fat" ){
         this.initStyle(0.3, 1, 1200);  //0.4, 0.03, 1600 ok
       }
-      else if(this.material == "PETGCARBON" && this.style == "fine" ){
-        this.initStyle(0.3, 0.2, 1200);  //0.4, 0.03, 1600 ok
+      
+      
+      if(this.material == "PLABRO" && this.style == "fine" ){
+          this.initStyle(0.5, 0.04, 800); //test ok armband.
       }
-      else if(this.material == "PLABRO" && this.style == "normal" ){
-          this.initStyle(0.4, 0.03, 1200); //test ok armband.
+      if(this.material == "PLABRO" && this.style == "normal" ){
+          this.initStyle(0.4, 0.05, 800); //test ok armband.
       }
-      else if(this.material == "PLABRO" && this.style == "fine" ){
-          this.initStyle(0.3, 0.02, 1200); //test ok armband.
+
+      if(this.material == "PLAHENNEP" && this.style == "fine" ){
+          this.initStyle(0.5, 0.04, 800); //this is with a 0.6 nozzle // ok getest in DUBAI KNITTING APP
       }
-      else if(this.material == "PLAHennep" && this.style == "fat" ){
-          this.initStyle(0.3, 0.1, 1200); //test ok armband.
+      if(this.material == "PLAHENNEP" && this.style == "normal" ){
+          this.initStyle(0.4, 0.05, 800); //this is with a 0.6 nozzle // ok getest in DUBAI KNITTING APP
       }
+      
       break;
     }
     case "Ultimaker2++":{ //nozzle 0.8
@@ -242,7 +250,7 @@ Settings.prototype.initPrinter = function(){
       this.bedtemp = 80; //80 is goed, niet meer veranderen!!
       break;
     }
-    case "PLAHennep":{
+    case "PLAHENNEP":{
       this.nozzletemp = 200;
       this.bedtemp = 30;
       break;
@@ -253,8 +261,8 @@ Settings.prototype.initPrinter = function(){
       break;
     }
     case "PLABRO":{
-      this.nozzletemp = 160;
-      this.bedtemp = 40;
+      this.nozzletemp = 200;  // MAKERVERSITY   //(ANET: 160, 40)
+      this.bedtemp = 50;
       break;
     }
     case "PURECOPER":{

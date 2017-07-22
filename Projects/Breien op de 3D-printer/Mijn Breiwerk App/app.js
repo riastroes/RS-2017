@@ -11,10 +11,14 @@ var inrows;
 var institches;
 var inlayers;
 
+
 var sliderStitches;
 var sliderRows;
 var sliderRadius;
 var sliderForce;
+var slidercosfrom;
+var slidercosto;
+var sliderScale;
 var btnGenerate;
 var btnSave;
 var offset;  // wordt alleen gebruikt in de tekenfuncties
@@ -25,20 +29,23 @@ var linepath;
 var ischanged;
 var func;
 var totlayerheight;
+var issaved;
 
 function setup() {
     var canvas = createCanvas(1200,1200);
     canvas.parent("divcanvas");
+
+   
     
     offset = createVector(0,15);
     pos = createVector(6,2);
     totlayerheight = 0;
     changeStitches();
     changeRows();
-    changeLayers();
+    //changeLayers();
     selectPrinter();
     selectMaterial();
-
+    
     func ="none";
     
     checkShowGrid = document.getElementById("showgrid");
@@ -46,11 +53,12 @@ function setup() {
     checkShowLineDrawing = document.getElementById("showlinedrawing");
     sliderRadius = document.getElementById("sliderradius");
     sliderForce = document.getElementById("sliderforce");
+    sliderScale = document.getElementById("sliderscale");
     //institches =  floor(int(sliderStitches.value));
    // inrows = floor(int(sliderRows.value));
     linepath = [];
     
-    
+    issaved = false;
   
 }
 function draw(){
@@ -60,7 +68,7 @@ function draw(){
   // rect(290,60, 60,40);
   // fill(0);
    
-  showPath(checkShowPointDrawing.checked);
+  //showPath(checkShowPointDrawing.checked);
   
 }
 function showPath(showPoints){
@@ -100,13 +108,14 @@ function create(){
     ina = document.getElementById("sliderradiusout").value;
     inb = document.getElementById("sliderforceout").value;
   }
-  else if(func.value == "sin"){
-    ina = document.getElementById("slidersinradius").value;
-    inb = document.getElementById("slidersinforce").value;
-  }
+  
   else if(func.value == "cos"){
-    ina = document.getElementById("slidercosradius").value;
-    inb = document.getElementById("slidercosforce").value;
+    ina = document.getElementById("slidercosfrom").value;
+    inb = document.getElementById("slidercosto").value;
+  }
+  else if(func.value == "scale"){
+    ina = document.getElementById("sliderscale").value;
+    
   }
   else if(func.value == "vert"){
     ina = document.getElementById("slidervert").value;
@@ -118,7 +127,7 @@ function create(){
   if(inrows  > 0 && institches >0){
    
     
-    lapje.create(checkShowGrid.checked, ischanged,institches, inrows,inlayers, linepath, func.value, ina, inb);
+    lapje.create(checkShowGrid.checked, ischanged,institches, inrows,5, linepath, func.value, ina, inb);
    
   }
   if(ischanged){
@@ -129,6 +138,7 @@ function create(){
     
   }
    ischanged = false;
+   issaved = false;
 }
 function changePosx(){
   pos.x = parseInt(document.getElementById("inx").value);
@@ -137,7 +147,7 @@ function changePosy(){
   pos.y = parseInt(document.getElementById("iny").value);
 }
 function changePrice(){
-  if(institches >0 && inrows > 0 && inlayers >0){
+  if(institches >0 && inrows > 0 ){
     var price = 0;
     var mat = 0.01;
     if(material == "PLABRO"){
@@ -145,7 +155,7 @@ function changePrice(){
     }
 
    
-    price = institches * inrows  * mat * inlayers;
+    price = institches * inrows  * mat * 5;
     
     
     document.getElementById("price").innerHTML = price.toFixed(2) + " euro."
@@ -165,8 +175,9 @@ function changePrice(){
 
 function downloadKnitting(){
 
-    if(!lapje.isSaved){
+    if(!issaved){
       lapje.save();
+      issaved = true;
     }
     //document.location.href ="#email";
 }
@@ -208,12 +219,12 @@ function changeRows(){
   ischanged = true;
   changePrice();
  }
-function changeLayers(){
-  document.getElementById("spinlayers").innerHTML = document.getElementById("sliderlayers").value;
-  inlayers = floor(int(document.getElementById("sliderlayers").value));
-  ischanged = true;
-  changePrice();
- }
+// function changeLayers(){
+//   document.getElementById("spinlayers").innerHTML = document.getElementById("sliderlayers").value;
+//   inlayers = floor(int(document.getElementById("sliderlayers").value));
+//   ischanged = true;
+//   changePrice();
+//  }
 function selectPrinter(){
    printer = document.getElementById("selectprinter").value
 }
@@ -226,8 +237,8 @@ function selectDisorderFunction(){
   if(func.value =="none"){
     w3.addClass("#circlesinfunction", "hidden");
     w3.addClass("#circlesoutfunction", "hidden");
-    w3.addClass("#sinfunction", "hidden");
     w3.addClass("#cosfunction", "hidden");
+    w3.addClass("#scalefunction", "hidden");
     w3.addClass("#vertfunction", "hidden");
     w3.addClass("#horfunction", "hidden");
     
@@ -238,8 +249,8 @@ function selectDisorderFunction(){
   else if(func.value =="circlesin"){
     w3.removeClass("#circlesinfunction", "hidden");
     w3.addClass("#circlesoutfunction", "hidden");
-    w3.addClass("#sinfunction", "hidden");
     w3.addClass("#cosfunction", "hidden");
+    w3.addClass("#scalefunction", "hidden");
     w3.addClass("#vertfunction", "hidden");
     w3.addClass("#horfunction", "hidden");
     
@@ -250,8 +261,8 @@ function selectDisorderFunction(){
   else if(func.value =="circlesout"){
     w3.removeClass("#circlesoutfunction", "hidden");
     w3.addClass("#circlesinfunction", "hidden");
-    w3.addClass("#sinfunction", "hidden");
     w3.addClass("#cosfunction", "hidden");
+    w3.addClass("#scalefunction", "hidden");
     w3.addClass("#vertfunction", "hidden");
     w3.addClass("#horfunction", "hidden");
     
@@ -259,34 +270,34 @@ function selectDisorderFunction(){
     document.getElementById("spinforceout").innerHTML = document.getElementById("sliderforceout").value;
     
   }
-  else if(func.value =="sin"){
-    w3.addClass("#circlesinfunction", "hidden");
-    w3.addClass("#circlesoutfunction", "hidden");
-    w3.removeClass("#sinfunction", "hidden");
-    w3.addClass("#cosfunction", "hidden");
-    w3.addClass("#vertfunction", "hidden");
-    w3.addClass("#horfunction", "hidden");
-    
-
-    document.getElementById("spinsinradius").innerHTML = document.getElementById("slidersinradius").value;
-    document.getElementById("spinsinforce").innerHTML = document.getElementById("slidersinforce").value;
-  }
+  
   else if(func.value =="cos"){
     w3.addClass("#circlesinfunction", "hidden");
     w3.addClass("#circlesoutfunction", "hidden");
-    w3.addClass("#sinfunction", "hidden");
     w3.removeClass("#cosfunction", "hidden");
+    w3.addClass("#scalefunction", "hidden");
     w3.addClass("#vertfunction", "hidden");
     w3.addClass("#horfunction", "hidden");
     
     document.getElementById("spincosradius").innerHTML = document.getElementById("slidercosradius").value;
     document.getElementById("spincosforce").innerHTML = document.getElementById("slidercosforce").value;
   }
+  else if(func.value =="scale"){
+    w3.addClass("#circlesinfunction", "hidden");
+    w3.addClass("#circlesoutfunction", "hidden");
+    w3.addClass("#cosfunction", "hidden");
+    w3.removeClass("#scalefunction", "hidden");
+    w3.addClass("#vertfunction", "hidden");
+    w3.addClass("#horfunction", "hidden");
+    
+    document.getElementById("spinscale").innerHTML = document.getElementById("sliderscale").value;
+    
+  }
   else if(func.value =="vert"){
     w3.addClass("#circlesinfunction", "hidden");
     w3.addClass("#circlesoutfunction", "hidden");
-    w3.addClass("#sinfunction", "hidden");
     w3.addClass("#cosfunction", "hidden");
+    w3.addClass("#scalefunction", "hidden");
     w3.removeClass("#vertfunction", "hidden");
     w3.addClass("#horfunction", "hidden");
    
@@ -295,8 +306,8 @@ function selectDisorderFunction(){
   else if(func.value =="hor"){
     w3.addClass("#circlesinfunction", "hidden");
     w3.addClass("#circlesoutfunction", "hidden");
-    w3.addClass("#sinfunction", "hidden");
     w3.addClass("#cosfunction", "hidden");
+    w3.addClass("#scalefunction", "hidden");
     w3.addClass("#vertfunction", "hidden");
     w3.removeClass("#horfunction", "hidden");
     
@@ -320,20 +331,16 @@ function changeForceOut(){
   document.getElementById("spinforceout").innerHTML = document.getElementById("sliderforceout").value;
 
 }
-function changeSinus(){
-  document.getElementById("spinsinradius").innerHTML = document.getElementById("slidersinradius").value;
+function changeCosFrom(){
+  document.getElementById("spincosfrom").innerHTML = document.getElementById("slidercosfrom").value;
 
 }
-function changeSinForce(){
-  document.getElementById("spinsinforce").innerHTML = document.getElementById("slidersinforce").value;
+function changeCosTo(){
+  document.getElementById("spincosto").innerHTML = document.getElementById("slidercosto").value;
 
 }
-function changeCosinus(){
-  document.getElementById("spincosradius").innerHTML = document.getElementById("slidercosradius").value;
-
-}
-function changeCosForce(){
-  document.getElementById("spincosforce").innerHTML = document.getElementById("slidercosforce").value;
+function changeScale(){
+  document.getElementById("spinscale").innerHTML = document.getElementById("sliderscale").value;
 
 }
 function changeVert(){

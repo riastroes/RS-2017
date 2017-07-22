@@ -25,9 +25,13 @@ Lapje.prototype.createGrid = function(w, h, marge){
   
 }
 Lapje.prototype.showGrid = function(){
+  
+  
   this.grid.draw();
+  
 }
 Lapje.prototype.create = function(showgrid, ischanged, institches, inrows, inlayers, linepath, func, a, b){
+  
   this.stitches = institches;
   this.rows = inrows;
   this.layers = [];
@@ -55,12 +59,13 @@ Lapje.prototype.create = function(showgrid, ischanged, institches, inrows, inlay
       else if(func == "circlesout"){
         this.knitgrid.disorderRadiusOut(linepath, a, b);
       }
-      else if(func == "sin"){
-        this.knitgrid.disorderSin(linepath, a, b);
-      }
       else if(func == "cos"){
-        this.knitgrid.disorderCos(linepath, a, b);
+        this.knitgrid.disorderCosWave(a, b, 2, 0.4);
       }
+      else if(func == "scale"){
+        this.rows = floor(constrain(this.rows, 0, 40 / sliderScale.value));
+      }
+      
       else if(func == "vert"){
         this.knitgrid.disorderVert(linepath, a);
       }
@@ -85,33 +90,41 @@ Lapje.prototype.create = function(showgrid, ischanged, institches, inrows, inlay
       //this.knitgrid.disorderHeight(0,100, -20, 14);
     }
     
-
+    var newscale = 1;
     this.knittings[i] = new Knitting(this.grid, this.knitgrid, this.layers[i],0,0,this.stitches);
+    if(func == "scale"){
+      push()
+      newscale = sliderScale.value
+      scale(sliderScale.value);
+    }
     this.knittings[i].createPattern("setup", 0,1);
     this.knittings[i].createPattern("straight", 1,this.rows);
     this.knittings[i].createPattern("end",this.rows,this.rows);
     this.knittings[i].patternToGrid();
     this.knittings[i].gotoStart(pos, offset);
     this.knittings[i].drawPattern(offset);
-    this.knittings[i].gcode(this.gcode, this.layers[i]);
-
-  
+    this.knittings[i].gcode(this.gcode, newscale);
+    if(func == "scale"){
+      pop();
+    }
   }
 
 
 }
 Lapje.prototype.save = function(){
-  this.gcode.generate(this.layers,this.skirt, this.knittings);
-  var code ="";
-  if(this.printer =="Anet"){
-    code = "A";
+  if(!this.isSaved){
+    this.gcode.generate(this.layers,this.skirt, this.knittings);
+    var code ="";
+    if(this.printer =="Anet"){
+      code = "A";
+    }
+    else{
+      code = "U";
+    }
+    this.filename = code + material + this.rows + "x"+ this.stitches + "x" + this.maxlayers;
+    var hide = document.getElementById("hidgcode");
+    hide.value = this.filename;
+    this.gcode.save(this.filename);
   }
-  else{
-    code = "U";
-  }
-  this.filename = code + material + this.rows + "x"+ this.stitches + "x" + this.maxlayers;
-  var hide = document.getElementById("hidgcode");
-  hide.value = this.filename;
-  this.gcode.save(this.filename);
   this.isSaved = true;
 }

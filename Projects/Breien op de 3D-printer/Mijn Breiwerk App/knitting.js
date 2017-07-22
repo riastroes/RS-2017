@@ -174,6 +174,7 @@ Knitting.prototype.gotoStart = function(pos, offset){
       var last = this.layer.p.length-1;
       var lastp = this.layer.p[last].copy();
       lastp.y += 50;
+      lastp.y = constrain(lastp.y, 0, height - offset.y );
       lastp.z =0;
        point(lastp.x + offset.x, lastp.y + offset.y);
        append(this.layer.p, lastp);
@@ -201,7 +202,7 @@ Knitting.prototype.drawPattern = function(offset){
       //double
       stroke(255,0,0);
       strokeWeight(5);
-      point(this.layer.p[i].x + offset.x, this.layer.p[i].y + offset.y);
+     // point(this.layer.p[i].x + offset.x, this.layer.p[i].y + offset.y);
     }
     else{
       if(this.layer.p[i].z > 0){
@@ -216,23 +217,23 @@ Knitting.prototype.drawPattern = function(offset){
   }
 }
 
-Knitting.prototype.gcode = function(gcode){
+Knitting.prototype.gcode = function(gcode, newscale){
 
   append(this.commands, "G0 F" + this.layer.speed);
   append(this.commands, "G0 Z" + this.layer.totallayerheight);
-  append(this.commands, "G0 X" + this.layer.p[0].x * this.layer.scale + " Y" + this.layer.p[0].y * this.layer.scale  );
+  append(this.commands, "G0 X" + this.layer.p[0].x * this.layer.scale * newscale + " Y" + this.layer.p[0].y * this.layer.scale * newscale );
 
   for(var i = 1; i < this.layer.p.length; i++){
 
 
-    var x = this.layer.p[i].x * this.layer.scale;
+    var x = this.layer.p[i].x * this.layer.scale * newscale ;
     x = floor(x * 100)/100;
-    var y = this.layer.p[i].y * this.layer.scale;
+    var y = this.layer.p[i].y * this.layer.scale  * newscale;
     y = floor(y * 100)/100;
     var z = this.layer.p[i].z;
 
     var dvector = p5.Vector.sub(this.layer.p[i], this.layer.p[i-1]);
-    var d = dvector.mag()* this.layer.scale;
+    var d = dvector.mag()* this.layer.scale  * newscale;
 
 
     var kz = this.layer.totallayerheight * z;

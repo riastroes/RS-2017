@@ -48,7 +48,7 @@ Gcode.prototype.getCodeToStart = function(skirtlast, knittingfirst, thickness, s
 
   append(tostart, ";tostart");
   append(tostart, "G1 F" + this.speed );
-
+  
   var v = p5.Vector.sub(skirtlast, knittingfirst);
   v.mult(app.settings.scale);
   this.extrude += (v.mag() * this.layerheight * this.thickness);
