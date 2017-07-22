@@ -88,10 +88,10 @@ Skirt.prototype.draw = function(){
     line(this.skirt[l-1].x + offset.x, this.skirt[l-1].y+ offset.y, this.skirt[l].x + offset.x, this.skirt[l].y + offset.y);
   }
 }
-Skirt.prototype.gcode = function(gcode, layer){
 
+Skirt.prototype.gcode = function(gcode, layer, newscale){
+  append(this.commands,";skirt");
   append(this.commands, "G0 X" + this.skirt[0].x * layer.scale + " Y" + this.skirt[0].y * layer.scale + " Z10" );
-  append(this.commands, "G0 X" + this.skirt[0].x * layer.scale + " Y" + this.skirt[0].y * layer.scale + " Z" + layer.layerheight );
   append(this.commands, "G0 F1200");
 
   for(var i = 1; i < this.skirt.length; i++){
@@ -101,11 +101,18 @@ Skirt.prototype.gcode = function(gcode, layer){
     y = floor(y * 100)/100;
 
     var dvector = p5.Vector.sub(this.skirt[i], this.skirt[i-1]);
-    var d = dvector.mag()* layer.scale;
+    var d = dvector.mag()* layer.scale  * newscale;
+
 
     gcode.extrude += (d * layer.thickness);
-    append(this.commands, "G1 X" + x + " Y" + y + " E" + gcode.extrude );
+    if(this.skirt.length - 2 == i){
+      append(this.commands, "G0 X" + this.skirt[0].x * layer.scale + " Y" + this.skirt[0].y * layer.scale + " Z" + layer.layerheight  + " E" + gcode.extrude);
+    }
+    else{
+      append(this.commands, "G1 X" + x + " Y" + y + " E" + gcode.extrude );
+    }
+    
 
   }
-
+  append(this.commands,";end skirt");
 }

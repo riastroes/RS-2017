@@ -46,7 +46,7 @@ Lapje.prototype.create = function(showgrid, ischanged, institches, inrows, inlay
   }
   this.skirt = new Skirt(this.grid, 2,30, 5);
   this.skirt.draw(offset);
-  this.skirt.gcode(this.gcode, this.layers[0]);12
+  this.skirt.gcode(this.gcode, this.layers[0], sliderScale.value);
   this.knittings = [];
   for(var i = 0; i < this.maxlayers; i++){
 
