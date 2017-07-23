@@ -26,12 +26,12 @@ Lapje.prototype.createGrid = function(w, h, marge){
 }
 Lapje.prototype.showGrid = function(){
   
-  
+  background(255);
   this.grid.draw();
   
 }
 Lapje.prototype.create = function(showgrid, ischanged, institches, inrows, inlayers, linepath, func, a, b){
-  
+  newscale = sliderScale.value;
   this.stitches = institches;
   this.rows = inrows;
   this.layers = [];
@@ -51,34 +51,10 @@ Lapje.prototype.create = function(showgrid, ischanged, institches, inrows, inlay
   for(var i = 0; i < this.maxlayers; i++){
 
     if(i == 0){                   //biggrid, stitchnr,row, stitches,rows
-      this.knitgrid = new Knitgrid(this.grid,pos.x,pos.y,this.stitches,this.rows);
+      this.knitgrid = new Knitgrid(this.grid,pos.x,pos.y,this.stitches,this.rows, newscale);
       
-      if(func == "circlesin"){
-        this.knitgrid.disorderRadiusIn(linepath, a, b);
-      }
-      else if(func == "circlesout"){
-        this.knitgrid.disorderRadiusOut(linepath, a, b);
-      }
-      else if(func == "cos"){
-        this.knitgrid.disorderCosWave(a, b, 2, 0.4);
-      }
-      else if(func == "scale"){
-        this.rows = floor(constrain(this.rows, 0, 40 / sliderScale.value));
-      }
-      
-      else if(func == "vert"){
-        this.knitgrid.disorderVert(linepath, a);
-      }
-      else if(func == "hor"){
-        this.knitgrid.disorderHor(linepath, a);
-      }
-       else if(func == "delete"){
-        this.knitgrid.disorderDelete(linepath, a);
-      }
-    
-      if(showgrid){
-        this.knitgrid.draw(offset);
-      }
+      this.manipuleer();
+     
       //this.knitgrid.disorderCosWave(1,this.rows,2, -TWO_PI/70);
       //this.knitgrid.disorderCosWave(32,43,2, TWO_PI/70);
       //this.knitgrid.disorderShrinkWidth(11,37, 0.7)
@@ -90,26 +66,51 @@ Lapje.prototype.create = function(showgrid, ischanged, institches, inrows, inlay
       //this.knitgrid.disorderHeight(0,100, -20, 14);
     }
     
-    var newscale = 1;
+    
     this.knittings[i] = new Knitting(this.grid, this.knitgrid, this.layers[i],0,0,this.stitches);
-    if(func == "scale"){
-      push()
-      newscale = sliderScale.value
-      scale(sliderScale.value);
-    }
+   
+      
+      
+     
+    
     this.knittings[i].createPattern("setup", 0,1);
     this.knittings[i].createPattern("straight", 1,this.rows);
     this.knittings[i].createPattern("end",this.rows,this.rows);
     this.knittings[i].patternToGrid();
     this.knittings[i].gotoStart(pos, offset);
     this.knittings[i].drawPattern(offset);
-    this.knittings[i].gcode(this.gcode, newscale);
-    if(func == "scale"){
-      pop();
-    }
+    this.knittings[i].gcode(this.gcode);
+    
+      
+    
+  }
+}
+Lapje.prototype.manipuleer = function(){
+  if(func == "circlesin"){
+        this.knitgrid.disorderRadiusIn(linepath, a, b);
+  }
+  else if(func == "circlesout"){
+    this.knitgrid.disorderRadiusOut(linepath, a, b);
+  }
+  else if(func == "cos"){
+    this.knitgrid.disorderCosWave(a, b, 2, 0.4);
+  }
+  else if(func == "scale"){
+    this.rows = floor(constrain(this.rows, 0, 40 / sliderScale.value));
+  }
+   else if(func == "vert"){
+    this.knitgrid.disorderVert(linepath, a);
+  }
+  else if(func == "hor"){
+    this.knitgrid.disorderHor(linepath, a);
+  }
+  else if(func == "delete"){
+    this.knitgrid.disorderDelete(linepath, a);
   }
 
-
+  if(showgrid){
+    this.knitgrid.draw(offset);
+  }
 }
 Lapje.prototype.save = function(){
   if(!this.isSaved){

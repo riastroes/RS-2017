@@ -1,4 +1,4 @@
-function Knitgrid(biggrid, pstitchnr,prow, pstitches,prows){
+function Knitgrid(biggrid, pstitchnr,prow, pstitches,prows, pnewscale){
   this.grid = [];
   this.row = prow;
   this.krow = this.row*4;
@@ -8,14 +8,14 @@ function Knitgrid(biggrid, pstitchnr,prow, pstitches,prows){
   this.krows = ((this.rows)*4) + 1;
   this.stitches = pstitches;
   this.kstitches = (this.stitches*4) + 1 ;
-  this.create(biggrid);
+  this.create(biggrid, pnewscale);
 }
-Knitgrid.prototype.create = function(biggrid){
+Knitgrid.prototype.create = function(biggrid, pnewscale){
   this.grid = [];
   for(var s = 0; s <= this.kstitches ; s++){
     this.grid[s]=[];
     for(var r = 0; r <= this.krows ; r++){
-      this.grid[s][r] = biggrid.getPos(this.kstitchnr + s, this.krow + r).copy();
+      this.grid[s][r] = biggrid.getPos((this.kstitchnr + s) * pnewscale, (this.krow + r)* pnewscale).copy();
     }
   }
 }
@@ -279,13 +279,13 @@ Knitgrid.prototype.disorderHeight = function(from,to, force, stitches){
   }
 }
 
-Knitgrid.prototype.draw = function(offset){
+Knitgrid.prototype.draw = function(offset, pnewscale){
   for(var s = 0; s <  this.kstitches; s++){
   for(var r = 0; r < this.krows; r++){
 
       stroke(0);
       strokeWeight(1);
-      point( this.grid[s][r].x + offset.x,  this.grid[s][r].y + offset.y);
+      point( (this.grid[s][r].x + offset.x) * pnewscale,  (this.grid[s][r].y + offset.y) * pnewscale);
     }
   }
 
@@ -293,9 +293,9 @@ Knitgrid.prototype.draw = function(offset){
   stroke(0, 0,255);
   strokeWeight(1);
   fill(0,0,255,10);
-  quad(  this.grid[0][0].x + offset.x,  this.grid[0][0].y + offset.y,
-         this.grid[ this.kstitches-1][0].x + offset.x,  this.grid[ this.kstitches-1][0].y + offset.y,
-         this.grid[ this.kstitches-1][ this.krows-1].x + offset.x,  this.grid[ this.kstitches-1][ this.krows].y + offset.y,
-         this.grid[0][ this.krows-1].x + offset.x,  this.grid[0][ this.krows].y + offset.y);
+  quad(  (this.grid[0][0].x + offset.x) * pnewscale,  (this.grid[0][0].y + offset.y) * pnewscale,
+         (this.grid[ this.kstitches-1][0].x + offset.x) * pnewscale,  (this.grid[ this.kstitches-1][0].y + offset.y) * pnewscale,
+         (this.grid[ this.kstitches-1][ this.krows-1].x + offset.x) * pnewscale,  (this.grid[ this.kstitches-1][ this.krows].y + offset.y) * pnewscale,
+         (this.grid[0][ this.krows-1].x + offset.x) * pnewscale ,  (this.grid[0][ this.krows].y + offset.y) * pnewscale);
 
 }

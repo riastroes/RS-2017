@@ -30,6 +30,7 @@ var ischanged;
 var func;
 var totlayerheight;
 var issaved;
+var newscale;
 
 function setup() {
     var canvas = createCanvas(1200,1200);
@@ -42,7 +43,7 @@ function setup() {
     totlayerheight = 0;
     changeStitches();
     changeRows();
-    //changeLayers();
+    
     selectPrinter();
     selectMaterial();
     
@@ -59,6 +60,7 @@ function setup() {
     linepath = [];
     
     issaved = false;
+    create();
   
 }
 function draw(){
@@ -71,19 +73,19 @@ function draw(){
   //showPath(checkShowPointDrawing.checked);
   
 }
-function showPath(showPoints){
-   if(showPoints){
-    stroke(255, 0, 0);
-    noFill();
-    for(var i =0; i < linepath.length; i++){
+// function showPath(showPoints){
+//    if(showPoints){
+//     stroke(255, 0, 0);
+//     noFill();
+//     for(var i =0; i < linepath.length; i++){
      
-        strokeWeight(5);
-        point(linepath[i].x + offset.x , linepath[i].y + offset.y);
-      }
+//         strokeWeight(5);
+//         point(linepath[i].x + offset.x , linepath[i].y + offset.y);
+//       }
      
-    }
+//     }
   
-}
+// }
 function create(){
   
   lapje = new Lapje(printer, material, "normal",  institches, inrows, checkShowGrid.checked  );
@@ -124,18 +126,12 @@ function create(){
     ina = document.getElementById("sliderhor").value;
   }
   
+  
   if(inrows  > 0 && institches >0){
-   
-    
-    lapje.create(checkShowGrid.checked, ischanged,institches, inrows,5, linepath, func.value, ina, inb);
-   
+   lapje.create(checkShowGrid.checked, ischanged,institches, inrows,5, linepath, func.value, ina, inb);
   }
   if(ischanged){
-    
-     changePrice();
-   
-
-    
+    changePrice(); 
   }
    ischanged = false;
    issaved = false;
@@ -155,7 +151,7 @@ function changePrice(){
     }
 
    
-    price = institches * inrows  * mat * 5;
+    price = institches * inrows  * mat * 5 * newscale;
     
     
     document.getElementById("price").innerHTML = price.toFixed(2) + " euro."
@@ -189,21 +185,9 @@ function mousePressed(){
     v.y = mouseY - offset.y;
     append(linepath, v);
     ischanged = true;
-    
-    create();
-  } 
-    
-}
-function keyPressed(){
-  if(key == 'g' || key =='G'){
-    create();
-  }
-  if(key == 'a' || key =='A'){
-    this.printer = "Anet"; //default setting
-  }
-  if(key == 'u' || key =='U'){
-    this.printer = "Ultimaker2+";
-  }
+    lapje.manipuleer();
+    //create();
+  }   
 }
 
 function changeStitches(){
@@ -279,8 +263,8 @@ function selectDisorderFunction(){
     w3.addClass("#vertfunction", "hidden");
     w3.addClass("#horfunction", "hidden");
     
-    document.getElementById("spincosradius").innerHTML = document.getElementById("slidercosradius").value;
-    document.getElementById("spincosforce").innerHTML = document.getElementById("slidercosforce").value;
+    document.getElementById("spincosfrom").innerHTML = document.getElementById("slidercosfrom").value;
+    document.getElementById("spincosto").innerHTML = document.getElementById("slidercosto").value;
   }
   else if(func.value =="scale"){
     w3.addClass("#circlesinfunction", "hidden");
@@ -339,10 +323,7 @@ function changeCosTo(){
   document.getElementById("spincosto").innerHTML = document.getElementById("slidercosto").value;
 
 }
-function changeScale(){
-  document.getElementById("spinscale").innerHTML = document.getElementById("sliderscale").value;
 
-}
 function changeVert(){
   document.getElementById("spinvert").innerHTML = document.getElementById("slidervert").value;
 
@@ -352,4 +333,26 @@ function changeHor(){
 
 }
 
-
+function changeScale(){
+  document.getElementById("spinscale").innerHTML = document.getElementById("sliderscale").value;
+  document.getElementById("sliderstitches").max = (ceil(40 / document.getElementById("sliderscale").value ));
+  document.getElementById("sliderrows").max = (ceil(40 / document.getElementById("sliderscale").value ));
+  if(document.getElementById("sliderstitches").value > document.getElementById("sliderstitches").max){
+    document.getElementById("sliderstitches").value = document.getElementById("sliderstitches").max;
+    document.getElementById("spinstitches").innerHTML = document.getElementById("sliderstitches").value;
+    stitches = document.getElementById("sliderstitches").value;
+  }
+  if(document.getElementById("sliderrows").value > document.getElementById("sliderrows").max){
+    document.getElementById("sliderrows").value = document.getElementById("sliderrows").max;
+    document.getElementById("spinrows").innerHTML = document.getElementById("sliderrows").value;
+    rows = document.getElementById("sliderrows").value;
+  }
+  document.getElementById("slidercosfrom").max = document.getElementById("sliderrows").max;
+  document.getElementById("slidercosfrom").value = 1;
+  document.getElementById("slidercosto").max = document.getElementById("sliderrows").max;
+  document.getElementById("slidercosto").value = document.getElementById("sliderrows").max;
+  newscale = document.getElementById("sliderscale").value;
+  create();
+ 
+  changePrice();
+}

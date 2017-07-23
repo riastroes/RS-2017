@@ -234,12 +234,12 @@ Stitch.prototype.create =function(){
          this.stitch[6] = new Pos(-1,-1,1,0);
          this.stitch[7] = new Pos(-4,0,1,0);
          this.stitch[8] = new Pos(-5,0,1,0);
-         this.stitch[9] = new Pos(-7,-1,1,0);
-          this.stitch[10] = new Pos(-7,-4,1,0);
-          this.stitch[11] = new Pos(-6,-4,1,0);
-          this.stitch[12] = new Pos(-5,-3,1,0);
-          this.stitch[13] = new Pos(-5,-1,1,0);
-            this.stitch[14] = new Pos(-7,0,1,0);
+         this.stitch[9] = new Pos(-6,-1,1,0);
+          this.stitch[10] = new Pos(-6,-4,1,0);
+          
+          this.stitch[11] = new Pos(-5,-3,1,0);
+          this.stitch[12] = new Pos(-5,-1,1,0);
+          this.stitch[13] = new Pos(-6,0,1,0);
            break;
         }
        case 'X': {                //R afhechten, eerste steek

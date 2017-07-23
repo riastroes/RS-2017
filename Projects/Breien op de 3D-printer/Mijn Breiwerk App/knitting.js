@@ -217,23 +217,23 @@ Knitting.prototype.drawPattern = function(offset){
   }
 }
 
-Knitting.prototype.gcode = function(gcode, newscale){
+Knitting.prototype.gcode = function(gcode){
 
   append(this.commands, "G0 F" + this.layer.speed);
   append(this.commands, "G0 Z" + this.layer.totallayerheight);
-  append(this.commands, "G0 X" + this.layer.p[0].x * this.layer.scale * newscale + " Y" + this.layer.p[0].y * this.layer.scale * newscale );
+  append(this.commands, "G0 X" + this.layer.p[0].x * this.layer.scale + " Y" + this.layer.p[0].y * this.layer.scale );
 
   for(var i = 1; i < this.layer.p.length; i++){
 
 
-    var x = this.layer.p[i].x * this.layer.scale * newscale ;
+    var x = this.layer.p[i].x * this.layer.scale ;
     x = floor(x * 100)/100;
-    var y = this.layer.p[i].y * this.layer.scale  * newscale;
+    var y = this.layer.p[i].y * this.layer.scale;
     y = floor(y * 100)/100;
     var z = this.layer.p[i].z;
 
     var dvector = p5.Vector.sub(this.layer.p[i], this.layer.p[i-1]);
-    var d = dvector.mag()* this.layer.scale  * newscale;
+    var d = dvector.mag()* this.layer.scale;
 
 
     var kz = this.layer.totallayerheight * z;

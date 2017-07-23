@@ -31,8 +31,8 @@
 <style>
 body{font-size:18px; font-family: "Raleway", sans-serif;}
 #header{ margin:0; background-image:url('Images/mask.jpg'); 
-background-blend-mode:soft-light; background-size: 100%; color:white; height:300px ; 
-background-position-y :-150px; font-size:120px; color:black; font-weight:bold; text-align: center; 
+background-blend-mode:soft-light; background-size: 100%; height:300px ; 
+background-position-y :-150px; font-size:100px;  color:brown; font-weight:bold; text-align: center; 
 padding-top:100px}
 label{display:inline-block; width:150px;}
 label.large{display:inline-block; width:400px;}
@@ -51,7 +51,7 @@ canvas{width:100%}
 </head>
 <body>
   <div id="header" class="w3-header">
-    DUBAI KNITTING APP
+    DUBAI-KNITTING-APP
   </div>
   
   <div class ="w3-container border" >
@@ -90,16 +90,19 @@ canvas{width:100%}
        </select><br/>
     
        <label>show grid:</label><input id="showgrid" type="checkbox" checked></input></br>
-       
+       je kunt de steken vergroten door de schaal aan te passen.</br>
+       <label>schaal vergroten: </label><input id="sliderscale" type="range" min="1" max="3" value="1" step="0.1" onchange="changeScale();"/><span id="spinscale">1</span></br> 
+
         <label class="small">Start positie x:  </label><input id="inx" type="text" size="5" value="6"  onchange="changePosx();">
         <label class="small">y:  </label><input id="iny" type="text" size="5" value="2"  onchange="changePosy();">
         <br/>
+        Elk zwart ruitje van het raster is ongeveer 1 cm2.<br/>
       
         <label>Aantal steken: </label><input id="sliderstitches" type="range" min="2" max="40" value="10" step="1"  onchange="changeStitches();"/><span id="spinstitches"></span></br>
         <label>Aantal pennen: </label><input  id="sliderrows" type="range" min="2" max="40" value="10" step="1"  onchange="changeRows();"/><span id="spinrows"></span></br>
         <button id="btnGenerate" onclick="create();">Breien</button>
-        <p><strong>Pas op!</strong>, dat alle lijnen binnen de grijze rand getekend zijn. Je kunt het breiwerk verplaatsen door andere waarden voor het beginpunt (x, y) in te stellen.
-          Als het dan nog niet lukt om alle lijnen binnen de grijze rand te krijgen, moet je het aantal steken of het aantal pennen verminderen.
+        <p><strong>Pas op!</strong>Alle zwarte lijnen moeten binnen de grijze rand getekend zijn. Je kunt het breiwerk verplaatsen door andere waarden voor het beginpunt (x, y) in te stellen.
+          Als het dan nog niet lukt om alle zwarte lijnen binnen de grijze rand te krijgen, moet je het aantal steken of het aantal pennen verminderen.
         </p>
          
     </div>
@@ -132,12 +135,10 @@ canvas{width:100%}
          
           </div>
         <div id="cosfunction" class="hidden">
-            <label>van rij: </label><input id="slidercosfrom" type="range" min="0" max="40" value="5" step="1" onchange="changeFromRow();"/><span id="spincosfrom"></span></br>
-            <label>tot rij: </label><input id="slidercosto" type="range" min="0" max="40" value="35" step="1" onchange="changeToRow();"/><span id="spincosto"></span></br>
+            <label>van rij: </label><input id="slidercosfrom" type="range" min="0" max="40" value="5" step="1" onchange="changeCosFrom();"/><span id="spincosfrom"></span></br>
+            <label>tot rij: </label><input id="slidercosto" type="range" min="0" max="40" value="35" step="1" onchange="changeCosTo();"/><span id="spincosto"></span></br>
         </div>
-        <div id="scalefunction" class="hidden">
-            <label>scale: </label><input id="sliderscale" type="range" min="1" max="3" value="1" step="0.1" onchange="changeScale();"/><span id="spinscale"></span></br> 
-        </div>
+        
          <div id="vertfunction" class="hidden">
             <label>breedte: </label><input id="slidervert" type="range" min="1" max="20" value="1" step="1" onchange="changeVert();"/><span id="spinvert"></span></br>
            <label>Toon verticaal:</label><input id="showpointdrawing" type="checkbox" checked></input></br><br/>
