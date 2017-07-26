@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Breiwerk</title>
+<META NAME="COPYRIGHT" CONTENT="&copy; Ria Stroes">
+<META HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE">
+<title>Breiwerk App</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<script src="/RS-2017/libraries/google.js" type="text/javascript"></script>
+<script src="/RS-2017/functions.js" type="text/javascript"></script>
+<script src="/RS-2017/libraries/p5.min.js" type="text/javascript"></script>
+<script src="/RS-2017/libraries/p5.dom.min.js" type="text/javascript"></script>
+<script src="https://www.w3schools.com/lib/w3.js"></script>
+
+<script src="settings.js" type="text/javascript"></script>
+<script src="gcode.js" type="text/javascript"></script>
+
+<script src="layer.js" type="text/javascript"></script>
+<script src="skirt.js" type="text/javascript"></script>
+<script src="knitting.js" type="text/javascript"></script>
+<script src="pattern.js" type="text/javascript"></script>
+<script src="stitch.js" type="text/javascript"></script>
+<script src="pos.js" type="text/javascript"></script>
+<script src="grid.js" type="text/javascript"></script>
+<script src="knitgrid.js" type="text/javascript"></script>
+<script src="lapje.js" type="text/javascript"></script>
+<script src="app.js" type="text/javascript"></script>
+<style>
+body{font-size:18px; font-family: "Raleway", sans-serif;}
+#header{ margin:0; background-image:url('Images/mask.jpg'); background-blend-mode:soft-light; background-size: 100%; color:white; height:300px ; background-position-y :-150px}
+label{display:inline-block; width:150px;}
+label.large{display:inline-block; width:400px;}
+
+.email{display:inline-block; width:400px;}
+.hidden{
+  display:none;
+}
+button{background-color:brown;color:white}
+.waarschuwing{color:red}
+.border{padding:10px; border-image:url('Images/mask.jpg')30 stretch ; border-style: solid; border-width: 10px}
+
+</style>
+</head>
+<body>
+  <div id="header" class="w3-header">
+  </div>
+  
+  <div class ="w3-container border" >
+  <div class="w3-container w3-center">
+  <h1 >Create your own knitting on my 3D-printer.<img src="/RS-2017/Images/Ria.jpg" style="width:50px" class="w3-round w3-right" alt="Ria Stroes"/></h1>
+  
+  </div>
+  <div class="w3-row">
+    <div class="w3-container w3-one">
+      <p>
+        Create your own knitting, if your design is ready, push the download-button and send the .code file to me. I will print your knitting on a 3D-printer and send it to you. If you want to make more knittings or if you want to 
+        see how you knitting is printed, come and visit me in my studio in Nijemirdum or at Makerversity in Amsterdam, contact me.
+         </p>
+        <br/>
+      </div>
+   </div>
+ 
+  <div class="w3-row">
+   <div id="divSettings1" class="w3-half w3-container">
+       <label>My 3D-printer in:</label>
+       <select id="selectprinter" onchange="selectPrinter();">
+          <option value="Anet">Nijemirdum (Friesland)- printer Anet</option>
+          <option value="Ultimaker2+">Amsterdam - printer Ultimaker2+</option>
+       </select><br/>
+       <label>Choose material:</label>
+        <select id="selectmaterial" onchange="selectMaterial();">
+          <option value="ABS">ABS neutral/wit</option>
+          <option value="PLA">PLA black</option>
+          <option value="PETGCARBON">PETG carbon</option>
+          <option value="SAT1N">Satijn silver</option>
+          <option value="SAT2N">Satijn gold</option>
+          <option value="SAT3N">Satijn light blue</option>
+          <option value="PLABRO">Bronze(30%)</option>
+          <option value="TRANSPARENT">Transparent </option>
+       </select><br/>
+    
+       <label>show grid:</label><input id="showgrid" type="checkbox" checked></input></br>
+       
+        <label class="small">Start position x:  </label><input id="inx" type="text" size="5" value="6"  onchange="changePosx();">
+        <label class="small">y:  </label><input id="iny" type="text" size="5" value="2"  onchange="changePosy();">
+        <br/>
+      
+        <label>Stitches: </label><input id="sliderstitches" type="range" min="2" max="40" value="10" step="1"  onchange="changeStitches();"/><span id="spinstitches"></span></br>
+        <label>Pins: </label><input  id="sliderrows" type="range" min="2" max="40" value="10" step="1"  onchange="changeRows();"/><span id="spinrows"></span></br>
+        <label>Layers: </label><input  id="sliderlayers" type="range" min="1" max="5" value="1" step="1"  onchange="changeLayers();"/><span id="spinlayers"></span></br>
+        <p id="infolayers">you will get a flexible material with one layer, about 0.2 mm thick, it's not strong. With 5 layers the material will be stiff and a lot stronger. You can bend it in hot water, for ABS you need boiling water and for PLA water that's 60 - 70 degrees. </p>
+        <button id="btnGenerate" onclick="create();"><strong>G</strong>eneer Breiwerk</button>
+         
+    </div>
+    <div id="divSettings2" class="w3-half w3-container">
+        <p>
+        After generating a knitting you kan manipulate the result. The regular pattern of the knitting will be disordered by one of the manipulate functions. Play with it to see the effect.
+        For some of the functions you have to set a point where you want the manipulation, before you choose your function.
+
+        Select a manipulate function:
+        <select id="disorderfunctions" onchange="selectDisorderFunction();">
+          <option value="none">None</option>
+          <option value="circlesin">Circles inside</option>
+          <option value="circlesout">Circles outside</option>
+          <option value="sin">Bows</option>
+          <option value="cos">Hooks</option>
+          <option value="vert">Vertical lines</option>
+          <option value="hor">Horizontal lines</option>
+          
+        </select><br/>
+
+        <div id="circlesinfunction" class="hidden">    
+            <label>radius: </label><input id="sliderradiusin" type="range" min="2" max="250" value="20" step="1" onchange="changeRadiusIn();"/><span id="spinradiusin"></span></br>
+            <label>strength: </label><input id="sliderforcein" type="range" min="1" max="50" value="5" step="1" onchange="changeForceIn();"/><span id="spinforcein"></span></br>
+        </div>
+         <div id="circlesoutfunction" class="hidden">    
+            <label>radius: </label><input id="sliderradiusout" type="range" min="2" max="250" value="20" step="1" onchange="changeRadiusOut();"/><span id="spinradiusout"></span></br>
+            <label>strength: </label><input id="sliderforceout" type="range" min="1" max="50" value="5" step="1" onchange="changeForceOut();"/><span id="spinforceout"></span></br>
+        </div>
+        <div id="sinfunction" class="hidden">
+            <label>bows: </label><input id="slidersinradius" type="range" min="2" max="200" value="20" step="1" onchange="changeSinus();"/><span id="spinsinradius"></span></br>
+            <label>strength: </label><input id="slidersinforce" type="range" min="-40" max="40" value="10" step="1" onchange="changeSinForce();"/><span id="spinsinforce"></span></br>
+        </div>
+        <div id="cosfunction" class="hidden">
+            <label>hooks: </label><input id="slidercosradius" type="range" min="2" max="200" value="20" step="1" onchange="changeCosinus();"/><span id="spincosradius"></span></br>
+            <label>strength: </label><input id="slidercosforce" type="range" min="-40" max="40" value="10" step="1" onchange="changeCosForce();"/><span id="spincosforce"></span></br>
+        </div>
+         <div id="vertfunction" class="hidden">
+            <label>width: </label><input id="slidervert" type="range" min="1" max="20" value="1" step="1" onchange="changeVert();"/><span id="spinvert"></span></br>
+          
+        </div>
+        <div id="horfunction" class="hidden">
+            <label>hight: </label><input id="sliderhor" type="range" min="1" max="20" value="1" step="1" onchange="changeHor();"/><span id="spinhor"></span></br>
+          
+        </div>
+         
+       
+         <label>Show points:</label><input id="showpointdrawing" type="checkbox" checked></input></br><br/>
+         <button id="btnManipulate" onclick="create();">Manipulate Knitting</button>
+        <p>a 3D-print of your design will cost: <span id="price">...</span> <br/>
+        The shipping costs are 3.95 euro, but you also can pick it up.</p>
+        <button id="btnSave" onclick="downloadKnitting();"><strong>D</strong>ownload Knitting (.gcode)</button>
+        <br/><br/><br/>
+
+
+    </div>
+    
+      
+
+   </div>
+   <div class="w3-row">
+    <div id="divcanvas"  class="w3-twothird border center">
+    </div>
+    <div id="divInfo" class="w3-third w3-container">
+    <H3> Recipe Bracelet </ h3>
+    <P> Make a knit with 8 stitches and 40 pins and 3 layers. <br/>
+    Put a number of points on the knit. <br/>
+    Manipulate the regular knitting pattern with a manipulate function. <br/>
+    Let the design print. Do not forget to send the .gcode file as an attachment to your email. <br/>
+    Pay the cost of your knitwear. <br/>
+    If you have received the print at home, take a glass or cup of hot water, let the print slowly soften in the hot water and shape it round inside the glass.
+    Cool the print with cold water. If the print is cold, it stays in the right shape and your bracelet is ready.   <img alt="Breien op de 3D-printer" src="images/breien3DPRINTER.jpg"/>
+    </div>
+
+    </div>
+    <div class="w3-row">
+    <div class="w3-half w3-container">
+   
+    <a id="email"/>
+        <h3>Orderform: </h3>
+    <form method="post" action="mailto:riastroes@gmail.nl?subject=Ontwerp voor 3D-printer" enctype="text/plain">
+      <input id="hidgcode" type="hidden" name="gcode" value="" ><br/>
+      <div class="w3-section">
+        <label >Name:</label>
+        <input class="w3-input w3-border email" type="text" name="Naam" required><br/>
+      </div>
+      <div class="w3-section">
+        <label >Email:</label>
+        <input class="w3-input w3-border email" type="text" name="Email" required><br/>
+      </div>
+    
+      <div class="w3-section">
+        <label class="large" >I will come to collect the 3D PRINT myself:</label>
+        <input id="checkOphalen" class="email" type="checkbox" name="ophalen" checked onchange="changePrice()">
+      </div>
+      <div id="divpostadres" class="w3-section hidden">
+        <label >Postaddres:</label>
+        <input id="postadres" class="w3-input w3-border email" type="text" name="Postadres" ><br/>
+      </div>
+      <div class="w3-section">
+        <label >I pay:</label>
+        <input id="emailprice" name="prijs" class="w3-input w3-border email" type="text" value=""><br/>
+       <label ></label> <textarea class="w3-input w3-border email" type="text" size="3" >I will pay on accountnr NL23 SNSB 0870 8412 03 t.a.v. Ria Stroes, Ontwerp 3D-PRINT </textarea>
+      </div>
+      <div class="w3-section">
+        <label >Questions and Remarks:</label>
+        <textarea class="w3-input w3-border email" type="text" size="3" name="Pas op!" >Don't forget the attachment! </textarea>
+      </div>
+      <button type="submit" class="w3-right">Create Email</button><br/><br/><br/>
+    </form>
+    </div>
+     <div class="w3-half w3-container">
+       <br/><br/><br/>
+       <p> This order form allows you to create an email. In your email application, you only have to add the design as an attachment.
+         The attachment can be found in your download directory. If you can not find a .gcode file, then your browser has it
+         Download blocked, you can see this in your browser's navigation bar.
+         </p>
+         <p> Once I have received the order and payment, I will print your knitwear.
+           </p>
+    <div class = "warning"> I do not accept liability if you print the generated file on another 3D PRINTER. </div>
+    </div>
+  </div>
+  </div>
+ <br>
+</div>
+<div class="w3-row">
+       <div class="w3-one w3-center">
+        <button class="w3-button w3-padding-large w3-white  w3-border " onclick="goHome();"><b><< HOME</b></button>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>
