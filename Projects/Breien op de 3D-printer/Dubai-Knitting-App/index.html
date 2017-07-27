@@ -34,8 +34,8 @@ body{font-size:18px; font-family: "Raleway", sans-serif;}
 background-blend-mode:soft-light; background-size: 100%; height:300px ; 
 background-position-y :-150px; font-size:100px;  color:brown; font-weight:bold; text-align: center; 
 padding-top:100px}
-label{display:inline-block; width:150px;}
-label.large{display:inline-block; width:400px;}
+label{display:inline-block; width:200px;color:brown; font-weight:bold;}
+span.large{width:400px;}
 
 .email{display:inline-block; width:400px;}
 .hidden{
@@ -45,7 +45,8 @@ button{background-color:brown;color:white}
 .waarschuwing{color:red}
 .border{padding:10px; border-image:url('Images/mask.jpg')30 stretch ; border-style: solid; border-width: 10px;
 }
-canvas{width:100%}
+.phone{color:brown;}
+.arti{font-family:cursive}
 
 </style>
 </head>
@@ -54,25 +55,20 @@ canvas{width:100%}
     DUBAI-KNITTING-APP
   </div>
   
-  <div class ="w3-container border" >
-  <div class="w3-container w3-center">
-  <h1 >Ontwerp je eigen breiwerkje op mijn 3D-printer.<img src="/RS-2017/Images/Ria.jpg" style="width:50px" class="w3-round w3-right" alt="Ria Stroes"/></h1>
+  <div class="w3-row"> 
+  <div class="w3-container w3-center w3-one">
+  <h1 >Ontwerp je eigen armband op mijn 3D-printer.<img src="/RS-2017/Images/Ria.jpg" style="width:50px" class="w3-round w3-right" alt="Ria Stroes"/></h1>
   
   </div>
+</div>
   <div class="w3-row">
-    <div class="w3-container w3-one">
+    <div class="w3-container w3-half">
       <p>
-        Maak je eigen breiwerk, als je ontwerp klaar is, druk de downloadknop en stuur je het .gcode bestand naar mij. Ik zal je breiwerk printen op de 3D-printer en naar je terugsturen.  Als je meerdere breiwerkjes wilt maken of 
-        als je een keer wilt zien hoe jouw breiwerkje geprint wordt, kom dan kijken in Amsterdam of in Nijemirdum, neem even contact met mij op.
+        Maak je eigen armband, als je ontwerp klaar is, druk de downloadknop en stuur je het .gcode bestand naar mij. Ik zal je breiwerk printen op de 3D-printer en naar je terugsturen.  Als je meerdere breiwerkjes wilt maken of 
+        als je een keer wilt zien hoe jouw armband geprint wordt, kom dan kijken in Amsterdam of in Nijemirdum, neem even contact met mij op. <span class="phone">+31 (0)6 13448618 of +31 (0)514 785172</span>
         </p>
-        <br/>
-      </div>
-  </div>
-   <div class="w3-row"> 
-       <div id="divInfo" class="w3-half w3-container">
-      
-    <h3>Recept Armband</h3>
-    <p>Maak een breiwerk met 8 steken en 40 pennen.<br/>
+       <h3 class="arti">Recept Armband</h3>
+    <p class="arti" >Een voorbeeld: Maak een breiwerk met 6 steken (breed) en 40 pennen (hoog).<br/>
     Je kunt het regelmatige breipatroon verstoren met de manipuleerfuncties. <br/>
     Download het .gcode bestand en vergeet niet het .gcode bestand mee te versturen als bijlage bij je email.<br/>
     Betaal de kosten van je breiwerk. <br/> 
@@ -80,20 +76,26 @@ canvas{width:100%}
     en druk de print tegen de rand van je beker of glas, niks forceren als het nog niet zacht wordt, dan is je water niet warm genoeg.
     Laat de print weer afkoelen met koud water. Als de print koud is blijft hij in de juiste vorm en is je armband klaar.
     </p>
+      </div>
+      <div class="w3-container w3-half">
+      <img alt="Breien op de 3D-printer" src="images/breien3DPRINTER.jpg"/>
+        <br/>
+      </div>
   </div>
-   <div id="divInfo" class="w3-half w3-container">
-    <img alt="Breien op de 3D-printer" src="images/breien3DPRINTER.jpg"/>
-    </div>
-   </div>
+  <br/><br/>
+  <div class="w3-row">
+
  
   <div class="w3-row">
-    <div  class="w3-half w3-container">
-        <div id="divcanvas"  style="width:100%; overflow:hidden;"  class= "border">
-      
-        </div>
-      </div>
+    <div class="w3-half w3-container">
+      <h1>Je Instellingen</h1>
+    </div>
+    <div class="w3-half w3-container">
+      <h1>Je Eigen Ontwerp</h1>
+    </div>
+  </div>
    <div id="divSettings1" class="w3-half w3-container">
-       <h1>Instellingen</h1>
+       
        <label>Kies mijn 3D-printer in:</label>
        <select id="selectprinter" onchange="selectPrinter();">
           <option value="Anet">Nijemirdum (Friesland)- printer Anet</option>
@@ -101,11 +103,11 @@ canvas{width:100%}
        </select><br/>
        <label>Kies materiaal:</label><span id="spnmaterial"></span><br/><br/>
     
-        Je kunt de steken vergroten en verkleinen door de schaal aan te passen.</br>
+       
         <label>schaal vergroten: </label><input id="sliderscale" type="range" min="1" max="3" value="1" step="0.1" onchange="changeScale();"/><span id="spinscale">1</span></br> 
-
-        <label class="small">Start positie x:  </label><input id="inx" type="text" size="5" value="6"  onchange="changePosx();">
-        <label class="small">y:  </label><input id="iny" type="text" size="5" value="2"  onchange="changePosy();">
+        Je kunt de steken vergroten en verkleinen door de schaal aan te passen.</br>
+        <label class="small">Start positie x, y:  </label><input id="inx" type="text" size="5" value="6"  onchange="changePosx();">,
+        <input id="iny" type="text" size="5" value="2"  onchange="changePosy();">
         <br/>
         Elk zwart ruitje van het raster is ongeveer 1 cm2.<br/>
       
@@ -119,7 +121,7 @@ canvas{width:100%}
          <p>
         Op het breiwerk kun je met je muis punten aangeven waar je het breiwerk wilt manipuleren. Het regelmatige patroon van het breiwerk wordt dan verstoord door één van onderstaande functies. Probeer maar ...</p>
        
-        Kies een manipuleer functie:
+        Kies eerst een manipuleer functie:
         <select id="disorderfunctions" onchange="selectDisorderFunction();">
           <option value="none">Geen</option>
           <option value="circlesin">Cirkels naar binnen</option>
@@ -128,17 +130,17 @@ canvas{width:100%}
           <option value="vert">Verticale lijnen</option>
           <option value="hor">Horizontale lijnen</option>
           
-        </select><br/>
+        </select> en klik daarna met je muis op het breiwerk.<br/>
 
         <div id="circlesinfunction" class="hidden">    
-            <label>radius: </label><input id="sliderradiusin" type="range" min="2" max="250" value="20" step="1" onchange="changeRadiusIn();"/><span id="spinradiusin"></span></br>
-            <label>sterkte: </label><input id="sliderforcein" type="range" min="1" max="50" value="5" step="1" onchange="changeForceIn();"/><span id="spinforcein"></span></br>
+            <label>radius: </label><input id="sliderradiusin" type="range" min="2" max="250" value="100" step="1" onchange="changeRadiusIn();"/><span id="spinradiusin"></span></br>
+            <label>sterkte: </label><input id="sliderforcein" type="range" min="1" max="50" value="25" step="1" onchange="changeForceIn();"/><span id="spinforcein"></span></br>
             <label>Toon punten:</label><input id="showpointdrawing" type="checkbox" checked></input></br><br/>
          
           </div>
          <div id="circlesoutfunction" class="hidden">    
-            <label>radius: </label><input id="sliderradiusout" type="range" min="2" max="250" value="20" step="1" onchange="changeRadiusOut();"/><span id="spinradiusout"></span></br>
-            <label>sterkte: </label><input id="sliderforceout" type="range" min="1" max="50" value="5" step="1" onchange="changeForceOut();"/><span id="spinforceout"></span></br>
+            <label>radius: </label><input id="sliderradiusout" type="range" min="2" max="250" value="100" step="1" onchange="changeRadiusOut();"/><span id="spinradiusout"></span></br>
+            <label>sterkte: </label><input id="sliderforceout" type="range" min="1" max="50" value="25" step="1" onchange="changeForceOut();"/><span id="spinforceout"></span></br>
             <label>Toon punten:</label><input id="showpointdrawing" type="checkbox" checked></input></br><br/>
          
           </div>
@@ -160,18 +162,20 @@ canvas{width:100%}
         </div>
          
        
-        
+        <label>KORTINGSCODE: </label><input id="incode" type="text" size="30" onchange="changeCode();" />
         <p>Een 3D-print van jouw ontwerp kost: <span id="price">...</span> <br/>
         De verzendkosten zijn 3.95 euro in Nederland, maar je mag het ook ophalen.</p>
         <button id="btnSave" onclick="downloadKnitting();"><strong>D</strong>ownload Breiwerk (.gcode)</button>
         <br/><br/><br/>
     </div>
     
-     
+     <div  class="w3-container w3-half">
+        <div id="divcanvas" >
       
-   
-    
+        </div>
+      </div>
     </div>
+
     <div class="w3-row">
     <div class="w3-half w3-container">
    
@@ -189,8 +193,7 @@ canvas{width:100%}
       </div>
     
       <div class="w3-section">
-        <label class="large" >Ik kom mijn 3D PRINT zelf ophalen:</label>
-        <input id="checkOphalen" class="email" type="checkbox" name="ophalen" checked onchange="changePrice()">
+        <span class="large" >Ik kom mijn 3D PRINT zelf ophalen:<input id="checkOphalen" class="email" type="checkbox" name="ophalen" checked onchange="changePrice()"></span>
       </div>
       <div id="divpostadres" class="w3-section hidden">
         <label >Postadres:</label>
@@ -216,11 +219,14 @@ canvas{width:100%}
          </p>
          <p>Zodra ik de bestelling en de betaling binnen heb, ga ik je breiwerk printen.
            </p>
-    <div class="waarschuwing">Ik aanvaart geen aansprakelijkheid als je het genereerde bestand print op een andere 3D-PRINTER.</div>
+    <div class="waarschuwing">Ik aanvaart geen aansprakelijkheid als je het genereerde bestand print op een andere 3D-PRINTER.
     </div>
     <div class="waarschuwing">Als je niet tevreden bent over het resultaat, stuur het dan terug. Je ontvangt dan je geld terug. (excl. verzendkosten)</div>
     </div>
+  
+  
   </div>
+  
   </div>
  <br>
 </div>

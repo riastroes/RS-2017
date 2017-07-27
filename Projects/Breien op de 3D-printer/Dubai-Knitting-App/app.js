@@ -5,11 +5,13 @@ var material;
 var lapje;
 var stitches;
 var rows;
+var korting;
 
 var pos;
 var inrows;
 var institches;
 var inlayers;
+var windowscale;
 
 
 var sliderStitches;
@@ -34,9 +36,11 @@ var newscale;
 var manip;
 
 function setup() {
-    var canvas = createCanvas(1200,1200);
+    var canvas = createCanvas(1150,1150);
     canvas.parent("divcanvas");
 
+    windowscale =  ((windowWidth-100)/2)/1200;
+    korting = 1;
    
     
     offset = createVector(0,15);
@@ -70,11 +74,13 @@ function setup() {
   
 }
 function draw(){
+  push();
+  scale(windowscale);
   if(ischanged == true){
     create();
     ischanged = false;
   }
-  
+  pop();
 }
 
 function create(){
@@ -146,6 +152,15 @@ function changePosy(){
   pos.y = parseInt(document.getElementById("iny").value);
   ischanged = true;
 }
+function changeCode(){
+  if(document.getElementById("incode").value == "FACEBOOK50"){
+    korting = 0.5;
+  }
+  else{
+    korting = 1;
+  }
+   changePrice();
+}
 function changePrice(){
   if(institches >0 && inrows > 0 ){
     var price = 0;
@@ -156,9 +171,7 @@ function changePrice(){
     if(material == "PLABRO"){
       mat = 0.015;
     }
-
-   
-    price = institches * inrows  * mat * 5 * newscale;
+    price = institches * inrows  * mat * 5 * newscale * korting;
     
     
     document.getElementById("price").innerHTML = price.toFixed(2) + " euro."
@@ -195,8 +208,8 @@ function mousePressed(){
   if(mouseX > offset.x && mouseY > offset.y){
     var v = createVector(0,0);
     
-    v.x = mouseX - offset.x;
-    v.y = mouseY - offset.y;
+    v.x = (mouseX - offset.x) / windowscale;
+    v.y = (mouseY - offset.y) / windowscale;
     
     manip.push(new Manip());
     if(manip.length> 1){
@@ -205,9 +218,6 @@ function mousePressed(){
       manip[manip.length-1].b =  manip[manip.length-2].b;
       manip[manip.length-1].v = v.copy(); 
     }
-    
-    
-    
     ischanged = true;
   }   
 }
@@ -374,18 +384,22 @@ function changeHor(){
 
 
 function changeScale(){
+
   document.getElementById("spinscale").innerHTML = document.getElementById("sliderscale").value;
   document.getElementById("sliderstitches").max = (floor(40 / document.getElementById("sliderscale").value ));
   document.getElementById("sliderrows").max = (floor(40 / document.getElementById("sliderscale").value ));
+
   if(document.getElementById("sliderstitches").value > document.getElementById("sliderstitches").max){
     document.getElementById("sliderstitches").value = document.getElementById("sliderstitches").max;
     document.getElementById("spinstitches").innerHTML = document.getElementById("sliderstitches").value;
     stitches = document.getElementById("sliderstitches").value;
+    changeStitches();
   }
   if(document.getElementById("sliderrows").value > document.getElementById("sliderrows").max){
     document.getElementById("sliderrows").value = document.getElementById("sliderrows").max;
     document.getElementById("spinrows").innerHTML = document.getElementById("sliderrows").value;
     rows = document.getElementById("sliderrows").value;
+    changeRows();
   }
   document.getElementById("slidercosfrom").max = document.getElementById("sliderrows").max;
   document.getElementById("slidercosfrom").value = 1;
