@@ -256,8 +256,8 @@ function selectPrinter(){
       var array2 = ["ABS neutraal/wit","Satijn silver","Satijn goud","Satijn licht blauw"];
   }
   else if (printer == "Ultimaker2+"){
-      var array1 = ["PLA",      "PLABRO",    "PETGCARBON"];
-      var array2 = ["PLA zwart","Brons(30%)","PETG carbon"];
+      var array1 = ["PLA",      "PLABRO"   ];
+      var array2 = ["PLA zwart","Brons(30%)"];
   }
 
   //Create and append select list

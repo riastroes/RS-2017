@@ -193,10 +193,10 @@ Settings.prototype.initMaterial = function(){
       }
 
       if(this.material == "PETGCARBON" && this.style == "fine" ){
-        this.initStyle(0.4, 0.02, 800);  //0.4, 0.03, 1600 ok
+        this.initStyle(0.4, 0.03, 800);  //0.4, 0.03, 1600 ok
       }
       if(this.material == "PETGCARBON" && this.style == "normal" ){
-        this.initStyle(0.4, 0.02, 800);  //0.4, 0.03, 1600 ok
+        this.initStyle(0.4, 0.04, 800);  //0.4, 0.03, 1600 ok
       }
       if(this.material == "PETGCARBON" && this.style == "fat" ){
         this.initStyle(0.3, 1, 1200);  //0.4, 0.03, 1600 ok
