@@ -25,7 +25,6 @@ var btnGenerate;
 var btnSave;
 var offset;  // wordt alleen gebruikt in de tekenfuncties
 var checkShowGrid;
-var checkShowPointDrawing;
 var checkShowLineDrawing;
 var linepath;
 var ischanged;
@@ -62,7 +61,6 @@ function setup() {
     
     
     checkShowGrid = document.getElementById("showgrid");
-    checkShowPointDrawing = document.getElementById("showpointdrawing");
     checkShowLineDrawing = document.getElementById("showlinedrawing");
     
     //institches =  floor(int(sliderStitches.value));
@@ -155,6 +153,7 @@ function changePosy(){
 function changeCode(){
   if(document.getElementById("incode").value == "FACEBOOK50"){
     korting = 0.5;
+    document.getElementById("code").value == "FACEBOOK50";
   }
   else{
     korting = 1;
@@ -257,7 +256,7 @@ function selectPrinter(){
   }
   else if (printer == "Ultimaker2+"){
       var array1 = ["PLA",      "PLABRO"   ];
-      var array2 = ["PLA zwart","Brons(30%)"];
+      var array2 = ["PLA zwart","PLA Brons(30%)"];
   }
 
   //Create and append select list

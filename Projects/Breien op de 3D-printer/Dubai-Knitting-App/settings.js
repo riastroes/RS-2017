@@ -79,7 +79,8 @@ Settings.prototype.initMaterial = function(){
         case "SAT1N":{
           this.materialcode ="SAT1N";
           if(this.style == "fine"){
-            this.initStyle(0.5, 0.12, 600); //test OK mooi
+            this.initStyle(0.5, 0.10, 800); //test OK mooi
+            //this.initStyle(0.5, 0.12, 600); //test OK mooi  
             //this.initStyle(0.5, 0.15, 600); //test OK
             //this.initStyle(0.4, 0.1, 600);//test ok 
            //this.initStyle(0.3, 0.1, 600);//test ok 
