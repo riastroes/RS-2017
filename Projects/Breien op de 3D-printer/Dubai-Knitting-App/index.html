@@ -48,7 +48,8 @@ button{background-color:brown;color:white}
 .phone{color:brown;}
 .arti{font-family:cursive}
 a{color:red; font-weight:bold}
-
+.show {visibility:visible;}
+.hidden {visibility:hidden;}
 </style>
 </head>
 <body>
@@ -102,19 +103,22 @@ a{color:red; font-weight:bold}
        </select><br/>
        <label>Kies materiaal:</label><span id="spnmaterial"></span><br/><br/>
     
-       
+       <div id="bigger" class="show">
         <label>schaal vergroten: </label><input id="sliderscale" type="range" min="1" max="3" value="1" step="0.1" onchange="changeScale();"/><span id="spinscale">1</span></br> 
         Je kunt de steken vergroten en verkleinen door de schaal aan te passen.</br>
         <label class="small">Start positie x, y:  </label><input id="inx" type="text" size="5" value="6"  onchange="changePosx();">,
         <input id="iny" type="text" size="5" value="2"  onchange="changePosy();">
         <br/>
+        </div>
         Elk zwart ruitje van het raster is ongeveer 1 cm2.<br/>
       
         <label>Aantal steken: </label><input id="sliderstitches" type="range" min="2" max="40" value="10" step="1"  onchange="changeStitches();"/><span id="spinstitches"></span></br>
         <label>Aantal pennen: </label><input  id="sliderrows" type="range" min="2" max="40" value="10" step="1"  onchange="changeRows();"/><span id="spinrows"></span></br>
         
         
-        <p><strong>Pas op!&nbsp;</strong>Alle zwarte lijnen moeten binnen de grijze rand getekend zijn. Je kunt het breiwerk verplaatsen door andere waarden voor het beginpunt (x, y) in te stellen.
+        <p>
+          Klik op groter, als je de steken groten wilt maken. <button onclick="showBigger()" value="groter"></button><br/>
+          <strong>Pas op!&nbsp;</strong>Alle zwarte lijnen moeten binnen de grijze rand getekend zijn. Je kunt het breiwerk verplaatsen door andere waarden voor het beginpunt (x, y) in te stellen.
           Als het dan nog niet lukt om alle zwarte lijnen binnen de grijze rand te krijgen, moet je het aantal steken of het aantal pennen verminderen.
         </p>
         <p>
@@ -153,6 +157,7 @@ a{color:red; font-weight:bold}
             <label>hoogte: </label><input id="sliderhor" type="range" min="1" max="20" value="8" step="1" onchange="changeHor();"/><span id="spinhor"></span></br>
            <p class="waarschuwing">Klik (linker-muisknop) op het breiwerk, zo kun je bepalen waar de horizontale veranderingen in het patroon moeten komen.</p></br><br/>
         </div>
+
         <p>Je kunt een kortingscode ontvangen als je mijn facebook pagina: <a         href="http://www.facebook.com/Dubai-Knitting-App">www.facebook.com/Dubai-Knitting-App</a> deelt op facebook.
           Je ontvangt dan 50 procent korting!</p>
        
