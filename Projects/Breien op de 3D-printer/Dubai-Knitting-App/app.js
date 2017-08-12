@@ -11,6 +11,7 @@ var inrows;
 var institches;
 var inlayers;
 var windowscale;
+var language;
 
 
 var sliderStitches;
@@ -36,6 +37,7 @@ var manip;
 function setup() {
     var canvas = createCanvas(1150, 1150);
     canvas.parent("divcanvas");
+    language = "NL";
 
     windowscale = ((windowWidth - 100) / 2) / 1200;
     korting = 1;
@@ -136,6 +138,10 @@ function create() {
     issaved = false;
 }
 
+function showBigger() {
+    var bigger = document.getElementById("bigger");
+    bigger.className = "show";
+}
 function changePosx() {
     pos.x = parseInt(document.getElementById("inx").value);
     ischanged = true;
@@ -160,6 +166,9 @@ function changeCode() {
 }
 
 function changePrice() {
+    if (document.URL.indexOf(".en.html") > 0) {
+        language = "EN";
+    }
     if (institches > 0 && inrows > 0) {
         var price = 0;
         var mat = 0.01;
@@ -173,14 +182,22 @@ function changePrice() {
 
 
         document.getElementById("price").innerHTML = price.toFixed(2) + " euro."
-        if (document.getElementById("checkOphalen").checked) {
-            document.getElementById("postadres").required = false;
-            w3.addClass("#divpostadres", "hidden");
+        if (language == "NL") {
+            var ophalen = document.getElementById("checkOphalen");
+            if (ophalen != undefined && ophalen.checked) {
+                document.getElementById("postadres").required = false;
+                w3.addClass("#divpostadres", "hidden");
+            }
             document.getElementById("emailprice").value = price.toFixed(2) + " euro."
         } else {
             w3.removeClass("#divpostadres", "hidden");
             document.getElementById("postadres").required = true;
-            document.getElementById("emailprice").value = (price + 3.95).toFixed(2) + " euro."
+            if (language == "NL") {
+                document.getElementById("emailprice").value = (price + 3.95).toFixed(2) + " euro."
+            }
+            else {
+                document.getElementById("emailprice").value = (price + 7).toFixed(2) + " euro."
+            }
         }
     }
 

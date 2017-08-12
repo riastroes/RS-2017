@@ -31,9 +31,8 @@
 <script src="app.js" type="text/javascript"></script>
 <style>
 body{font-size:18px; font-family: "Raleway", sans-serif;}
-#header{ margin:0; background-image:url('Images/mask.jpg'); background-repeat:no-repeat;
-background-blend-mode:soft-light; background-size: 100%; height:300px ; 
-background-position-y :-150px; font-size:100px;  color:brown; font-weight:bold; text-align: center; 
+#header{ margin:0; background-image:url('images/mask.jpg'); background-repeat:no-repeat;background-size:100%;background-position-y:-100px;
+height:300px ; font-size:100px;  color:brown; font-weight:bold; text-align: center; 
 padding-top:100px}
 label{display:inline-block; width:200px;color:brown; font-weight:bold;}
 span.large{width:400px;}
@@ -48,9 +47,10 @@ button{background-color:brown;color:white}
 }
 .phone{color:brown;}
 .arti{font-family:cursive}
-a{color:red; font-weight:bold}
+a.facebook{color:red; font-weight:bold}
 .show {visibility:visible;}
 .hidden {visibility:hidden;}
+
 </style>
 </head>
 
@@ -59,7 +59,8 @@ a{color:red; font-weight:bold}
         DUBAI-KNITTING-APP
 
     </div>
-
+      
+    <a href="index.en.html" ><div><img src="/RS-2017/Images/en.png" alt="Engels" width="30px" style="vertical-align:middle; margin-right:10px; margin-left:10px" />English version</div></a>
     <div class="w3-row">
         <div class="w3-container w3-center w3-one">
             <h1>Ontwerp je eigen armband op mijn 3D-printer.<img src="/RS-2017/Images/Ria.jpg" style="width:50px" class="w3-round w3-right" alt="Ria Stroes" /></h1>
@@ -99,14 +100,14 @@ a{color:red; font-weight:bold}
           <option value="Anet">Nijemirdum (Friesland)- printer Anet</option>
           <option value="Ultimaker2+">Amsterdam (Makerversity) - printer Ultimaker2+</option>
        </select><br/>
-       <label>Kies materiaal:</label><span id="spnmaterial"></span><br/><br/>
+       <label>Kies materiaal:</label><span id="spnmaterial"></span><br/>
+       <p>ABS en PLA zijn sterke filementen (plastics), de andere materialen zijn breekbaarder, dus wees daar wel een beetje voorzichtig
+                mee.</p><br/>
     
-       <div id="bigger" class="show">
+       <div id="bigger" class="hidden">
         <label>schaal vergroten: </label><input id="sliderscale" type="range" min="1" max="3" value="1" step="0.1" onchange="changeScale();"/><span id="spinscale">1</span></br> 
         Je kunt de steken vergroten en verkleinen door de schaal aan te passen.</br>
-        <label class="small">Start positie x, y:  </label><input id="inx" type="text" size="5" value="6"  onchange="changePosx();">,
-        <input id="iny" type="text" size="5" value="2"  onchange="changePosy();">
-        <br/>
+        
         </div>
         Elk zwart ruitje van het raster is ongeveer 1 cm2.<br/>
       
@@ -115,9 +116,8 @@ a{color:red; font-weight:bold}
         
         
         <p>
-          Klik op groter, als je de steken groten wilt maken. <button onclick="showBigger()" value="groter"></button><br/>
-          <strong>Pas op!&nbsp;</strong>Alle zwarte lijnen moeten binnen de grijze rand getekend zijn. Je kunt het breiwerk verplaatsen door andere waarden voor het beginpunt (x, y) in te stellen.
-          Als het dan nog niet lukt om alle zwarte lijnen binnen de grijze rand te krijgen, moet je het aantal steken of het aantal pennen verminderen.
+          Klik op knop groter, als je de steken groten wilt maken. <button onclick="showBigger()">Groter</button><br/>
+          
         </p>
         <p>
         Op het breiwerk kun je met je muis punten aangeven waar je het breiwerk wilt manipuleren. Het regelmatige patroon van het breiwerk wordt dan verstoord door één van onderstaande functies. Probeer maar ...</p>
@@ -130,16 +130,18 @@ a{color:red; font-weight:bold}
           <option value="cos">Cosinus golf</option>
           <option value="vert">Verticale lijnen</option>
           <option value="hor">Horizontale lijnen</option>
-        </select> en klik daarna met je muis op het breiwerk.<br/>
+        </select>
 
             <div id="circlesinfunction" class="hidden">
                 <label>radius: </label><input id="sliderradiusin" type="range" min="2" max="250" value="100" step="1" onchange="changeRadiusIn();" /><span id="spinradiusin"></span></br>
                 <label>sterkte: </label><input id="sliderforcein" type="range" min="1" max="50" value="25" step="1" onchange="changeForceIn();" /><span id="spinforcein"></span></br>
+                <p>Klik op (of vlak naast) het breiwerk voor de positie van een circle. Je kunt meerdere circles plaatsen.</p>
                 <br/>
             </div>
             <div id="circlesoutfunction" class="hidden">
                 <label>radius: </label><input id="sliderradiusout" type="range" min="2" max="250" value="100" step="1" onchange="changeRadiusOut();" /><span id="spinradiusout"></span></br>
                 <label>sterkte: </label><input id="sliderforceout" type="range" min="1" max="50" value="25" step="1" onchange="changeForceOut();" /><span id="spinforceout"></span></br>
+                <p>Klik op (of vlak naast) het breiwerk voor de positie van een circle. Je kunt meerdere circles plaatsen.</p>
                 <br/>
             </div>
             <div id="cosfunction" class="hidden">
@@ -149,19 +151,39 @@ a{color:red; font-weight:bold}
             <div id="vertfunction" class="hidden">
                 <label>breedte: </label><input id="slidervert" type="range" min="1" max="20" value="8" step="1" onchange="changeVert();" /><span id="spinvert"></span></br>
                 <label>Toon verticaal:</label><input id="showpointdrawing" type="checkbox" checked></input>
-                <p class="waarschuwing">Klik (linker-muisknop) op het breiwerk, zo kun je bepalen waar de verticale veranderingen in het patroon moeten komen.</p>
+                <p class="waarschuwing">Klik op het breiwerk, zo kun je bepalen waar de verticale veranderingen in het patroon moeten komen.</p>
                 </br><br/>
             </div>
             <div id="horfunction" class="hidden">
                 <label>hoogte: </label><input id="sliderhor" type="range" min="1" max="20" value="8" step="1" onchange="changeHor();" /><span id="spinhor"></span></br>
-                <p class="waarschuwing">Klik (linker-muisknop) op het breiwerk, zo kun je bepalen waar de horizontale veranderingen in het patroon moeten komen.</p>
+                <p class="waarschuwing">Klik op het breiwerk, zo kun je bepalen waar de horizontale veranderingen in het patroon moeten komen.</p>
                 </br><br/>
             </div>
-            <p>Je kunt een kortingscode ontvangen als je mijn facebook pagina: <a href="http://www.facebook.com/Dubai-Knitting-App">www.facebook.com/Dubai-Knitting-App</a> deelt op facebook. Je ontvangt dan 50 procent korting!</p>
+            <p>Als je niet tevreden bent over het resultaat, kun je op de manipuleer functie: 'Geen' klikken en opnieuw beginnen.</p>
+           
+            <h3>Controleer je ontwerp</h3>
+            <br/>
+            <p>
+            Alle zwarte lijnen van het breiwerk moeten binnen de grijze rand getekend zijn. Je kunt het breiwerk verplaatsen door andere waarden voor het beginpunt (x, y) in te stellen.
+        Als het dan nog niet lukt om alle zwarte lijnen binnen de grijze rand te krijgen, moet je het aantal steken of het aantal pennen verminderen.<br/>
+        <label class="small">Start positie x, y:  </label><input id="inx" type="text" size="5" value="6"  onchange="changePosx();">,
+        <input id="iny" type="text" size="5" value="2"  onchange="changePosy();">
+        <br/>
+        </p>
+      <br/><br/>
+       <h3>3D-Printen</h3>
+        <br/>
+            <p>Je kun je eigen ontwerp downloaden naar mij toesturen. Ik zal je breiwerk printen op de 3D-printer en naar je terugsturen. </p>
+            <button id="btnSave" onclick="downloadKnitting();"><strong>D</strong>ownload Breiwerk (.gcode)</button>
+            <br/><br/>
+       <h3>Korting</h3>
+        <br/>
+            <p>Een 3D-print van jouw ontwerp kost: <span id="price">...</span> <br/> De verzendkosten zijn 3.95 euro in Nederland, maar je mag het ook ophalen.</p>
+            <p>Je kunt een kortingscode ontvangen als je mijn facebook pagina: <a class="facebook" href="http://www.facebook.com/Dubai-Knitting-App-473749346291811">www.facebook.com/Dubai-Knitting-App</a> DEELT op facebook. Je ontvangt dan 50 procent korting!</p>
 
             <label>KORTINGSCODE: </label><input id="incode" type="text" size="30" onchange="changeCode();" />
-            <p>Een 3D-print van jouw ontwerp kost: <span id="price">...</span> <br/> De verzendkosten zijn 3.95 euro in Nederland, maar je mag het ook ophalen.</p>
-            <button id="btnSave" onclick="downloadKnitting();"><strong>D</strong>ownload Breiwerk (.gcode)</button>
+            
+            
             <br/><br/><br/>
         </div>
         <div class="w3-container w3-half">
@@ -170,19 +192,13 @@ a{color:red; font-weight:bold}
             </div>
         </div>
 
-        <p>Je kunt een kortingscode ontvangen als je mijn facebook pagina: <a         href="http://www.facebook.com/Dubai-Knitting-App">www.facebook.com/Dubai-Knitting-App</a> deelt op facebook.
-          Je ontvangt dan 50 procent korting!</p>
-       
-        <label>KORTINGSCODE: </label><input id="incode" type="text" size="30" onchange="changeCode();" />
-        <p>Een 3D-print van jouw ontwerp kost: <span id="price">...</span> <br/>
-        De verzendkosten zijn 3.95 euro in Nederland, maar je mag het ook ophalen.</p>
-        <button id="btnSave" onclick="downloadKnitting();"><strong>D</strong>ownload Breiwerk (.gcode)</button>
-        <br/><br/><br/>
+        
     </div>
     <div class="w3-row">
         <div class="w3-half w3-container">
+           <h3>Bestelformulier </h3>
             <a id="email" />
-            <h3>Bestelformulier </h3>
+            
             <form method="post" action="mailto:riastroes@gmail.nl?subject=Ontwerp voor 3D-printer" enctype="text/plain">
                 <input id="hidgcode" type="hidden" name="gcode" value=""><br/>
                 <div class="w3-section">
@@ -194,7 +210,7 @@ a{color:red; font-weight:bold}
                     <input class="w3-input w3-border email" type="text" name="Email" required><br/>
                 </div>
                 <div class="w3-section">
-                    <span style="color:brown;">Ik kom mijn 3D PRINT zelf ophalen:<input id="checkOphalen" class="email" type="checkbox" name="ophalen" checked onchange="changePrice()"></span>
+                    <span style="color:brown;">Ik kom mijn 3D PRINT zelf ophalen:<input id="checkOphalen" class="email" type="checkbox" name="ophalen"  onchange="changePrice()"></span>
                 </div>
                 <div id="divpostadres" class="w3-section hidden">
                     <label>Postadres:</label>
