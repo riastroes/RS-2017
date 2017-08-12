@@ -2,55 +2,110 @@
 <html>
 
 <head>
-<title>Dubai-Knitting-App</title>
-<META NAME="COPYRIGHT" CONTENT="&copy; Ria Stroes">
-<META HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE">
+    <title>Dubai-Knitting-App</title>
+    <META NAME="COPYRIGHT" CONTENT="&copy; Ria Stroes">
+    <META HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE">
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
-<script src="/RS-2017/libraries/google.js" type="text/javascript"></script>
-<script src="/RS-2017/functions.js" type="text/javascript"></script>
-<script src="/RS-2017/libraries/p5.min.js" type="text/javascript"></script>
-<script src="/RS-2017/libraries/p5.dom.min.js" type="text/javascript"></script>
-<script src="https://www.w3schools.com/lib/w3.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+    <script src="/RS-2017/libraries/google.js" type="text/javascript"></script>
+    <script src="/RS-2017/functions.js" type="text/javascript"></script>
+    <script src="/RS-2017/libraries/p5.min.js" type="text/javascript"></script>
+    <script src="/RS-2017/libraries/p5.dom.min.js" type="text/javascript"></script>
+    <script src="https://www.w3schools.com/lib/w3.js"></script>
 
-<script src="settings.js" type="text/javascript"></script>
-<script src="gcode.js" type="text/javascript"></script>
+    <script src="settings.js" type="text/javascript"></script>
+    <script src="gcode.js" type="text/javascript"></script>
 
-<script src="layer.js" type="text/javascript"></script>
-<script src="skirt.js" type="text/javascript"></script>
-<script src="knitting.js" type="text/javascript"></script>
-<script src="pattern.js" type="text/javascript"></script>
-<script src="stitch.js" type="text/javascript"></script>
-<script src="pos.js" type="text/javascript"></script>
-<script src="grid.js" type="text/javascript"></script>
-<script src="knitgrid.js" type="text/javascript"></script>
-<script src="lapje.js" type="text/javascript"></script>
-<script src="app.js" type="text/javascript"></script>
-<style>
-body{font-size:18px; font-family: "Raleway", sans-serif;}
-#header{ margin:0; background-image:url('images/mask.jpg'); background-repeat:no-repeat;background-size:100%;background-position-y:-100px;
-height:300px ; font-size:100px;  color:brown; font-weight:bold; text-align: center; 
-padding-top:100px}
-label{display:inline-block; width:200px;color:brown; font-weight:bold;}
-span.large{width:400px;}
-
-.email{display:inline-block; width:400px;}
-.hidden{
-  display:none;
-}
-button{background-color:brown;color:white}
-.waarschuwing{color:red}
-.border{padding:10px; border-image:url('Images/mask.jpg')30 stretch ; border-style: solid; border-width: 10px;
-}
-.phone{color:brown;}
-.arti{font-family:cursive}
-a.facebook{color:red; font-weight:bold}
-.show {visibility:visible;}
-.hidden {visibility:hidden;}
-</style>
+    <script src="layer.js" type="text/javascript"></script>
+    <script src="skirt.js" type="text/javascript"></script>
+    <script src="knitting.js" type="text/javascript"></script>
+    <script src="pattern.js" type="text/javascript"></script>
+    <script src="stitch.js" type="text/javascript"></script>
+    <script src="pos.js" type="text/javascript"></script>
+    <script src="grid.js" type="text/javascript"></script>
+    <script src="knitgrid.js" type="text/javascript"></script>
+    <script src="lapje.js" type="text/javascript"></script>
+    <script src="app.js" type="text/javascript"></script>
+    <style>
+        body {
+            font-size: 18px;
+            font-family: "Raleway", sans-serif;
+        }
+        
+        #header {
+            margin: 0;
+            background-image: url('images/mask.jpg');
+            background-repeat: no-repeat;
+            background-size: 100%;
+            background-position-y: -100px;
+            height: 300px;
+            font-size: 100px;
+            color: brown;
+            font-weight: bold;
+            text-align: center;
+            padding-top: 100px
+        }
+        
+        label {
+            display: inline-block;
+            width: 200px;
+            color: brown;
+            font-weight: bold;
+        }
+        
+        span.large {
+            width: 400px;
+        }
+        
+        .email {
+            display: inline-block;
+            width: 400px;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        button {
+            background-color: brown;
+            color: white
+        }
+        
+        .waarschuwing {
+            color: red
+        }
+        
+        .border {
+            padding: 10px;
+            border-image: url('Images/mask.jpg')30 stretch;
+            border-style: solid;
+            border-width: 10px;
+        }
+        
+        .phone {
+            color: brown;
+        }
+        
+        .arti {
+            font-family: cursive
+        }
+        
+        a.facebook {
+            color: red;
+            font-weight: bold
+        }
+        
+        .show {
+            visibility: visible;
+        }
+        
+        .hidden {
+            visibility: hidden;
+        }
+    </style>
 </head>
 
 <body>
@@ -58,7 +113,10 @@ a.facebook{color:red; font-weight:bold}
         DUBAI-KNITTING-APP
 
     </div>
-    <a href="index.html" ><div><img src="/RS-2017/Images/nl.png" alt="Nederlands" width="30px" style="vertical-align:middle; margin-left:10px; margin-right:10px" />Nederlandse versie</div></a>
+    <a href="index.html">
+        <div><img src="/RS-2017/Images/nl.png" alt="Nederlands" width="30px" style="vertical-align:middle; margin-left:10px; margin-right:10px" />Nederlandse versie</div>
+    </a>
+
     <div class="w3-row">
         <div class="w3-container w3-center w3-one">
             <h1>Design your own bracelet on my 3D printer.<img src="/RS-2017/Images/Ria.jpg" style="width:50px" class="w3-round w3-right" alt="Ria Stroes" /></h1>
@@ -67,10 +125,13 @@ a.facebook{color:red; font-weight:bold}
     </div>
     <div class="w3-row">
         <div class="w3-container w3-half">
-            <p> Dubai is new, Dubai is different just like knitting on the 3D printer. Here you can design your own bracelet, if your design is ready, press the download button and send the .gcode file to me. I will print your knitting on the 3D printer and return the bracelet to you.
+            <p> Dubai is new, Dubai is different just like knitting on the 3D printer. Here you can design your own bracelet, if your design is ready, press the download button and send the .gcode file to me. I will print your knitting on the 3D printer and
+                return the bracelet to you.<br/> This app is not working on IPAD or MOBILE device.
             </p>
             <h3 class="arti">Recipe Bracelet</h3>
-            <p class="arti"> An example: Knit 6 stitches (wide) and 40 pins (high). <br/> You can disrupt the regular knitting pattern with the manipulation features. <br/> Download the .gcode file and don't forget to send the .gcode file as an attachment to your email. <br/> Pay the cost of your knitwear. <br/> If you have received the print at home, take a glass or cup of hot water, let the print slowly soften in the hot water and push the print against the inner edge of your cup or glass do not force anything if it does not get soft, then your water is not hot enough. Allow the print to cool with cold water. If the print is cold, it stays in the right shape and your bracelet is ready!
+            <p class="arti"> An example: Knit 6 stitches (wide) and 40 pins (high). <br/> You can disrupt the regular knitting pattern with the manipulation features. <br/> Download the .gcode file and don't forget to send the .gcode file as an attachment to your email.
+                <br/> Pay the cost of your knitwear. <br/> If you have received the print at home, take a glass or cup of hot water, let the print slowly soften in the hot water and push the print against the inner edge of your cup or glass do not force
+                anything if it does not get soft, then your water is not hot enough. Allow the print to cool with cold water. If the print is cold, it stays in the right shape and your bracelet is ready!
             </p>
         </div>
         <div class="w3-container w3-half">
@@ -95,29 +156,29 @@ a.facebook{color:red; font-weight:bold}
           <option value="Anet">Nijemirdum (Friesland)- printer Anet</option>
           <option value="Ultimaker2+">Amsterdam (Makerversity) - printer Ultimaker2+</option>
        </select><br/>
-       <label>Choose material:</label><span id="spnmaterial"></span><br/>
-       <p>ABS and PLA are strong filaments (plastics), the other materials are more fragile, so be careful.</p><br/>
-    
-       <div id="bigger" class="hidden">
-        <label>resize scale: </label><input id="sliderscale" type="range" min="1" max="3" value="1" step="0.1" onchange="changeScale();"/><span id="spinscale">1</span></br> 
-         You can increase and decrease the stitches by adjusting the scale.</br>
-        
-        </div>
-        Each black square of the grid is about 1 cm2.<br/>
-      
-        <label>Number of stitches: </label><input id="sliderstitches" type="range" min="2" max="40" value="10" step="1"  onchange="changeStitches();"/><span id="spinstitches"></span></br>
-        <label>Number of pins: </label><input  id="sliderrows" type="range" min="2" max="40" value="10" step="1"  onchange="changeRows();"/><span id="spinrows"></span></br>
-        
-        
-        <p>
-          Click bigger button to enlarge the stitches. <button onclick="showBigger()">Bigger</button><br/>
-          
-        </p>
-        <p>
-        On the knitwear you can use your mouse to indicate points where you want to manipulate the knitwork. The regular pattern of the knitting is then disturbed by one of the following functions. Just try ...</p>
-       
-        First select a <span style = "color: brown; font-weight: bold"> manipulate function </span>:
-        <select id="disorderfunctions" onchange="selectDisorderFunction();">
+            <label>Choose material:</label><span id="spnmaterial"></span><br/>
+            <p>ABS and PLA are strong filaments (plastics), the other materials are more fragile, so be careful.</p><br/>
+
+            <div id="bigger" class="hidden">
+                <label>resize scale: </label><input id="sliderscale" type="range" min="1" max="3" value="1" step="0.1" onchange="changeScale();" /><span id="spinscale">1</span></br>
+                You can increase and decrease the stitches by adjusting the scale.</br>
+
+            </div>
+            Each black square of the grid is about 1 cm2.<br/>
+
+            <label>Number of stitches: </label><input id="sliderstitches" type="range" min="2" max="40" value="10" step="1" onchange="changeStitches();" /><span id="spinstitches"></span></br>
+            <label>Number of pins: </label><input id="sliderrows" type="range" min="2" max="40" value="10" step="1" onchange="changeRows();" /><span id="spinrows"></span></br>
+
+
+            <p>
+                Click bigger button to enlarge the stitches. <button onclick="showBigger()">Bigger</button><br/>
+
+            </p>
+            <p>
+                On the knitwear you can use your mouse to indicate points where you want to manipulate the knitwork. The regular pattern of the knitting is then disturbed by one of the following functions. Just try ...</p>
+
+            First select a <span style="color: brown; font-weight: bold"> manipulate function </span>:
+            <select id="disorderfunctions" onchange="selectDisorderFunction();">
           <option value="none">None</option>
           <option value="circlesin">Circles inwards</option>
           <option value="circlesout">Circles outwards</option>
@@ -144,7 +205,7 @@ a.facebook{color:red; font-weight:bold}
             </div>
             <div id="vertfunction" class="hidden">
                 <label>width: </label><input id="slidervert" type="range" min="1" max="20" value="8" step="1" onchange="changeVert();" /><span id="spinvert"></span></br>
-               
+
                 <p class="waarschuwing">Click on the knitting, so you can decide where vertical changes should be in the pattern.</p>
                 </br><br/>
             </div>
@@ -154,30 +215,31 @@ a.facebook{color:red; font-weight:bold}
                 </br><br/>
             </div>
             <p>If you are not satisfied with the result, you can click on the manipulate function: 'None' and start again.</p>
-           
+
             <h3>Controleer je ontwerp</h3>
             <br/>
             <p>
-            All black lines of knitting should be drawn within the gray border. You can move the knitting by setting other values ​​for the starting point (x, y).
-        If it fails to get all black lines within the gray border, you need to reduce the number of stitches or the number of pins.<br/>
-        <label class="small">Start positie x, y:  </label><input id="inx" type="text" size="5" value="6"  onchange="changePosx();">,
-        <input id="iny" type="text" size="5" value="2"  onchange="changePosy();">
-        <br/>
-        </p>
-      <br/><br/>
-       <h3>3D-Printing</h3>
-        <br/>
+                All black lines of knitting should be drawn within the gray border. You can move the knitting by setting other values ​​for the starting point (x, y). If it fails to get all black lines within the gray border, you need to reduce the number of stitches
+                or the number of pins.<br/>
+                <label class="small">Start positie x, y:  </label><input id="inx" type="text" size="5" value="6" onchange="changePosx();">,
+                <input id="iny" type="text" size="5" value="2" onchange="changePosy();">
+                <br/>
+            </p>
+            <br/><br/>
+            <h3>3D-Printing</h3>
+            <br/>
             <p>You can send your own design download to me. I will print your knitting on the 3D printer and send you back. </p>
             <button id="btnSave" onclick="downloadKnitting();"><strong>D</strong>ownload Knitting Design (.gcode)</button>
             <br/><br/>
-       <h3>Sales</h3>
-        <br/>
-            <p>A 3D print of your design costs: <span id = "price"> ... </span> <br/> The shipping costs are 7 euros.</p>
-            <P> You can receive a discount code if you have my facebook page: <a  class="facebook"  href="http://www.facebook.com/Dubai-Knitting-App-473749346291811"> www.facebook.com/Dubai-Knitting-App </a> SHARE ON facebook. You will receive a 50% discount! </p>
+            <h3>Sales</h3>
+            <br/>
+            <p>A 3D print of your design costs: <span id="price"> ... </span> <br/> The shipping costs are 7 euros.</p>
+            <P> You can receive a discount code if you have my facebook page: <a class="facebook" href="http://www.facebook.com/Dubai-Knitting-App-473749346291811"> www.facebook.com/Dubai-Knitting-App </a> SHARE ON facebook. You will receive a 50% discount!
+            </p>
 
             <label>SALESCODE: </label><input id="incode" type="text" size="30" onchange="changeCode();" />
-            
-            
+
+
             <br/><br/><br/>
         </div>
         <div class="w3-container w3-half">
@@ -186,13 +248,13 @@ a.facebook{color:red; font-weight:bold}
             </div>
         </div>
 
-        
+
     </div>
     <div class="w3-row">
         <div class="w3-half w3-container">
-           <h3>Order form </h3>
+            <h3>Order form </h3>
             <a id="email" />
-            
+
             <form method="post" action="mailto:riastroes@gmail.nl?subject=Ontwerp voor 3D-printer" enctype="text/plain">
                 <input id="hidgcode" type="hidden" name="gcode" value=""><br/>
                 <div class="w3-section">
@@ -203,7 +265,7 @@ a.facebook{color:red; font-weight:bold}
                     <label>Email:</label>
                     <input class="w3-input w3-border email" type="text" name="Email" required><br/>
                 </div>
-               
+
                 <div id="divpostadres" class="w3-section ">
                     <label>Address:</label>
                     <input id="postadres" class="w3-input w3-border email" type="text" name="address"><br/>
@@ -226,15 +288,14 @@ a.facebook{color:red; font-weight:bold}
         </div>
         <div class="w3-half w3-container">
             <br/><br/><br/>
-            <P> This order form allows you to create an email. In your email application, you only need to add the design as an attachment. The attachment can be found in your download directory. If you can not find a .gcode file there, then
-                Your browser has blocked download, which you can see in your browser's navigation bar. </ P>
-            <P> Once I have received the order and payment, I will print your knitwear. </ P>
-            <Div class = "waarschuwing"> I do not accept liability if you print the generated file on another 3D PRINTER. </ Div>
-            <Div class = "waarschuwing"> If you are not satisfied with the result, send it back. You will then receive your money back. (Excl. Shipping costs) ABS and PLA are strong filaments (plastics), the other materials are fragile, so please be careful
-                Along.
-            </div>
+            <P> This order form allows you to create an email. In your email application, you only need to add the design as an attachment. The attachment can be found in your download directory. If you can not find a .gcode file there, then Your browser
+                has blocked download, which you can see in your browser's navigation bar. </ P>
+                <P> Once I have received the order and payment, I will print your knitwear. </ P>
+                    <Div class="waarschuwing"> I do not accept liability if you print the generated file on another 3D PRINTER. </ Div>
+                        <Div class="waarschuwing"> If you are not satisfied with the result, send it back. You will then receive your money back. (Excl. Shipping costs) ABS and PLA are strong filaments (plastics), the other materials are fragile, so please be careful Along.
+                        </div>
+                    </div>
         </div>
-    </div>
     </div>
     <br>
     </div>
