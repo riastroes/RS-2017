@@ -37,7 +37,11 @@ var manip;
 function setup() {
     var canvas = createCanvas(1150, 1150);
     canvas.parent("divcanvas");
-    language = "NL";
+    if (document.URL.indexOf(".en.html") > 0) {
+        language = "EN";
+    } else {
+        language = "NL";
+    }
 
     windowscale = ((windowWidth - 100) / 2) / 1200;
     korting = 1;
@@ -142,6 +146,7 @@ function showBigger() {
     var bigger = document.getElementById("bigger");
     bigger.className = "show";
 }
+
 function changePosx() {
     pos.x = parseInt(document.getElementById("inx").value);
     ischanged = true;
@@ -194,8 +199,7 @@ function changePrice() {
             document.getElementById("postadres").required = true;
             if (language == "NL") {
                 document.getElementById("emailprice").value = (price + 3.95).toFixed(2) + " euro."
-            }
-            else {
+            } else {
                 document.getElementById("emailprice").value = (price + 7).toFixed(2) + " euro."
             }
         }
@@ -268,13 +272,26 @@ function selectPrinter() {
     printer = document.getElementById("selectprinter").value
     var spn = document.getElementById("spnmaterial");
     spn.innerHTML = "";
+    var array1, array2;
     if (printer == "Anet") {
         //Create array of options to be added
-        var array1 = ["ABS", "SAT1N", "SAT2N", "SAT3N"];
-        var array2 = ["ABS neutraal/wit", "Satijn silver", "Satijn goud", "Satijn licht blauw"];
+
+        array1 = ["ABS", "SAT1N", "SAT2N", "SAT3N"];
+        if (language == "NL") {
+            array2 = ["ABS neutraal/wit", "Satijn silver", "Satijn goud", "Satijn licht blauw"];
+        } else {
+            array2 = ["ABS neutral/white", "Satin silver", "Satin gold", "Satin light blue"];
+
+        }
     } else if (printer == "Ultimaker2+") {
-        var array1 = ["PLA", "PLABRO"];
-        var array2 = ["PLA zwart", "PLA Brons(30%)"];
+        array1 = ["PLA", "PLABRO"];
+        if (language == "NL") {
+            array2 = ["PLA zwart", "PLA Brons(30%)"];
+        } else {
+            array2 = ["PLA black", "PLA Bronse(30%)"];
+
+        }
+
     }
 
     //Create and append select list

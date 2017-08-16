@@ -64,25 +64,25 @@ Shape.prototype.changeToRect = function(s) {
     }
 
 }
-Shape.prototype.draw = function() {
+Shape.prototype.draw = function(pg) {
     if (this.strokecolor == -1) {
-        noStroke();
+        pg.noStroke();
     } else {
-        stroke(this.strokecolor);
+        pg.stroke(this.strokecolor);
     }
     if (this.fillcolor == -1) {
-        noFill();
+        pg.noFill();
     } else {
-        fill(this.fillcolor);
+        pg.fill(this.fillcolor);
     }
-    strokeWeight(this.strokeweight);
+    pg.strokeWeight(this.strokeweight);
 
-    beginShape();
+    pg.beginShape();
 
     for (var i = 0; i < this.max; i++) {
-        vertex(this.p[i].x, this.p[i].y);
+        pg.vertex(this.p[i].x, this.p[i].y);
 
     }
-    endShape(CLOSE);
+    pg.endShape(CLOSE);
 
 }
