@@ -19,8 +19,9 @@ function preload() {
 
 function setup() {
     createCanvas(1500, 500, WEBGL);
-    pg = createGraphics(1500, 150);
-    pg.background(0, 0, 0)
+    pg = [];
+    pg[0] = createGraphics(1500, 150);
+    pg[0].background(0, 0, 0)
     grid = new Grid(10, 3);
     shape = new Shape(4);
     darkblue = color(0, 0, 20, 80);
@@ -38,22 +39,22 @@ function draw() {
 
     if (frameCount == 3) {
 
-        pg.fill(0, 0, 50);
-        pg.noStroke();
-        pg.rect(0, 30, 400, 90);
+        pg[0].fill(0, 0, 50);
+        pg[0].noStroke();
+        pg[0].rect(0, 30, 400, 90);
         //quad(800,0, 1100, 0, 850,150, 550,150);
     }
     if (frameCount == 2) {
-        pg.fill(darkblue);
-        pg.noStroke();
-        pg.rect(250, 30, 400, 90);
-        pg.quad(1300, 0, 1500, 0, 1250, 150, 1050, 150);
+        pg[0].fill(darkblue);
+        pg[0].noStroke();
+        pg[0].rect(250, 30, 400, 90);
+        pg[0].quad(1300, 0, 1500, 0, 1250, 150, 1050, 150);
     }
     if (frameCount == 3) {
-        pg.fill(0, 0, 50);
-        pg.noStroke();
+        pg[0].fill(0, 0, 50);
+        pg[0].noStroke();
         //rect(250,30,400,90);
-        pg.quad(1200, 0, 1400, 0, 1150, 150, 950, 150);
+        pg[0].quad(1200, 0, 1400, 0, 1150, 150, 950, 150);
     }
     if (frameCount <= 4) {
         //noLoop();
@@ -66,14 +67,14 @@ function draw() {
             shape.size(s, r);
             r = 1;
             shape.style(255, -1, 2);
-            shape.draw(pg);
+            shape.draw(pg[0]);
         }
     }
     //rotateZ(z);
     rotateY(y);
     //rotateX(x);
     specularMaterial(255);
-    texture(pg);
+    texture(pg[0]);
     plane(1500, 50);
     z += 0.01;
     y += 0.1;
