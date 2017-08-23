@@ -276,11 +276,11 @@ function selectPrinter() {
     if (printer == "Anet") {
         //Create array of options to be added
 
-        array1 = ["ABS", "SAT1N", "SAT2N", "SAT3N"];
+        array1 = ["PLA", "ABS", "SAT1N", "SAT2N", "SAT3N"];
         if (language == "NL") {
-            array2 = ["ABS neutraal/wit", "Satijn silver", "Satijn goud", "Satijn licht blauw"];
+            array2 = ["PLA wit", "ABS neutraal/wit", "Satijn silver", "Satijn goud", "Satijn licht blauw"];
         } else {
-            array2 = ["ABS neutral/white", "Satin silver", "Satin gold", "Satin light blue"];
+            array2 = ["PLA white", "ABS neutral/white", "Satin silver", "Satin gold", "Satin light blue"];
 
         }
     } else if (printer == "Ultimaker2+") {
