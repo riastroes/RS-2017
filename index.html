@@ -11,67 +11,81 @@
 <script src="libraries/google.js" type="text/javascript"></script>
 <script src="functions.js" type="text/javascript"></script>
 <style>
-body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif;}
-.cardtext {height:150px;}
-.link{color:cadetblue}
-
+    body,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        font-family: "Raleway", sans-serif;
+    }
+    
+    .cardtext {
+        height: 150px;
+    }
+    
+    .link {
+        color: cadetblue
+    }
 </style>
+
 <body class="w3-light-grey w3-content" style="max-width:1600px">
 
-<!-- Sidebar/menu -->
-<nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px;" id="mySidebar"><br>
-  <div class="w3-container">
-    <a href="#" onclick="w3_close()" class="w3-hide-large w3-right w3-jumbo w3-padding w3-hover-grey" title="close menu">
-      <i class="fa fa-remove"></i>
-    </a>
-    <img src="Images/Ria.jpg" style="width:45%;" class="w3-round"><br><br>
-    <h4><b>Ria Stroes</b></h4>
-    <p class="w3-text-grey">Creative Coder, Kunstenaar</p>
-  </div>
-  <div class="w3-bar-block">
-    <a href="#projecten" onclick="w3_close()" class="w3-bar-item w3-button w3-padding w3-text-teal"><i class="fa fa-th-large fa-fw w3-margin-right"></i>PROJECTEN</a>
-    <a href="/RS-2017/Photos/index.html" onclick="w3_close()" class="w3-bar-item w3-button w3-padding w3-text-teal"><i class="fa fa-th-large fa-fw w3-margin-right"></i>FOTO series</a>
-    <a href="https://www.riastroes.nl/CCC" onclick="w3_close()" class="w3-bar-item w3-button w3-padding w3-text-teal"><i class="fa fa-th-large fa-fw w3-margin-right"></i>CURSUS CREATIVE CODING</a>
-    <a href="#overmij" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-user fa-fw w3-margin-right"></i>OVER MIJ</a>
-    <a href="#contact" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-envelope fa-fw w3-margin-right"></i>CONTACT</a>
-  </div>
-  <div class="w3-panel w3-large">
-    <a href="https://www.facebook.com/ria.stroes"><i class="fa fa-facebook-official w3-hover-opacity"></i></a>
-    <a href="https://www.riastroes.tumblr.com"><i class="fa fa-tumblr w3-hover-opacity"></i></a>
-    <a href="https://www.instagram.com/riastroes"><i class="fa fa-instagram w3-hover-opacity"></i></a>
-    <a href="https://nl.pinterest.com/riastroes"><i class="fa fa-pinterest-p w3-hover-opacity"></i></a>
-    <a href="https://www.linkedin.com/in/ria-stroes-13648b127/"><i class="fa fa-linkedin w3-hover-opacity"></i></a>
-  </div>
-</nav>
+    <!-- Sidebar/menu -->
+    <nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px;" id="mySidebar"><br>
+        <div class="w3-container">
+            <a href="#" onclick="w3_close()" class="w3-hide-large w3-right w3-jumbo w3-padding w3-hover-grey" title="close menu">
+                <i class="fa fa-remove"></i>
+            </a>
+            <img src="Images/Ria.jpg" style="width:45%;" class="w3-round"><br><br>
+            <h4><b>Ria Stroes</b></h4>
+            <p class="w3-text-grey">Creative Coder, Kunstenaar</p>
+        </div>
+        <div class="w3-bar-block">
+            <a href="#projecten" onclick="w3_close()" class="w3-bar-item w3-button w3-padding w3-text-teal"><i class="fa fa-th-large fa-fw w3-margin-right"></i>PROJECTEN</a>
+            <a href="/RS-2017/Photos/index.html" onclick="w3_close()" class="w3-bar-item w3-button w3-padding w3-text-teal"><i class="fa fa-th-large fa-fw w3-margin-right"></i>FOTO series</a>
+            <a href="https://www.riastroes.nl/CCC" onclick="w3_close()" class="w3-bar-item w3-button w3-padding w3-text-teal"><i class="fa fa-th-large fa-fw w3-margin-right"></i>CURSUS CREATIVE CODING</a>
+            <a href="#overmij" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-user fa-fw w3-margin-right"></i>OVER MIJ</a>
+            <a href="#contact" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-envelope fa-fw w3-margin-right"></i>CONTACT</a>
+        </div>
+        <div class="w3-panel w3-large">
+            <a href="https://www.facebook.com/ria.stroes"><i class="fa fa-facebook-official w3-hover-opacity"></i></a>
+            <a href="https://www.riastroes.tumblr.com"><i class="fa fa-tumblr w3-hover-opacity"></i></a>
+            <a href="https://www.instagram.com/riastroes"><i class="fa fa-instagram w3-hover-opacity"></i></a>
+            <a href="https://nl.pinterest.com/riastroes"><i class="fa fa-pinterest-p w3-hover-opacity"></i></a>
+            <a href="https://www.linkedin.com/in/ria-stroes-13648b127/"><i class="fa fa-linkedin w3-hover-opacity"></i></a>
+        </div>
+    </nav>
 
-<!-- Overlay effect when opening sidebar on small screens -->
-<div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+    <!-- Overlay effect when opening sidebar on small screens -->
+    <div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
 
-<!-- !PAGE CONTENT! -->
-<div class="w3-main" style="margin-left:300px">
+    <!-- !PAGE CONTENT! -->
+    <div class="w3-main" style="margin-left:300px">
 
-  <!-- Header -->
- 
-  <header id="projecten">
-    <a href="#overmij"><img src="Images/Ria.jpg" style="width:65px;" class="w3-circle w3-right w3-margin w3-hide-large w3-hover-opacity"></a>
-    <span class="w3-button w3-hide-large w3-xxlarge w3-hover-text-grey" onclick="w3_open()"><i class="fa fa-bars"></i></span>
-    <div class="w3-container">
-    <h1><b>Projecten</b></h1>
-    <div class="w3-section w3-bottombar w3-padding-16">
-      <span class="w3-margin-right w3-hide-small">Filter:</span>
-      <button class="w3-button w3-black w3-hide-small" onclick="setFilter('all')">ALL</button>
-      <button class="w3-button w3-white w3-hide-small" onclick="setFilter('3D-printer')">3D-printer</button>
-      <button class="w3-button w3-white w3-hide-small" onclick="setFilter('code')">Code</button>
-      <button class="w3-button w3-white w3-hide-small" onclick="setFilter('animatie')">Animatie</button>
-      <button class="w3-button w3-white w3-hide-small" onclick="setFilter('diversen')">Diversen</button>
-   </div>
-    </div>
-  </header>
+        <!-- Header -->
 
-  <!-- First Photo Grid-->
-  
-  
-    <!-- 
+        <header id="projecten">
+            <a href="#overmij"><img src="Images/Ria.jpg" style="width:65px;" class="w3-circle w3-right w3-margin w3-hide-large w3-hover-opacity"></a>
+            <span class="w3-button w3-hide-large w3-xxlarge w3-hover-text-grey" onclick="w3_open()"><i class="fa fa-bars"></i></span>
+            <div class="w3-container">
+                <h1><b>Projecten</b></h1>
+                <div class="w3-section w3-bottombar w3-padding-16">
+                    <span class="w3-margin-right w3-hide-small">Filter:</span>
+                    <button class="w3-button w3-black w3-hide-small" onclick="setFilter('all')">ALL</button>
+                    <button class="w3-button w3-white w3-hide-small" onclick="setFilter('3D-printer')">3D-printer</button>
+                    <button class="w3-button w3-white w3-hide-small" onclick="setFilter('code')">Code</button>
+                    <button class="w3-button w3-white w3-hide-small" onclick="setFilter('animatie')">Animatie</button>
+                    <button class="w3-button w3-white w3-hide-small" onclick="setFilter('diversen')">Diversen</button>
+                </div>
+            </div>
+        </header>
+
+        <!-- First Photo Grid-->
+
+
+        <!-- 
     // Dansende duinen heeft HTTPS nodig, anders mag je de microfoon niet gebruiken.
 
     <div class="w3-third w3-container w3-margin-bottom card w3-white code animatie" onclick="show('Dansende Duinen')">
@@ -138,266 +152,281 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif;}
       </div>
     </div>
  -->
-   <div class="w3-third w3-container w3-margin-bottom card w3-white 3D-printer code app" onclick="show('Breien op de 3D-printer/Dubai-Knitting-app')">
-      <img src="Images/knittingapp.jpg" alt="Hanger" style="width:100%" class="w3-hover-opacity">
-      <div class="w3-container cardtext">
-        <p><b>Dubai-Knitting-App</b></p>
-        <p class="cardtext">Design your onw bracelet on my 3D-printer.
-          <br/> <span class="link">Go to app ...</span><br/><img src="Images/nl.png" alt="Nederlands" width="30px" />&nbsp;<img src="Images/en.png" alt="Engels" width="30px" /></p>
-      </div>
-    </div>
-  
-   <div class="w3-third w3-container w3-margin-bottom card w3-white 3D-printer" onclick="show('Breien op de 3D-printer/Armbanden')">
-      <img src="Images/armband.jpg" alt="Armband" style="width:100%" class="w3-hover-opacity">
-      <div class="w3-container cardtext">
-         <p><b>Collectie Armbanden</b></p>
-        <p class="cardtext">Armbanden 'gebreid' op de 3D-printer.
-          <br/> <span class="link">Bekijk project ...</span></p>
-        
-      </div>
-    </div>
-      <div class="w3-third w3-container w3-margin-bottom card w3-white 3D-printer" onclick="show('Breien op de 3D-printer/Hangers-wit')">
-      <img src="Images/hanger-wit.jpg" alt="Hangers" style="width:100%" class="w3-hover-opacity">
-      <div class="w3-container cardtext">
-        <p><b>Hangers</b></p>
-        <p class="cardtext">De hangers zijn geprint in een breimotief. Je kunt ze aan de hals van een T-shirt of jurk hangen. 
-          <br/> <span class="link">Bekijk project ...</span></p>
-      </div>
-    </div>
-    <div class="w3-third w3-container w3-margin-bottom card w3-white 3D-printer" onclick="show('Breien op de 3D-printer/vaas met bloemen')">
-      <img src="Images/vaas met bloemen.jpg" alt="Vaas met bloemen" style="width:100%" class="w3-hover-opacity">
-      <div class="w3-container cardtext">
-        <p><b>Vaas met Bloemen</b></p>
-        <p class="cardtext">De vaas en de bloemen zijn 'gebreid' op de 3D-printer. 
-          <br/> <span class="link">Bekijk project ...</span></p>
-      </div>
-    </div>
-    <div class="w3-third w3-container w3-margin-bottom card w3-white code" onclick="show('Voor Tycho')">
-      <img src="Images/Eagle-eye.jpg" alt="Armband" style="width:100%" class="w3-hover-opacity">
-      <div class="w3-container cardtext">
-         <p><b>Eagle-eye</b></p>
-        <p class="cardtext">Gegenereerde posters gemaakt voor en met Tycho Tigchelaar.
-          <br/> <span class="link">Bekijk project ...</span></p>
-        
-      </div>
-    </div>
-  <div class="w3-third w3-container w3-margin-bottom card w3-white foto code" onclick="show('Time Off')">
-      <img src="Images/time off.png" alt="Time Off" style="width:100%" class="w3-hover-opacity">
-      <div class="w3-container cardtext">
-         <p><b>Time Off</b></p>
-        <p class="cardtext">'Time Off' is gemaakt in opdracht van Compano BV.
-          <br/> <span class="link">Bekijk project ...</span></p>
-        
-      </div>
-    </div>
-   <div class="w3-third w3-container w3-margin-bottom card w3-white code animatie" onclick="show('Dans/Dansende Duinen')">
-      <img src="Images/dansende duinen.png" alt="Hanger" style="width:100%" class="w3-hover-opacity">
-      <div class="w3-container cardtext">
-         <p><b>Dansende Duinen</b></p>
-        <p class="cardtext">'Dansende Duinen' is een animatie, die gebruik maakt van de microfoon in je browser.
-          <br/> <span class="link">Bekijk project ...</span></p>
-        
-      </div>
-    </div>
+        <div class="w3-third w3-container w3-margin-bottom card w3-white 3D-printer code app" onclick="show('Breien op de 3D-printer/Tasjes')">
+            <img src="Images/tasje001.jpg" alt="Tasje" style="width:100%" class="w3-hover-opacity">
+            <div class="w3-container cardtext">
+                <p><b>Collectie Tasjes</b></p>
+                <p class="cardtext">3D-gebreide Tasjes
+                    <br/> <span class="link">Go to app ...</span></p>
+            </div>
+        </div>
 
-  <div class="w3-third w3-container w3-margin-bottom card w3-white code" onclick="show('CCD/Dreaming')">
-      <img src="Images/lsd.png" alt="Hanger" style="width:100%" class="w3-hover-opacity">
-      <div class="w3-container cardtext">
-        <p><b>Dreaming</b></p>'Dreaming' is gemaakt tijdens de Creative Coding Days in Paderborn.
-          <br/> <span class="link">Bekijk project ...</span></p>
-      </div>
-    </div>
+        <div class="w3-third w3-container w3-margin-bottom card w3-white 3D-printer code app" onclick="show('Patterns')">
+            <img src="Images/pattern.jpg" alt="Hanger" style="width:100%" class="w3-hover-opacity">
+            <div class="w3-container cardtext">
+                <p><b>Pattronen</b></p>
+                <p class="cardtext">Lijn patronen
+                    <br/> <span class="link">Go to app ...</span><br/></p>
+            </div>
+        </div>
 
-     <div class="w3-third w3-container w3-margin-bottom card w3-white code" onclick="show('CCD/CreateAStory')">
-      <img src="Images/sea-octopus-mushroom.jpg" alt="Hanger" style="width:100%" class="w3-hover-opacity">
-      <div class="w3-container cardtext">
-        <p><b>Create a Story</b></p>
-        <p class="cardtext">Combineer 3 afbeelding en maak een verhaal. "Create a Story" is gemaakt tijdens de Creative Coding Days in Paderborn.
-          <br/> <span class="link">Bekijk project ...</span></p>
-      </div>
-    </div>
-    
- 
-  
-    <div class="w3-third w3-container w3-margin-bottom card w3-white code" onclick="show('ComputerBirds')">
-      <img src="Images/computerbirds.jpg" alt="ComputerBirds" style="width:100%" class="w3-hover-opacity">
-      <div class="w3-container cardtext">
-        <p><b>ComputerBirds</b></p>
-        <p class="cardtext">Een behang en een dubbel-print voor Compano BV.<br/>
-        Techniek: Processing (Java)
-         <br/> <span class="link">Bekijk project ...</span></p>
-      </div>
-    </div>
-    <div class="w3-third w3-container w3-margin-bottom card w3-white code" onclick="show('TotemFlowers')">
-      <img src="Images/totemflowers.jpg" alt="ComputerBirds" style="width:100%" class="w3-hover-opacity">
-      <div class="w3-container cardtext">
-        <p><b>TotemFlowers</b></p>
-        <p class="cardtext">Digitale Print (160x120 cm), 2017, Compano BV<br/>
-        Techniek: Javascript
-        <br/> <span class="link">Bekijk project ...</span></p>
-        
-      </div>
-    </div>
-    <div class="w3-third w3-container w3-margin-bottom card w3-white diversen" onclick="show('Lucas')">
-      <img src="Images/lucas.jpg" alt="Lucas" style="width:100%" class="w3-hover-opacity">
-      <div class="w3-container cardtext">
-        <p><b>Waar is Lucas?</b></p>
-        <p class="cardtext">Lucas is een jaar geleden verdwenen ..
-         <br/> <span class="link">Bekijk project ...</span>
-        </p>
-        
-      </div>
-    </div>
-    <div class="w3-third w3-container w3-margin-bottom card w3-white code animatie" onclick="show('Bugs')">
-      <img src="Images/bugs.jpg" alt="Bugs" style="width:100%" class="w3-hover-opacity">
-      <div class="w3-container cardtext">
-        <p><b>Bugs</b></p>
-        <p class="cardtext">Graveerplaat (60x60 cm), 2017, Compano BV.
-          In dit project is ook de interactieve animatie te zien van BUGS.
-          <br/> <span class="link">Bekijk project ...</span>
-        </p>
-        
-      </div>
-    </div>
+        <div class="w3-third w3-container w3-margin-bottom card w3-white 3D-printer code app" onclick="show('Breien op de 3D-printer/Dubai-Knitting-app')">
+            <img src="Images/knittingapp.jpg" alt="Hanger" style="width:100%" class="w3-hover-opacity">
+            <div class="w3-container cardtext">
+                <p><b>Dubai-Knitting-App</b></p>
+                <p class="cardtext">Design your onw bracelet on my 3D-printer.
+                    <br/> <span class="link">Go to app ...</span><br/><img src="Images/nl.png" alt="Nederlands" width="30px" />&nbsp;<img src="Images/en.png" alt="Engels" width="30px" /></p>
+            </div>
+        </div>
+
+        <div class="w3-third w3-container w3-margin-bottom card w3-white 3D-printer" onclick="show('Breien op de 3D-printer/Armbanden')">
+            <img src="Images/armband.jpg" alt="Armband" style="width:100%" class="w3-hover-opacity">
+            <div class="w3-container cardtext">
+                <p><b>Collectie Armbanden</b></p>
+                <p class="cardtext">Armbanden 'gebreid' op de 3D-printer.
+                    <br/> <span class="link">Bekijk project ...</span></p>
+
+            </div>
+        </div>
+        <div class="w3-third w3-container w3-margin-bottom card w3-white 3D-printer" onclick="show('Breien op de 3D-printer/Hangers-wit')">
+            <img src="Images/hanger-wit.jpg" alt="Hangers" style="width:100%" class="w3-hover-opacity">
+            <div class="w3-container cardtext">
+                <p><b>Hangers</b></p>
+                <p class="cardtext">De hangers zijn geprint in een breimotief. Je kunt ze aan de hals van een T-shirt of jurk hangen.
+                    <br/> <span class="link">Bekijk project ...</span></p>
+            </div>
+        </div>
+        <div class="w3-third w3-container w3-margin-bottom card w3-white 3D-printer" onclick="show('Breien op de 3D-printer/vaas met bloemen')">
+            <img src="Images/vaas met bloemen.jpg" alt="Vaas met bloemen" style="width:100%" class="w3-hover-opacity">
+            <div class="w3-container cardtext">
+                <p><b>Vaas met Bloemen</b></p>
+                <p class="cardtext">De vaas en de bloemen zijn 'gebreid' op de 3D-printer.
+                    <br/> <span class="link">Bekijk project ...</span></p>
+            </div>
+        </div>
+        <div class="w3-third w3-container w3-margin-bottom card w3-white code" onclick="show('Voor Tycho')">
+            <img src="Images/Eagle-eye.jpg" alt="Armband" style="width:100%" class="w3-hover-opacity">
+            <div class="w3-container cardtext">
+                <p><b>Eagle-eye</b></p>
+                <p class="cardtext">Gegenereerde posters gemaakt voor en met Tycho Tigchelaar.
+                    <br/> <span class="link">Bekijk project ...</span></p>
+
+            </div>
+        </div>
+        <div class="w3-third w3-container w3-margin-bottom card w3-white foto code" onclick="show('Time Off')">
+            <img src="Images/time off.png" alt="Time Off" style="width:100%" class="w3-hover-opacity">
+            <div class="w3-container cardtext">
+                <p><b>Time Off</b></p>
+                <p class="cardtext">'Time Off' is gemaakt in opdracht van Compano BV.
+                    <br/> <span class="link">Bekijk project ...</span></p>
+
+            </div>
+        </div>
+        <div class="w3-third w3-container w3-margin-bottom card w3-white code animatie" onclick="show('Dans/Dansende Duinen')">
+            <img src="Images/dansende duinen.png" alt="Hanger" style="width:100%" class="w3-hover-opacity">
+            <div class="w3-container cardtext">
+                <p><b>Dansende Duinen</b></p>
+                <p class="cardtext">'Dansende Duinen' is een animatie, die gebruik maakt van de microfoon in je browser.
+                    <br/> <span class="link">Bekijk project ...</span></p>
+
+            </div>
+        </div>
+
+        <div class="w3-third w3-container w3-margin-bottom card w3-white code" onclick="show('CCD/Dreaming')">
+            <img src="Images/lsd.png" alt="Hanger" style="width:100%" class="w3-hover-opacity">
+            <div class="w3-container cardtext">
+                <p><b>Dreaming</b></p>'Dreaming' is gemaakt tijdens de Creative Coding Days in Paderborn.
+                <br/> <span class="link">Bekijk project ...</span></p>
+            </div>
+        </div>
+
+        <div class="w3-third w3-container w3-margin-bottom card w3-white code" onclick="show('CCD/CreateAStory')">
+            <img src="Images/sea-octopus-mushroom.jpg" alt="Hanger" style="width:100%" class="w3-hover-opacity">
+            <div class="w3-container cardtext">
+                <p><b>Create a Story</b></p>
+                <p class="cardtext">Combineer 3 afbeelding en maak een verhaal. "Create a Story" is gemaakt tijdens de Creative Coding Days in Paderborn.
+                    <br/> <span class="link">Bekijk project ...</span></p>
+            </div>
+        </div>
 
 
-  <!-- Pagination -->
- 
 
-  <!-- Images of Me -->
-  <div class="w3-row w3-container" id="overmij">
-    <div class="w3-third">
-      <img src="Images/Ria.jpg" alt="Ria Stroes" style="width:100%">
-    </div>
-    <div class="w3-third">
-      <h3>Bekijk ook mijn andere websites:</h3>
-      <ul class="w3-list">
-        <li><a href="http://www.riastroes.nl/CCC" class="w3-bar-item w3-button">Creative Coding Course</a></li>
-        <li><a href="http://www.riastroes.nl/RS-Website" class="w3-bar-item w3-button w3-hover-black">Website II 2016</a></li>
-        <li><a href="http://www.riastroes.nl/2016" class="w3-bar-item w3-button w3-hover-black">Website I 2016</a></li>
-        <li><a href="http://www.riastroes.nl/2015" class="w3-bar-item w3-button w3-hover-black">Website 2015</a></li>
-      <li><a href="http://www.riastroes.nl/2013/index2.html" class="w3-bar-item w3-button w3-hover-black">Website 2013</a></li>
-      </ul>
-    </div>
-    <div class="w3-third">
-      <img src="Images/Ria1.jpg" alt="Ria Stroes" style="width:100%">
-    </div>
-  </div>
+        <div class="w3-third w3-container w3-margin-bottom card w3-white code" onclick="show('ComputerBirds')">
+            <img src="Images/computerbirds.jpg" alt="ComputerBirds" style="width:100%" class="w3-hover-opacity">
+            <div class="w3-container cardtext">
+                <p><b>ComputerBirds</b></p>
+                <p class="cardtext">Een behang en een dubbel-print voor Compano BV.<br/> Techniek: Processing (Java)
+                    <br/> <span class="link">Bekijk project ...</span></p>
+            </div>
+        </div>
+        <div class="w3-third w3-container w3-margin-bottom card w3-white code" onclick="show('TotemFlowers')">
+            <img src="Images/totemflowers.jpg" alt="ComputerBirds" style="width:100%" class="w3-hover-opacity">
+            <div class="w3-container cardtext">
+                <p><b>TotemFlowers</b></p>
+                <p class="cardtext">Digitale Print (160x120 cm), 2017, Compano BV<br/> Techniek: Javascript
+                    <br/> <span class="link">Bekijk project ...</span></p>
 
-  <div class="w3-container w3-padding-large" style="margin-bottom:32px">
-    <h4><b>OVER MIJ</b></h4>
-    <p>Na 15 jaar werk als ICT manager / CEO in Compano, heb ik  een fantastisch jaar in 2013  gehad op de kunstacademie in Groningen. Daar ontdekte ik dat de wereld tussen ICT en kunst, mijn wereld was. Sinds dien ben ik bezig met Creative Coding.
-Op Makerversity in Amsterdam heb ik voor twee dagen in de week een werkplek gevonden, die aansluit op mijn behoefte om in contact te komen met andere mensen. Collega makers, die creatief en gepassioneerd bezig zijn op een professionele manier en daarnaast bied Makerversity de mogelijkheid om in contact te komen met professionals in de markt.
-Op Makerversity vind ik niet alleen een creatieve omgeving van makers, maar ook bieden ze hier de mogelijkheid aan om gebruik te maken van allerlei machines, zoals 3D printers, Lasercutters, Vinyl-snijders, industriële naaimachines, foto-studio en nog veel meer...
-Op vrijdag werk ik samen met Jori Stoop aan diverse projecten.</p>
-    <hr>
-    hier is een link naar <a href="www.atelierjori.jimdo.com">de website van Jori Stoop</a>. Deze site is zeker de moeite waard om goed te bekijken! Er valt heel veel te ontdekken.
-  </div>
+            </div>
+        </div>
+        <div class="w3-third w3-container w3-margin-bottom card w3-white diversen" onclick="show('Lucas')">
+            <img src="Images/lucas.jpg" alt="Lucas" style="width:100%" class="w3-hover-opacity">
+            <div class="w3-container cardtext">
+                <p><b>Waar is Lucas?</b></p>
+                <p class="cardtext">Lucas is een jaar geleden verdwenen ..
+                    <br/> <span class="link">Bekijk project ...</span>
+                </p>
 
-    <div class="w3-container w3-padding-large" style="margin-bottom:32px">
-    <h4>OPDRACHTEN</h4>
-    <!-- Pricing Tables -->
-    <div class="w3-row-padding" style="margin:0 -16px">
-      <div class="w3-third w3-margin-bottom">
-        <ul class="w3-ul w3-border w3-white w3-center w3-opacity w3-hover-opacity-off">
-          <li>Samenwerking met andere kunstenaars</li>
-          <li>Grafisch werk: prints van digitale grafische beelden</li>
-          <li>Computer Animaties, voor websites</li>
-          <li>Ontwerp stoffen</li>
-          <li>Sieraden</li>
-          <li>Cursus Creative Coding</li>
-          <li>Workshop Creative Coding</li>
-        </ul>
-      </div>
-  </div>
+            </div>
+        </div>
+        <div class="w3-third w3-container w3-margin-bottom card w3-white code animatie" onclick="show('Bugs')">
+            <img src="Images/bugs.jpg" alt="Bugs" style="width:100%" class="w3-hover-opacity">
+            <div class="w3-container cardtext">
+                <p><b>Bugs</b></p>
+                <p class="cardtext">Graveerplaat (60x60 cm), 2017, Compano BV. In dit project is ook de interactieve animatie te zien van BUGS.
+                    <br/> <span class="link">Bekijk project ...</span>
+                </p>
 
-  <!-- Contact Section -->
-  <div class="w3-container w3-padding-large w3-grey">
-    <h4 id="contact"><b>Contact</b></h4>
-    <div class="w3-row-padding w3-center w3-padding-24" style="margin:0 -16px">
-      <div class="w3-third w3-dark-grey">
-        <p><i class="fa fa-envelope w3-xxlarge w3-text-light-grey"></i></p>
-        <p>riastroes@gmail.com</p>
-      </div>
-      <div class="w3-third w3-teal">
-        <p><i class="fa fa-map-marker w3-xxlarge w3-text-light-grey"></i></p>
-        <p><a href="http://maps.google.com/?q=De Hege Bouwen 37, 8566 JB, Nijemirdum">De Hege Bouwen 37, Nijemirdum</a></p>
-      </div>
-      <div class="w3-third w3-dark-grey">
-        <p><i class="fa fa-phone w3-xxlarge w3-text-light-grey"></i></p>
-        <p>0514 785172 of 06 13448618
-        </p>
-      </div>
-    </div>
-    <hr class="w3-opacity">
-    <form method="post" action="mailto:riastroes@gmail.nl" enctype="text/plain">
-      <div class="w3-section">
-        <label>Naam</label>
-        <input class="w3-input w3-border" type="text" name="Name" required><br/>
-      </div>
-      <div class="w3-section">
-        <label>Email</label>
-        <input class="w3-input w3-border" type="text" name="Email" required><br/>
-      </div>
-      <div class="w3-section">
-        <label>Vraag of Opmerking</label>
-        <input class="w3-input w3-border" type="text" name="Reactie" required>
-      </div>
-      <button type="submit" class="w3-button w3-black w3-margin-bottom"><i class="fa fa-paper-plane w3-margin-right"></i>Verstuur bericht</button>
-    </form>
-  </div>
+            </div>
+        </div>
 
-  <!-- Footer -->
-  <footer class="w3-container w3-padding-32 w3-dark-grey">
-  <div class="w3-row-padding">
-    <div class="w3-third">
-      <h3>Ik hou van </h3>
-      <p> Programmeren, Maken, Vorm geven, Bedenken, Ontwikkelen,Verf, Papier, Fotograferen, Schilderen, Tekenen, Techniek en nog veel meer... </p>
-      <h3>Ik ben </h3>
-      <p> Nieuwsgierig, leergierig, onderzoekend, enthousiast, creatief, een genieter, ... </p>
-    </div>
 
-    <div class="w3-third">
-      <h3>MEER LEZEN ...</h3>
-      <ul class="w3-ul w3-hoverable">
-        <li class="w3-padding-16" onclick="show('Breien op de 3D-printer');" >
-          <span class="w3-large"><i class="material-icons w3-margin-right"  style="font-size:18px;">devices</i>Breien op de 3D-printer</span><br>
-          <span>Het verhaal van één draad...</span>
-        </li>
+        <!-- Pagination -->
 
-      </ul>
-    </div>
 
-    <div class="w3-third">
-      <h3>POPULAIRE TAGS</h3>
-      <p>
-        <span class="w3-tag w3-black w3-margin-bottom">P5</span> <span class="w3-tag w3-grey w3-small w3-margin-bottom">Processing</span> <span class="w3-tag w3-grey w3-small w3-margin-bottom">Javascript</span>
-        <span class="w3-tag w3-grey w3-small w3-margin-bottom">Web Design</span> <span class="w3-tag w3-grey w3-small w3-margin-bottom">Papier Maché</span> <span class="w3-tag w3-grey w3-small w3-margin-bottom">IOT</span>
-        <span class="w3-tag w3-grey w3-small w3-margin-bottom">Digitaal Schilderen</span> <span class="w3-tag w3-grey w3-small w3-margin-bottom">3D-Printer</span> <span class="w3-tag w3-grey w3-small w3-margin-bottom">Filament</span>
-        <span class="w3-tag w3-grey w3-small w3-margin-bottom">Makerversity</span> <span class="w3-tag w3-grey w3-small w3-margin-bottom">Sieraden</span> <span class="w3-tag w3-grey w3-small w3-margin-bottom">Kunst</span>
-        <span class="w3-tag w3-grey w3-small w3-margin-bottom">Computers</span> <span class="w3-tag w3-grey w3-small w3-margin-bottom">Robots</span>
-      </p>
-    </div>
+        <!-- Images of Me -->
+        <div class="w3-row w3-container" id="overmij">
+            <div class="w3-third">
+                <img src="Images/Ria.jpg" alt="Ria Stroes" style="width:100%">
+            </div>
+            <div class="w3-third">
+                <h3>Bekijk ook mijn andere websites:</h3>
+                <ul class="w3-list">
+                    <li><a href="http://www.riastroes.nl/CCC" class="w3-bar-item w3-button">Creative Coding Course</a></li>
+                    <li><a href="http://www.riastroes.nl/RS-Website" class="w3-bar-item w3-button w3-hover-black">Website II 2016</a></li>
+                    <li><a href="http://www.riastroes.nl/2016" class="w3-bar-item w3-button w3-hover-black">Website I 2016</a></li>
+                    <li><a href="http://www.riastroes.nl/2015" class="w3-bar-item w3-button w3-hover-black">Website 2015</a></li>
+                    <li><a href="http://www.riastroes.nl/2013/index2.html" class="w3-bar-item w3-button w3-hover-black">Website 2013</a></li>
+                </ul>
+            </div>
+            <div class="w3-third">
+                <img src="Images/Ria1.jpg" alt="Ria Stroes" style="width:100%">
+            </div>
+        </div>
 
-  </div>
-  </footer>
+        <div class="w3-container w3-padding-large" style="margin-bottom:32px">
+            <h4><b>OVER MIJ</b></h4>
+            <p>Na 15 jaar werk als ICT manager / CEO in Compano, heb ik een fantastisch jaar in 2013 gehad op de kunstacademie in Groningen. Daar ontdekte ik dat de wereld tussen ICT en kunst, mijn wereld was. Sinds dien ben ik bezig met Creative Coding.
+                Op Makerversity in Amsterdam heb ik voor twee dagen in de week een werkplek gevonden, die aansluit op mijn behoefte om in contact te komen met andere mensen. Collega makers, die creatief en gepassioneerd bezig zijn op een professionele
+                manier en daarnaast bied Makerversity de mogelijkheid om in contact te komen met professionals in de markt. Op Makerversity vind ik niet alleen een creatieve omgeving van makers, maar ook bieden ze hier de mogelijkheid aan om gebruik te
+                maken van allerlei machines, zoals 3D printers, Lasercutters, Vinyl-snijders, industriële naaimachines, foto-studio en nog veel meer... Op vrijdag werk ik samen met Jori Stoop aan diverse projecten.</p>
+            <hr> hier is een link naar <a href="www.atelierjori.jimdo.com">de website van Jori Stoop</a>. Deze site is zeker de moeite waard om goed te bekijken! Er valt heel veel te ontdekken.
+        </div>
 
-  
-<!-- End page content -->
-</div>
+        <div class="w3-container w3-padding-large" style="margin-bottom:32px">
+            <h4>OPDRACHTEN</h4>
+            <!-- Pricing Tables -->
+            <div class="w3-row-padding" style="margin:0 -16px">
+                <div class="w3-third w3-margin-bottom">
+                    <ul class="w3-ul w3-border w3-white w3-center w3-opacity w3-hover-opacity-off">
+                        <li>Samenwerking met andere kunstenaars</li>
+                        <li>Grafisch werk: prints van digitale grafische beelden</li>
+                        <li>Computer Animaties, voor websites</li>
+                        <li>Ontwerp stoffen</li>
+                        <li>Sieraden</li>
+                        <li>Cursus Creative Coding</li>
+                        <li>Workshop Creative Coding</li>
+                    </ul>
+                </div>
+            </div>
 
-<script>
-// Script to open and close sidebar
-function w3_open() {
-    document.getElementById("mySidebar").style.display = "block";
-    document.getElementById("myOverlay").style.display = "block";
-}
+            <!-- Contact Section -->
+            <div class="w3-container w3-padding-large w3-grey">
+                <h4 id="contact"><b>Contact</b></h4>
+                <div class="w3-row-padding w3-center w3-padding-24" style="margin:0 -16px">
+                    <div class="w3-third w3-dark-grey">
+                        <p><i class="fa fa-envelope w3-xxlarge w3-text-light-grey"></i></p>
+                        <p>riastroes@gmail.com</p>
+                    </div>
+                    <div class="w3-third w3-teal">
+                        <p><i class="fa fa-map-marker w3-xxlarge w3-text-light-grey"></i></p>
+                        <p><a href="http://maps.google.com/?q=De Hege Bouwen 37, 8566 JB, Nijemirdum">De Hege Bouwen 37, Nijemirdum</a></p>
+                    </div>
+                    <div class="w3-third w3-dark-grey">
+                        <p><i class="fa fa-phone w3-xxlarge w3-text-light-grey"></i></p>
+                        <p>0514 785172 of 06 13448618
+                        </p>
+                    </div>
+                </div>
+                <hr class="w3-opacity">
+                <form method="post" action="mailto:riastroes@gmail.nl" enctype="text/plain">
+                    <div class="w3-section">
+                        <label>Naam</label>
+                        <input class="w3-input w3-border" type="text" name="Name" required><br/>
+                    </div>
+                    <div class="w3-section">
+                        <label>Email</label>
+                        <input class="w3-input w3-border" type="text" name="Email" required><br/>
+                    </div>
+                    <div class="w3-section">
+                        <label>Vraag of Opmerking</label>
+                        <input class="w3-input w3-border" type="text" name="Reactie" required>
+                    </div>
+                    <button type="submit" class="w3-button w3-black w3-margin-bottom"><i class="fa fa-paper-plane w3-margin-right"></i>Verstuur bericht</button>
+                </form>
+            </div>
 
-function w3_close() {
-    document.getElementById("mySidebar").style.display = "none";
-    document.getElementById("myOverlay").style.display = "none";
-}
-</script>
+            <!-- Footer -->
+            <footer class="w3-container w3-padding-32 w3-dark-grey">
+                <div class="w3-row-padding">
+                    <div class="w3-third">
+                        <h3>Ik hou van </h3>
+                        <p> Programmeren, Maken, Vorm geven, Bedenken, Ontwikkelen,Verf, Papier, Fotograferen, Schilderen, Tekenen, Techniek en nog veel meer... </p>
+                        <h3>Ik ben </h3>
+                        <p> Nieuwsgierig, leergierig, onderzoekend, enthousiast, creatief, een genieter, ... </p>
+                    </div>
+
+                    <div class="w3-third">
+                        <h3>MEER LEZEN ...</h3>
+                        <ul class="w3-ul w3-hoverable">
+                            <li class="w3-padding-16" onclick="show('Breien op de 3D-printer');">
+                                <span class="w3-large"><i class="material-icons w3-margin-right"  style="font-size:18px;">devices</i>Breien op de 3D-printer</span><br>
+                                <span>Het verhaal van één draad...</span>
+                            </li>
+
+                        </ul>
+                    </div>
+
+                    <div class="w3-third">
+                        <h3>POPULAIRE TAGS</h3>
+                        <p>
+                            <span class="w3-tag w3-black w3-margin-bottom">P5</span> <span class="w3-tag w3-grey w3-small w3-margin-bottom">Processing</span> <span class="w3-tag w3-grey w3-small w3-margin-bottom">Javascript</span>
+                            <span class="w3-tag w3-grey w3-small w3-margin-bottom">Web Design</span> <span class="w3-tag w3-grey w3-small w3-margin-bottom">Papier Maché</span> <span class="w3-tag w3-grey w3-small w3-margin-bottom">IOT</span>
+                            <span class="w3-tag w3-grey w3-small w3-margin-bottom">Digitaal Schilderen</span> <span class="w3-tag w3-grey w3-small w3-margin-bottom">3D-Printer</span> <span class="w3-tag w3-grey w3-small w3-margin-bottom">Filament</span>
+                            <span class="w3-tag w3-grey w3-small w3-margin-bottom">Makerversity</span> <span class="w3-tag w3-grey w3-small w3-margin-bottom">Sieraden</span> <span class="w3-tag w3-grey w3-small w3-margin-bottom">Kunst</span>
+                            <span class="w3-tag w3-grey w3-small w3-margin-bottom">Computers</span> <span class="w3-tag w3-grey w3-small w3-margin-bottom">Robots</span>
+                        </p>
+                    </div>
+
+                </div>
+            </footer>
+
+
+            <!-- End page content -->
+        </div>
+
+        <script>
+            // Script to open and close sidebar
+            function w3_open() {
+                document.getElementById("mySidebar").style.display = "block";
+                document.getElementById("myOverlay").style.display = "block";
+            }
+
+            function w3_close() {
+                document.getElementById("mySidebar").style.display = "none";
+                document.getElementById("myOverlay").style.display = "none";
+            }
+        </script>
 
 </body>
+
 </html>
