@@ -4,9 +4,9 @@ function Grid() {
 }
 Grid.prototype.init = function(maxx, maxy) {
     var i = 0;
-    for (var y = height / (maxy + 1); y < height; y += height / (maxy + 1)) {
-        for (var x = width / (maxx + 1); x < width; x += width / (maxx + 1)) {
-            this.p[i] = createVector(x, y, 0);
+    for (var y = (height + 100) / (maxy + 1); y < (height + 100); y += (height + 100) / (maxy + 1)) {
+        for (var x = (width + 100) / (maxx + 1); x < (width + 100); x += (width + 100) / (maxx + 1)) {
+            this.p[i] = createVector(x - 100, y - 50, 0);
             i++;
 
         }

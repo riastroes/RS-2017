@@ -12,14 +12,16 @@ Pattern.prototype.style = function(acolor, weight) {
     strokeWeight(weight);
 }
 Pattern.prototype.draw = function(center) {
-    this.style(this.color, 10);
+    this.style(this.color, 15);
     push();
     translate(center.x, center.y);
-    beginShape();
-    vertex(this.p[0].x, this.p[0].y);
-    vertex(this.p[0].x, this.p[1].y);
-    vertex(this.p[1].x, this.p[1].y);
-    endShape();
+    // beginShape();
+    // vertex(this.p[0].x, this.p[0].y);
+    // vertex(this.p[0].x, this.p[1].y);
+    // vertex(this.p[1].x, this.p[1].y);
+    // endShape();
+    line(this.p[0].x, this.p[0].y, this.p[0].x, this.p[1].y);
+    line(this.p[0].x, this.p[1].y, this.p[1].x, this.p[1].y);
     pop();
 
 }

@@ -201,7 +201,12 @@ Settings.prototype.initMaterial = function() {
                 if (this.material == "PLA" && this.style == "normal") {
                     this.initStyle(0.4, 0.05, 800); // ok getest in knitting app  // ok getest in DUBAI KNITTING APP
                 }
-
+                if (this.material == "PLAFLEX" && this.style == "fine") {
+                    this.initStyle(0.5, 0.08, 800); // ok getest in knitting app  // ok getest in DUBAI KNITTING APP
+                }
+                if (this.material == "PLAFLEX" && this.style == "normal") {
+                    this.initStyle(0.4, 0.1, 800); // ok getest in knitting app  // ok getest in DUBAI KNITTING APP
+                }
                 if (this.material == "PETGCARBON" && this.style == "fine") {
                     this.initStyle(0.4, 0.03, 800); //0.4, 0.03, 1600 ok
                 }
@@ -250,6 +255,12 @@ Settings.prototype.initMaterial = function() {
 Settings.prototype.initPrinter = function() {
     switch (this.material) {
         case "PLA":
+            {
+                this.nozzletemp = 210;
+                this.bedtemp = 50;
+                break;
+            }
+        case "PLAFLEX":
             {
                 this.nozzletemp = 210;
                 this.bedtemp = 50;
