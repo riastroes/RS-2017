@@ -1,5 +1,11 @@
 /* Ria Stroes */
 /* @updated: september 2017  */
+/* op elke layer wordt op een grid een patroontje herhaald.
+/* per layer kan het patroon verschillen. Het patroon bestaat elke keer
+/* uit een deelverzameling van een 5x5 aantal punten, waarvoor geld dat
+/* elke verzameling een deelverzameling is van de vorige verzameling.
+/* anders hangen hogere layers los in de lucht.
+*/
 
 
 var grid;
@@ -12,6 +18,11 @@ var list;
 var c;
 var a;
 var windowscale;
+
+var settings;
+var totlayerheight;
+var layers;
+var l;
 
 function setup() {
 
@@ -28,15 +39,59 @@ function setup() {
 
     pattern = new Pattern((width / maxw), height / maxh);
     list = [];
-    a = c = 0;
+    totlayerheight = a = c = 0;
+    background(200);
     frameRate(10);
     strokeJoin(MITER);
     strokeCap(SQUARE);
+    noFill();
     textSize(30);
+    settings = new Settings("Anet", "PLAw", "normal");
+    layers = [];
+
+
 
 }
 
 function draw() {
+    push();
+    translate(50, 50);
+    //scale(windowscale);
+    l = frameCount - 1;
+
+    layers[l] = new Layer(l, settings);
+    stroke(colors[l]);
+    list[0] = [1, 13, 3, 16, 17, 22, 24];
+    list[1] = [1, 3, 16, 17];
+    //list = [6, 16, 18, 8];
+    pattern.create(list[l], colors[l], 2);
+
+
+    grid = new Grid();
+    grid.init(maxw, maxh);
+
+    var from = 0;
+    var to = 0;
+    for (var y = 0; y < maxh; y++) {
+        from = y * maxw * list[l].length;
+        for (var i = 0; i < maxw; i++) {
+            pattern.addToLayer(layers[l], grid.p[(maxw * y) + i]);
+
+        }
+        to = (y * maxw * list[l].length) + (maxw * list[l].length);
+        layers[l].draw(from, to, colors[l]);
+    }
+
+
+
+    pop();
+    if (frameCount == 2) {
+        noLoop();
+    }
+}
+//pattern functions
+
+function draw2() {
     push();
     translate(50, 50);
     scale(windowscale);
