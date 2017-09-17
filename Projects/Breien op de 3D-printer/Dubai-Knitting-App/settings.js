@@ -39,6 +39,16 @@ Settings.prototype.initMaterial = function() {
                             }
                             break;
                         }
+                     case "PLAFLEX":
+                        {
+                            this.materialcode = "PLAFLEX";
+                            if (this.style == "fine") {
+                                this.initStyle(0.4, 0.07, 800); //test OK 0.3, 0.07, 800
+                            } else if (this.style == "normal") {
+                                this.initStyle(0.4, 0.12, 800); //test OK
+                            }
+                            break;
+                        }
                     case "TPCFLEX":
                         {
                             this.materialcode = "TPCFLEX";
@@ -252,6 +262,12 @@ Settings.prototype.initPrinter = function() {
         case "PLA":
             {
                 this.nozzletemp = 210;
+                this.bedtemp = 50;
+                break;
+            }
+        case "PLAFLEX":
+            {
+                this.nozzletemp = 200;
                 this.bedtemp = 50;
                 break;
             }

@@ -276,11 +276,11 @@ function selectPrinter() {
     if (printer == "Anet") {
         //Create array of options to be added
 
-        array1 = ["PLA", "ABS", "SAT1N", "SAT2N", "SAT3N"];
+        array1 = ["PLA", "PLAFLEX", "PLAFLEX", "ABS", "SAT1N", "SAT2N", "SAT3N"];
         if (language == "NL") {
-            array2 = ["PLA wit", "ABS neutraal/wit", "Satijn silver", "Satijn goud", "Satijn licht blauw"];
+            array2 = ["PLA wit", "PLA FLEX rood", "PLA FLEX zwart", "ABS neutraal/wit", "Satijn silver", "Satijn goud", "Satijn licht blauw"];
         } else {
-            array2 = ["PLA white", "ABS neutral/white", "Satin silver", "Satin gold", "Satin light blue"];
+            array2 = ["PLA white","PLA FLEX red", "PLA FLEX black", "ABS neutral/white", "Satin silver", "Satin gold", "Satin light blue"];
 
         }
     } else if (printer == "Ultimaker2+") {
