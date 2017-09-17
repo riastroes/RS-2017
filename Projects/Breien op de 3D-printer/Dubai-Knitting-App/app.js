@@ -269,30 +269,20 @@ function changeRows() {
 //   changePrice();
 //  }
 function selectPrinter() {
-    printer = document.getElementById("selectprinter").value
+    printer = "Anet";
     var spn = document.getElementById("spnmaterial");
     spn.innerHTML = "";
     var array1, array2;
-    if (printer == "Anet") {
-        //Create array of options to be added
 
-        array1 = ["PLA", "PLAFLEX", "PLAFLEX", "ABS", "SAT1N", "SAT2N", "SAT3N"];
-        if (language == "NL") {
-            array2 = ["PLA wit", "PLA FLEX rood", "PLA FLEX zwart", "ABS neutraal/wit", "Satijn silver", "Satijn goud", "Satijn licht blauw"];
-        } else {
-            array2 = ["PLA white","PLA FLEX red", "PLA FLEX black", "ABS neutral/white", "Satin silver", "Satin gold", "Satin light blue"];
 
-        }
-    } else if (printer == "Ultimaker2+") {
-        array1 = ["PLA", "PLABRO"];
-        if (language == "NL") {
-            array2 = ["PLA zwart", "PLA Brons(30%)"];
-        } else {
-            array2 = ["PLA black", "PLA Bronse(30%)"];
-
-        }
+    array1 = ["PLAw", "PLAz", "ABS", "SAT1N", "SAT2N", "SAT3N", "PLAFLEXz", "PLABRO"];
+    if (language == "NL") {
+        array2 = ["PLA wit", "PLA zwart", "ABS neutraal/wit", "Satijn silver", "Satijn goud", "Satijn licht blauw", "PLA FLEX zwart", "PLA Brons(30%)"];
+    } else {
+        array2 = ["PLA white", "PLA black", "ABS neutral/white", "Satin silver", "Satin gold", "Satin light blue", "PLA FLEX black", "PLA Brons(30%)"];
 
     }
+
 
     //Create and append select list
     var selectList = document.createElement("select");
@@ -314,6 +304,11 @@ function selectPrinter() {
 
 function selectMaterial() {
     material = document.getElementById("selectmaterial").value
+    if (material == "PLAz" || material == "PLAFLEX" || material == "PLABRO") {
+        printer = "Ultimaker2+";
+    } else {
+        printer = "Anet";
+    }
     ischanged = true;
 
 }
