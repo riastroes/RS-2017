@@ -49,11 +49,11 @@ Settings.prototype.initMaterial = function() {
                             }
                             break;
                         }
-                    case "TPCFLEX":
+                    case "PLAFLEX":
                         {
-                            this.materialcode = "TPCFLEX";
+                            this.materialcode = "PLAFLEX";
                             if (this.style == "normal") {
-                                this.initStyle(1.3, 0.15, 800); //0.4 0.2 800 OK // 0.4 0.15. 80 niet getest - TE DUN 0.1
+                                this.initStyle(0.4, 0.15, 800); //0.4 0.2 800 OK // 0.4 0.15. 80 niet getest - TE DUN 0.1
                             } else if (this.style == "fine") {
 
                                 this.initStyle(0.4, 0.12, 800); //test OK
@@ -259,7 +259,7 @@ Settings.prototype.initPrinter = function() {
             }
         case "PLAFLEX":
             {
-                this.nozzletemp = 210;
+                this.nozzletemp = 190;
                 this.bedtemp = 50;
                 break;
             }

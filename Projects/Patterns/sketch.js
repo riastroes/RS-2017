@@ -15,6 +15,7 @@ var a, b, c, d;
 var maxw, maxh;
 var pattern;
 var list;
+var rlist;
 var c;
 var a;
 var windowscale;
@@ -23,11 +24,12 @@ var settings;
 var totlayerheight;
 var layers;
 var l;
+var offset;
 
 function setup() {
 
-    var canvas = createCanvas(1150, 1150);
-    windowscale = ((windowWidth - 100) / 2) / 1150;
+    var canvas = createCanvas(800, 800);
+    windowscale = ((windowWidth - 100) / 2) / 800;
 
 
     maxw = 10;
@@ -36,9 +38,11 @@ function setup() {
     pool = new Color();
     pool.random(10);
     colors = pool.colors;
+    offset = createVector(100,100);
 
     pattern = new Pattern((width / maxw), height / maxh);
     list = [];
+    rlist = [];
     totlayerheight = a = c = 0;
     background(200);
     frameRate(10);
@@ -46,8 +50,10 @@ function setup() {
     strokeCap(SQUARE);
     noFill();
     textSize(30);
-    settings = new Settings("Anet", "PLAw", "normal");
+    settings = new Settings("Anet", "PLAFLEX", "normal");
     layers = [];
+    gcode = new Gcode(settings);
+    
 
 
 
@@ -56,15 +62,18 @@ function setup() {
 function draw() {
     push();
     translate(50, 50);
-    //scale(windowscale);
+    scale(windowscale);
     l = frameCount - 1;
 
     layers[l] = new Layer(l, settings);
     stroke(colors[l]);
     list[0] = [1, 13, 3, 16, 17, 22, 24];
     list[1] = [1, 3, 16, 17];
+
+    rlist[0] = [24,22,17,16,3,13,1];
+    rlist[1] = [17,16,3,1];
     //list = [6, 16, 18, 8];
-    pattern.create(list[l], colors[l], 2);
+    
 
 
     grid = new Grid();
@@ -73,19 +82,34 @@ function draw() {
     var from = 0;
     var to = 0;
     for (var y = 0; y < maxh; y++) {
-        from = y * maxw * list[l].length;
-        for (var i = 0; i < maxw; i++) {
-            pattern.addToLayer(layers[l], grid.p[(maxw * y) + i]);
-
+        if(y % 2 == 0){
+            pattern.create(list[l], colors[3], 2); 
+            //from = y * maxw * list[l].length;   
+            for (var i = 0; i < maxw; i++) {
+                pattern.addToLayer(layers[l], grid.p[(maxw * y) + i], offset);
+            }     
         }
-        to = (y * maxw * list[l].length) + (maxw * list[l].length);
-        layers[l].draw(from, to, colors[l]);
+        else{
+            pattern.create(rlist[l], colors[4], 2);
+            //from = y * maxw * rlist[l].length;  
+            for (var i = maxw-1; i >= 0;i--) {
+                pattern.addToLayer(layers[l], grid.p[(maxw * y) + i], offset);
+            }     
+        } 
+       
+        
+        
     }
+    to = (maxh * maxw * list[l].length) ;//+ (maxw * list[l].length);
+    layers[l].draw(from, to, colors[l]);
+    layers[l].generate(l,from,to);
+
 
 
 
     pop();
     if (frameCount == 2) {
+        gcode.generateLayers();
         noLoop();
     }
 }
@@ -413,6 +437,7 @@ function pattern13(weight, angle) {
 }
 
 function mousePressed() {
+    gcode.save("pattern2");
     noLoop();
 }
 
