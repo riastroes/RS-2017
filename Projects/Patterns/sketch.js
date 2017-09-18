@@ -67,12 +67,17 @@ function draw() {
 
     layers[l] = new Layer(l, settings);
     stroke(colors[l]);
-    list[0] = [1, 13, 3, 16, 17, 22, 24];
-    list[1] = [1, 3, 16, 17];
+    // list[0] = [1, 13, 3, 16, 17, 22, 24];     //pattern2
+    // list[1] = [1, 3, 16, 17];                 //pattern2
 
-    rlist[0] = [24,22,17,16,3,13,1];
-    rlist[1] = [17,16,3,1];
-    //list = [6, 16, 18, 8];
+    // rlist[0] = [24,22,17,16,3,13,1];            //pattern2
+    // rlist[1] = [17,16,3,1];                     //pattern2
+
+    list[0] = [0,1,10,22,14,3,4 ];     //pattern3
+    list[1] = [20,21,2,23,24];                 //pattern3
+    
+    rlist[0] = [4,3,14,22,10,1,0];            //pattern3
+    rlist[1] = [24,23,2,21,20];               //pattern3
     
 
 
@@ -437,7 +442,7 @@ function pattern13(weight, angle) {
 }
 
 function mousePressed() {
-    gcode.save("pattern2");
+    gcode.save("pattern3");
     noLoop();
 }
 
