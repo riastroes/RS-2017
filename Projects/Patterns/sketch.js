@@ -38,7 +38,7 @@ function setup() {
     pool = new Color();
     pool.random(10);
     colors = pool.colors;
-    offset = createVector(100,100);
+    offset = createVector(100, 100);
 
     pattern = new Pattern((width / maxw), height / maxh);
     list = [];
@@ -53,7 +53,7 @@ function setup() {
     settings = new Settings("Anet", "PLAFLEX", "normal");
     layers = [];
     gcode = new Gcode(settings);
-    
+
 
 
 
@@ -70,10 +70,8 @@ function draw() {
     list[0] = [1, 13, 3, 16, 17, 22, 24];
     list[1] = [1, 3, 16, 17];
 
-    rlist[0] = [24,22,17,16,3,13,1];
-    rlist[1] = [17,16,3,1];
-    //list = [6, 16, 18, 8];
-    
+    rlist[0] = [24, 22, 17, 16, 3, 13, 1];
+    rlist[1] = [17, 16, 3, 1];
 
 
     grid = new Grid();
@@ -82,27 +80,26 @@ function draw() {
     var from = 0;
     var to = 0;
     for (var y = 0; y < maxh; y++) {
-        if(y % 2 == 0){
-            pattern.create(list[l], colors[3], 2); 
+        if (y % 2 == 0) {
+            pattern.create(list[l], colors[3], 2);
             //from = y * maxw * list[l].length;   
             for (var i = 0; i < maxw; i++) {
                 pattern.addToLayer(layers[l], grid.p[(maxw * y) + i], offset);
-            }     
-        }
-        else{
+            }
+        } else {
             pattern.create(rlist[l], colors[4], 2);
             //from = y * maxw * rlist[l].length;  
-            for (var i = maxw-1; i >= 0;i--) {
+            for (var i = maxw - 1; i >= 0; i--) {
                 pattern.addToLayer(layers[l], grid.p[(maxw * y) + i], offset);
-            }     
-        } 
-       
-        
-        
+            }
+        }
+
+
+
     }
-    to = (maxh * maxw * list[l].length) ;//+ (maxw * list[l].length);
+    to = (maxh * maxw * list[l].length); //+ (maxw * list[l].length);
     layers[l].draw(from, to, colors[l]);
-    layers[l].generate(l,from,to);
+    layers[l].generate(l, from, to);
 
 
 
