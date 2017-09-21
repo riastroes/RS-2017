@@ -38,7 +38,8 @@ function setup() {
     maxh = 9; //height / 35;
 
     pool = new Color();
-    pool.random(10);
+    pool.add(color(0,0,25));
+    pool.add(color(0,200,200));
     colors = pool.colors;
     offset = createVector(100, 100);
 
@@ -66,11 +67,11 @@ function draw() {
     push();
     translate(25, 25);
     scale(windowscale);
-    l = frameCount - 1;
+    layer = frameCount - 1;
 
 
-    layers[l] = new Layer(l, settings);
-    stroke(colors[l]);
+    layers[layer] = new Layer(layer, settings);
+    stroke(colors[0]);
     // list[0] = [1, 13, 3, 16, 17, 22, 24];     //pattern2
     // list[1] = [1, 3, 16, 17];                 //pattern2
 
@@ -100,27 +101,30 @@ function draw() {
     grid = new Grid();
     grid.init(maxw, maxh);
 
+    for(var l = 0 ;l < list.length; l++){
+
+
     for (var y = 0; y < maxh; y++) {
         if (y % 2 == 1) {
-            pattern.create(list[l], colors[3], 2);
+            pattern.create(list[l], colors[0], 2);
             for (var i = 0; i < maxw; i++) {
-                pattern.addToLayer(layers[l], grid.p[(maxw * y) + i], offset);
+                pattern.addToLayer(layers[layer], grid.p[(maxw * y) + i], offset);
             }
         } else {
             if (y == 0) {
-                pattern.create(skirt[0], colors[5], 2);
+                pattern.create(skirt[0], colors[2], 2);
                 for (var i = 0; i < maxw; i++) {
-                    pattern.addToLayer(layers[l], grid.p[(maxw * y) + i], offset);
+                    pattern.addToLayer(layers[layer], grid.p[(maxw * y) + i], offset);
                 }
-                pattern.create(skirt[1], colors[5], 2);
+                pattern.create(skirt[1], colors[2], 2);
                 for (var i = maxw - 1; i >= 0; i--) {
-                    pattern.addToLayer(layers[l], grid.p[(maxw * y) + i], offset);
+                    pattern.addToLayer(layers[layer], grid.p[(maxw * y) + i], offset);
                 }
 
             } else {
-                pattern.create(rlist[l], colors[4], 2);
+                pattern.create(rlist[l], colors[0], 2);
                 for (var i = maxw - 1; i >= 0; i--) {
-                    pattern.addToLayer(layers[l], grid.p[(maxw * y) + i], offset);
+                    pattern.addToLayer(layers[layer], grid.p[(maxw * y) + i], offset);
                 }
             }
 
@@ -129,8 +133,10 @@ function draw() {
 
 
     }
-    layers[l].draw(colors[l]);
-    layers[l].generate(l);
+    layers[layer].draw(colors[0]);
+    layers[layer].generate(layer);
+}
+
 
 
 

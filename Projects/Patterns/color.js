@@ -5,6 +5,9 @@ function Color() {
     this.colors[1] = color(255);
 
 }
+Color.prototype.add = function(acolor){
+    append(this.colors, acolor);
+}
 Color.prototype.random = function(max, alpha) {
     if (alpha == undefined) {
         alpha = 255;
