@@ -13,6 +13,7 @@ var pool;
 var colors;
 var a, b, c, d;
 var maxw, maxh;
+var marge;
 var pattern;
 var list;
 var rlist;
@@ -23,6 +24,7 @@ var windowscale;
 var settings;
 var totlayerheight;
 var layers;
+var layer;
 var l;
 var offset;
 var skirt;
@@ -31,47 +33,43 @@ var skirt;
 function setup() {
 
     var canvas = createCanvas(920, 920);
-    windowscale = ((windowWidth - 100) / 2) / 920;
+    windowscale = 1; //((windowWidth - 110) / 2) / 920;
 
 
-    maxw = 9;
-    maxh = 9; //height / 35;
+    maxw = 11;
+    maxh = 11; //height / 35;
+    marge = 50;
 
     pool = new Color();
-    pool.add(color(0,0,25));
-    pool.add(color(0,200,200));
+    pool.add(color(0, 0, 25));
+    pool.add(color(0, 200, 200));
     colors = pool.colors;
-    offset = createVector(100, 100);
+    offset = createVector(0, 0);
 
-    pattern = new Pattern((width / maxw), height / maxh);
+    pattern = new Pattern((width - (2 * marge)) / maxw, (height - (2 * marge)) / maxh);
     list = [];
     rlist = [];
     totlayerheight = a = c = 0;
     background(200);
-    frameRate(10);
+    //frameRate(10);
     strokeJoin(MITER);
     strokeCap(SQUARE);
     noFill();
     textSize(30);
     settings = new Settings("Anet", "SAT1N", "normal");
     layers = [];
+    layers[0] = new Layer(0, settings);
+    layer = 0;
     gcode = new Gcode(settings);
+
+    grid = new Grid();
+    grid.init(marge, maxw, maxh);
+    grid.draw();
+
     skirt = [];
 
 
 
-
-}
-
-function draw() {
-    push();
-    translate(25, 25);
-    scale(windowscale);
-    layer = frameCount - 1;
-
-
-    layers[layer] = new Layer(layer, settings);
-    stroke(colors[0]);
     // list[0] = [1, 13, 3, 16, 17, 22, 24];     //pattern2
     // list[1] = [1, 3, 16, 17];                 //pattern2
 
@@ -87,65 +85,135 @@ function draw() {
     /*
     /* NOPPEN */
 
-    skirt[0] = [0, 4];
-    skirt[1] = [9, 5];
 
-    list[0] = [10, 5, 1, 2, 8, 13, 14]; //pattern3
-    list[1] = [10, 16, 17, 13, 14]; //pattern3
+    skirt[0] = [5, 9];
+    skirt[1] = [14, 10];
 
-    rlist[0] = [14, 13, 8, 2, 1, 5, 10]; //pattern3
-    rlist[1] = [14, 13, 17, 16, 10]; //pattern3
+    list[0] = [5, 1, 2, 8, 9]; //pattern3
+    list[1] = [10, 16, 17, 13, 14]; //pattern3 
+    list[2] = [1, 5, 10, 16, 21]; //pattern3
+    list[3] = [2, 8, 13, 17, 22]; //pattern3 
 
-
-
-    grid = new Grid();
-    grid.init(maxw, maxh);
-
-    for(var l = 0 ;l < list.length; l++){
-
-
-    for (var y = 0; y < maxh; y++) {
-        if (y % 2 == 1) {
-            pattern.create(list[l], colors[0], 2);
-            for (var i = 0; i < maxw; i++) {
-                pattern.addToLayer(layers[layer], grid.p[(maxw * y) + i], offset);
-            }
-        } else {
-            if (y == 0) {
-                pattern.create(skirt[0], colors[2], 2);
-                for (var i = 0; i < maxw; i++) {
-                    pattern.addToLayer(layers[layer], grid.p[(maxw * y) + i], offset);
-                }
-                pattern.create(skirt[1], colors[2], 2);
-                for (var i = maxw - 1; i >= 0; i--) {
-                    pattern.addToLayer(layers[layer], grid.p[(maxw * y) + i], offset);
-                }
-
-            } else {
-                pattern.create(rlist[l], colors[0], 2);
-                for (var i = maxw - 1; i >= 0; i--) {
-                    pattern.addToLayer(layers[layer], grid.p[(maxw * y) + i], offset);
-                }
-            }
-
-        }
+    rlist[0] = [9, 8, 2, 1, 5]; //pattern3
+    rlist[1] = [14, 13, 17, 16, 10]; //pattern3 
+    rlist[2] = [21, 16, 10, 5, 1]; //pattern3
+    rlist[3] = [22, 17, 13, 8, 2]; //pattern3 
 
 
 
-    }
-    layers[layer].draw(colors[0]);
-    layers[layer].generate(layer);
+
+
 }
 
 
 
+function draw() {
+    push();
+    //translate(25, 25);
+    scale(windowscale);
+
+    if (layer == 0 && frameCount == 1) {
+
+        //create skirt
+        var y = 0;
+        pattern.create(skirt[0], colors[2], 2);
+        for (var x = 0; x < maxw; x++) {
+            layers[layer].addPattern(offset, grid.p[x], pattern.path);
+        }
+        pattern.create(skirt[1], colors[2], 2);
+        for (var x = maxw - 1; x >= 0; x--) {
+            layers[layer].addPattern(offset, grid.p[x], pattern.path);
+        }
+        for (var y = 1; y < maxh; y++) {
+            pattern.create(list[0], colors[2], 2);
+            for (var x = 0; x < maxw; x++) {
+                layers[layer].addPattern(offset, grid.p[(maxw * y) + x], pattern.path);
+            }
+            pattern.create(rlist[1], colors[2], 2);
+            for (var x = maxw - 1; x >= 0; x--) {
+                layers[layer].addPattern(offset, grid.p[(maxw * y) + x], pattern.path);
+            }
+        }
+        for (var x = 0; x < maxw; x++) {
+            pattern.create(rlist[2], colors[2], 2);
+            for (var y = maxh - 1; y > 0; y--) {
+                layers[layer].addPattern(offset, grid.p[(maxw * y) + x], pattern.path);
+            }
+            pattern.create(list[3], colors[2], 2);
+            for (var y = 1; y < maxh; y++) {
+                layers[layer].addPattern(offset, grid.p[(maxw * y) + x], pattern.path);
+            }
+        }
+
+    }
+
+
+
+
+
+    // for (var l = 0; l < 2; l++) {
+    //     //de eerste twee lijnen worden horizontaal getekend.
+
+    //     for (var y = 0; y < maxh; y++) {
+    //         if (y % 2 == 1) {
+
+    //             pattern.create(list[l], colors[0], 2);
+    //             for (var i = 0; i < maxw; i++) {
+    //                 pattern.addToLayer(layers[layer], grid.p[(maxw * y) + i], offset);
+    //             }
+    //         } else {
+    //             if ((y == 0) && layer == 0) {
+
+    //                 pattern.create(skirt[0], colors[2], 2);
+    //                 for (var i = 0; i < maxw; i++) {
+    //                     pattern.addToLayer(layers[layer], grid.p[(maxw * y) + i], offset);
+    //                 }
+    //                 pattern.create(skirt[1], colors[2], 2);
+    //                 for (var i = maxw - 1; i >= 0; i--) {
+    //                     pattern.addToLayer(layers[layer], grid.p[(maxw * y) + i], offset);
+    //                 }
+    //             } else if (y > 0) {
+    //                 pattern.create(rlist[l], colors[0], 2);
+    //                 for (var i = maxw - 1; i >= 0; i--) {
+    //                     pattern.addToLayer(layers[layer], grid.p[(maxw * y) + i], offset);
+    //                 }
+    //             }
+    //         }
+    //     }
+    // }
+
+    // for (var l = 2; l < 4; l++) {
+    //     //lijn 3 en vier worden verticaal getekend.
+    //     for (var x = 0; x < maxw; x++) {
+    //         if (x % 2 == 0) {
+
+    //             pattern.create(list[l], colors[0], 2);
+    //             for (var i = 1; i < maxh; i++) {
+    //                 pattern.addToLayer(layers[layer], grid.p[(maxh * x) + i], offset);
+    //             }
+    //         } else {
+
+    //             pattern.create(rlist[l], colors[0], 2);
+    //             for (var i = maxh - 1; i >= 1; i--) {
+    //                 pattern.addToLayer(layers[layer], grid.p[(maxh * x) + i], offset);
+    //             }
+
+    //         }
+    //     }
+    // }
+
+
+    layers[layer].generate(layer);
+
 
 
     pop();
-    if (frameCount == 2) {
+    if (frameCount == 1) {
         gcode.generateLayers();
-        noLoop();
+        //noLoop();
     }
+    layers[layer].draw(frameCount, colors[0]);
+
 }
 //pattern functions
 

@@ -2,13 +2,13 @@ function Grid() {
     this.p = [];
 
 }
-Grid.prototype.init = function(maxx, maxy) {
+Grid.prototype.init = function(marge, maxx, maxy) {
     var i = 0;
-    var w = width / maxx;
-    var h = height / maxy;
-    for (var y = 0; y < (height); y += h) {
-        for (var x = 0; x < (width); x += w) {
-            this.p[i] = createVector(x + (w / 2), y + (h / 2), 0);
+    var w = (width - (2 * marge)) / maxx;
+    var h = (height - (2 * marge)) / maxy;
+    for (var y = 0; y < maxy; y++) {
+        for (var x = 0; x < maxx; x++) {
+            this.p[i] = createVector(marge + ((x * w) + (w / 2)), marge + ((y * h) + (h / 2)), 0);
             i++;
 
         }

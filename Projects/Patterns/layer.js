@@ -17,13 +17,25 @@ function Layer(layer, settings) {
 
     this.p = [];
 }
-Layer.prototype.draw = function(acolor) {
+Layer.prototype.addPattern = function(offset, pos, path) {
+    for (var i = 0; i < path.length; i++) {
+        var p = pos.copy();
+        p.add(offset);
+        p.add(path[i]);
+        p.z = 0.2;
+        append(this.p, p);
+    }
+}
+Layer.prototype.draw = function(index, acolor) {
     strokeWeight = 1;
     stroke(acolor);
     noFill();
     beginShape();
     for (var i = 0; i < this.p.length; i++) {
-        vertex(this.p[i].x, this.p[i].y);
+        if (i <= index) {
+            vertex(this.p[i].x, this.p[i].y);
+        }
+
     }
     endShape();
 }

@@ -46,16 +46,7 @@ Pattern.prototype.create = function(alist, acolor, weight) {
         this.path[i] = createVector(this.p[alist[i]].x, this.p[alist[i]].y);
     }
 }
-Pattern.prototype.addToLayer = function(layer, pos, offset) {
-    for (var i = 0; i < this.path.length; i++) {
-        var p = pos.copy();
-        p.add(offset);
-        p.add(this.path[i]);
-        p.z = 0.2;
-        append(layer.p, p);
 
-    }
-}
 Pattern.prototype.draw = function(center, a) {
 
     push();
