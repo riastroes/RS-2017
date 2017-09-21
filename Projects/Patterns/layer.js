@@ -17,45 +17,71 @@ function Layer(layer, settings) {
 
     this.p = [];
 }
-Layer.prototype.draw = function(from, to, acolor) {
+Layer.prototype.draw = function(acolor) {
     strokeWeight = 1;
     stroke(acolor);
     noFill();
     beginShape();
-    for (var i = from; i < to; i++) {
+    for (var i = 0; i < this.p.length; i++) {
         vertex(this.p[i].x, this.p[i].y);
     }
     endShape();
 }
-Layer.prototype.generate = function(layer, from,to){
+Layer.prototype.generate = function(layer) {
     var z = 0.2 + (layer * this.layerheight);
-    append(this.commands,"G0 Z" + z );
-    for(var i = from; i < to; i++){
-        
-        
-            var x = this.p[i].x * this.scale ;
-            x = floor(x * 100)/100;
-            var y = this.p[i].y * this.scale;
-            y = floor(y * 100)/100;
-            var z;
-            if(i == from){
-                z = 0;
-            }
-            else{
-                z = this.p[i].z;
-            }
-            
-            var dvector = p5.Vector.sub(this.p[i], this.p[i-1]);
-            var d = dvector.mag()* this.scale;
-        
-        
-            var kz = this.totallayerheight * z;
-            if(z == 0){
-              append(this.commands, "G0 X" + x + " Y" + y );
-            }
-            else{
-              gcode.extrude += (d * this.thickness);
-              append(this.commands, "G1 X" + x + " Y" + y + " E" + gcode.extrude );
-            }
+    append(this.commands, "G0 Z" + z);
+    //skirt
+    // for (var i = from; i < from + 8; i++) {
+
+
+    //     var x = this.p[i].x * this.scale;
+    //     x = floor(x * 100) / 100;
+    //     var y = this.p[i].y * this.scale;
+    //     y = floor(y * 100) / 100;
+    //     var z;
+    //     if (i == from) {
+    //         z = 0;
+    //     } else {
+    //         z = this.p[i].z;
+    //     }
+
+    //     var dvector = p5.Vector.sub(this.p[i], this.p[i - 1]);
+    //     var d = dvector.mag() * this.scale;
+
+
+    //     var kz = this.totallayerheight * z;
+    //     if (z == 0) {
+    //         append(this.commands, "G0 X" + x + " Y" + y);
+    //     } else {
+    //         gcode.extrude += (d * this.thickness);
+    //         append(this.commands, "G1 X" + x + " Y" + y - 20 + " E" + gcode.extrude);
+    //     }
+    // }
+
+    for (var i = 0; i < this.p.length; i++) {
+
+
+        var x = this.p[i].x * this.scale;
+        x = floor(x * 100) / 100;
+        var y = this.p[i].y * this.scale;
+        y = floor(y * 100) / 100;
+        var z;
+        if (i == 0) {
+            z = 0;
+        } else {
+            z = this.p[i].z;
+        }
+
+        var dvector = p5.Vector.sub(this.p[i], this.p[i - 1]);
+        var d = dvector.mag() * this.scale;
+
+
+        var kz = this.totallayerheight * z;
+        if (z == 0) {
+            append(this.commands, "G0 X" + x + " Y" + y);
+        } else {
+            gcode.extrude += (d * this.thickness);
+            append(this.commands, "G1 X" + x + " Y" + y + " E" + gcode.extrude);
+        }
     }
 }

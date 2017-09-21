@@ -25,15 +25,17 @@ var totlayerheight;
 var layers;
 var l;
 var offset;
+var skirt;
+
 
 function setup() {
 
-    var canvas = createCanvas(800, 800);
-    windowscale = ((windowWidth - 100) / 2) / 800;
+    var canvas = createCanvas(920, 920);
+    windowscale = ((windowWidth - 100) / 2) / 920;
 
 
-    maxw = 10;
-    maxh = 10; //height / 35;
+    maxw = 9;
+    maxh = 9; //height / 35;
 
     pool = new Color();
     pool.random(10);
@@ -50,9 +52,10 @@ function setup() {
     strokeCap(SQUARE);
     noFill();
     textSize(30);
-    settings = new Settings("Anet", "PLAFLEX", "normal");
+    settings = new Settings("Anet", "SAT1N", "normal");
     layers = [];
     gcode = new Gcode(settings);
+    skirt = [];
 
 
 
@@ -61,9 +64,10 @@ function setup() {
 
 function draw() {
     push();
-    translate(50, 50);
+    translate(25, 25);
     scale(windowscale);
     l = frameCount - 1;
+
 
     layers[l] = new Layer(l, settings);
     stroke(colors[l]);
@@ -74,48 +78,59 @@ function draw() {
     //rlist[0] = [24, 22, 17, 16, 3, 13, 1];
     //rlist[1] = [17, 16, 3, 1];
 
-//      list[0] = [0,1,10,22,14,3,4 ];             //pattern3
-   // list[1] = [20,21,2,23,24];                 //pattern3
+    //      list[0] = [0,1,10,22,14,3,4 ];             //pattern3
+    // list[1] = [20,21,2,23,24];                 //pattern3
 
-   // rlist[0] = [4,3,14,22,10,1,0];            //pattern3
-   // rlist[1] = [24,23,2,21,20];               //pattern3 */
-  /*
-  /* NOPPEN */
+    // rlist[0] = [4,3,14,22,10,1,0];            //pattern3
+    // rlist[1] = [24,23,2,21,20];               //pattern3 */
+    /*
+    /* NOPPEN */
 
-    list[0] = [10,5,1,2,8,13 ];             //pattern3
-    list[1] = [10,15,21,22,18,13];                 //pattern3
+    skirt[0] = [0, 4];
+    skirt[1] = [9, 5];
 
-    rlist[0] = [14,13,8,2,1,5];            //pattern3
-    rlist[1] = [14,13,18,22,21,15];               //pattern3
+    list[0] = [10, 5, 1, 2, 8, 13, 14]; //pattern3
+    list[1] = [10, 16, 17, 13, 14]; //pattern3
+
+    rlist[0] = [14, 13, 8, 2, 1, 5, 10]; //pattern3
+    rlist[1] = [14, 13, 17, 16, 10]; //pattern3
 
 
 
     grid = new Grid();
     grid.init(maxw, maxh);
 
-    var from = 0;
-    var to = 0;
     for (var y = 0; y < maxh; y++) {
-        if (y % 2 == 0) {
+        if (y % 2 == 1) {
             pattern.create(list[l], colors[3], 2);
-            //from = y * maxw * list[l].length;
             for (var i = 0; i < maxw; i++) {
                 pattern.addToLayer(layers[l], grid.p[(maxw * y) + i], offset);
             }
         } else {
-            pattern.create(rlist[l], colors[4], 2);
-            //from = y * maxw * rlist[l].length;
-            for (var i = maxw - 1; i >= 0; i--) {
-                pattern.addToLayer(layers[l], grid.p[(maxw * y) + i], offset);
+            if (y == 0) {
+                pattern.create(skirt[0], colors[5], 2);
+                for (var i = 0; i < maxw; i++) {
+                    pattern.addToLayer(layers[l], grid.p[(maxw * y) + i], offset);
+                }
+                pattern.create(skirt[1], colors[5], 2);
+                for (var i = maxw - 1; i >= 0; i--) {
+                    pattern.addToLayer(layers[l], grid.p[(maxw * y) + i], offset);
+                }
+
+            } else {
+                pattern.create(rlist[l], colors[4], 2);
+                for (var i = maxw - 1; i >= 0; i--) {
+                    pattern.addToLayer(layers[l], grid.p[(maxw * y) + i], offset);
+                }
             }
+
         }
 
 
 
     }
-    to = (maxh * maxw * list[l].length); //+ (maxw * list[l].length);
-    layers[l].draw(from, to, colors[l]);
-    layers[l].generate(l, from, to);
+    layers[l].draw(colors[l]);
+    layers[l].generate(l);
 
 
 
@@ -450,7 +465,7 @@ function pattern13(weight, angle) {
 }
 
 function mousePressed() {
-    gcode.save("pattern3");
+    gcode.save("Patroon rond1");
     noLoop();
 }
 

@@ -1,14 +1,14 @@
-function Gcode(settings){
+function Gcode(settings) {
     this.bedtemp = settings.bedtemp;
     this.nozzletemp = settings.nozzletemp;
     this.filement = settings.filement;
     this.extrude = 0;
-    this.commands = new Array(";Project: Generate Knitting",";Ria Stroes");
+    this.commands = new Array(";Project: Generate Knitting", ";Ria Stroes");
 }
 
-Gcode.prototype.startCode = function(){
+Gcode.prototype.startCode = function() {
     append(this.commands, ";start code");
-    append(this.commands, "M140 S"+ this.bedtemp);
+    append(this.commands, "M140 S" + this.bedtemp);
     append(this.commands, "M109 T0 S" + this.nozzletemp);
     append(this.commands, "T0");
 
@@ -28,10 +28,10 @@ Gcode.prototype.startCode = function(){
     //append(this.commands, "M106            ;fan on");
     append(this.commands, "M117 Printing...");
 }
-Gcode.prototype.getCode = function(commands){
+Gcode.prototype.getCode = function(commands) {
     this.commands = concat(this.commands, commands);
 }
-Gcode.prototype.endCode = function(){
+Gcode.prototype.endCode = function() {
     append(this.commands, ";end code");
     //append(this.commands, "M107               ;fan off");
     append(this.commands, "G1 Z15 F200        ;move Z up a bit");
@@ -43,45 +43,47 @@ Gcode.prototype.endCode = function(){
     append(this.commands, "M84                ;steppers off");
     append(this.commands, "G90                ;absolute positioning");
 }
-Gcode.prototype.getCodeToStart = function(skirtlast, knittingfirst, thickness, speed, scale){
-  var tostart = new Array("");
+Gcode.prototype.getCodeToStart = function(skirtlast, knittingfirst, thickness, speed, scale) {
+    var tostart = new Array("");
 
-  append(tostart, ";tostart");
-  append(tostart, "G1 F" + this.speed );
-  
-  var v = p5.Vector.sub(skirtlast, knittingfirst);
-  v.mult(app.settings.scale);
-  this.extrude += (v.mag() * this.layerheight * this.thickness);
-  tostart = append(tostart, "G0  Z3");
-  tostart = append(tostart, "G1  X"+  (knittingfirst.x*scale) + " Y"+ (knittingfirst.y*scale) );
-  tostart = append(tostart, "G0  Z"+ (this.layer* this.layerheight));
-  this.commands.concat(tostart);
+    append(tostart, ";tostart");
+    append(tostart, "G1 F" + this.speed);
+
+    var v = p5.Vector.sub(skirtlast, knittingfirst);
+    v.mult(app.settings.scale);
+    this.extrude += (v.mag() * this.layerheight * this.thickness);
+    tostart = append(tostart, "G0  Z3");
+    tostart = append(tostart, "G1  X" + (knittingfirst.x * scale) + " Y" + (knittingfirst.y * scale));
+    tostart = append(tostart, "G0  Z" + (this.layer * this.layerheight));
+    this.commands.concat(tostart);
 }
 
 
-Gcode.prototype.save = function(name){
+Gcode.prototype.save = function(name) {
 
-    save(this.commands,name + ".gcode");
+    save(this.commands, name + ".gcode");
     console.log(name + " is saved.");
 }
-Gcode.prototype.generate = function(layers, skirt, knittings){
-  this.startCode();
-  if(skirt != undefined){
-    this.getCode(skirt.commands);
-  }
-
-  for(var i = 0; i < knittings.length; i++){
-    if(i <  layers.length){
-      this.getCode(layers[i].commands);
+Gcode.prototype.generate = function(layers, skirt, knittings) {
+    this.startCode();
+    if (skirt != undefined) {
+        this.getCode(skirt.commands);
     }
-    this.getCode(knittings[i].commands);
-  }
-  this.endCode();
+
+    for (var i = 0; i < knittings.length; i++) {
+        if (i < layers.length) {
+            this.getCode(layers[i].commands);
+        }
+        this.getCode(knittings[i].commands);
+    }
+    this.endCode();
 }
-Gcode.prototype.generateLayers = function(){
-  this.startCode();
-  for(var i = 0; i< layers.length; i++){
-    this.getCode(layers[i].commands);
-  }
-  this.endCode();
+
+Gcode.prototype.generateLayers = function() {
+    this.startCode();
+
+    for (var i = 0; i < layers.length; i++) {
+        this.getCode(layers[i].commands);
+    }
+    this.endCode();
 }

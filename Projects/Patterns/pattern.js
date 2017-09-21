@@ -32,18 +32,18 @@ function Pattern(patternwidth, patternheight) {
     this.p[24] = createVector(patternwidth / 2, patternheight / 2);
 
     this.path = [];
-    
+
 }
 Pattern.prototype.style = function(acolor, weight) {
     stroke(acolor);
     strokeWeight = weight;
     noFill();
 }
-Pattern.prototype.create = function(list, acolor, weight) {
+Pattern.prototype.create = function(alist, acolor, weight) {
     this.style(acolor, weight);
     this.path = [];
-    for (var i = 0; i < list.length; i++) {
-        this.path[i] = createVector(this.p[list[i]].x, this.p[list[i]].y);
+    for (var i = 0; i < alist.length; i++) {
+        this.path[i] = createVector(this.p[alist[i]].x, this.p[alist[i]].y);
     }
 }
 Pattern.prototype.addToLayer = function(layer, pos, offset) {

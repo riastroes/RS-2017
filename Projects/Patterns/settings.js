@@ -101,7 +101,7 @@ Settings.prototype.initMaterial = function() {
                                 //this.initStyle(0.3, 0.1, 600);//test ok 
                                 //this.initStyle(0.25, 0.15, 600);//test ok  
                             } else if (this.style == "normal") {
-                                this.initStyle(0.2, 0.15, 800); //getest met knittingapp
+                                this.initStyle(0.2, 0.2, 800); //getest met knittingapp
                                 // this.initStyle(0.5, 0.2, 800); //test ok (iphone etui)
                                 //this.initStyle(0.2, 0.2, 800); //test te vet
 
@@ -199,7 +199,7 @@ Settings.prototype.initMaterial = function() {
                     this.initStyle(0.5, 0.04, 800); // ok getest in knitting app  // ok getest in DUBAI KNITTING APP
                 }
                 if ((this.material == "PLA" || this.material == "PLAz") && this.style == "normal") {
-                    this.initStyle(0.4, 0.05, 800); // ok getest in knitting app  // ok getest in DUBAI KNITTING APP
+                    this.initStyle(0.3, 0.05, 800); // ok getest in knitting app  // ok getest in DUBAI KNITTING APP
                 }
                 if (this.material == "PLAFLEX" && this.style == "fine") {
                     this.initStyle(0.5, 0.2, 800); // ok getest in knitting app  // ok getest in DUBAI KNITTING APP
