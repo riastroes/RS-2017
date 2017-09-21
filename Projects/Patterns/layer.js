@@ -18,12 +18,15 @@ function Layer(layer, settings) {
     this.p = [];
 }
 Layer.prototype.addPattern = function(offset, pos, path) {
+    
     for (var i = 0; i < path.length; i++) {
         var p = pos.copy();
         p.add(offset);
         p.add(path[i]);
         p.z = 0.2;
         append(this.p, p);
+       
+        
     }
 }
 Layer.prototype.draw = function(index, acolor) {
@@ -31,8 +34,9 @@ Layer.prototype.draw = function(index, acolor) {
     stroke(acolor);
     noFill();
     beginShape();
-    for (var i = 0; i < this.p.length; i++) {
-        if (i <= index) {
+    vertex(this.p[0].x, this.p[0].y);
+    for (var i = 1; i < this.p.length; i++) {
+        if (i <= index && ( abs(this.p[i].x - this.p[i-1].x) > 1 || abs( this.p[i].y - this.p[i-1].y) >1)) {
             vertex(this.p[i].x, this.p[i].y);
         }
 

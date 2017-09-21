@@ -14,11 +14,12 @@ var colors;
 var a, b, c, d;
 var maxw, maxh;
 var marge;
+var offset;
+var skirt;
 var pattern;
 var list;
 var rlist;
-var c;
-var a;
+
 var windowscale;
 
 var settings;
@@ -26,18 +27,17 @@ var totlayerheight;
 var layers;
 var layer;
 var l;
-var offset;
-var skirt;
+
 
 
 function setup() {
 
-    var canvas = createCanvas(920, 920);
-    windowscale = 1; //((windowWidth - 110) / 2) / 920;
+    var canvas = createCanvas(1100, 1100);
+    windowscale = 0.75;
 
 
-    maxw = 11;
-    maxh = 11; //height / 35;
+    maxw = 13;
+    maxh = 13; //height / 35;
     marge = 50;
 
     pool = new Color();
@@ -109,7 +109,7 @@ function setup() {
 
 function draw() {
     push();
-    //translate(25, 25);
+    translate(0,0);
     scale(windowscale);
 
     if (layer == 0 && frameCount == 1) {
@@ -539,10 +539,7 @@ function pattern13(weight, angle) {
 }
 
 function mousePressed() {
-    gcode.save("Patroon rond1");
+    gcode.save("Patroon rond regelmatig " + maxw + "x" + maxh);
     noLoop();
 }
 
-function keyPressed() {
-    loop();
-}
