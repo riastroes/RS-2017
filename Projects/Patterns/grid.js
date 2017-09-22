@@ -66,6 +66,18 @@ Grid.prototype.round = function(radius, grow) {
         }
     }
 }
+Grid.prototype.changeToCenter = function(){
+    var center = createVector(width/2, height/2);
+    for(var i = 0; i < this.p.length; i++){
+        
+        var sub = center.copy();
+        sub.sub(this.p[i]);
+        sub.normalize();
+        sub.mult( sub.mag()*150);
+        this.p[i].add(sub);
+    }
+
+}
 Grid.prototype.draw = function() {
     stroke(0);
     strokeWeight(3);

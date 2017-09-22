@@ -24,19 +24,38 @@ Layer.prototype.addPattern = function(offset, pos, path) {
         p.add(offset);
         p.add(path[i]);
         p.z = 0.2;
-        append(this.p, p);
+        if(p.x > 0 && p.x < width && p.y > 0 && p.y < height){
+            append(this.p, p);
+        }
+        else{
+            console.log("FATAL ERROR IN PRINT");
+        }
+        
        
         
     }
 }
-Layer.prototype.draw = function(index, acolor) {
+Layer.prototype.change = function(min,max) {
+    var r = [];
+    for (var i = 1; i < this.p.length; i++) {
+        r[0] = random(min,max);
+        r[1] = random(min,max);
+        this.p[i].x += r[0];
+        this.p[i].y += r[1];
+    }
+        
+        
+}
+Layer.prototype.draw = function( acolor) {
     strokeWeight = 1;
     stroke(acolor);
     noFill();
     beginShape();
     vertex(this.p[0].x, this.p[0].y);
+    
     for (var i = 1; i < this.p.length; i++) {
-        if (i <= index && ( abs(this.p[i].x - this.p[i-1].x) > 1 || abs( this.p[i].y - this.p[i-1].y) >1)) {
+       
+        if (( abs(this.p[i].x - this.p[i-1].x) > 1 || abs( this.p[i].y - this.p[i-1].y) >1)) {
             vertex(this.p[i].x, this.p[i].y);
         }
 
@@ -46,33 +65,7 @@ Layer.prototype.draw = function(index, acolor) {
 Layer.prototype.generate = function(layer) {
     var z = 0.2 + (layer * this.layerheight);
     append(this.commands, "G0 Z" + z);
-    //skirt
-    // for (var i = from; i < from + 8; i++) {
-
-
-    //     var x = this.p[i].x * this.scale;
-    //     x = floor(x * 100) / 100;
-    //     var y = this.p[i].y * this.scale;
-    //     y = floor(y * 100) / 100;
-    //     var z;
-    //     if (i == from) {
-    //         z = 0;
-    //     } else {
-    //         z = this.p[i].z;
-    //     }
-
-    //     var dvector = p5.Vector.sub(this.p[i], this.p[i - 1]);
-    //     var d = dvector.mag() * this.scale;
-
-
-    //     var kz = this.totallayerheight * z;
-    //     if (z == 0) {
-    //         append(this.commands, "G0 X" + x + " Y" + y);
-    //     } else {
-    //         gcode.extrude += (d * this.thickness);
-    //         append(this.commands, "G1 X" + x + " Y" + y - 20 + " E" + gcode.extrude);
-    //     }
-    // }
+    
 
     for (var i = 0; i < this.p.length; i++) {
 

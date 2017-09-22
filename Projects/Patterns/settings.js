@@ -25,7 +25,7 @@ Settings.prototype.initMaterial = function() {
     switch (this.printer) {
         case "Anet":
             {
-                this.scale = 0.2; //canvas = 1000 px, bed = 220 mm
+                this.scale = 0.2; //canvas = 1100 px, bed = 220 mm
                 this.filement = 1.75;
 
                 switch (this.material) {
@@ -193,7 +193,7 @@ Settings.prototype.initMaterial = function() {
         case "Ultimaker2+":
             { //nozzle 0.4
 
-                this.scale = 0.20; //canvas = 1000 px, bed = 230 mm
+                this.scale = 0.20; //canvas = 1100 px, bed = 220 mm
                 this.filement = 2.85;
                 if ((this.material == "PLA" || this.material == "PLAz") && this.style == "fine") {
                     this.initStyle(0.5, 0.04, 800); // ok getest in knitting app  // ok getest in DUBAI KNITTING APP

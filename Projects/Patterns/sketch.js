@@ -27,17 +27,18 @@ var totlayerheight;
 var layers;
 var layer;
 var l;
+var issaved;
 
 
 
 function setup() {
 
-    var canvas = createCanvas(1100, 1100);
+    var canvas = createCanvas(1100, 1100);     //X22O EN Y220 is het hoogste
     windowscale = 0.75;
 
 
-    maxw = 13;
-    maxh = 13; //height / 35;
+    maxw = 10;
+    maxh = 10; //height / 35;
     marge = 50;
 
     pool = new Color();
@@ -56,7 +57,7 @@ function setup() {
     strokeCap(SQUARE);
     noFill();
     textSize(30);
-    settings = new Settings("Anet", "SAT1N", "normal");
+    settings = new Settings("Ultimaker2+", "PLAz", "normal");
     layers = [];
     layers[0] = new Layer(0, settings);
     layer = 0;
@@ -64,7 +65,7 @@ function setup() {
 
     grid = new Grid();
     grid.init(marge, maxw, maxh);
-    grid.draw();
+    
 
     skirt = [];
 
@@ -100,7 +101,8 @@ function setup() {
     rlist[3] = [22, 17, 13, 8, 2]; //pattern3 
 
 
-
+    issaved = false;
+    
 
 
 }
@@ -113,6 +115,8 @@ function draw() {
     scale(windowscale);
 
     if (layer == 0 && frameCount == 1) {
+        grid.changeToCenter();
+        grid.draw();
 
         //create skirt
         var y = 0;
@@ -124,6 +128,9 @@ function draw() {
         for (var x = maxw - 1; x >= 0; x--) {
             layers[layer].addPattern(offset, grid.p[x], pattern.path);
         }
+
+        //end skirt
+
         for (var y = 1; y < maxh; y++) {
             pattern.create(list[0], colors[2], 2);
             for (var x = 0; x < maxw; x++) {
@@ -146,7 +153,17 @@ function draw() {
         }
 
     }
-
+    if (frameCount == 1) {
+        
+       layers[layer].change(-10,10);
+        
+        layers[layer].draw( colors[0]);
+        layers[layer].generate(layer);
+        
+        gcode.generateLayers();
+        
+    }
+    pop();
 
 
 
@@ -203,16 +220,16 @@ function draw() {
     // }
 
 
-    layers[layer].generate(layer);
+    
 
 
 
-    pop();
-    if (frameCount == 1) {
-        gcode.generateLayers();
-        //noLoop();
-    }
-    layers[layer].draw(frameCount, colors[0]);
+    
+    
+    // if(frameCount % 10 == 0){
+    //     layers[layer].draw( frameCount, colors[0]);
+    // }
+    
 
 }
 //pattern functions
@@ -539,7 +556,10 @@ function pattern13(weight, angle) {
 }
 
 function mousePressed() {
-    gcode.save("Patroon rond regelmatig " + maxw + "x" + maxh);
-    noLoop();
+    if(!issaved){
+        gcode.save("Patroon rond regelmatig " + maxw + "x" + maxh);
+        issaved = true;
+    }
+    
 }
 
