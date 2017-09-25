@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>CREATE A STORY</title>
+<META NAME="COPYRIGHT" CONTENT="&copy; Ria Stroes">
+<META HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<script src="/RS-2017/libraries/p5.min.js" type="text/javascript"></script>
+<script src="/RS-2017/libraries/p5.dom.min.js" type="text/javascript"></script>
+<script src="script.js" type="text/javascript"></script>
+<script src="loop.js" type="text/javascript"></script>
+
+
+<style>
+  body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif;font-size:18px}
+  div{font-size:14px}
+  .header{background-image: url("create a story.jpg");
+  color:white;
+  font-size:130px;
+  vertical-align: center;
+  height:300px;}
+  
+.label{width: 150px; float:left;}
+h1{padding:10px;}
+</style>
+</head>
+<body>
+  <h1 class="w3-center header">CREATE A STORY</h1>
+<div class="w3-row">
+  <div class="w3-container w3-third">
+    
+    <br/><br/>
+    <p>Add three images and discover your own story with your mouse!<br/>
+    Hover over the result with your mouse.<br/>
+    You can change the images until your story is told.</p>
+    <span class="label" >search: </span><br/>
+    <input id="inImage1" type="text" value="" />
+    <button id="btnimage1" onclick="selectImage1()">load</button><span id="loadimage1"></span><br/>
+    <input id="inImage2" type="text" value=""  />
+    <button id="btnimage2" onclick="selectImage2()">load</button><span id="loadimage2"></span><br/>
+    <input id="inImage3" type="text" value=""  />
+    <button id="btnimage3" onclick="selectImage3()">load</button><span id="loadimage3"></span><br/><br/>
+    
+    <span class="label" >mode: </span><select id="selectmode" onchange="selectMode()">
+      <option value="source-over" >BLEND</option>
+      <option value="lighter">ADD</option>
+      <option value="color-burn" selected>BURN</option>
+      <option value="color-dodge">DODGE</option>
+      <option value="soft-light">SOFT_LIGHT</option>
+      <option value="hard-light">HARD_LIGHT</option>
+      <option value="exclusion">EXCLUSION</option>
+      <option value="overlay">OVERLAY</option>
+      <option value="screen">SCREEN</option>
+      <option value="difference" selected>DIFFERENCE</option>
+      <option value="multiply">MULTIPLY</option>
+      <option value="darken">DARKEST</option>
+      <option value="lighten">LIGHTEST</option></select><br/>
+
+
+      <span class="label" >loop mode: </span><select id="selectloopmode" onchange="selectLoopMode()">
+      <option value="soft-light">SOFT_LIGHT</option>
+      <option value="exclusion">EXCLUSION</option>
+      <option value="difference" selected>DIFFERENCE</option>
+      </select><br/><br/><br/>
+    <span class="label" >&nbsp;</span><button class="w3-btn w3-border" onclick="download()">Download</button>
+  </div>
+  <div class="w3-container w3-twothird ">
+  <div id="divcanvas" >
+      </div>
+  </div>
+    <h1>Some of my results:</h1>
+
+  <div class="w3-row">
+  <div class="w3-container w3-half">
+  <img class="w3-image" src="result/bubble-bubbles-blue.jpg" alt="bubble-bubbles-blue" />
+  <span>bubble-bubbles-blue</span>
+  </div>
+<div class="w3-container w3-half">
+  <img class="w3-image" src="result/bubble-bubbles-purple.jpg" alt="bubble-bubbles-purple" />
+  <span>bubble-bubbles-purple</span>
+  </div>
+</div>
+<div class="w3-row">
+  <div class="w3-container w3-half">
+  <img class="w3-image" src="result/bubbles-octopus-mushroom.jpg" alt="bubbles-octopus-mushroom" />
+  <span>bubbles-octopus-mushroom</span>
+  </div>
+<div class="w3-container w3-half">
+  <img class="w3-image" src="result/dunes-old man-flower.jpg" alt="dunes-old man-flower" />
+  <span>dunes-old man-flower</span>
+  </div>
+</div>
+<div class="w3-row">
+  <div class="w3-container w3-half">
+  <img class="w3-image" src="result/floral pattern-flower-butterfly.jpg" alt="floral pattern-flower-butterfly" />
+  <span>floral pattern-flower-butterfly</span>
+  </div>
+<div class="w3-container w3-half">
+  <img class="w3-image" src="result/mountain-dessert-coast.jpg" alt="mountain-dessert-coast" />
+  <span>mountain-dessert-coast</span>
+  </div>
+</div>
+<div class="w3-row">
+  <div class="w3-container w3-half">
+  <img class="w3-image" src="result/water-desert-jellyfish.jpg" alt="water-desert-jellyfish" />
+  <span>water-desert-jellyfish</span>
+  </div>
+<div class="w3-container w3-half">
+  <img class="w3-image" src="result/water-people-storm.jpg" alt="water-people-storm" />
+  <span>water-people-storm</span>
+  </div>
+</div>
+</body>
+</html>
