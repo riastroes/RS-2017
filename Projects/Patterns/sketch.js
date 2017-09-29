@@ -26,6 +26,7 @@ var settings;
 var totlayerheight;
 var layers;
 var layer;
+var maxlayers;
 var l;
 var issaved;
 
@@ -33,7 +34,7 @@ var issaved;
 
 function setup() {
 
-    var canvas = createCanvas(1100, 1100);     //X22O EN Y220 is het hoogste
+    var canvas = createCanvas(1100, 1100); //X22O EN Y220 is het hoogste
     windowscale = 0.75;
 
 
@@ -59,13 +60,17 @@ function setup() {
     textSize(30);
     settings = new Settings("Ultimaker2+", "PLAz", "normal");
     layers = [];
-    layers[0] = new Layer(0, settings);
+    maxlayers = 3;
+    for (var f = 0; f < maxlayers; f++) {
+        layers[f] = new Layer(f, settings);
+    }
+
     layer = 0;
     gcode = new Gcode(settings);
 
     grid = new Grid();
     grid.init(marge, maxw, maxh);
-    
+
 
     skirt = [];
 
@@ -102,20 +107,28 @@ function setup() {
 
 
     issaved = false;
-    
+
 
 
 }
 
+function mousePressed() {
+    if (!issaved) {
+        gcode.save("PRO" + maxw + "x" + maxh);
+        issaved = true;
+    }
 
+}
 
 function draw() {
     push();
-    translate(0,0);
+    translate(0, 0);
     scale(windowscale);
 
     if (layer == 0 && frameCount == 1) {
-        grid.changeToCenter();
+
+        //naar centrum trekken
+        //grid.changeToCenter();
         grid.draw();
 
         //create skirt
@@ -129,41 +142,47 @@ function draw() {
             layers[layer].addPattern(offset, grid.p[x], pattern.path);
         }
 
-        //end skirt
+    }
 
-        for (var y = 1; y < maxh; y++) {
-            pattern.create(list[0], colors[2], 2);
-            for (var x = 0; x < maxw; x++) {
-                layers[layer].addPattern(offset, grid.p[(maxw * y) + x], pattern.path);
-            }
-            pattern.create(rlist[1], colors[2], 2);
-            for (var x = maxw - 1; x >= 0; x--) {
-                layers[layer].addPattern(offset, grid.p[(maxw * y) + x], pattern.path);
-            }
-        }
+    //end skirt
+    //patroon Rond
+
+    for (var y = 1; y < maxh; y++) {
+        pattern.create(list[0], colors[2], 2);
         for (var x = 0; x < maxw; x++) {
-            pattern.create(rlist[2], colors[2], 2);
-            for (var y = maxh - 1; y > 0; y--) {
-                layers[layer].addPattern(offset, grid.p[(maxw * y) + x], pattern.path);
-            }
-            pattern.create(list[3], colors[2], 2);
-            for (var y = 1; y < maxh; y++) {
-                layers[layer].addPattern(offset, grid.p[(maxw * y) + x], pattern.path);
-            }
+            layers[layer].addPattern(offset, grid.p[(maxw * y) + x], pattern.path);
         }
+        pattern.create(rlist[1], colors[2], 2);
+        for (var x = maxw - 1; x >= 0; x--) {
+            layers[layer].addPattern(offset, grid.p[(maxw * y) + x], pattern.path);
+        }
+    }
+    for (var x = 0; x < maxw; x++) {
+        pattern.create(rlist[2], colors[2], 2);
+        for (var y = maxh - 1; y > 0; y--) {
+            layers[layer].addPattern(offset, grid.p[(maxw * y) + x], pattern.path);
+        }
+        pattern.create(list[3], colors[2], 2);
+        for (var y = 1; y < maxh; y++) {
+            layers[layer].addPattern(offset, grid.p[(maxw * y) + x], pattern.path);
+        }
+    }
 
+
+    if (frameCount <= maxlayers) {
+
+        //regelmatig of onregelmatig patroon rond
+        layers[layer].change(-10, 10);
     }
-    if (frameCount == 1) {
-        
-       layers[layer].change(-10,10);
-        
-        layers[layer].draw( colors[0]);
-        layers[layer].generate(layer);
-        
+    layers[layer].draw(colors[0]);
+    layers[layer].generate(layer);
+
+    if (frameCount == maxlayers) {
         gcode.generateLayers();
-        
     }
+
     pop();
+    layer++
 
 
 
@@ -220,16 +239,16 @@ function draw() {
     // }
 
 
-    
 
 
 
-    
-    
+
+
+
     // if(frameCount % 10 == 0){
     //     layers[layer].draw( frameCount, colors[0]);
     // }
-    
+
 
 }
 //pattern functions
@@ -554,12 +573,3 @@ function pattern13(weight, angle) {
         pattern.draw(grid.p[i], angle);
     }
 }
-
-function mousePressed() {
-    if(!issaved){
-        gcode.save("Patroon rond regelmatig " + maxw + "x" + maxh);
-        issaved = true;
-    }
-    
-}
-
