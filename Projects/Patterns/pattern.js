@@ -48,7 +48,7 @@ Pattern.prototype.create = function(alist, acolor, weight) {
 }
 
 Pattern.prototype.draw = function(center, a) {
-
+    this.style(0,1);
     push();
     translate(center.x, center.y);
     rotate(a);
