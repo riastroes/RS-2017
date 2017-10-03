@@ -1,6 +1,7 @@
 function Grid() {
     this.p = [];
 
+
 }
 Grid.prototype.init = function(marge, maxx, maxy) {
     var i = 0;
@@ -13,6 +14,61 @@ Grid.prototype.init = function(marge, maxx, maxy) {
 
         }
     }
+}
+Grid.prototype.reorder = function() {
+    var newp = [];
+    var reversep = [];
+    var n = 0;
+    var r = 0;
+    var nrechts = true;
+
+    for (var i = 1; i < this.p.length - 1; i++) {
+        if (this.p[i].y != this.p[i - 1].y) {
+            nrechts != nrechts;
+            if (reversep.length > 0) {
+
+                console.log(reversep.length);
+                for (var j = reversep.length - 1; j >= 0; j--) {
+                    newp[n] = reversep[j].copy();
+                    n += 1;
+                }
+                reversep = [];
+                r = 0;
+            }
+        } else {
+
+            if (nrechts) { //naar rechts: this.p[i].x > this.p[i - 1].x
+                newp[n] = this.p[i].copy();
+                n += 1;
+            } else { //naar links
+                reversep[r] = this.p[i].copy();
+                r += 1;
+            }
+        }
+
+    }
+    this.p = [];
+    this.p = newp;
+    for (var i = 0; i < this.p.length; i++) {
+        console.log(this.p[i].x, this.p[i].y);
+    }
+}
+Grid.prototype.maskImage = function(marge, img) {
+    var newp = [];
+    var n = 0;
+    img.loadPixels();
+
+    for (var i = 0; i < this.p.length; i++) {
+        if ((img.pixels[((this.p[i].y - marge) * img.width * 4) + ((this.p[i].x - marge) * 4) + 3] == 255) &&
+            (img.pixels[((this.p[i].y - marge) * img.width * 4) + ((this.p[i].x - marge) * 4)] == 0)) {
+            newp[n] = this.p[i].copy();
+            n += 1;
+
+        }
+    }
+    this.p = [];
+    this.p = newp;
+
 }
 Grid.prototype.maskCircle = function(pos, radius) {
     //pos is an position
@@ -66,22 +122,23 @@ Grid.prototype.round = function(radius, grow) {
         }
     }
 }
-Grid.prototype.changeToCenter = function(){
-    var center = createVector(width/2, height/2);
-    for(var i = 0; i < this.p.length; i++){
-        
+Grid.prototype.changeToCenter = function() {
+    var center = createVector(width / 2, height / 2);
+    for (var i = 0; i < this.p.length; i++) {
+
         var sub = center.copy();
         sub.sub(this.p[i]);
         sub.normalize();
-        sub.mult( sub.mag()*150);
+        sub.mult(sub.mag() * 150);
         this.p[i].add(sub);
     }
 
 }
 Grid.prototype.draw = function() {
-    stroke(0);
+    stroke(255, 0, 0);
     strokeWeight(3);
     for (var i = 0; i < this.p.length; i++) {
         point(this.p[i].x, this.p[i].y);
     }
+
 }
