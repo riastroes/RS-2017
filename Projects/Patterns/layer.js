@@ -50,17 +50,21 @@ Layer.prototype.draw = function( acolor) {
     strokeWeight = 1;
     stroke(acolor);
     noFill();
+    if(this.p.length > 0){
+
+   
     beginShape();
     vertex(this.p[0].x, this.p[0].y);
     
-    for (var i = 1; i < this.p.length; i++) {
-       
-        if (( abs(this.p[i].x - this.p[i-1].x) > 1 || abs( this.p[i].y - this.p[i-1].y) >1)) {
-            vertex(this.p[i].x, this.p[i].y);
-        }
+        for (var i = 1; i < this.p.length; i++) {
+        
+            if (( abs(this.p[i].x - this.p[i-1].x) > 1 || abs( this.p[i].y - this.p[i-1].y) >1)) {
+                vertex(this.p[i].x, this.p[i].y);
+            }
 
+        }
+        endShape();
     }
-    endShape();
 }
 Layer.prototype.generate = function(layer) {
     var z = 0.2 + (layer * this.layerheight);

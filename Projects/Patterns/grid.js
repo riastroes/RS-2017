@@ -1,5 +1,6 @@
 function Grid() {
     this.p = [];
+    this.newp = [];
 
 
 }
@@ -16,95 +17,123 @@ Grid.prototype.init = function(marge, maxx, maxy) {
     }
 }
 Grid.prototype.reorder = function() {
-    var newp = [];
+    this.newp = [];
     var reversep = [];
     var n = 0;
     var r = 0;
     var nrechts = true;
 
-    for (var i = 1; i < this.p.length - 1; i++) {
+    this.newp[0] = this.p[0].copy();
+    n = 1;
+
+    for (var i = 1; i < this.p.length; i++) {
         if (this.p[i].y != this.p[i - 1].y) {
-            nrechts != nrechts;
+            nrechts = !nrechts;
             if (reversep.length > 0) {
 
-                console.log(reversep.length);
+                console.log(reversep);
                 for (var j = reversep.length - 1; j >= 0; j--) {
-                    newp[n] = reversep[j].copy();
+                    this.newp[n] = reversep[j].copy();
                     n += 1;
                 }
                 reversep = [];
                 r = 0;
             }
-        } else {
+        } 
 
-            if (nrechts) { //naar rechts: this.p[i].x > this.p[i - 1].x
-                newp[n] = this.p[i].copy();
-                n += 1;
-            } else { //naar links
-                reversep[r] = this.p[i].copy();
-                r += 1;
-            }
+        if (nrechts) { //naar rechts: this.p[i].x > this.p[i - 1].x
+            this.newp[n] = this.p[i].copy();
+            n += 1;
+        } else { //naar links
+            reversep[r] = this.p[i].copy();
+            r += 1;
         }
+        
 
     }
-    this.p = [];
-    this.p = newp;
-    for (var i = 0; i < this.p.length; i++) {
-        console.log(this.p[i].x, this.p[i].y);
+    if (reversep.length > 0) {
+        for (var j = reversep.length - 1; j >= 0; j--) {
+            this.newp[n] = reversep[j].copy();
+            n += 1;
+        }
     }
+    
+    this.p = [];
+    for (var i = 0; i < this.newp.length; i++) {
+        this.p[i] = this.newp[i].copy();
+    }
+    
 }
 Grid.prototype.maskImage = function(marge, img) {
-    var newp = [];
+    this.newp = [];
     var n = 0;
     img.loadPixels();
+    console.log("Pixels"+ img.pixels.length);
+    console.log(img.width);
+    console.log(marge);
 
     for (var i = 0; i < this.p.length; i++) {
-        if ((img.pixels[((this.p[i].y - marge) * img.width * 4) + ((this.p[i].x - marge) * 4) + 3] == 255) &&
-            (img.pixels[((this.p[i].y - marge) * img.width * 4) + ((this.p[i].x - marge) * 4)] == 0)) {
-            newp[n] = this.p[i].copy();
+        var r = (this.p[i].y - marge) % 4;
+        var s = (this.p[i].x - marge) % 4;
+        if ((img.pixels[(((this.p[i].y - marge)-r) * img.width * 4 ) + (((this.p[i].x - marge)-s)  * 4) + 3] == 255) &&
+            (img.pixels[(((this.p[i].y - marge)-r) * img.width * 4 ) + (((this.p[i].x - marge)-s)  * 4)]  < 10)) {
+                this.newp[n] = this.p[i].copy();
             n += 1;
 
         }
     }
-    this.p = [];
-    this.p = newp;
+    if(this.newp.length>0){
+
+        this.p = [];
+        for (var i = 0; i < this.newp.length; i++) {
+            this.p[i] = this.newp[i].copy();
+        }
+    }
+
+    
 
 }
 Grid.prototype.maskCircle = function(pos, radius) {
-    //pos is an position
+    //pos is a position
     var tot = [];
-    var newp = [];
+    this.newp = [];
     var n = 0;
 
     for (var i = 0; i < this.p.length; i++) {
 
         if (dist(pos.x, pos.y, this.p[i].x, this.p[i].y) < radius) {
-            newp[n] = this.p[i].copy();
+            this.newp[n] = this.p[i].copy();
             n += 1;
         }
     }
-
-
-    this.p = [];
-    this.p = newp;
+    if(this.newp.length>0){
+        this.p = [];
+        for (var i = 0; i < this.newp.length; i++) {
+            this.p[i] = this.newp[i].copy();
+        }
+    }
 
 }
 Grid.prototype.maskCircles = function(pos, radius) {
     //pos is an array of positions
-    var newp = [];
+    this.newp = [];
     var n = 0;
     for (var m = 0; m < pos.length; m++) {
         for (var i = 0; i < this.p.length; i++) {
 
             if (dist(pos[m].x, pos[m].y, this.p[i].x, this.p[i].y) < radius) {
-                newp[n] = this.p[i].copy();
+                this.newp[n] = this.p[i].copy();
                 n += 1;
             }
         }
 
     }
-    this.p = [];
-    this.p = newp;
+    if(this.newp.length>0){
+        this.p = [];
+        for (var i = 0; i < this.newp.length; i++) {
+            this.p[i] = this.newp[i].copy();
+        }
+    }
 
 }
 Grid.prototype.round = function(radius, grow) {
@@ -140,5 +169,11 @@ Grid.prototype.draw = function() {
     for (var i = 0; i < this.p.length; i++) {
         point(this.p[i].x, this.p[i].y);
     }
+    stroke(0,0,255);
+    strokeWeight(3);
+    for (var i = 0; i < this.newp.length; i++) {
+        point(this.newp[i].x,this.newp[i].y);
+    }
+
 
 }

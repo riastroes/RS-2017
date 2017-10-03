@@ -42,12 +42,13 @@ function setup() {
     model.resize(1000, 1000);
 
 
-    maxw = 20;
-    maxh = 20; //height / 35;
-    marge = 100;
+    maxw = 40;
+    maxh = 40; //height / 35;
+    marge = 50;
 
     pool = new Color();
-    pool.add(color(0, 0, 25));
+    pool.add(color(255,0,0));
+    pool.add(color(0, 0, 255));
     pool.add(color(0, 200, 200));
     colors = pool.colors;
     offset = createVector(0, 0);
@@ -76,9 +77,11 @@ function setup() {
     layer = 0;
     gcode = new Gcode(settings);
 
-    grid = new Grid();
+    newFunction();
     grid.init(marge, maxw, maxh);
+    
     grid.maskImage(marge, model);
+    grid.draw();
     grid.reorder();
 
 
@@ -103,10 +106,15 @@ function setup() {
     /* ZIGZAG */
 
     list[4] = [0, 24, 19, 1, 2, 14, 9, 3, 4];
+    //list[5] = [4, 3, 24, 0];
     list[5] = [4, 3, 9, 14, 2, 1, 19, 24, 0];
 
 
     issaved = false;
+
+    function newFunction() {
+        grid = new Grid();
+    }
     // image(model, 50, 50);
 
 
@@ -133,16 +141,16 @@ function draw() {
         grid.draw();
 
         //create skirt
-        var y = 0;
-        pattern.create(skirt[0], colors[2], 2);
-        for (var x = 0; x < maxw; x++) {
-            layers[layer].addPattern(offset, grid.p[x], pattern.path);
+        // var y = 0;
+        // pattern.create(skirt[0], colors[2], 2);
+        // for (var x = 0; x < maxw; x++) {
+        //     layers[layer].addPattern(offset, grid.p[x], pattern.path);
 
-        }
-        pattern.create(skirt[1], colors[2], 2);
-        for (var x = maxw - 1; x >= 0; x--) {
-            layers[layer].addPattern(offset, grid.p[x], pattern.path);
-        }
+        // }
+        // pattern.create(skirt[1], colors[2], 2);
+        // for (var x = maxw - 1; x >= 0; x--) {
+        //     layers[layer].addPattern(offset, grid.p[x], pattern.path);
+        // }
 
     }
 
@@ -150,21 +158,65 @@ function draw() {
     //patroon ZIGZAG
     if (layer < maxlayers) {
 
-        for (var i = 0; i < grid.p.length - 1; i++) {
+        // for (var y = 1; y < maxh; y++) {
+        //     pattern.create(list[4], colors[2], 2);
+        //     for (var x = 0; x < maxw; x++) {
+        //         layers[layer].addPattern(offset, grid.p[(maxw * y) + x], pattern.path);
+        //     }
+        //     pattern.create(list[5], colors[2], 2);
+        //     for (var x = maxw - 1; x >= 0; x--) {
+        //         layers[layer].addPattern(offset, grid.p[(maxw * y) + x], pattern.path);
+        //     }
+        // }
+
+        for (var i = 0; i < grid.p.length; i++) {
             if (i == 0 && grid.p[i].x < grid.p[i + 1].x) {
                 pattern.create(list[4], colors[2], 2);
-                console.log("l" + "," + grid.p[i].x + "," + grid.p[i].y);
-            } else if (i == 0 && grid.p[i].x > grid.p[i + 1].x) {
+                layers[layer].addPattern(offset, grid.p[i], pattern.path);
+                
+            } 
+            else if (i == 0 && grid.p[i].x >= grid.p[i + 1].x) {
                 pattern.create(list[5], colors[2], 2);
-                console.log("r" + "," + grid.p[i].x + "," + grid.p[i].y);
-            } else if (grid.p[i].y == grid.p[i + 1].y && grid.p[i].x <= grid.p[i + 1].x) {
+                layers[layer].addPattern(offset, grid.p[i], pattern.path);
+                
+            } 
+            else if(i == grid.p.length -1 && grid.p[i].x > grid.p[i - 1].x) {
+                //laaste
                 pattern.create(list[4], colors[2], 2);
-                console.log("l" + "," + grid.p[i].x + "," + grid.p[i].y);
-            } else if (grid.p[i].y == grid.p[i + 1].y && grid.p[i].x > grid.p[i + 1].x) {
+                layers[layer].addPattern(offset, grid.p[i], pattern.path);
+                
+            } 
+            else if(i == grid.p.length -1 && grid.p[i].x <= grid.p[i - 1].x) {
+                //laaste
                 pattern.create(list[5], colors[2], 2);
-                console.log("r" + "," + grid.p[i].x + "," + grid.p[i].y);
+                layers[layer].addPattern(offset, grid.p[i], pattern.path);
+                
+            } 
+            
+            else if (grid.p[i].y == grid.p[i + 1].y && grid.p[i].x <= grid.p[i + 1].x) {
+                pattern.create(list[4], colors[2], 2);
+                layers[layer].addPattern(offset, grid.p[i], pattern.path);
+                
+            } 
+            else if (grid.p[i].y == grid.p[i + 1].y && grid.p[i].x > grid.p[i + 1].x) {
+                pattern.create(list[5], colors[2], 2);
+                layers[layer].addPattern(offset, grid.p[i], pattern.path);
+                
             }
-            layers[layer].addPattern(offset, grid.p[i], pattern.path);
+            else if (grid.p[i].y < grid.p[i + 1].y && grid.p[i].x > grid.p[i - 1].x) {
+                pattern.create(list[4], colors[2], 2);
+                layers[layer].addPattern(offset, grid.p[i], pattern.path);
+                
+            }
+            else if (grid.p[i].y < grid.p[i + 1].y && grid.p[i].x <= grid.p[i-1].x) {
+                pattern.create(list[5], colors[2], 2);
+                layers[layer].addPattern(offset, grid.p[i], pattern.path);
+                
+            }
+            else{
+                console.log("vergeten");
+            }
+           
 
         }
 
@@ -187,7 +239,7 @@ function draw() {
         //variatie: regelmatig of onregelmatig patroon rond
         //layers[layer].change(-10, 10);
 
-        layers[layer].draw(colors[1]);
+        layers[layer].draw(colors[2]);
         layers[layer].generate(layer);
 
 
