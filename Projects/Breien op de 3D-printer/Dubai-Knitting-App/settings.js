@@ -39,7 +39,6 @@ Settings.prototype.initMaterial = function() {
                             }
                             break;
                         }
-<
                     case "PLAw":
                         {
                             this.materialcode = "PLAw";
@@ -272,11 +271,7 @@ Settings.prototype.initPrinter = function() {
                 this.bedtemp = 50;
                 break;
             }
-<<<<<<< HEAD
-        case "PLAFLEX":
-            {
-                this.nozzletemp = 200;
-=======
+
         case "PLAw":
             {
                 this.nozzletemp = 210;
@@ -292,7 +287,6 @@ Settings.prototype.initPrinter = function() {
         case "PLAFLEX":
             {
                 this.nozzletemp = 210;
->>>>>>> origin/master
                 this.bedtemp = 50;
                 break;
             }
