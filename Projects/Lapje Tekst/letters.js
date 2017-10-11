@@ -8,18 +8,20 @@ Alphabet.prototype.index = function(letter) {
     return this.alphabet.indexOf(letter);
 
 }
-Alphabet.prototype.get = function(letter) {
+Alphabet.prototype.get = function(letter, next) {
     var index = this.alphabet.indexOf(letter) * 2;
+    if(next ==1){index +=1;}
     return this.letters[index];
 }
-Alphabet.prototype.getStory = function(story) {
+Alphabet.prototype.getStory = function(story, next) {
     var result = [];
 
     for (var i = 0; i < story.length; i++) {
-        result[i] = this.get(story[i]);
+        result[i] = this.get(story[i],next);
     }
     return result;
 }
+
 Alphabet.prototype.createLetters = function() {
 
     this.letters[0] = [15, 19]; //spatie
@@ -38,8 +40,8 @@ Alphabet.prototype.createLetters = function() {
     this.letters[8] = [15, 16, 1, 16, 18, 13, 11, 13, 19]; //d
     this.letters[9] = [19, 13, 11, 13, 18, 16, 1, 16, 15]; //-d
 
-    this.letters[10] = [15, 16, 13, 8, 7, 11, 18, 19]; //e
-    this.letters[11] = [19, 18, 11, 7, 8, 13, 16, 15]; //-e
+    this.letters[10] = [15, 17, 13, 8, 6, 11, 18, 19]; //e
+    this.letters[11] = [19, 18, 11,6, 8, 13, 17, 15]; //-e
 
     this.letters[12] = []; //f
     this.letters[13] = []; //-f
@@ -72,8 +74,8 @@ Alphabet.prototype.createLetters = function() {
     this.letters[30] = []; //o
     this.letters[31] = []; //-o
 
-    this.letters[32] = [15, 17, 15, 10, 6, 7, 22, 7, 19]; //p
-    this.letters[33] = [19, 7, 22, 7, 6, 10, 15, 17, 15]; //-p
+    this.letters[32] = [15, 17, 10, 6, 7, 22, 7, 19]; //p
+    this.letters[33] = [19, 7, 22, 7, 6, 10, 17, 15]; //-p
 
     this.letters[34] = []; //q
     this.letters[35] = []; //-q
@@ -82,8 +84,8 @@ Alphabet.prototype.createLetters = function() {
     this.letters[37] = [19, 18, 7, 6, 11, 12, 16, 15]; //-r
 
 
-    this.letters[38] = [15, 16, 15, 10, 11, 6, 19]; //s
-    this.letters[39] = [19, 6, 11, 10, 15, 16, 15]; //-s
+    this.letters[38] = [15,17,11,12,7,  19]; //s
+    this.letters[39] = [19, 7,12, 11,17, 15]; //-s
 
     this.letters[40] = [15, 16, 17, 2, 7, 6, 19]; //t
     this.letters[41] = [19, 6, 7, 2, 17, 16, 15]; //-t

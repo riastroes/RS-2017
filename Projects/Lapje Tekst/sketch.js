@@ -35,7 +35,7 @@ var _verhaal;
 var alphabet;
 
 function preload() {
-    model = loadImage("images/drawing.png");
+    model = loadImage("images/drawing1.png");
 }
 
 function setup() {
@@ -46,7 +46,7 @@ function setup() {
     alphabet = new Alphabet();
 
 
-    maxw = 40;
+    maxw = 80;
     maxh = 40; //height / 35;
     marge = 50;
 
@@ -57,9 +57,9 @@ function setup() {
     colors = pool.colors;
     offset = createVector(0, 0);
 
-    //pattern = new Pattern((width - (2 * marge)) / maxw, (height - (2 * marge)) / maxh);
+    pattern = new Pattern((width - (2 * marge)) / maxw, (height - (2 * marge)) / maxh);
     //oversized pattern
-    pattern = new Pattern((width + 100) / maxw, (height + 100) / maxh);
+    //pattern = new Pattern((width + 100) / maxw, (height + 100) / maxh);
 
 
     list = [];
@@ -71,9 +71,9 @@ function setup() {
     strokeCap(SQUARE);
     noFill();
     textSize(30);
-    settings = new Settings("Ultimaker2+", "PLAz", "fine");
+    settings = new Settings("Anet", "SAT1N", "normal");
     layers = [];
-    maxlayers = 3;
+    maxlayers = 10;
     for (var f = 0; f < maxlayers; f++) {
         layers[f] = new Layer(f, settings);
     }
@@ -100,13 +100,13 @@ function setup() {
 
     //Dit is een lapje. 
 
-    verhaal = alphabet.getStory("Dit is een lapje.");
-    _verhaal = [];
-    var n = 0;
-    for (var i = verhaal.length - 1; i >= 0; i--) {
-        _verhaal[n] = verhaal[i];
-        n++;
-    }
+    verhaal = alphabet.getStory("Dit is een lapje.", 1);
+    _verhaal = alphabet.getStory(".ejpal nee si tiD", 0);
+    // var n = 0;
+    // for (var i = verhaal.length - 1; i >= 0; i--) {
+    //     _verhaal[n] = verhaal[i];
+    //     n++;
+    // }
     issaved = false;
 
 
@@ -114,7 +114,7 @@ function setup() {
 
 function mousePressed() {
     if (!issaved) {
-        gcode.save("PRO" + maxw + "x" + maxh);
+        gcode.save("Lapje" + maxw + "x" + maxh);
         issaved = true;
     }
 
@@ -138,10 +138,6 @@ function draw() {
         pattern.create(skirt[1], colors[2], 2);
         layers[layer].addPattern(offset, createVector(900, 30), pattern.path);
         pattern.create(skirt[0], colors[2], 2);
-        layers[layer].addPattern(offset, createVector(150, 40), pattern.path);
-        pattern.create(skirt[1], colors[2], 2);
-        layers[layer].addPattern(offset, createVector(900, 40), pattern.path);
-        pattern.create(skirt[0], colors[2], 2);
         layers[layer].addPattern(offset, createVector(150, 50), pattern.path);
         pattern.create(skirt[1], colors[2], 2);
         layers[layer].addPattern(offset, createVector(900, 50), pattern.path);
@@ -163,17 +159,17 @@ function draw() {
         for (var i = 0; i < grid.p.length; i++) {
             //eerste
             if (i == 0 && grid.p[i].x < grid.p[i + 1].x) {
-                pattern.create(verhaal[v], colors[2], 2);
+                pattern.create(_verhaal[v], colors[2], 2);
                 layers[layer].addPattern(offset, grid.p[i], pattern.path);
 
             } else if (i == 0 && grid.p[i].x >= grid.p[i + 1].x) {
-                pattern.create(_verhaal[v], colors[2], 2);
+                pattern.create(verhaal[v], colors[2], 2);
                 layers[layer].addPattern(offset, grid.p[i], pattern.path);
 
             } else if (i == grid.p.length - 1 && grid.p[i].x > grid.p[i - 1].x) {
                 //laatste naar rechts
 
-                pattern.create(verhaal[v], colors[2], 2);
+                pattern.create(_verhaal[v], colors[2], 2);
                 layers[layer].addPattern(offset, grid.p[i], pattern.path);
 
 
@@ -188,28 +184,28 @@ function draw() {
                 //naar rechts
 
 
-                pattern.create(verhaal[v], colors[2], 2);
+                pattern.create(_verhaal[v], colors[2], 2);
                 layers[layer].addPattern(offset, grid.p[i], pattern.path);
 
 
             } else if (grid.p[i].y == grid.p[i + 1].y && grid.p[i].x > grid.p[i + 1].x) {
                 //naar links
 
-                pattern.create(_verhaal[v], colors[2], 2);
+                pattern.create(verhaal[v], colors[2], 2);
                 layers[layer].addPattern(offset, grid.p[i], pattern.path);
 
 
             } else if (grid.p[i].y < grid.p[i + 1].y && grid.p[i].x > grid.p[i - 1].x) {
                 //naaar rechts zijkant
 
-                pattern.create(verhaal[v], colors[2], 2);
+                pattern.create(_verhaal[v], colors[2], 2);
                 layers[layer].addPattern(offset, grid.p[i], pattern.path);
 
 
             } else if (grid.p[i].y < grid.p[i + 1].y && grid.p[i].x <= grid.p[i - 1].x) {
                 //naar links zijkant
 
-                pattern.create(_verhaal[v], colors[2], 2);
+                pattern.create(verhaal[v], colors[2], 2);
                 layers[layer].addPattern(offset, grid.p[i], pattern.path);
 
 

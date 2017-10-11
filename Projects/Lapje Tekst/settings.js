@@ -101,7 +101,8 @@ Settings.prototype.initMaterial = function() {
                                 //this.initStyle(0.3, 0.1, 600);//test ok 
                                 //this.initStyle(0.25, 0.15, 600);//test ok  
                             } else if (this.style == "normal") {
-                                this.initStyle(0.2, 0.2, 800); //getest met knittingapp
+                                this.initStyle(0.5, 0.1, 800);
+                                //this.initStyle(0.2, 0.2, 800); //getest met Lapje Tekst te veel plastic
                                 // this.initStyle(0.5, 0.2, 800); //test ok (iphone etui)
                                 //this.initStyle(0.2, 0.2, 800); //test te vet
 
