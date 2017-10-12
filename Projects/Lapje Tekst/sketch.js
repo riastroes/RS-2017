@@ -46,8 +46,8 @@ function setup() {
     alphabet = new Alphabet();
 
 
-    maxw = 80;
-    maxh = 40; //height / 35;
+    maxw = 20; //80;
+    maxh = 20; //40; //height / 35;
     marge = 50;
 
     pool = new Color();
@@ -100,8 +100,8 @@ function setup() {
 
     //Dit is een lapje. 
 
-    verhaal = alphabet.getStory("Dit is een lapje.", 1);
-    _verhaal = alphabet.getStory(".ejpal nee si tiD", 0);
+    verhaal = alphabet.getStory("Tof, dit is stof.", 1);
+    _verhaal = alphabet.getStory(".neknedan toT", 0);
     // var n = 0;
     // for (var i = verhaal.length - 1; i >= 0; i--) {
     //     _verhaal[n] = verhaal[i];
@@ -153,89 +153,62 @@ function draw() {
 
 
         //verhaal
-        var v = 0;
+        var r = 0;
+        var l = 0;
+
         var max = verhaal.length;
 
         for (var i = 0; i < grid.p.length; i++) {
-            //eerste
+            //eerste naar rechts, maar dan op de kop
             if (i == 0 && grid.p[i].x < grid.p[i + 1].x) {
-                pattern.create(_verhaal[v], colors[2], 2);
+                pattern.create(_verhaal[l], colors[2], 2);
                 layers[layer].addPattern(offset, grid.p[i], pattern.path);
-
+                l = (l + 1) % _verhaal.length;
             } else if (i == 0 && grid.p[i].x >= grid.p[i + 1].x) {
-                pattern.create(verhaal[v], colors[2], 2);
+                pattern.create(verhaal[r], colors[2], 2);
                 layers[layer].addPattern(offset, grid.p[i], pattern.path);
-
+                r = (r + 1) % verhaal.length;
             } else if (i == grid.p.length - 1 && grid.p[i].x > grid.p[i - 1].x) {
-                //laatste naar rechts
+                //laatste naar links, maar dan op de kop
 
-                pattern.create(_verhaal[v], colors[2], 2);
+                pattern.create(_verhaal[l], colors[2], 2);
                 layers[layer].addPattern(offset, grid.p[i], pattern.path);
-
-
-
+                l = (l + 1) % _verhaal.length;
             } else if (i == grid.p.length - 1 && grid.p[i].x <= grid.p[i - 1].x) {
 
-                pattern.create(_verhaal[v], colors[2], 2);
+                pattern.create(verhaal[r], colors[2], 2);
                 layers[layer].addPattern(offset, grid.p[i], pattern.path);
-
+                r = (r + 1) % _verhaal.length;
 
             } else if (grid.p[i].y == grid.p[i + 1].y && grid.p[i].x <= grid.p[i + 1].x) {
-                //naar rechts
-
-
-                pattern.create(_verhaal[v], colors[2], 2);
+                //naar links, maar dan op de kop
+                pattern.create(_verhaal[l], colors[2], 2);
                 layers[layer].addPattern(offset, grid.p[i], pattern.path);
-
+                l = (l + 1) % _verhaal.length;
 
             } else if (grid.p[i].y == grid.p[i + 1].y && grid.p[i].x > grid.p[i + 1].x) {
-                //naar links
-
-                pattern.create(verhaal[v], colors[2], 2);
+                //naar rechts, maar dan op de kop
+                pattern.create(verhaal[r], colors[2], 2);
                 layers[layer].addPattern(offset, grid.p[i], pattern.path);
-
+                r = (r + 1) % verhaal.length;
 
             } else if (grid.p[i].y < grid.p[i + 1].y && grid.p[i].x > grid.p[i - 1].x) {
-                //naaar rechts zijkant
-
-                pattern.create(_verhaal[v], colors[2], 2);
+                //naaar linker zijkant, maar dan op de kop
+                pattern.create(_verhaal[l], colors[2], 2);
                 layers[layer].addPattern(offset, grid.p[i], pattern.path);
-
+                l = (l + 1) % _verhaal.length;
 
             } else if (grid.p[i].y < grid.p[i + 1].y && grid.p[i].x <= grid.p[i - 1].x) {
-                //naar links zijkant
-
-                pattern.create(verhaal[v], colors[2], 2);
+                //naar rechter zijkant, maar dan op de kop
+                pattern.create(verhaal[r], colors[2], 2);
                 layers[layer].addPattern(offset, grid.p[i], pattern.path);
-
+                r = (r + 1) % verhaal.length;
 
 
             } else {
                 console.log("vergeten");
             }
-            v = (v + 1) % verhaal.length;
-
-
         }
-
-
-
-        /* zonder mask
-                for (var y = 1; y < maxh; y++) {
-                    pattern.create(list[4], colors[2], 2);
-                    for (var x = 0; x < maxw; x++) {
-                        layers[layer].addPattern(offset, grid.p[(maxw * y) + x], pattern.path);
-                    }
-                    pattern.create(list[5], colors[2], 2);
-                    for (var x = maxw - 1; x >= 0; x--) {
-                        layers[layer].addPattern(offset, grid.p[(maxw * y) + x], pattern.path);
-                    }
-                }
-        */
-
-
-        //variatie: regelmatig of onregelmatig patroon rond
-        //layers[layer].change(-10, 10);
 
         layers[layer].draw(colors[2]);
         layers[layer].generate(layer);
