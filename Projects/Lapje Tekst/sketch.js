@@ -46,8 +46,8 @@ function setup() {
     alphabet = new Alphabet();
 
 
-    maxw = 20; //80;
-    maxh = 20; //40; //height / 35;
+    maxw = 50; //80;
+    maxh = 30; //40; //height / 35;
     marge = 50;
 
     pool = new Color();

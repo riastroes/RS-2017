@@ -41,8 +41,8 @@ function setup() {
 
 
 
-    maxw = 10;
-    maxh = 10; //height / 35;
+    maxw = 20;
+    maxh = 20; //height / 35;
     marge = 50;
 
     pool = new Color();
