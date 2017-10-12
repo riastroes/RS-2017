@@ -30,7 +30,7 @@ var model;
 
 
 function preload() {
-    model = loadImage("images/drawing.png");
+    model = loadImage("images/drawing1.png");
 }
 
 function setup() {
@@ -41,9 +41,9 @@ function setup() {
 
 
 
-    maxw = 20;
-    maxh = 20; //height / 35;
-    marge = 50;
+    maxw = 40;
+    maxh = 40; //height / 35;
+    marge = 80;
 
     pool = new Color();
     pool.add(color(255, 0, 0));
@@ -52,9 +52,9 @@ function setup() {
     colors = pool.colors;
     offset = createVector(0, 0);
 
-    pattern = new Pattern((width - (2 * marge)) / maxw, (height - (2 * marge)) / maxh);
+    //pattern = new Pattern((width - (2 * marge)) / maxw, (height - (2 * marge)) / maxh);
     //oversized pattern
-    //pattern = new Pattern((width + 100) / maxw, (height + 100) / maxh);
+    pattern = new Pattern((width + 300) / maxw, (height + 300) / maxh);
 
     totlayerheight = a = c = 0;
     background(200);
@@ -63,7 +63,7 @@ function setup() {
     strokeCap(SQUARE);
     noFill();
     textSize(30);
-    settings = new Settings("Ultimaker2+", "PLAz", "fine");
+    settings = new Settings("Anet", "SAT1N", "normal");
     layers = [];
     maxlayers = 1;
     for (var f = 0; f < maxlayers; f++) {
@@ -76,9 +76,9 @@ function setup() {
     grid = new Grid();
     grid.init(marge, maxw, maxh);
 
-    //grid.maskImage(marge, model);
-    // grid.draw();
-    // grid.reorder();
+    grid.maskImage(marge, model);
+    grid.draw();
+    grid.reorder();
 
 
     skirt = [];
@@ -90,10 +90,18 @@ function setup() {
 
     list[0] = [15, 16, 1, 2, 17, 18, 13, 14];
     rlist[0] = [14, 13, 18, 17, 2, 1, 16, 15];
-    list[1] = [20, 10, 7, 13, 17, 16, 21, 24];
-    rlist[1] = [24, 21, 16, 17, 13, 7, 10, 20];
-    list[1] = [10, 1, 3, 14, 23, 21, 10, 14];
+    
+    /*honingraat*/
+    list[1] = [10, 1, 3, 14, 23, 21, 10, 14];      
     rlist[1] = [14, 10, 21, 23, 14, 3, 1, 10];
+
+     /*Kopschoen*/
+     list[2] = [20, 10, 7, 13, 17, 16, 21, 24];
+     rlist[2] = [24, 21, 16, 17, 13, 7, 10, 20];
+
+      /*oversized  zigzag*/
+      list[3] = [0, 24];
+      rlist[3] = [4, 20];
 
     issaved = false;
 
@@ -122,22 +130,22 @@ function draw() {
 
         //create skirt
         pattern.create(skirt[0], colors[2], 2);
-        layers[layer].addPattern(offset, createVector(150, 30), pattern.path);
+        layers[layer].addPattern(offset, createVector(120, 30), pattern.path);
         pattern.create(skirt[1], colors[2], 2);
         layers[layer].addPattern(offset, createVector(900, 30), pattern.path);
         pattern.create(skirt[0], colors[2], 2);
-        layers[layer].addPattern(offset, createVector(150, 50), pattern.path);
+        layers[layer].addPattern(offset, createVector(120, 50), pattern.path);
         pattern.create(skirt[1], colors[2], 2);
         layers[layer].addPattern(offset, createVector(900, 50), pattern.path);
         pattern.create(skirt[0], colors[2], 2);
-        layers[layer].addPattern(offset, createVector(150, 60), pattern.path);
+        layers[layer].addPattern(offset, createVector(120, 60), pattern.path);
 
     }
 
     //end skirt
     //patroon ZIGZAG
     if (layer < maxlayers) {
-        /*
+        /* zonder mask list[0]
         for (var y = 1; y < maxh; y++) {
             pattern.create(list[0], colors[2], 2);
             for (var x = 0; x < maxw; x++) {
@@ -149,7 +157,9 @@ function draw() {
             }
         }
         */
-        for (var y = 1; y < maxh; y++) {
+        /* zonder mask  list[1]
+       
+        for (var y = 0; y < maxh; y++) {
             pattern.create(list[1], colors[2], 2);
             for (var x = 0; x < maxw; x++) {
                 layers[layer].addPattern(offset, grid.p[(maxw * y) + x], pattern.path);
@@ -158,6 +168,70 @@ function draw() {
             for (var x = maxw - 1; x >= 0; x--) {
                 layers[layer].addPattern(offset, grid.p[(maxw * y) + x], pattern.path);
             }
+        }
+        */
+
+        /* patroon op een ronde circle Honingraat 
+        for (var i = 0; i < grid.p.length-1; i++) {
+           if(grid.p[i].x <= grid.p[i+1].x){
+                pattern.create(list[1], colors[2], 2);
+                layers[layer].addPattern(offset, grid.p[i], pattern.path);
+           }
+           else{
+                pattern.create(rlist[1], colors[2], 2);
+                layers[layer].addPattern(offset, grid.p[i], pattern.path);
+           }
+           
+        }
+        if(grid.p[grid.p.length-1].x < grid.p[grid.p.length-2].x){
+            pattern.create(rlist[1], colors[2], 2);
+            layers[layer].addPattern(offset, grid.p[grid.p.length-1], pattern.path);
+       }
+       else{
+            pattern.create(list[1], colors[2], 2);
+            layers[layer].addPattern(offset, grid.p[grid.p.length-1], pattern.path);
+       }
+        */
+        /* patroon op een ronde circle Kopschoen 
+        for (var i = 0; i < grid.p.length-1; i++) {
+            if(grid.p[i].x <= grid.p[i+1].x){
+                 pattern.create(list[2], colors[2], 2);
+                 layers[layer].addPattern(offset, grid.p[i], pattern.path);
+            }
+            else{
+                 pattern.create(rlist[2], colors[2], 2);
+                 layers[layer].addPattern(offset, grid.p[i], pattern.path);
+            }
+            
+         }
+         if(grid.p[grid.p.length-1].x < grid.p[grid.p.length-2].x){
+             pattern.create(rlist[2], colors[2], 2);
+             layers[layer].addPattern(offset, grid.p[grid.p.length-1], pattern.path);
+        }
+        else{
+             pattern.create(list[2], colors[2], 2);
+             layers[layer].addPattern(offset, grid.p[grid.p.length-1], pattern.path);
+        }
+        */
+        /* patroon op een ronde circle oversized zigzag */
+        for (var i = 0; i < grid.p.length-1; i++) {
+            if(grid.p[i].x <= grid.p[i+1].x){
+                 pattern.create(list[3], colors[2], 2);
+                 layers[layer].addPattern(offset, grid.p[i], pattern.path);
+            }
+            else{
+                 pattern.create(rlist[3], colors[2], 2);
+                 layers[layer].addPattern(offset, grid.p[i], pattern.path);
+            }
+            
+         }
+         if(grid.p[grid.p.length-1].x < grid.p[grid.p.length-2].x){
+             pattern.create(rlist[2], colors[2], 2);
+             layers[layer].addPattern(offset, grid.p[grid.p.length-1], pattern.path);
+        }
+        else{
+             pattern.create(list[2], colors[2], 2);
+             layers[layer].addPattern(offset, grid.p[grid.p.length-1], pattern.path);
         }
 
         // for (var y = 1; y < maxh; y++) {
@@ -256,75 +330,7 @@ function draw() {
 
         // }
 
-        //maartje
-
-        // for (var i = 0; i < grid.p.length; i++) {
-        //     //eerste
-        //     if (i == 0 && grid.p[i].x < grid.p[i + 1].x) {
-        //         pattern.create(list[22], colors[2], 2);
-        //         layers[layer].addPattern(offset, grid.p[i], pattern.path);
-
-        //     } else if (i == 0 && grid.p[i].x >= grid.p[i + 1].x) {
-        //         pattern.create(list[23], colors[2], 2);
-        //         layers[layer].addPattern(offset, grid.p[i], pattern.path);
-
-        //     } else if (i == grid.p.length - 1 && grid.p[i].x > grid.p[i - 1].x) {
-        //         //laatste naar rechts
-        //         var max = verhaal.length;
-
-        //         for (var m = 0; m < max; m++) {
-        //             pattern.create(verhaal[m], colors[2], 2);
-        //             layers[layer].addPattern(offset, grid.p[i], pattern.path);
-        //         }
-
-
-        //     } else if (i == grid.p.length - 1 && grid.p[i].x <= grid.p[i - 1].x) {
-        //         var max = _verhaal.length;
-
-        //         for (var m = 0; m < max; m++) {
-        //             pattern.create(_verhaal[m], colors[2], 2);
-        //             layers[layer].addPattern(offset, grid.p[i], pattern.path);
-        //         }
-
-        //     } else if (grid.p[i].y == grid.p[i + 1].y && grid.p[i].x <= grid.p[i + 1].x) {
-        //         //naar rechts
-        //         for (var m = 0; m < max; m++) {
-        //             pattern.create(verhaal[m], colors[2], 2);
-        //             layers[layer].addPattern(offset, grid.p[i], pattern.path);
-        //         }
-
-        //     } else if (grid.p[i].y == grid.p[i + 1].y && grid.p[i].x > grid.p[i + 1].x) {
-        //         //naar links
-        //         var max = _verhaal.length;
-
-        //         for (var m = 0; m < max; m++) {
-        //             pattern.create(_verhaal[m], colors[2], 2);
-        //             layers[layer].addPattern(offset, grid.p[i], pattern.path);
-        //         }
-
-        //     } else if (grid.p[i].y < grid.p[i + 1].y && grid.p[i].x > grid.p[i - 1].x) {
-        //         //naaar rechts zijkant
-        //         for (var m = 0; m < max; m++) {
-        //             pattern.create(verhaal[m], colors[2], 2);
-        //             layers[layer].addPattern(offset, grid.p[i], pattern.path);
-        //         }
-
-        //     } else if (grid.p[i].y < grid.p[i + 1].y && grid.p[i].x <= grid.p[i - 1].x) {
-        //         //naar links zijkant
-        //         var max = _verhaal.length;
-
-        //         for (var m = 0; m < max; m++) {
-        //             pattern.create(_verhaal[m], colors[2], 2);
-        //             layers[layer].addPattern(offset, grid.p[i], pattern.path);
-        //         }
-
-
-        //     else {
-        //         console.log("vergeten");
-        //     }
-
-
-        // }
+       
 
 
 
