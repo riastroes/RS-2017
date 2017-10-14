@@ -64,19 +64,50 @@ Grid.prototype.reorder = function() {
     }
 
 }
-Grid.prototype.maskImage = function(marge, img) {
+Grid.prototype.mask = function() {
+    this.newp = [];
+    var n = 0;
+    loadPixels();
+
+
+    for (var i = 0; i < this.p.length; i++) {
+        var r = (this.p[i].y) % 4;
+        var s = (this.p[i].x) % 4;
+        var x = this.p[i].x - s;
+        var y = this.p[i].y - r;
+
+
+        var idx = (y * width * 4) + (x * 4);
+        if (idx >= pixels.length) {
+            console.log("idx: " + idx);
+        }
+
+        if (pixels[idx] == 0) {
+            this.newp[n] = this.p[i].copy();
+            n += 1;
+        }
+
+    }
+    if (this.newp.length > 0) {
+
+        this.p = [];
+        for (var i = 0; i < this.newp.length; i++) {
+            this.p[i] = this.newp[i].copy();
+        }
+    }
+
+}
+Grid.prototype.maskImage = function(pmarge, img) {
     this.newp = [];
     var n = 0;
     img.loadPixels();
-    console.log("Pixels" + img.pixels.length);
-    console.log(img.width);
-    console.log(marge);
+
 
     for (var i = 0; i < this.p.length; i++) {
-        var r = (this.p[i].y - marge) % 4;
-        var s = (this.p[i].x - marge) % 4;
-        if ((img.pixels[(((this.p[i].y - marge) - r) * img.width * 4) + (((this.p[i].x - marge) - s) * 4) + 3] == 255) &&
-            (img.pixels[(((this.p[i].y - marge) - r) * img.width * 4) + (((this.p[i].x - marge) - s) * 4)] < 10)) {
+        var r = (this.p[i].y - pmarge) % 4;
+        var s = (this.p[i].x - pmarge) % 4;
+        if ((img.pixels[(((this.p[i].y - pmarge) - r) * img.width * 4) + (((this.p[i].x - pmarge) - s) * 4) + 3] == 255) &&
+            (img.pixels[(((this.p[i].y - pmarge) - r) * img.width * 4) + (((this.p[i].x - pmarge) - s) * 4)] < 10)) {
             this.newp[n] = this.p[i].copy();
             n += 1;
 
