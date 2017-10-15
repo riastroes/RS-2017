@@ -30,7 +30,7 @@ var model;
 
 
 function preload() {
-    model = loadImage("images/drawing1.png");
+    model = loadImage("images/organisch2.png");
 }
 
 function setup() {
@@ -41,7 +41,7 @@ function setup() {
 
 
 
-    maxw = 40;
+    maxw = 80;
     maxh = 40; //height / 35;
     marge = 50;
 
@@ -52,7 +52,7 @@ function setup() {
 
     pattern = new Pattern((width - (2 * marge)) / maxw, (height - (2 * marge)) / maxh);
     //oversized pattern
-    //pattern = new Pattern((width + 300) / maxw, (height + 300) / maxh);
+    pattern = new Pattern((width + 300) / maxw, (height + 300) / maxh);
 
     totlayerheight = a = c = 0;
     background(200);
@@ -61,9 +61,9 @@ function setup() {
     strokeCap(SQUARE);
     noFill();
     textSize(30);
-    settings = new Settings("Ultimaker2+", "PLAz", "normal");
+    settings = new Settings("Ultimaker2+", "PLAz", "fine");
     layers = [];
-    maxlayers = 3;
+    maxlayers = 2;
     for (var f = 0; f < maxlayers; f++) {
         layers[f] = new Layer(f, settings);
     }
@@ -74,13 +74,10 @@ function setup() {
     grid = new Grid();
     grid.init(marge, maxw, maxh);
 
-    noStroke();
-    fill(colors[0]);
-    ellipse(500, 500, 600, 600);
 
-
-    grid.maskCircle(createVector(500, 500), 300);
-    //grid.maskImage(0, this);
+    //grid.maskCircle(createVector(500, 500), 300);
+    image(model, marge, marge);
+    grid.maskImage(50, model);
     grid.draw();
     grid.reorder();
 
@@ -140,15 +137,15 @@ function draw() {
 
         //create skirt
         pattern.create(skirt[0], colors[2], 2);
-        layers[layer].addPattern(offset, createVector(120, 30), pattern.path);
+        layers[layer].addPattern(offset, createVector(150, 30), pattern.path);
         pattern.create(skirt[1], colors[2], 2);
         layers[layer].addPattern(offset, createVector(900, 30), pattern.path);
         pattern.create(skirt[0], colors[2], 2);
-        layers[layer].addPattern(offset, createVector(120, 50), pattern.path);
+        layers[layer].addPattern(offset, createVector(150, 50), pattern.path);
         pattern.create(skirt[1], colors[2], 2);
         layers[layer].addPattern(offset, createVector(900, 50), pattern.path);
         pattern.create(skirt[0], colors[2], 2);
-        layers[layer].addPattern(offset, createVector(120, 60), pattern.path);
+        layers[layer].addPattern(offset, createVector(150, 60), pattern.path);
 
     }
 
@@ -244,7 +241,7 @@ function draw() {
             layers[layer].addPattern(offset, grid.p[grid.p.length - 1], pattern.path);
         }
         */
-        /* random 
+        /* random */
         // maxx = 80
         // maxy = 80
         for (var i = 0; i < grid.p.length - 1; i++) {
@@ -268,8 +265,8 @@ function draw() {
             layers[layer].addPattern(offset, grid.p[grid.p.length - 1], pattern.path);
         }
 
-        */
-        /*oversized zigzag*/
+
+        /*oversized zigzag
         for (var i = 0; i < grid.p.length - 1; i++) {
             if (grid.p[i].x <= grid.p[i + 1].x) {
                 pattern.create(list[4], colors[2], 2);
@@ -287,7 +284,7 @@ function draw() {
             pattern.create(list[4], colors[2], 2);
             layers[layer].addPattern(offset, grid.p[grid.p.length - 1], pattern.path);
         }
-
+        */
         // for (var y = 1; y < maxh; y++) {
         //     pattern.create(list[4], colors[2], 2);
         //     for (var x = 0; x < maxw; x++) {

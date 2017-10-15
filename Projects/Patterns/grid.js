@@ -107,7 +107,7 @@ Grid.prototype.maskImage = function(pmarge, img) {
         var r = (this.p[i].y - pmarge) % 4;
         var s = (this.p[i].x - pmarge) % 4;
         if ((img.pixels[(((this.p[i].y - pmarge) - r) * img.width * 4) + (((this.p[i].x - pmarge) - s) * 4) + 3] == 255) &&
-            (img.pixels[(((this.p[i].y - pmarge) - r) * img.width * 4) + (((this.p[i].x - pmarge) - s) * 4)] < 10)) {
+            (img.pixels[(((this.p[i].y - pmarge) - r) * img.width * 4) + (((this.p[i].x - pmarge) - s) * 4)] < 200)) {
             this.newp[n] = this.p[i].copy();
             n += 1;
 

@@ -196,7 +196,7 @@ Settings.prototype.initMaterial = function() {
                 this.scale = 0.20; //canvas = 1100 px, bed = 220 mm
                 this.filement = 2.85;
                 if ((this.material == "PLA" || this.material == "PLAz") && this.style == "fine") {
-                    this.initStyle(0.5, 0.03, 800); // test dunner
+                    this.initStyle(0.3, 0.04, 800); // test dunner
                 }
                 if ((this.material == "PLA" || this.material == "PLAz") && this.style == "normal") {
                     this.initStyle(0.3, 0.05, 800); // ok getest in knitting app  // ok getest in DUBAI KNITTING APP
