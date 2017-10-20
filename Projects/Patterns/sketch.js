@@ -46,7 +46,7 @@ function setup() {
     marge = 50;
 
     pool = new Color();
-    colors = pool.createPallet();
+    colors = pool.createPalette();
 
     offset = createVector(0, 0);
 
