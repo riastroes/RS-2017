@@ -28,6 +28,7 @@ var l;
 var issaved;
 var model;
 var sluiting;
+var steps;
 
 function setup() {
 
@@ -38,7 +39,7 @@ function setup() {
     //frameRate(10);
     settings = new Settings("Ultimaker2+", "PLAz", "normal");
     layers = [];
-    maxlayers = 10;
+    maxlayers = 20;
     totlayerheight = 0;
 
     layer = 0;
@@ -54,22 +55,22 @@ function setup() {
 
 
     var controls = [];
-    var a = createVector(100, 300);
-    var b = createVector(1100, 300);
+    var a = createVector(40, 300);
+    var b = createVector(1140, 300);
 
-    controls[0] = createVector(600, -500);
-    controls[1] = createVector(600, -500);
+    controls[0] = createVector(595, -500);
+    controls[1] = createVector(595, -500);
 
-    var c = createVector(100, 600); //150
-    var d = createVector(1100, 600); //950
+    var c = createVector(40, 600); //150
+    var d = createVector(1140, 600); //950
 
-    controls[2] = createVector(600, 1500);
-    controls[3] = createVector(600, 1500);
+    controls[2] = createVector(595, 1500);
+    controls[3] = createVector(595, 1500);
 
 
-
-    sluiting = new Sluiting(a, b, c, d, controls);
-    sluiting.create(24);
+    steps = 24
+    ladder = new Ladder(a, b, c, d, controls);
+    ladder.create(steps);
     //sluiting.draw();
 
     for (var f = 0; f < maxlayers; f++) {
@@ -90,7 +91,7 @@ function setup() {
 
 function mousePressed() {
     if (!issaved) {
-        gcode.save("lines");
+        gcode.save("ladder" + );
         issaved = true;
     }
 

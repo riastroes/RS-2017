@@ -199,7 +199,7 @@ Settings.prototype.initMaterial = function() {
                     this.initStyle(0.3, 0.04, 1600); // test dunner
                 }
                 if ((this.material == "PLA" || this.material == "PLAz") && this.style == "normal") {
-                    this.initStyle(0.3, 0.05, 1600); // ok getest in knitting app  // ok getest in DUBAI KNITTING APP
+                    this.initStyle(0.3, 0.1, 2400); // ok getest in knitting app  // ok getest in DUBAI KNITTING APP
                 }
                 if (this.material == "PLAFLEX" && this.style == "fine") {
                     this.initStyle(0.5, 0.2, 800); // ok getest in knitting app  // ok getest in DUBAI KNITTING APP

@@ -1,4 +1,4 @@
-function Sluiting(a, b, c, d, controls) {
+function Ladder(a, b, c, d, controls) {
     this.a = a;
     this.b = b;
 
@@ -18,9 +18,9 @@ function Sluiting(a, b, c, d, controls) {
 
 
 }
-Sluiting.prototype.create = function(steps) {
+Ladder.prototype.create = function(steps) {
 
-    for (i = 0; i < steps; i++) {
+    for (i = 0; i <= steps; i++) {
         t = i / steps;
         this.x1 = curvePoint(this.c1.x, this.a.x, this.b.x, this.c2.x, t);
         this.y1 = curvePoint(this.c1.y, this.a.y, this.b.y, this.c2.y, t);
@@ -33,23 +33,30 @@ Sluiting.prototype.create = function(steps) {
     }
 
 
-    for (var i = 0; i < steps; i += 1) {
+    for (var i = 0; i <= steps; i += 1) {
         append(this.path, this.curve1[i]);
     }
-    for (var i = 0; i < steps; i += 1) {
-        append(this.path, this.curve2[(steps - 1) - i]);
+    for (var i = 0; i <= steps; i += 1) {
+        append(this.path, this.curve2[(steps) - i]);
     }
     append(this.path, this.curve1[0]);
+    append(this.path, this.curve1[1]);
+    append(this.path, this.curve1[2]);
+    append(this.path, this.curve1[3]);
+    append(this.path, this.curve1[2]);
+    append(this.path, this.curve1[1]);
+    append(this.path, this.curve1[0]);
 
-    for (var i = 0; i <= steps - 1; i += 2) {
+    for (var i = 0; i < steps; i += 2) {
         append(this.path, this.curve1[i]);
         append(this.path, this.curve2[i]);
         append(this.path, this.curve2[i + 1]);
         append(this.path, this.curve1[i + 1]);
     }
+
 }
 
-Sluiting.prototype.draw = function() {
+Ladder.prototype.draw = function() {
     stroke(0);
     strokeWeight(1);
     noFill();
