@@ -94,16 +94,17 @@ Settings.prototype.initMaterial = function() {
                         {
                             this.materialcode = "SAT1N";
                             if (this.style == "fine") {
-                                this.initStyle(0.5, 0.10, 800); //test OK mooi
+                                this.initStyle(0.5, 0.10, 600); //test OK mooi
                                 //this.initStyle(0.5, 0.12, 600); //test OK mooi  
                                 //this.initStyle(0.5, 0.15, 600); //test OK
                                 //this.initStyle(0.4, 0.1, 600);//test ok 
                                 //this.initStyle(0.3, 0.1, 600);//test ok 
                                 //this.initStyle(0.25, 0.15, 600);//test ok  
                             } else if (this.style == "normal") {
-                                this.initStyle(0.2, 0.2, 800); //getest met knittingapp
-                                // this.initStyle(0.5, 0.2, 800); //test ok (iphone etui)
-                                //this.initStyle(0.2, 0.2, 800); //test te vet
+                                this.initStyle(0.5, 0.12, 800) //1.5
+                                    //this.initStyle(0.2, 0.2, 800); //getest met knittingapp
+                                    // this.initStyle(0.5, 0.2, 800); //test ok (iphone etui)
+                                    //this.initStyle(0.2, 0.2, 800); //test te vet
 
                             }
                             break;
@@ -300,20 +301,20 @@ Settings.prototype.initPrinter = function() {
                 break;
             }
         case "SAT1N":
-            { //SATIN SILVER
-                this.nozzletemp = 210;
+            { //SATIN   temp 190 - 200
+                this.nozzletemp = 190;
                 this.bedtemp = 50;
                 break;
             }
         case "SAT2N":
-            {
-                this.nozzletemp = 185; //200
+            { //SATIN   temp 190 - 200
+                this.nozzletemp = 190;
                 this.bedtemp = 50;
                 break;
             }
         case "SAT3N":
-            {
-                this.nozzletemp = 185; //200
+            { //SATIN   temp 190 - 200
+                this.nozzletemp = 190;
                 this.bedtemp = 50;
                 break;
             }

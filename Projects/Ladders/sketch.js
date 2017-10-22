@@ -27,8 +27,11 @@ var maxlayers;
 var l;
 var issaved;
 var model;
-var sluiting;
+var ladder;
 var steps;
+var rot;
+var controls;
+var a, b, c, d;
 
 function setup() {
 
@@ -37,12 +40,11 @@ function setup() {
 
     background(200);
     //frameRate(10);
-    settings = new Settings("Ultimaker2+", "PLAz", "normal");
+    settings = new Settings("Anet", "SAT1N", "normal");
     layers = [];
-    maxlayers = 20;
+
     totlayerheight = 0;
 
-    layer = 0;
     gcode = new Gcode(settings);
 
 
@@ -53,35 +55,41 @@ function setup() {
     skirt[3] = createVector(950, 70);
 
 
-
-    var controls = [];
-    var a = createVector(40, 300);
-    var b = createVector(1140, 300);
+    /*brug*/
+    controls = [];
+    a = createVector(40, 300);
+    b = createVector(1140, 300);
 
     controls[0] = createVector(595, -500);
     controls[1] = createVector(595, -500);
 
-    var c = createVector(40, 600); //150
-    var d = createVector(1140, 600); //950
+    c = createVector(40, 600); //150
+    d = createVector(1140, 600); //950
 
     controls[2] = createVector(595, 1500);
     controls[3] = createVector(595, 1500);
 
 
-    steps = 24
-    ladder = new Ladder(a, b, c, d, controls);
-    ladder.create(steps);
-    //sluiting.draw();
+    /*rond
 
-    for (var f = 0; f < maxlayers; f++) {
-        layers[f] = new Layer(f, settings);
-        if (f == 0) {
-            layers[f].add(skirt);
-        }
-        layers[f].add(sluiting.path);
-    }
+    controls = [];
+    a = createVector(500, 300);
+    b = createVector(200, 300);
 
+    controls[0] = createVector(1500, -1400);
+    controls[1] = createVector(1500, -1400);
 
+    c = createVector(200, 300); //150
+    d = createVector(500, 300); //950
+
+    controls[2] = createVector(1500, 2000);
+    controls[3] = createVector(1500, 2000);
+*/
+    layer = 0;
+    maxlayers = 5;
+
+    steps = 20
+    rot = 0;
     issaved = false;
 
 
@@ -91,7 +99,7 @@ function setup() {
 
 function mousePressed() {
     if (!issaved) {
-        gcode.save("ladder" + );
+        gcode.save("ladderhart");
         issaved = true;
     }
 
@@ -100,30 +108,35 @@ function mousePressed() {
 function draw() {
 
 
-    if (layer == 0) {
-
-        //variatie: naar centrum trekken
-        // grid.changeToCenter();
-        //image(model, marge, marge);
-
-
-    }
 
     //end skirt
     //patroon ZIGZAG
     if (layer < maxlayers) {
 
 
-        layers[layer].draw(0);
+        ladder = new Ladder(a, b, c, d, controls);
+        ladder.create(steps);
+        //ladder.rotate(-rot);
+        //ladder.shift(100, 500);
+        layers[layer] = new Layer(layer, settings);
+        if (layer == 0) {
+            layers[layer].add(skirt);
+        }
+        layers[layer].add(ladder.path);
         layers[layer].generate(layer);
+        layers[layer].draw(0);
 
 
-        layer++;
+        rot += 0.3
+
+
     } else {
+
+
         gcode.generateLayers();
         noLoop();
     }
-    //pop();
+    layer++;
 
 
 

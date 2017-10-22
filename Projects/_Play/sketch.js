@@ -68,3 +68,7 @@ function growWhite() {
     }
     updatePixels();
 }
+
+function windowResized() {
+    resizeCanvas(windowWidth, windowHeight);
+}
