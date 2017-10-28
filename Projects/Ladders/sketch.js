@@ -40,7 +40,7 @@ function setup() {
 
     background(200);
     //frameRate(10);
-    settings = new Settings("Anet", "SAT1N", "normal");
+    settings = new Settings("Ultimaker2+", "PLAFLEX", "normal");
     layers = [];
 
     totlayerheight = 0;
@@ -86,7 +86,7 @@ function setup() {
     controls[3] = createVector(1500, 2000);
 */
     layer = 0;
-    maxlayers = 5;
+    maxlayers = 3;
 
     steps = 20
     rot = 0;

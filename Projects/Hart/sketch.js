@@ -53,26 +53,27 @@ function setup() {
     skirt[0] = createVector(150, 50);
     skirt[1] = createVector(950, 50);
     skirt[2] = createVector(150, 70);
-    skirt[3] = createVector(950, 70);
+    skirt[3] = createVector(750, 70);
 
 
-    center = createVector(500, 500)
+
+    center = createVector(50, 150)
 
     controls = [];
     a = createVector(center.x, center.y);
-    b = createVector(center.x + 500, center.y);
+    b = createVector(center.x + 800, center.y);
 
-    controls[0] = createVector(center.x, center.y - 1000);
-    controls[1] = createVector(center.x, center.y - 1000);
+    controls[0] = createVector(center.x + 500, center.y - 3000);
+    controls[1] = createVector(center.x + 500, center.y - 3000);
 
     c = createVector(center.x + 500, center.y);
     d = createVector(center.x, center.y);
 
-    controls[2] = createVector(center.x, center.y + 1000);
-    controls[3] = createVector(center.x, center.y + 1000);
+    controls[2] = createVector(center.x + 500, center.y + 3000);
+    controls[3] = createVector(center.x + 500, center.y + 3000);
 
     layer = 0;
-    maxlayers = 5;
+    maxlayers = 1;
 
     steps = 20
     rot = 0;
@@ -99,21 +100,21 @@ function draw() {
     //patroon ZIGZAG
     if (layer < maxlayers) {
 
-
-        ladder = new Ladder(a, b, c, d, controls);
-        ladder.create(steps);
-        ladder.rotate(-rot);
-        //ladder.shift(100, 500);
         layers[layer] = new Layer(layer, settings);
         if (layer == 0) {
             layers[layer].add(skirt);
         }
+        ladder = new Ladder(a, b, c, d, controls);
+        ladder.create(steps);
+        ladder.rotate(rot);
+        ladder.shift(0, 200);
+
         layers[layer].add(ladder.path);
         layers[layer].generate(layer);
         layers[layer].draw(0);
 
 
-        rot += 0.3
+        rot += 1.6
 
 
     } else {
