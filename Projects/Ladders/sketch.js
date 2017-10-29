@@ -36,7 +36,7 @@ var end, begin;
 
 function setup() {
 
-    var canvas = createCanvas(1100, 1100); 
+    var canvas = createCanvas(1100, 1100);
     windowscale = 1;
 
     background(200);
@@ -57,7 +57,7 @@ function setup() {
 
 
     begin = createVector(50, 200);
-    
+
 
 
     /*brug*/
@@ -74,7 +74,7 @@ function setup() {
     // controls[2] = createVector(595, 1500);
     // controls[3] = createVector(595, 1500);
 
-    
+
     /*ladder*/
     // controls = [];
     // a = createVector(50, 300);
@@ -89,30 +89,44 @@ function setup() {
     // controls[2] = createVector(50, 500);
     // controls[3] = createVector(1050, 500);
 
-     /*driehoek*/
-     controls = [];
-     a = createVector(50, 300);
-     b = createVector(1050, 500);
+    /*trapezium*/
+    // controls = [];
+    // a = createVector(50, 300);
+    // b = createVector(1050, 470);
 
-     c = createVector(50, 700); //150
-     d = createVector(1050, 500); //950
- 
- 
-     controls[0] = createVector(50, 300);
-     controls[1] = createVector(1050, 500);
- 
-     
-     controls[2] = createVector(50, 300);
-     controls[3] = createVector(1050, 500);
- 
+    // c = createVector(50, 700); //150
+    // d = createVector(1050, 530); //950
 
+
+    // controls[0] = createVector(50, 300);
+    // controls[1] = createVector(1050, 530);
+
+
+    // controls[2] = createVector(50, 700);
+    // controls[3] = createVector(1050, 530);
+
+    /*halfrond*/
+    controls = [];
+    a = createVector(400, 300);
+    b = createVector(700, 300);
+
+    c = createVector(50, 400); //150
+    d = createVector(1050, 400); //950
+
+
+    controls[0] = createVector(400, 200);
+    controls[1] = createVector(700, 200);
+
+
+    controls[2] = createVector(50, -1400);
+    controls[3] = createVector(1050, -1400);
 
     end = createVector(1000, 200);
-    
+
     layer = 0;
     maxlayers = 3;
 
-    steps = 10
+    steps = 11
     rot = 0;
     issaved = false;
 
