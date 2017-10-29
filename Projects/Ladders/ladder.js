@@ -20,32 +20,32 @@ function Ladder(a, b, c, d, controls) {
 }
 Ladder.prototype.create = function(steps) {
 
+   
     for (i = 0; i <= steps; i++) {
         t = i / steps;
         this.x1 = curvePoint(this.c1.x, this.a.x, this.b.x, this.c2.x, t);
         this.y1 = curvePoint(this.c1.y, this.a.y, this.b.y, this.c2.y, t);
+        fill(0,0,255);
         ellipse(this.x1, this.y1, 5, 5);
         append(this.curve1, createVector(this.x1, this.y1));
-
+    }
+    for (i = 0; i <= steps; i++) {
+        t = i / steps;
         this.x2 = curvePoint(this.c3.x, this.c.x, this.d.x, this.c4.x, t);
         this.y2 = curvePoint(this.c3.y, this.c.y, this.d.y, this.c4.y, t);
+        fill(255,0,0);
         ellipse(this.x2, this.y2, 5, 5);
         append(this.curve2, createVector(this.x2, this.y2));
     }
 
-
+    append(this.path, begin);
     for (var i = 0; i <= steps; i += 1) {
         append(this.path, this.curve1[i]);
     }
     for (var i = 0; i <= steps; i += 1) {
-        append(this.path, this.curve2[(steps) - i]);
+        append(this.path, this.curve2[(steps-i) ]);
     }
-    for (var i = 0; i <= steps; i += 1) {
-        append(this.path, this.curve1[i]);
-    }
-    for (var i = 0; i <= steps; i += 1) {
-        append(this.path, this.curve2[(steps) - i]);
-    }
+    
 
 
 
@@ -55,6 +55,7 @@ Ladder.prototype.create = function(steps) {
         append(this.path, this.curve2[i + 1]);
         append(this.path, this.curve1[i + 1]);
     }
+    append(this.path, end);
 
 }
 Ladder.prototype.rotate = function(rot) {

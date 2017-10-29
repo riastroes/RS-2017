@@ -32,15 +32,16 @@ var steps;
 var rot;
 var controls;
 var a, b, c, d;
+var end, begin;
 
 function setup() {
 
-    var canvas = createCanvas(1200, 1200); //X22O EN Y220 is het hoogste
+    var canvas = createCanvas(1100, 1100); 
     windowscale = 1;
 
     background(200);
     //frameRate(10);
-    settings = new Settings("Ultimaker2+", "PLAFLEX", "normal");
+    settings = new Settings("Anet", "PLAFLEX", "normal");
     layers = [];
 
     totlayerheight = 0;
@@ -55,40 +56,63 @@ function setup() {
     skirt[3] = createVector(950, 70);
 
 
+    begin = createVector(50, 200);
+    
+
+
     /*brug*/
-    controls = [];
-    a = createVector(40, 300);
-    b = createVector(1140, 300);
+    // controls = [];
+    // a = createVector(50, 300);
+    // b = createVector(1050, 300);
 
-    controls[0] = createVector(595, -500);
-    controls[1] = createVector(595, -500);
+    // controls[0] = createVector(595, -500);
+    // controls[1] = createVector(595, -500);
 
-    c = createVector(40, 600); //150
-    d = createVector(1140, 600); //950
+    // c = createVector(50, 600); //150
+    // d = createVector(1050, 600); //950
 
-    controls[2] = createVector(595, 1500);
-    controls[3] = createVector(595, 1500);
+    // controls[2] = createVector(595, 1500);
+    // controls[3] = createVector(595, 1500);
+
+    
+    /*ladder*/
+    // controls = [];
+    // a = createVector(50, 300);
+    // b = createVector(1050, 300);
+
+    // controls[0] = createVector(50, 300);
+    // controls[1] = createVector(1050, 300);
+
+    // c = createVector(50, 500); //150
+    // d = createVector(1050, 500); //950
+
+    // controls[2] = createVector(50, 500);
+    // controls[3] = createVector(1050, 500);
+
+     /*driehoek*/
+     controls = [];
+     a = createVector(50, 300);
+     b = createVector(1050, 500);
+
+     c = createVector(50, 700); //150
+     d = createVector(1050, 500); //950
+ 
+ 
+     controls[0] = createVector(50, 300);
+     controls[1] = createVector(1050, 500);
+ 
+     
+     controls[2] = createVector(50, 300);
+     controls[3] = createVector(1050, 500);
+ 
 
 
-    /*rond
-
-    controls = [];
-    a = createVector(500, 300);
-    b = createVector(200, 300);
-
-    controls[0] = createVector(1500, -1400);
-    controls[1] = createVector(1500, -1400);
-
-    c = createVector(200, 300); //150
-    d = createVector(500, 300); //950
-
-    controls[2] = createVector(1500, 2000);
-    controls[3] = createVector(1500, 2000);
-*/
+    end = createVector(1000, 200);
+    
     layer = 0;
     maxlayers = 3;
 
-    steps = 20
+    steps = 10
     rot = 0;
     issaved = false;
 
@@ -99,7 +123,7 @@ function setup() {
 
 function mousePressed() {
     if (!issaved) {
-        gcode.save("ladderhart");
+        gcode.save("ladder");
         issaved = true;
     }
 
