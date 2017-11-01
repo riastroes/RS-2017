@@ -35,7 +35,7 @@ function preload() {
 
 function setup() {
 
-    var canvas = createCanvas(1100, 1100); //X22O EN Y220 is het hoogste
+    var canvas = createCanvas(1100, 600); //X22O EN Y220 is het hoogste
     windowscale = 1;
     model.resize(1000, 1000);
 
@@ -61,7 +61,7 @@ function setup() {
     strokeCap(SQUARE);
     noFill();
     textSize(30);
-    settings = new Settings("Ultimaker2+", "PLAz", "fine");
+    settings = new Settings("Anet", "PLAFLEX", "normal");
     layers = [];
     maxlayers = 2;
     for (var f = 0; f < maxlayers; f++) {
@@ -76,9 +76,9 @@ function setup() {
 
 
     //grid.maskCircle(createVector(500, 500), 300);
-    image(model, marge, marge);
-    grid.maskImage(50, model);
-    grid.draw();
+   // image(model, marge, marge);
+    //grid.maskImage(50, model);
+    //grid.draw();
     grid.reorder();
 
 
@@ -142,10 +142,10 @@ function draw() {
         layers[layer].addPattern(offset, createVector(900, 30), pattern.path);
         pattern.create(skirt[0], colors[2], 2);
         layers[layer].addPattern(offset, createVector(150, 50), pattern.path);
-        pattern.create(skirt[1], colors[2], 2);
-        layers[layer].addPattern(offset, createVector(900, 50), pattern.path);
-        pattern.create(skirt[0], colors[2], 2);
-        layers[layer].addPattern(offset, createVector(150, 60), pattern.path);
+        // pattern.create(skirt[1], colors[2], 2);
+        // layers[layer].addPattern(offset, createVector(900, 50), pattern.path);
+        // pattern.create(skirt[0], colors[2], 2);
+        // layers[layer].addPattern(offset, createVector(150, 60), pattern.path);
 
     }
 

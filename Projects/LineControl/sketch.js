@@ -41,7 +41,7 @@ function setup() {
 
     background(200);
     //frameRate(10);
-    settings = new Settings("Anet", "PLAFLEX", "normal");
+    settings = new Settings("Anet", "ABS", "normal");
     layers = [];
 
     totlayerheight = 0;
@@ -60,73 +60,30 @@ function setup() {
 
 
 
-    /*brug*/
-    // controls = [];
-    // a = createVector(50, 300);
-    // b = createVector(1050, 300);
-
-    // controls[0] = createVector(595, -500);
-    // controls[1] = createVector(595, -500);
-
-    // c = createVector(50, 600); //150
-    // d = createVector(1050, 600); //950
-
-    // controls[2] = createVector(595, 1500);
-    // controls[3] = createVector(595, 1500);
-
-
     /*ladder*/
-    // controls = [];
-    // a = createVector(50, 300);
-    // b = createVector(1050, 300);
-
-    // controls[0] = createVector(50, 300);
-    // controls[1] = createVector(1050, 300);
-
-    // c = createVector(50, 500); //150
-    // d = createVector(1050, 500); //950
-
-    // controls[2] = createVector(50, 500);
-    // controls[3] = createVector(1050, 500);
-
-    /*trapezium*/
-    // controls = [];
-    // a = createVector(50, 300);
-    // b = createVector(1050, 470);
-
-    // c = createVector(50, 700); //150
-    // d = createVector(1050, 530); //950
-
-
-    // controls[0] = createVector(50, 300);
-    // controls[1] = createVector(1050, 530);
-
-
-    // controls[2] = createVector(50, 700);
-    // controls[3] = createVector(1050, 530);
-
-    /*halfrond*/
     controls = [];
     a = createVector(250, 300);
     b = createVector(850, 300);
 
-    c = createVector(150, 400); //150
-    d = createVector(950, 400); //950
+    controls[0] = createVector(50,-0);
+    controls[1] = createVector(1050, -0);
 
+    c = createVector(50, 500); //150
+    d = createVector(1050, 500); //950
 
-    controls[0] = createVector(400, -1000);
-    controls[1] = createVector(700, -1000);
+    controls[2] = createVector(1050, -1500);
+    controls[3] = createVector(50, -1500);
 
+   
 
-    controls[2] = createVector(50, -1200);
-    controls[3] = createVector(1050, -1200);
+  
 
     end = createVector(1000, 200);
 
     layer = 0;
-    maxlayers = 3;
+    maxlayers = 13;
 
-    steps = 11
+    steps = 21
     rot = 0;
     issaved = false;
 
@@ -137,7 +94,7 @@ function setup() {
 
 function mousePressed() {
     if (!issaved) {
-        gcode.save("ladder");
+        gcode.save("linecontrol");
         issaved = true;
     }
 
@@ -151,7 +108,11 @@ function draw() {
     //patroon ZIGZAG
     if (layer < maxlayers) {
 
-
+        //a.add(0,100);
+        //b.add(0,100);
+        c.add(0,-20);
+        d.add(0,-20);
+        
         ladder = new Ladder(a, b, c, d, controls);
         ladder.create(steps);
         //ladder.rotate(-rot);
