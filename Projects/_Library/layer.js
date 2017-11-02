@@ -1,4 +1,4 @@
-function Layer(layer, settings) {
+function Layer(layer, settings, totlayerheight) {
     this.layer = layer;
     this.layerheight = settings.layerheight;
     totlayerheight += this.layerheight;
@@ -75,7 +75,8 @@ Layer.prototype.draw = function(acolor) {
         endShape();
     }
 }
-Layer.prototype.generate = function(layer) {
+
+Layer.prototype.generate = function(layer, gcode) {
     var z = 0.2 + (layer * this.layerheight);
     append(this.commands, "G0 Z" + z);
 

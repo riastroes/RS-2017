@@ -79,7 +79,7 @@ Gcode.prototype.generate = function(layers, skirt, knittings) {
     this.endCode();
 }
 
-Gcode.prototype.generateLayers = function() {
+Gcode.prototype.generateLayers = function(layers) {
     this.startCode();
 
     for (var i = 0; i < layers.length; i++) {
