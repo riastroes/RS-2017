@@ -158,7 +158,8 @@ Settings.prototype.initMaterial = function() {
                         {
                             this.materialcode = "ABS";
                             if (this.style == "normal") {
-                                this.initStyle(0.4, 0.1, 800); //TEST OK getest met knittingapp
+                                this.initStyle(0.4, 0.08, 800); //TEST IN LineControl
+                                //this.initStyle(0.4, 0.1, 800); //TEST OK getest met knittingapp
                                 //this.initStyle(0.2, 0.05, 800);  te dun
                                 //this.initStyle(0.2, 0.2, 800);te laag , te vet 
                                 //this.initStyle(0.2, 0.1, 800); te vet 
@@ -326,7 +327,7 @@ Settings.prototype.initPrinter = function() {
             }
         case "ABS":
             {
-                this.nozzletemp = 250;
+                this.nozzletemp = 240;
                 this.bedtemp = 60;
                 break;
             }

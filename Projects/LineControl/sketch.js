@@ -10,26 +10,22 @@ var end; //set last point before you go to start
 var maxlayers;
 var layer;
 
-var grid;
-var pool;
+
+var palette;
 var colors;
-var a, b, c, d;
+
 var maxw, maxh;
 var marge;
 var offset;
 
-var windowscale;
 
 
-var l;
-
-var model;
-var ladder;
 var steps;
 var rot;
 var controls;
-var a, b, c, d, e, f, g, h, i, j;
-var end, begin;
+var a, b, c, d, e, f ;
+var abde, bcef, cafd;
+
 var miny = 70;
 var maxy = 1050;
 var minx = 50;
@@ -45,43 +41,35 @@ function setup() {
 
     background(200);
     layer = 0;
-    maxlayers = 1;
-    start = createVector(550, 550);
+    maxlayers = 2;
+    palette = new Color();
+    
+        
+    palette.addHuePalette(60, 50, 50);
+    colors = palette.colors;
+    
     print3D = new Print3D("Anet", "ABS", "normal", maxlayers);
 
-
-
-
-
-    // /*ladder*/
-    // controls = [];
-    // a = createVector(250, 300);
-    // b = createVector(850, 300);
-
-    // controls[0] = createVector(50, -0);
-    // controls[1] = createVector(1050, -0);
-
-    // c = createVector(50, 500); //150
-    // d = createVector(1050, 500); //950
-
-    // controls[2] = createVector(1050, -1500);
-    // controls[3] = createVector(50, -1500);
-
+    
     /*ladder*/
+   
+    a = createVector(550, 300);
+    d = createVector(550+10, 300);
+
+    b = createVector(300, 625);
+    e = createVector(300, 625+10);
+
+    c = createVector(725-10, 725-10);
+    f = createVector(725+10, 725+10);
     controls = [];
-    a = createVector(550, 350);
-    b = createVector(375, 625);
-    c = createVector(725, 725);
 
+    start = a.copy().add(0,0,-1);
+    end =  a.copy().add(100,0);
 
-
-
-
-    end = createVector(1000, 200);
-
+    
     layer = 0;
     steps = 21;
-    rot = 0;
+    
     issaved = false;
 
 
@@ -91,7 +79,7 @@ function setup() {
 
 function mousePressed() {
     if (!issaved) {
-        print3D.gcode.save("LineControl");
+        print3D.gcode.save("LC");
         issaved = true;
     }
 
@@ -100,73 +88,19 @@ function mousePressed() {
 function draw() {
 
 
-    if (layer < maxlayers) {
+    if (layer < 2) {
 
-
-        d = a.copy();
-        d.add(-10, 0);
-        e = b.copy();
-        e.add(-10, 0);
-
-        controls[0] = createVector(550, 300);
-        controls[1] = createVector(100, 625);
-        controls[2] = createVector(550, 300);
-        controls[3] = createVector(100, 625);
-
-
-
-        ladder = new Ladder(a, b, d, e, controls);
-        append(ladder.path, createVector(550, 550)); //start
-        ladder.create(steps);
-        append(ladder.path, createVector(550, 550)); //end
-
-        f = b.copy();
-        f.add(0, 10);
-        g = c.copy();
-        g.add(0, 10);
-
-        controls[0] = createVector(100, 625);
-        controls[1] = createVector(1050, 625);
-        controls[2] = createVector(100, 625);
-        controls[3] = createVector(1050, 625);
-        print3D.addToLayer(layer, ladder.path);
-
-        ladder = new Ladder(b, c, f, g, controls);
-        append(ladder.path, createVector(550, 550)); //start
-        ladder.create(steps);
-        append(ladder.path, createVector(550, 550)); //end
-        print3D.addToLayer(layer, ladder.path);
-
-
-        controls[0] = createVector(100, 625);
-        controls[1] = createVector(1050, 625);
-        controls[2] = createVector(100, 625);
-        controls[3] = createVector(1050, 625);
-
-        i = a.copy();
-        i.add(10, 0);
-        j = b.copy();
-        j.add(0, 10);
-
-        controls[0] = createVector(1050, 625);
-        controls[1] = createVector(0, 625);
-        controls[2] = createVector(1050, 625);
-        controls[3] = createVector(0, 625);
-
-
-        ladder = new Ladder(g, i, h, j, controls);
-        append(ladder.path, createVector(550, 550)); //start
-        ladder.create(steps);
-        append(ladder.path, createVector(550, 550)); //end
-        print3D.addToLayer(layer, ladder.path);
-
-        //ladder.rotate(-rot);
-        //ladder.shift(100, 500);
-        //if (print3D.checkPrint(ladder.path, 50, 70, 1050, 1050)) {
-
-
-
-
+        //driehoeksladder
+        
+        var driehoeksladder = new DriehoeksLadder(a,b,c, steps);
+        if(layer == 0){
+            print3D.addPointToLayer(layer, start, 0);
+        }
+        print3D.addToLayer(layer, driehoeksladder.create(), 0.2);
+        if(layer == maxlayers-1){
+           // print3D.addPointToLayer(layer, end, 0.2); 
+        }
+        
 
     } else {
         print3D.print(start);

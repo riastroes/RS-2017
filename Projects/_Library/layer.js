@@ -23,7 +23,7 @@ Layer.prototype.addPattern = function(offset, pos, path) {
         var p = pos.copy();
         p.add(offset);
         p.add(path[i]);
-        p.z = 0.2;
+        
         if (p.x > 0 && p.x < width && p.y > 0 && p.y < height) {
             append(this.p, p);
         } else {
@@ -35,14 +35,17 @@ Layer.prototype.addPattern = function(offset, pos, path) {
     }
 }
 
-Layer.prototype.add = function(path) {
+Layer.prototype.addPoint= function(vector) {
+        append(this.p, vector);
+    }
 
-    for (var i = 0; i < path.length; i++) {
+Layer.prototype.add = function(path) {
+     for (var i = 0; i < path.length; i++) {
         var p = path[i].copy();
-        p.z = 0.2;
         append(this.p, p);
     }
 }
+
 
 Layer.prototype.change = function(min, max) {
     var r = [];
@@ -57,17 +60,23 @@ Layer.prototype.change = function(min, max) {
 }
 Layer.prototype.draw = function(acolor) {
     strokeWeight = 1;
-    stroke(acolor);
+    var colorindex = this.p[0].z /10  * 100;
+   
+    
     noFill();
     if (this.p.length > 0) {
 
 
         beginShape();
+
+        stroke(colors[colorindex]);
         vertex(this.p[0].x, this.p[0].y);
 
         for (var i = 1; i < this.p.length; i++) {
 
             if ((abs(this.p[i].x - this.p[i - 1].x) > 1 || abs(this.p[i].y - this.p[i - 1].y) > 1)) {
+                colorindex =this.p[1].z /10  * 100;
+                stroke(colorindex);
                 vertex(this.p[i].x, this.p[i].y);
             }
 
@@ -77,8 +86,8 @@ Layer.prototype.draw = function(acolor) {
 }
 
 Layer.prototype.generate = function(layer, gcode) {
-    var z = 0.2 + (layer * this.layerheight);
-    append(this.commands, "G0 Z" + z);
+    var nz = (layer * this.layerheight);  // nz = normaal niveau
+    append(this.commands, "G0 Z" + (nz + this.layerheight));
 
 
     for (var i = 0; i < this.p.length; i++) {
@@ -88,23 +97,28 @@ Layer.prototype.generate = function(layer, gcode) {
         x = floor(x * 100) / 100;
         var y = this.p[i].y * this.scale;
         y = floor(y * 100) / 100;
-        var z;
-        if (i == 0) {
-            z = 0;
-        } else {
-            z = this.p[i].z;
-        }
-
+        var z = floor(this.p[i].z * 10) / 10;
+        
         var dvector = p5.Vector.sub(this.p[i], this.p[i - 1]);
         var d = dvector.mag() * this.scale;
+        if(i > 0){
+            if(z  !=  floor(this.p[i-1].z * 10) / 10){
+                // andere hoogte
+                z = (nz + this.layerheight);
+            }
+        }
 
-
-        var kz = this.totallayerheight * z;
-        if (z == 0) {
+        
+        if (z == -1) {  //transport
             append(this.commands, "G0 X" + x + " Y" + y);
-        } else {
+        } 
+        else if (z == 0){  // normale hoogte
             gcode.extrude += (d * this.thickness);
-            append(this.commands, "G1 X" + x + " Y" + y + " E" + gcode.extrude);
+            append(this.commands, "G1 X" + x + " Y" + y +  " E" + gcode.extrude);
+        }
+        else {
+            gcode.extrude += (d * this.thickness);
+            append(this.commands, "G1 X" + x + " Y" + y + " Z" + z + " E" + gcode.extrude);
         }
     }
 }
