@@ -6,9 +6,10 @@ Bloem.prototype.createRond = function(pos, size, corner,  z){
     var p = pos.copy();
     p.z = -1;
     var apath = [];
+    var steps = size/8;
     
     append( apath, p);
-    for(var t = 10; t < size; t += 10){
+    for(var t = 10; t < size-5; t += steps){
         for(var i = 0; i <= 10; i++ ){
             var p = pos.copy();
             p.x += (t+i) * cos(corner +  (i*(TWO_PI / 10)));

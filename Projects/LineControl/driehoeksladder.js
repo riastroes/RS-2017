@@ -17,7 +17,7 @@ DriehoeksLadder.prototype.create = function(){
     corner = PI/2;
     
     
-    this.path = this.path.concat(bloem.createRond(this.a, 100, corner, 3.8));
+    this.path = this.path.concat(bloem.createRond(this.a, 100, corner, 2.8));
     this.controls[0] = a.copy().add(0,-200);
     this.controls[1] = b.copy().add(-200,0);
     this.controls[2] = d.copy().add(0,-200);
@@ -26,7 +26,7 @@ DriehoeksLadder.prototype.create = function(){
     this.AB.create(this.steps);
     this.path = this.path.concat(this.AB.path);
     corner = -PI/5;
-    this.path = this.path.concat(bloem.createRond(this.b, 100,corner,3.8));
+    this.path = this.path.concat(bloem.createRond(this.b, 100,corner,2.8));
     this.controls[0] = b.copy().add(-200,0);
     this.controls[1] = c.copy().add(200,200);
     this.controls[2] = e.copy().add(-200,0);
@@ -35,7 +35,7 @@ DriehoeksLadder.prototype.create = function(){
     this.BC.create(this.steps);
     this.path = this.path.concat(this.BC.path);
     corner = PI + PI/8;
-    this.path = this.path.concat(bloem.createRond(this.c, 100, corner,3.8));
+    this.path = this.path.concat(bloem.createRond(this.c, 100, corner,2.8));
     this.controls[0] = c.copy().add(200,0);
     this.controls[1] = a.copy().add(200,200);
     this.controls[2] = f.copy().add(200,0);

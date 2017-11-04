@@ -36,8 +36,8 @@ Gcode.prototype.endCode = function() {
     //append(this.commands, "M107               ;fan off");
     append(this.commands, "G1 Z15 F200        ;move Z up a bit");
     append(this.commands, "G91                ;relative positioning");
-    append(this.commands, "M104 S0            ;extruder heater off");
-    append(this.commands, "M140 S0            ;heated bed heater off");
+    //append(this.commands, "M104 S0            ;extruder heater off");
+    //append(this.commands, "M140 S0            ;heated bed heater off");
     append(this.commands, "G1 Z+5 F200        ;move Z up a bit");
     append(this.commands, "G28 X0 Y0          ;move X/Y to min endstops, so the head is out of the way");
     append(this.commands, "M84                ;steppers off");

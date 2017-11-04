@@ -60,7 +60,6 @@ Layer.prototype.change = function(min, max) {
 }
 Layer.prototype.draw = function(acolor) {
     strokeWeight = 1;
-    var colorindex = this.p[0].z /10  * 100;
    
     
     noFill();
@@ -69,14 +68,13 @@ Layer.prototype.draw = function(acolor) {
 
         beginShape();
 
-        stroke(colors[colorindex]);
+        stroke(0);
         vertex(this.p[0].x, this.p[0].y);
 
         for (var i = 1; i < this.p.length; i++) {
 
             if ((abs(this.p[i].x - this.p[i - 1].x) > 1 || abs(this.p[i].y - this.p[i - 1].y) > 1)) {
-                colorindex =this.p[1].z /10  * 100;
-                stroke(colorindex);
+                
                 vertex(this.p[i].x, this.p[i].y);
             }
 

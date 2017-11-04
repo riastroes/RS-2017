@@ -51,20 +51,10 @@ function setup() {
     print3D = new Print3D("Anet", "ABS", "normal", maxlayers);
 
     
-    /*ladder*/
    
-    a = createVector(550, 300);
-    d = createVector(550+10, 300);
-
-    b = createVector(300, 625);
-    e = createVector(300, 625+10);
-
-    c = createVector(725-10, 725-10);
-    f = createVector(725+10, 725+10);
-    controls = [];
-
-    start = a.copy().add(0,0,-1);
-    end =  a.copy().add(100,0);
+   
+    start = createVector(100,100);;  
+    end =  createVector(100,100);
 
     
     layer = 0;
@@ -88,19 +78,50 @@ function mousePressed() {
 function draw() {
 
 
-    if (layer < 2) {
+    if (layer < maxlayers) {
 
         //driehoeksladder
         
-        var driehoeksladder = new DriehoeksLadder(a,b,c, steps);
+        // var driehoeksladder = new DriehoeksLadder(a,b,c, steps);
+        // if(layer == 0){
+        //     print3D.addPointToLayer(layer, start, 0);
+        // }
+        // print3D.addToLayer(layer, driehoeksladder.create(), 0.2);
+
+        //vierhoeksladder
+        var vierhoeksladder;
+        start = createVector(200,100); 
+        end = createVector(200,100); 
         if(layer == 0){
-            print3D.addPointToLayer(layer, start, 0);
+            vierhoeksladder = new VierhoeksLadder(createVector(200,200), 60,false);
+         }
+        else{
+            vierhoeksladder = new VierhoeksLadder(createVector(200,200), 60,true);
         }
-        print3D.addToLayer(layer, driehoeksladder.create(), 0.2);
-        if(layer == maxlayers-1){
-           // print3D.addPointToLayer(layer, end, 0.2); 
+        print3D.addPointToLayer(layer, start, 0);
+        print3D.addToLayer(layer, vierhoeksladder.create(), 0.2);
+        start = createVector(500,100); 
+        end = createVector(500,100); 
+        if(layer == 0){
+            vierhoeksladder = new VierhoeksLadder(createVector(500,200), 60,false);
+         }
+        else{
+            vierhoeksladder = new VierhoeksLadder(createVector(500,200), 60,true);
         }
-        
+        print3D.addPointToLayer(layer, start, 0);
+        print3D.addToLayer(layer, vierhoeksladder.create(), 0.2);
+        start = createVector(800,100); 
+        end = createVector(800,100); 
+        if(layer == 0){
+            vierhoeksladder = new VierhoeksLadder(createVector(800,200), 60,false);
+         }
+        else{
+            vierhoeksladder = new VierhoeksLadder(createVector(800,200), 60,true);
+        }
+        print3D.addPointToLayer(layer, start, 0);
+        print3D.addToLayer(layer, vierhoeksladder.create(), 0.2);
+
+
 
     } else {
         print3D.print(start);
