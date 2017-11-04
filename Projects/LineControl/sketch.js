@@ -88,7 +88,7 @@ function draw() {
         // }
         // print3D.addToLayer(layer, driehoeksladder.create(), 0.2);
 
-        //vierhoeksladder
+        //vierhoeksladder  //small
         var vierhoeksladder;
         start = createVector(200,100); 
         end = createVector(200,100); 
