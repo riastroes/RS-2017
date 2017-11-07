@@ -85,11 +85,9 @@ function draw() {
 
 
     if (layer == 0) {
-        flowersOnLangeLadder(layer, false);
-        print3D.print(layer);
-    } else {
         flowersOnLangeLadder(layer, true);
         print3D.print(layer);
+    } else {
         print3D.stop();
         noLoop();
     }
