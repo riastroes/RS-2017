@@ -68,7 +68,7 @@ Layer.prototype.draw = function(acolor) {
 
         beginShape();
 
-        stroke(0);
+        stroke(acolor);
         vertex(this.p[0].x, this.p[0].y);
 
         for (var i = 1; i < this.p.length; i++) {

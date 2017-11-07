@@ -28,6 +28,9 @@ Gcode.prototype.startCode = function() {
     //append(this.commands, "M106            ;fan on");
     append(this.commands, "M117 Printing...");
 }
+Gcode.prototype.pauseCode = function(sec){
+    append(this.commands, "G4 P" + (sec * 1000));
+}
 Gcode.prototype.getCode = function(commands) {
     this.commands = concat(this.commands, commands);
 }
@@ -65,7 +68,7 @@ Gcode.prototype.save = function(name) {
     console.log(name + " is saved.");
 }
 Gcode.prototype.generate = function(layers, skirt, knittings) {
-    this.startCode();
+    
     if (skirt != undefined) {
         this.getCode(skirt.commands);
     }
@@ -76,14 +79,17 @@ Gcode.prototype.generate = function(layers, skirt, knittings) {
         }
         this.getCode(knittings[i].commands);
     }
-    this.endCode();
+    
 }
 
 Gcode.prototype.generateLayers = function(layers) {
-    this.startCode();
+   
 
     for (var i = 0; i < layers.length; i++) {
         this.getCode(layers[i].commands);
     }
-    this.endCode();
+    
+}
+Gcode.prototype.generateLayer = function(layer){
+    this.getCode(layers[layer].commands);
 }

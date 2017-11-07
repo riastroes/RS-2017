@@ -29,14 +29,23 @@ Print3D.prototype.addPointToLayer = function(layer, vector) {
    this.layers[layer].addPoint(vector);
   
 }
-Print3D.prototype.print = function() {
+Print3D.prototype.start = function(){
+    this.gcode.startCode();
+}
+Print3D.prototype.pause = function(sec){
+    this.gcode.pauseCode(sec);
+}
+Print3D.prototype.stop = function(){
+    this.gcode.endCode();
+}
+Print3D.prototype.print = function(layer) {
 
-    for (var l = 0; l < this.maxlayers; l++) {
-        this.layers[l].generate(l, this.gcode);
-        var acolor = colors[3 + l];
-        this.layers[l].draw(acolor);
-    }
+   
+    this.layers[layer].generate(layer, this.gcode); // generate commands
+    var acolor = colors[2 + layer];
+    this.layers[layer].draw(acolor);
 
+    
     this.gcode.generateLayers(this.layers);
 }
 Print3D.prototype.checkPrint = function(path, minx, miny, maxx, maxy) {
