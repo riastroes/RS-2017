@@ -85,21 +85,17 @@ function draw() {
 
 
     if (layer == 0) {
-        flowersOnLangeLadder(layer);
+        driehoeksladders(150);
         print3D.print(layer);
     }
     else{
+        
+        
         print3D.stop();
         noLoop();
     }
     layer++;
 
-}
-function flowersOnLangeLadder(layer){
-    var start = createVector(550,150); 
-    var ll = new FlowersOnLangeLadder(start, 100);
-    print3D.addToLayer(layer, ll.create2(false));
-    
 }
 function driespiralen(layer){
     var spiraal = new Spiraal();

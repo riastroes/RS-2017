@@ -85,83 +85,77 @@ function draw() {
 
 
     if (layer == 0) {
-
-        //patroonelement  driehoeksladder met fluffie geprinte spiralen
-        //wordt in 1 layer geprint
-        
-        driehoekincirkel(false);
+        vierkantsladder3x();
         print3D.print(layer);
     }
-    else if(layer == 1){
-        //print3D.addPointToLayer(layer, start, 0);
-                
-        driehoekincirkel(true);
-        print3D.print(layer);
-    }
-    else if(layer == 2){
+    else{
         
-        //print3D.pause(20);
-        //driespiralen(layer);
-        //print3D.print(layer);
+        vierkantsladder3x();
+        print3D.print(layer);
         print3D.stop();
         noLoop();
     }
     layer++;
 
-
-
-
-
 }
-function driespiralen(layer){
-    var spiraal = new Spiraal();
-    for(var aantal = 0; aantal < 3; aantal++){
-        var pos = createVector(300 + (aantal* 300),210)
-        print3D.addToLayer(layer, spiraal.create(pos,100,0,4));
-    }
-}
-function driehoekincirkel(metknoppen){
-    var driehoekincirkelladders;
-    
-    for(var aantal = 0; aantal < 3; aantal++){
-        start = createVector(200 + (aantal* 300),150); 
-        end = createVector(200 + (aantal* 300),200); 
-        var center = createVector(250 + (aantal* 300),300); 
-        print3D.addPointToLayer(layer, start, 0);
-       
-        driehoekincirkelladders = new DriehoekInCirkelLadder(center, 120, -PI/3*2);
-        print3D.addToLayer(layer, driehoekincirkelladders.create2(metknoppen), 0.2);
-        
-        print3D.addPointToLayer(layer, start, 0);
-    }
-    
 
-}
+
 function vierkantsladder3x(){
     // 3 patroonelementen  in een vierkant worden de hoeken naar binnen gebracht, deze lijnconstructie wordt  in ladders 2x geprint 
     // in de tweede layer worden fluffie geprinte spiralen geprint. 
     // wordt in 2 layers geprint
     var vierhoeksladder;
     for(var aantal = 0; aantal < 3; aantal++){
-        start = createVector(200 + (i* 300),100); 
+        start = createVector(200 + (aantal* 300),100); 
        
         print3D.addPointToLayer(layer, start, 0);
         if(layer == 0){
-            vierhoeksladder = new VierhoeksLadder(createVector(200 + (i* 300),200), 60);
+            vierhoeksladder = new VierhoeksLadder(createVector(200 + (aantal* 300),200), 60);
             print3D.addToLayer(layer, vierhoeksladder.create(false), 0.2);
          }
         else{
             // alleen in de tweede layer worden 'bloemen' geprint
-            vierhoeksladder = new VierhoeksLadder(createVector(200 + (i* 300),200), 60);
+            vierhoeksladder = new VierhoeksLadder(createVector(200 + (aantal* 300),200), 60);
             print3D.addToLayer(layer, vierhoeksladder.create(true), 0.2);
         }
         
 
     }
 
-    function driehoeksladder(){
-        //patroonelement  driehoeksladder met fluffie geprinte spiralen 
+    
+}
+function driehoeksladders(size){
+    //patroonelement  driehoeksladder met fluffie geprinte spiralen 
+    var y = 200;
+    var x;
+    for(var aantal = 0; aantal < 3; aantal++){
+        x = aantal * (width/4);
+        var start = createVector((width/4) +x, 300 );
+        if(aantal == 1){
+            
+            print3D.addPointToLayer(layer, start, 0);
+            start = createVector((width/4) +x, 700 );
+            print3D.addPointToLayer(layer, start, 0);
+
+        }
+        else{
+            print3D.addPointToLayer(layer, start, 0);
+            start = createVector((width/4) +x, 300 );
+        }
+       
+        var a = start.copy().add(0,100 );
+        var b = a.copy().add( ( size/2) , size  );
+        var c = a.copy().add(-(size), size );
+        var steps = 12;
+        
+        
+
         var driehoeksladder = new DriehoeksLadder(a,b,c, steps);
-        print3D.addToLayer(layer, driehoeksladder.create(), 0.2);
+        print3D.addToLayer(layer, driehoeksladder.create(size/2), 0.2);
+        print3D.addPointToLayer(layer, start, 0);
+        if(aantal == 1){
+            start = createVector((width/4) +x, 300 );
+            print3D.addPointToLayer(layer, start, 0);
+        }
     }
 }

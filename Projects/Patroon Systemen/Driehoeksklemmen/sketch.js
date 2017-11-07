@@ -1,6 +1,7 @@
 /* Ria Stroes */
 /* @updated: november 2017  
-/* Het begin van kant.*/
+/* patroon systemen
+/* Driehoeksklemmen */
 
 
 var print3D;
@@ -85,21 +86,33 @@ function draw() {
 
 
     if (layer == 0) {
-        flowersOnLangeLadder(layer);
+
+        //patroonelement  driehoeksladder met fluffie geprinte spiralen
+        //wordt in 1 layer geprint
+        
+        driehoekincirkel(false);
         print3D.print(layer);
     }
-    else{
+    else if(layer == 1){
+        //print3D.addPointToLayer(layer, start, 0);
+                
+        driehoekincirkel(true);
+        print3D.print(layer);
+    }
+    else if(layer == 2){
+        
+        //print3D.pause(20);
+        //driespiralen(layer);
+        //print3D.print(layer);
         print3D.stop();
         noLoop();
     }
     layer++;
 
-}
-function flowersOnLangeLadder(layer){
-    var start = createVector(550,150); 
-    var ll = new FlowersOnLangeLadder(start, 100);
-    print3D.addToLayer(layer, ll.create2(false));
-    
+
+
+
+
 }
 function driespiralen(layer){
     var spiraal = new Spiraal();
@@ -147,40 +160,9 @@ function vierkantsladder3x(){
 
     }
 
-    
-}
-function driehoeksladders(size){
-    //patroonelement  driehoeksladder met fluffie geprinte spiralen 
-    var y = 200;
-    var x;
-    for(var aantal = 0; aantal < 3; aantal++){
-        x = aantal * (width/4);
-        var start = createVector((width/4) +x, 300 );
-        if(aantal == 1){
-            
-            print3D.addPointToLayer(layer, start, 0);
-            start = createVector((width/4) +x, 700 );
-            print3D.addPointToLayer(layer, start, 0);
-
-        }
-        else{
-            print3D.addPointToLayer(layer, start, 0);
-            start = createVector((width/4) +x, 300 );
-        }
-       
-        var a = start.copy().add(0,100 );
-        var b = a.copy().add( ( size/2) , size  );
-        var c = a.copy().add(-(size), size );
-        var steps = 12;
-        
-        
-
+    function driehoeksladder(){
+        //patroonelement  driehoeksladder met fluffie geprinte spiralen 
         var driehoeksladder = new DriehoeksLadder(a,b,c, steps);
-        print3D.addToLayer(layer, driehoeksladder.create(size/2), 0.2);
-        print3D.addPointToLayer(layer, start, 0);
-        if(aantal == 1){
-            start = createVector((width/4) +x, 300 );
-            print3D.addPointToLayer(layer, start, 0);
-        }
+        print3D.addToLayer(layer, driehoeksladder.create(), 0.2);
     }
 }
