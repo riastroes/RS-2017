@@ -31,7 +31,6 @@ Grid.prototype.reorder = function() {
             nrechts = !nrechts;
             if (reversep.length > 0) {
 
-                console.log(reversep);
                 for (var j = reversep.length - 1; j >= 0; j--) {
                     this.newp[n] = reversep[j].copy();
                     n += 1;
@@ -219,4 +218,10 @@ Grid.prototype.draw = function() {
     }
 
 
+}
+Grid.prototype.showMargin = function(marge){
+    background(colors[2]);
+    stroke(colors[0]);
+    fill(colors[1]);
+    rect(marge, marge, width- (2*marge), height - (2*marge));
 }

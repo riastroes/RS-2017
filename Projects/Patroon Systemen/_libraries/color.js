@@ -16,10 +16,11 @@ Color.prototype.random = function(max, alpha) {
         this.colors[i] = color(random(255), random(255), random(255), alpha);
     }
 }
-Color.prototype.createPalette = function() {
+Color.prototype.create= function() {
     //create your colors here
     this.add(color(0));
     this.add(color(255));
+    this.add(color(0, 50, 50));
     this.add(color(255, 0, 0));
     this.add(color(0, 0, 255));
     this.add(color(0, 255, 0));
