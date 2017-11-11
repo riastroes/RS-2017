@@ -51,33 +51,7 @@ Bloem.prototype.createKnop = function(pos, size, corner, z) {
     }
     return this.path;
 }
-
-Bloem.prototype.createPijlPunten = function( pos, size, corner,  z){
-    this.path = [];
-    var p = pos.copy();
-    p.z = -1;
-    var apath = [];
-    var steps = size/8;
-    
-    append( this.path, p); //moveto
-    p.z = 0;
-    for( var h = 0; h < 3; h++){
-        z += 0.2;
-        for(var t = 2; t < size; t += steps){
-            for(var i = 0; i <= 3; i++ ){
-                var p = pos.copy();
-                p.x += (t) * cos(corner +  (i*(TWO_PI / 3)));
-                p.y += (t) * sin(corner +  (i*(TWO_PI / 3)));
-                p.z = z;
-                append( this.path, p);
-            }
-        }
-    }
-    return this.path;
-}
-Bloem.prototype.createCirkel = function(pos, size, corner,  z){
-
-
+Bloem.prototype.createCirkel = function(pos, size, corner, z) {
     this.path = [];
     var p = pos.copy();
     p.z = -1;
@@ -118,49 +92,6 @@ Bloem.prototype.createCirkel = function(pos, size, corner,  z){
 
     return this.path;
 }
-
-Bloem.prototype.createPatroon = function(pos, size, steps, corner, z){
-    
-    var p = pos.copy();
-    var r = 0;
-    p.z = -1;
-    size += 20;
-    //for(var ring = 0; ring < 8; ring++){
-   //     size = size - 20;
-    //    corner -= TWO_PI / (steps/2);
-    //    r = 0;
-    for(var i = 0; i <= (steps * 12); i++ ){
-        if(i % steps == 0){
-           // corner += (TWO_PI /steps)/2;
-        }
-        if(i % 4 == 0 ||i % 4 == 1){
-            var p = pos.copy();
-            p.x += (size-r) * cos(corner +  (i*(TWO_PI /steps)));
-            p.y += (size-r) * sin(corner +(i*(TWO_PI / steps)));
-            p.z = z;
-            append( this.path, p);
-        }
-        else{
-            var p = pos.copy();
-            p.x += ((size-r)-60) * cos(corner +  (i*(TWO_PI /steps)));
-            p.y += ((size-r)-60) * sin(corner +(i*(TWO_PI / steps)));
-            p.z = z;
-            append( this.path, p);
-        }
-        r += (20/steps);
-     }
-
-    
-    var max = this.path.length-1;
-    for(var i = 0; i < max; i++){
-        append(this.path, this.path[max - i].copy());
-    }
-    
-    
-    
-    return this.path;
-}
-
 
 Bloem.prototype.lijn = function(pos, size, corner, z) {
 
@@ -213,4 +144,3 @@ Bloem.prototype.lijn = function(pos, size, corner, z) {
     return this.path;
 
 }
-
