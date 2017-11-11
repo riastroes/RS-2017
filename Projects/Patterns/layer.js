@@ -27,7 +27,11 @@ Layer.prototype.addPattern = function(offset, pos, path) {
         if (p.x > 0 && p.x < width && p.y > 0 && p.y < height) {
             append(this.p, p);
         } else {
-            console.log("FATAL ERROR IN PRINT");
+            console.log("FATAL ERROR IN PRINT(" + p.x + "," + p.y+ ")");
+            var p = pos.copy();
+            p.add(offset);
+            p.add(path[i-1]);
+            console.log("vorige PRINT(" + p.x + "," + p.y+ ")");
         }
 
 

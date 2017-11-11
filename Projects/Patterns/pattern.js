@@ -43,7 +43,9 @@ Pattern.prototype.create = function(alist, acolor, weight) {
     this.style(acolor, weight);
     this.path = [];
     for (var i = 0; i < alist.length; i++) {
+       
         this.path[i] = createVector(this.p[alist[i]].x, this.p[alist[i]].y);
+        
     }
 }
 

@@ -78,22 +78,28 @@ function mousePressed() {
         print3D.gcode.save("LC");
         issaved = true;
     }
-
 }
 
 function draw() {
 
 
     if (layer == 0) {
-        flowersOnLangeLadder(layer);
+        cirkelpattern(200);
         print3D.print(layer);
-    }
-    else{
         print3D.stop();
         noLoop();
     }
+    else{
+       
+    }
     layer++;
 
+}
+function cirkelpattern(size){
+    var center = createVector( 550, 400);
+    var size = 300;
+    var bloem = new Bloem();
+    print3D.addToLayer(layer, bloem.createPatroon(center, size, 81, 0, 0.2));
 }
 function flowersOnLangeLadder(layer){
     var start = createVector(550,150); 
@@ -119,6 +125,50 @@ function driehoekincirkel(metknoppen){
        
         driehoekincirkelladders = new DriehoekInCirkelLadder(center, 120, -PI/3*2);
         print3D.addToLayer(layer, driehoekincirkelladders.create2(metknoppen), 0.2);
+        
+        print3D.addPointToLayer(layer, start, 0);
+    }
+    
+
+}
+function driehoekmetpijlpunten(metknoppen){
+    var driehoekincirkelladders;
+    
+    for(var aantal = 0; aantal < 3; aantal++){
+        start = createVector(200 + (aantal* 300),150); 
+        end = createVector(200 + (aantal* 300),200); 
+        var center = createVector(250 + (aantal* 300),300); 
+        print3D.addPointToLayer(layer, start, 0);
+       
+        driehoekincirkelladders = new DriehoekInCirkelLadder(center, 120, -PI/3*2);
+        if(metknoppen){
+            print3D.addToLayer(layer, driehoekincirkelladders.create2(true,true), 0.2);
+        }else{
+            print3D.addToLayer(layer, driehoekincirkelladders.create2(false, false), 0.2);
+        }
+        
+        
+        print3D.addPointToLayer(layer, start, 0);
+    }
+    
+
+}
+function tweehoekmetpijlpunten(metknoppen){
+    var tweehoek;
+    
+    for(var aantal = 0; aantal < 3; aantal++){
+        start = createVector(200 + (aantal* 300),150); 
+        end = createVector(200 + (aantal* 300),200); 
+        var center = createVector(250 + (aantal* 300),300); 
+        print3D.addPointToLayer(layer, start, 0);
+       
+        tweehoek = new TweeHoeksLadder(center, 110, 0);
+        if(metknoppen){
+            print3D.addToLayer(layer, tweehoek.create2(true,true), 0.2);
+        }else{
+            print3D.addToLayer(layer, tweehoek.create2(false, false), 0.2);
+        }
+        
         
         print3D.addPointToLayer(layer, start, 0);
     }

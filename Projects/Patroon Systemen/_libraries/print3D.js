@@ -45,8 +45,8 @@ Print3D.prototype.print = function(layer) {
     var acolor = colors[2 + layer];
     this.layers[layer].draw(acolor);
 
-    
-    this.gcode.generateLayers(this.layers);
+    this.gcode.generateLayer(this.layers[layer]);
+    //this.gcode.generateLayers(this.layers);
 }
 Print3D.prototype.checkPrint = function(path, minx, miny, maxx, maxy) {
     var ok = true;

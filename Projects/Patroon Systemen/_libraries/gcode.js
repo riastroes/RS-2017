@@ -91,5 +91,5 @@ Gcode.prototype.generateLayers = function(layers) {
     
 }
 Gcode.prototype.generateLayer = function(layer){
-    this.getCode(layers[layer].commands);
+    this.getCode(layer.commands);
 }

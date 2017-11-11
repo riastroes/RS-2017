@@ -50,7 +50,7 @@ DriehoekInCirkelLadder.prototype.getPR = function(center, size, corner){
     
 }
 
-DriehoekInCirkelLadder.prototype.create2 = function(metknoppen){
+DriehoekInCirkelLadder.prototype.create2 = function(metknoppen, metpijlpunten){
     var bloem = new Bloem();
     var b = [];
     var corner = 0;
@@ -67,7 +67,13 @@ DriehoekInCirkelLadder.prototype.create2 = function(metknoppen){
             p.y  += (this.size/3) * sin((TWO_PI/3) * i);
             fill(255,0,0);
             ellipse(p.x, p.y, 10,10);
-            this.path = this.path.concat(bloem.createKnop(p,30,corner,1));
+            if(metpijlpunten){
+                this.path = this.path.concat(bloem.createPijlPunten(p,40,corner,1));
+            }
+            else{
+                this.path = this.path.concat(bloem.createKnop(p,30,corner,1));
+            }
+            
             
         }
     }
