@@ -54,7 +54,7 @@ function setup() {
 
     colors = palette.colors;
 
-    print3D = new Print3D("Anet", "ABS", "normal", maxlayers);
+    print3D = new Print3D("Ultimaker2+", "PLA", "normal", maxlayers);
 
 
 
@@ -84,13 +84,15 @@ function draw() {
 
 
     if (layer == 0) {
-        flowersOnLangeLadder(layer, false);
+        spiraal();
         print3D.print(layer);
+
     } else {
-        flowersOnLangeLadder(layer, true);
+        spiraal();
         print3D.print(layer);
         print3D.stop();
         noLoop();
+
     }
     else{
        
@@ -99,6 +101,7 @@ function draw() {
 
 }
 
+<<<<<<< Updated upstream
 function cirkelpattern(size){
     var center = createVector( 550, 400);
     var size = 300;
@@ -106,6 +109,59 @@ function cirkelpattern(size){
     print3D.addToLayer(layer, bloem.createPatroon(center, size, 81, 0, 0.2));
 }
 
+=======
+function spiraal() {
+    var start = createVector(550, 550);
+    var path = [];
+    var steps = 20;
+    var g = 0;
+    var size = 200;
+    var corner = 0;
+    var hoek = TWO_PI / ((steps * 2) + 1);
+    var radius1 = size / 3;
+    var radius2 = size;
+
+
+
+
+
+    for (var i = 0; i <= (16 * 8) + 1; i++) {
+        var p = start.copy();
+
+        radius2 = size - (i * 1);
+        radius1 = radius2 / 3;
+
+        if (i % 4 == 0) {
+            p.x += radius2 * cos((hoek * (i - 1)));
+            p.y += radius2 * sin((hoek * (i - 1)));
+        } else if (i % 4 == 1) {
+            p.x += radius2 * cos((hoek * (i)));
+            p.y += radius2 * sin((hoek * (i)));
+        } else if (i % 4 == 2) {
+            p.x += radius1 * cos((hoek * (i - 1)));
+            p.y += radius1 * sin((hoek * (i - 1)));
+        } else if (i % 4 == 3) {
+            p.x += radius1 * cos((hoek * (i)));
+            p.y += radius1 * sin((hoek * (i)));
+        }
+
+
+        append(path, p);
+
+
+
+    }
+
+
+    var max = path.length - 1;
+
+    for (var i = 0; i < max; i++) {
+        append(path, path[max - i]);
+    }
+
+    print3D.addToLayer(layer, path);
+}
+>>>>>>> Stashed changes
 
 function flowersOnLangeLadder(layer, metbloemen) {
     var start = createVector(350, 250);

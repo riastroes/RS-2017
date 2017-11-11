@@ -218,7 +218,9 @@ Settings.prototype.initMaterial = function() {
                 if (this.material == "PETGCARBON" && this.style == "fat") {
                     this.initStyle(0.3, 1, 1200); //0.4, 0.03, 1600 ok
                 }
-
+                if (this.material == "TRANS" && this.style == "normal") {
+                    this.initStyle(0.3, 2, 1600); // test dunner
+                }
 
                 if (this.material == "PLABRO" && this.style == "fine") {
                     this.initStyle(0.5, 0.04, 800); //test ok armband.
@@ -244,7 +246,7 @@ Settings.prototype.initPrinter = function() {
         case "PLA":
             {
                 this.nozzletemp = 210;
-                this.bedtemp = 50;
+                this.bedtemp = 30;
                 break;
             }
         case "PLAw":
@@ -336,6 +338,13 @@ Settings.prototype.initPrinter = function() {
                 this.nozzletemp = 200;
                 this.bedtemp = 30;
                 break;
+            }
+        case "TRANS":
+            {
+                this.nozzletemp = 200;
+                this.bedtemp = 30;
+                break;
+
             }
     }
 }
