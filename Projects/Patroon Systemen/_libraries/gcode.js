@@ -3,7 +3,7 @@ function Gcode(settings) {
     this.nozzletemp = settings.nozzletemp;
     this.filement = settings.filement;
     this.extrude = 0;
-    this.commands = new Array(";Project: Generate Knitting", ";Ria Stroes");
+    this.commands = new Array(";Project: SOLO, The opera dress", ";Ria Stroes");
 }
 
 Gcode.prototype.startCode = function() {
@@ -21,10 +21,12 @@ Gcode.prototype.startCode = function() {
     append(this.commands, "G28 Z0             ;move Z to min endstops");
     append(this.commands, "G0 Z15.0           ;move the platform up 15mm");
     append(this.commands, "G92 E0             ;zero the extruded");
+    append(this.commands, "G0 F800            ;speed");
+    append(this.commands, "G0 X0 Y0           ;HOME");
     append(this.commands, "G1 F200 E10        ;extrude 10mm of feed stock");
     append(this.commands, "G92 E0             ;zero the extruded length again");
     append(this.commands, "G0 Z10             ;move the platform up 15mm");
-    append(this.commands, "G0 F800            ;speed");
+    
     //append(this.commands, "M106            ;fan on");
     append(this.commands, "M117 Printing...");
 }

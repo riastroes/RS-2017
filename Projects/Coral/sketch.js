@@ -79,7 +79,7 @@ function draw() {
         //image(model, marge, marge);
         //grid.draw();
 
-        createCoral("Regular20Random2", false);
+        createCoral("Irregular20Random2Thick20", false);
         print3D.print(layer);
 
         
@@ -119,7 +119,7 @@ function createCoral(aname, showdesign){
                     stroke(colors[0]);
                     ellipse(grid.p[i].x, grid.p[i].y, 10,10);
                  }
-                var path = createPattern(grid.p[i], 10,8);
+                var path = createPattern(grid.p[i], 10,8,0);
                 print3D.addToLayer(layer, path);
             }
             break;
@@ -130,9 +130,23 @@ function createCoral(aname, showdesign){
                     stroke(colors[0]);
                     ellipse(grid.p[i].x, grid.p[i].y,20,20);
                  }
-                var path = createPattern(grid.p[i], 20,8);
+                var path = createPattern(grid.p[i], 20,8,0);
                 print3D.addToLayer(layer, path);
             }
+            break;
+        }
+        case "Regular7Random2":{
+            for(var i = 0; i < grid.p.length; i++){
+                if(random(2) < 1){
+                    if(showdesign){
+                        stroke(colors[0]);
+                        ellipse(grid.p[i].x, grid.p[i].y,10,10);
+                    }
+                    var path = createPattern(grid.p[i], 7,8,0);
+                    print3D.addToLayer(layer, path);
+                 }
+                
+             }
             break;
         }
         case "Regular10Random2":{
@@ -142,7 +156,7 @@ function createCoral(aname, showdesign){
                         stroke(colors[0]);
                         ellipse(grid.p[i].x, grid.p[i].y,10,10);
                     }
-                    var path = createPattern(grid.p[i], 10,8);
+                    var path = createPattern(grid.p[i], 10,8,0);
                     print3D.addToLayer(layer, path);
                  }
                 
@@ -154,33 +168,123 @@ function createCoral(aname, showdesign){
                 if(random(2) < 1){
                     if(showdesign){
                         stroke(colors[0]);
-                        ellipse(grid.p[i].x, grid.p[i].y,10,10);
+                        ellipse(grid.p[i].x, grid.p[i].y,20,20);
                     }
-                    var path = createPattern(grid.p[i], 10,8);
+                    var path = createPattern(grid.p[i], 20,8,0);
                     print3D.addToLayer(layer, path);
                  }
                 
              }
             break;
         }
-        case "Regular7Random2":{
+        case "Regular10Random2Thick3":{
             for(var i = 0; i < grid.p.length; i++){
                 if(random(2) < 1){
                     if(showdesign){
                         stroke(colors[0]);
                         ellipse(grid.p[i].x, grid.p[i].y,10,10);
                     }
-                    var path = createPattern(grid.p[i], 7,8);
+                    var path = createPattern(grid.p[i], 10,8,0);
+                    print3D.addToLayer(layer, path);
+                    path = createPattern(grid.p[i], 8,7,0.2);
+                    print3D.addToLayer(layer, path);
+                    path = createPattern(grid.p[i], 6,6,0.4);
                     print3D.addToLayer(layer, path);
                  }
                 
              }
             break;
         }
+        case "Irregular10Random2Thick3":{
+            for(var i = 0; i < grid.p.length; i++){
+                if(random(2) < 1){
+                    var radius = random(5,10);
+                    if(showdesign){
+                        stroke(colors[0]);
+                        ellipse(grid.p[i].x, grid.p[i].y,radius,radius);
+                    }
+
+                    var path = createPattern(grid.p[i], radius,0);
+                    print3D.addToLayer(layer, path);
+                    path = createPattern(grid.p[i], radius-2,radius,0.2);
+                    print3D.addToLayer(layer, path);
+                    path = createPattern(grid.p[i], radius-2,radius,0.4);
+                    print3D.addToLayer(layer, path);
+                 }
+                
+             }
+            break;
+        }
+        case "Irregular10Thick3":{
+            for(var i = 0; i < grid.p.length; i++){
+                
+                    var radius = random(5,10);
+                    if(showdesign){
+                        stroke(colors[0]);
+                        ellipse(grid.p[i].x, grid.p[i].y,radius,radius);
+                    }
+
+                    var path = createPattern(grid.p[i], radius,0);
+                    print3D.addToLayer(layer, path);
+                    path = createPattern(grid.p[i], radius-2,radius,0.2);
+                    print3D.addToLayer(layer, path);
+                    path = createPattern(grid.p[i], radius-2,radius,0.4);
+                    print3D.addToLayer(layer, path);
+                
+                
+             }
+            break;
+        }
+        case "Irregular10Random2Thick5":{
+            for(var i = 0; i < grid.p.length; i++){
+                if(random(2) < 1){
+                    var radius = random(5,10);
+                    if(showdesign){
+                        stroke(colors[0]);
+                        ellipse(grid.p[i].x, grid.p[i].y,radius,radius);
+                    }
+                    var path;
+                    var z = 0;
+                    for(var t = 0; t < 5; t++){
+                        z += 0.2;
+                        path = createPattern(grid.p[i], radius-t,radius,z);
+                        print3D.addToLayer(layer, path);
+                    }
+                   
+                 }
+                
+             }
+            break;
+        }
+        case "Irregular20Random2Thick20":{
+            for(var i = 0; i < grid.p.length; i++){
+                if(random(2) < 1){
+                    var radius = random(5,10);
+                    if(showdesign){
+                        stroke(colors[0]);
+                        ellipse(grid.p[i].x, grid.p[i].y,radius,radius);
+                    }
+                    var path;
+                    var z = 0;
+                    for(var t = 0; t < 20; t++){
+                        z += 0.2;
+                        path = createPattern(grid.p[i], radius-t,radius,z);
+                        print3D.addToLayer(layer, path);
+                    }
+                   
+                 }
+                
+             }
+            break;
+        }
+        
     }
     
 }
-function createPattern(pos, radius, steps){
+function createPattern(pos, radius, steps, z){
+    if(z == undefined){
+        z = 0;
+    }
     this.path = [];
     var i = 0;
     var corner = PI/2;
@@ -188,6 +292,7 @@ function createPattern(pos, radius, steps){
             this.path[i] = pos.copy();
             this.path[i].x += radius * cos(angle + corner);
             this.path[i].y += radius * sin(angle + corner);
+            this.path[i].z = z;
             i++;
     }
     return this.path;
