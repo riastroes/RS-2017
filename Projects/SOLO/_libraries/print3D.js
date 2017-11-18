@@ -17,12 +17,13 @@ function Print3D(printer, material, style, maxlayers, startlayerheight, maxskirt
 
 }
 Print3D.prototype.createLayers = function() {
-
+   
     for (var l = 0; l < this.maxlayers; l++) {
+        this.totlayerheight += this.settings.layerheight;
         this.layers[l] = new Layer(l, this.settings, this.totlayerheight);
         if (l == 0) {
             for (var s = 0; s < this.maxskirt; s++) {
-                this.skirt.p[s].z = this.totlayerheight;
+               
                 this.addPointToLayer(l, this.skirt.p[s]);
             }
 

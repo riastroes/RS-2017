@@ -1,6 +1,8 @@
 function Layer(layer, settings, totlayerheight) {
     this.layer = layer;
     this.layerheight = settings.layerheight;
+    
+    this.startlayerheight = totlayerheight;
     totlayerheight += this.layerheight;
     this.totallayerheight = totlayerheight;
 
@@ -80,6 +82,7 @@ Layer.prototype.draw = function() {
         vertex(this.p[0].x, this.p[0].y);
 
         for (var i = 1; i < this.p.length; i++) {
+            //strokecolor
             if (this.p[i].z == 0) {
                 stroke(0);
             }
@@ -101,8 +104,9 @@ Layer.prototype.draw = function() {
 }
 
 Layer.prototype.generate = function(layer, gcode) {
-    var nz = (layer * this.layerheight); // nz = normaal niveau
-    append(this.commands, "G0 Z" + (nz + this.layerheight));
+    var nz = this.totallayerheight; // nz = normaal niveau
+    var tz = 0;
+    append(this.commands, "G0 Z" + nz);
 
 
     for (var i = 0; i < this.p.length; i++) {
@@ -117,21 +121,18 @@ Layer.prototype.generate = function(layer, gcode) {
         var dvector = p5.Vector.sub(this.p[i], this.p[i - 1]);
         var d = dvector.mag() * this.scale;
         if (i > 0) {
-            if (z != floor(this.p[i - 1].z * 10) / 10) {
+            if ((this.startlayerheight + z) != nz) {
                 // andere hoogte
-                z = (nz + this.layerheight);
+                tz = this.startlayerheight + z;
             }
         }
 
 
         if (z == -1) { //transport
             append(this.commands, "G0 X" + x + " Y" + y);
-        } else if (z == 0) { // normale hoogte
+        }  else {
             gcode.extrude += (d * this.thickness);
-            append(this.commands, "G1 X" + x + " Y" + y + " E" + gcode.extrude);
-        } else {
-            gcode.extrude += (d * this.thickness);
-            append(this.commands, "G1 X" + x + " Y" + y + " Z" + z + " E" + gcode.extrude);
+            append(this.commands, "G1 X" + x + " Y" + y + " Z" + tz + " E" + gcode.extrude);
         }
     }
 }

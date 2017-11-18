@@ -213,7 +213,7 @@ Settings.prototype.initMaterial = function() {
                     this.initStyle(0.4, 0.03, 800); //0.4, 0.03, 1600 ok
                 }
                 if (this.material == "PETGCARBON" && this.style == "normal") {
-                    this.initStyle(0.4, 0.04, 800); //0.4, 0.03, 1600 ok
+                    this.initStyle(0.4, 0.04,1600); //0.4, 0.03, 1600 ok
                 }
                 if (this.material == "PETGCARBON" && this.style == "fat") {
                     this.initStyle(0.3, 1, 1200); //0.4, 0.03, 1600 ok

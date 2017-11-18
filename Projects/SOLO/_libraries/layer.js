@@ -1,6 +1,7 @@
 function Layer(layer, settings, totlayerheight) {
     this.layer = layer;
     this.layerheight = settings.layerheight;
+    this.startlayerheight = totlayerheight;
     totlayerheight += this.layerheight;
     this.totallayerheight = totlayerheight;
 
@@ -102,7 +103,7 @@ Layer.prototype.draw = function() {
 
 Layer.prototype.generate = function(layer, gcode) {
     //var nz = (layer * this.layerheight); // nz = normaal niveau
-    var nz = this.totallayerheight;
+    var nz = floor(this.totallayerheight*100)/100  // nz = normaal niveau;
     append(this.commands, "G0 Z" + nz);
 
 
@@ -113,25 +114,19 @@ Layer.prototype.generate = function(layer, gcode) {
         x = floor(x * 100) / 100;
         var y = this.p[i].y * this.scale;
         y = floor(y * 100) / 100;
-        var z = nz - this.layerheight + floor(this.p[i].z * 100) / 100;
+        var z = floor(this.p[i].z * 100) / 100;
 
         var dvector = p5.Vector.sub(this.p[i], this.p[i - 1]);
         var d = dvector.mag() * this.scale;
-        //if (i > 0) {
-        if (z == 0) {
-            // normale hoogte
-            z = nz;
-        }
-
-        //}
-
-
+        
         if (z == -1) { //transport
             append(this.commands, "G0 X" + x + " Y" + y);
-        } else if (z == 0) { // normale hoogte
+        } else  if(z == 0){
             gcode.extrude += (d * this.thickness);
-            append(this.commands, "G1 X" + x + " Y" + y + " E" + gcode.extrude);
-        } else {
+            append(this.commands, "G1 X" + x + " Y" + y + " Z" + nz + " E" + gcode.extrude);
+        }
+        else  if(z > 0){
+            z = floor((this.startlayerheight + z) * 100)/100;
             gcode.extrude += (d * this.thickness);
             append(this.commands, "G1 X" + x + " Y" + y + " Z" + z + " E" + gcode.extrude);
         }

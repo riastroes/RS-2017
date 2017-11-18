@@ -37,9 +37,10 @@ function setup() {
 
 
     layer = 0;
-    maxlayers = 1;
-    var startlayerheight = 2; // 1
+    maxlayers = 2;
+    var startlayerheight = 1; // 1
     var maxskirt = 3; //0 whithout skirt
+    //startlayerheight = 2;  // JellyBox
     //print3D = new Print3D("JellyBox", "MAXXFLEX", "normal", maxlayers, startlayerheight, maxskirt);
     print3D = new Print3D("Anet", "PETGCARBON", "normal", maxlayers, startlayerheight, maxskirt);
     name = "clams"
@@ -85,12 +86,14 @@ function draw() {
 
         //createClams("Irregular10Random3Thick5", false);
         show = true;
-        createVertexPattern(show);
+        createVertexPattern(show, 0.05);
         print3D.print(layer);
 
 
 
-    } else if (layer < maxlayers) {
+    } else if (layer == 1) {
+        createVertexPattern2(show, 0.05);
+        print3D.print(layer);
 
 
 
@@ -209,36 +212,9 @@ function createPattern(pos, radius, steps, z) {
     return this.path;
 }
 
-function createCurvedVertexPattern() {
-    var pos = createVector(350, 400);
-    this.path = [];
-    for (var s = 0; s < 10; s++) {
-        stroke(0);
-        noFill();
-        push();
-        translate(pos.x, pos.y);
-        scale(s * 0.1);
-
-        ellipse(0, -200, 10, 10);
-        beginShape();
-        curveVertex(0, -160);
-        curveVertex(0, -160);
-        curveVertex(80, -300);
-        curveVertex(160, 0);
-        curveVertex(100, 150);
-        curveVertex(0, 100);
-        curveVertex(-160, 300);
-        curveVertex(-80, -300);
-        endShape(CLOSE);
 
 
-
-        pop();
-    }
-
-}
-
-function createVertexPattern(show) {
+function createVertexPattern(show, scalefactor) {
     this.path = [];
     var pos = createVector(350, 100);
     append(this.path, pos.copy());
@@ -247,7 +223,7 @@ function createVertexPattern(show) {
     var sc = 0;
 
     for (var s = 20; s > 0; s--) {
-        sc = s * 0.05;
+        sc = s * scalefactor;
         stroke(colors[2]);
         noFill();
         push();
@@ -267,7 +243,7 @@ function createVertexPattern(show) {
             vertex(-120, 280);
             vertex(-160, 300);
             vertex(-220, 200);
-            vertex(-120, -200);
+            vertex(-200, -150);
             vertex(-70, -290);
             vertex(-50, -290);
             vertex(0, -160);
@@ -284,7 +260,7 @@ function createVertexPattern(show) {
         append(path, createVector(-120, 280).mult(sc).add(pos.x, pos.y));
         append(path, createVector(-160, 300).mult(sc).add(pos.x, pos.y));
         append(path, createVector(-220, 200).mult(sc).add(pos.x, pos.y));
-        append(path, createVector(-120, -200).mult(sc).add(pos.x, pos.y));
+        append(path, createVector(-200, -150).mult(sc).add(pos.x, pos.y));
         append(path, createVector(-70, -290).mult(sc).add(pos.x, pos.y));
         append(path, createVector(-50, -290).mult(sc).add(pos.x, pos.y));
 
@@ -292,7 +268,69 @@ function createVertexPattern(show) {
 
         pop();
 
-        print3D.addToLayer(layer, path);
+        
     }
+    print3D.addToLayer(layer, path);
+}
 
+function createVertexPattern2(show, scalefactor) {
+    this.path = [];
+    var pos = createVector(350, 100);
+    append(this.path, pos.copy());
+
+    pos.add(0, 300);
+    var sc = 0;
+
+    for (var s = 20; s > 0; s--) {
+        sc = s * scalefactor;
+        stroke(colors[2]);
+        noFill();
+        push();
+        translate(pos.x, pos.y);
+        scale(sc);
+        if (show) {
+
+            beginShape();
+            vertex(0, -160);
+            vertex(70, -300);
+            vertex(100, -310);
+            vertex(120, -270);
+            vertex(160, 0);
+            vertex(140, 250);
+            vertex(100, 270);
+            vertex(0, 100);
+            vertex(-120, 280);
+            vertex(-160, 300);
+            vertex(-220, 200);
+            vertex(-200, -150);
+            vertex(-70, -290);
+            vertex(-50, -290);
+            vertex(0, -160);
+            endShape();
+        }
+        //right clam
+        append(path, createVector(20, -150).mult(sc).add(pos.x, pos.y));
+        append(path, createVector(60, -290).mult(sc).add(pos.x, pos.y));
+        append(path, createVector(90, -300).mult(sc).add(pos.x, pos.y));
+        append(path, createVector(110, -260).mult(sc).add(pos.x, pos.y));
+        append(path, createVector(150, 0).mult(sc).add(pos.x, pos.y));
+        append(path, createVector(130, 240).mult(sc).add(pos.x, pos.y));
+        append(path, createVector(90, 260).mult(sc).add(pos.x, pos.y));
+        append(path, createVector(10, 90).mult(sc).add(pos.x, pos.y));
+        //left clam
+        append(path, createVector(-20, 90).mult(sc).add(pos.x, pos.y));
+        append(path, createVector(-110, 280).mult(sc).add(pos.x, pos.y));
+        append(path, createVector(-150, 300).mult(sc).add(pos.x, pos.y));
+        append(path, createVector(-210, 200).mult(sc).add(pos.x, pos.y));
+        append(path, createVector(-190, -150).mult(sc).add(pos.x, pos.y));
+        append(path, createVector(-80, -290).mult(sc).add(pos.x, pos.y));
+        append(path, createVector(-60, -290).mult(sc).add(pos.x, pos.y));
+
+        append(path, createVector(-20, -150).mult(sc).add(pos.x, pos.y));
+
+        pop();
+
+        
+    }
+    print3D.addToLayer(layer, path);
 }

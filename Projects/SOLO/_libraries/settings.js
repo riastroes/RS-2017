@@ -207,7 +207,7 @@ Settings.prototype.initMaterial = function() {
                     this.initStyle(0.2, 0.5, 800); // ok getest in knitting app  // ok getest in DUBAI KNITTING APP
                 }
                 if (this.material == "PLAFLEX" && this.style == "normal") {
-                    this.initStyle(0.2, 1, 800); // ok getest in knitting app  // ok getest in DUBAI KNITTING APP
+                    this.initStyle(0.2, 1, 1600); // ok getest in knitting app  // ok getest in DUBAI KNITTING APP
                 }
                 if (this.material == "PLAFLEX" && this.style == "blob") {
                     this.initStyle(0.2, 2, 1800); // 
