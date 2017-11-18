@@ -54,7 +54,7 @@ function setup() {
 
     colors = palette.colors;
 
-    print3D = new Print3D("Ultimaker2+", "PLAFLEX", "normal", maxlayers);
+    print3D = new Print3D("Ultimaker2+", "PLAFLEX", "normal", maxlayers, 1);
 
 
 
@@ -118,6 +118,7 @@ function driespiralen() {
     ellipse(a.x, a.y, 10, 10);
 
     print3D.addPointToLayer(layer, a);
+
     ellipse(a1.x, a1.y, 10, 10);
     spiraal2(a1);
 

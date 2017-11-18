@@ -1,17 +1,17 @@
-function Print3D(printer, material, style, maxlayers, maxskirt) {
+function Print3D(printer, material, style, maxlayers, startlayerheight, maxskirt) {
 
     this.settings = new Settings(printer, material, style);
     this.gcode = new Gcode(this.settings);
 
-    this.totlayerheight = 1;
+    this.totlayerheight = startlayerheight;
     this.layers = [];
 
     this.maxlayers = maxlayers;
-    if(maxskirt == undefined){maxskirt = 4;}
+    if (maxskirt == undefined) { maxskirt = 4; }
     this.maxskirt = maxskirt;
-   
-    this.skirt = new Skirt(150, 50, 950, 70);
-       
+
+    this.skirt = new Skirt(150, 50, 750, 70);
+
     this.createLayers();
 
 
@@ -20,11 +20,12 @@ Print3D.prototype.createLayers = function() {
 
     for (var l = 0; l < this.maxlayers; l++) {
         this.layers[l] = new Layer(l, this.settings, this.totlayerheight);
-        if(l == 0){
-            for(var s= 0; s < this.maxskirt; s++){
-               this.addPointToLayer(l, this.skirt.p[s]);
+        if (l == 0) {
+            for (var s = 0; s < this.maxskirt; s++) {
+                this.skirt.p[s].z = this.totlayerheight;
+                this.addPointToLayer(l, this.skirt.p[s]);
             }
-          
+
         }
     }
 

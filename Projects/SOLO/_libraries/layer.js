@@ -71,17 +71,17 @@ Layer.prototype.draw = function() {
             stroke(0);
         }
         if (this.p[0].z > 0) {
-            stroke(255, 0, 0);
+            stroke(colors[3]);
         }
         if (this.p[0].z == -1) {
-            stroke(0, 0, 255);
+            stroke(colors[2]);
         }
 
         vertex(this.p[0].x, this.p[0].y);
 
         for (var i = 1; i < this.p.length; i++) {
             if (this.p[i].z == 0) {
-                stroke(250,250,200);
+                stroke(colors[0]);
             }
             if (this.p[i].z > 0) {
                 stroke(0);
@@ -101,8 +101,9 @@ Layer.prototype.draw = function() {
 }
 
 Layer.prototype.generate = function(layer, gcode) {
-    var nz = (layer * this.layerheight); // nz = normaal niveau
-    append(this.commands, "G0 Z" + (nz + this.layerheight));
+    //var nz = (layer * this.layerheight); // nz = normaal niveau
+    var nz = this.totallayerheight;
+    append(this.commands, "G0 Z" + nz);
 
 
     for (var i = 0; i < this.p.length; i++) {
@@ -112,16 +113,17 @@ Layer.prototype.generate = function(layer, gcode) {
         x = floor(x * 100) / 100;
         var y = this.p[i].y * this.scale;
         y = floor(y * 100) / 100;
-        var z = floor(this.p[i].z * 10) / 10;
+        var z = nz - this.layerheight + floor(this.p[i].z * 100) / 100;
 
         var dvector = p5.Vector.sub(this.p[i], this.p[i - 1]);
         var d = dvector.mag() * this.scale;
-        if (i > 0) {
-            if (z != floor(this.p[i - 1].z * 10) / 10) {
-                // andere hoogte
-                z = (nz + this.layerheight);
-            }
+        //if (i > 0) {
+        if (z == 0) {
+            // normale hoogte
+            z = nz;
         }
+
+        //}
 
 
         if (z == -1) { //transport

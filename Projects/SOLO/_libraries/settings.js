@@ -209,6 +209,9 @@ Settings.prototype.initMaterial = function() {
                 if (this.material == "PLAFLEX" && this.style == "normal") {
                     this.initStyle(0.2, 1, 800); // ok getest in knitting app  // ok getest in DUBAI KNITTING APP
                 }
+                if (this.material == "PLAFLEX" && this.style == "blob") {
+                    this.initStyle(0.2, 2, 1800); // 
+                }
                 if (this.material == "PETGCARBON" && this.style == "fine") {
                     this.initStyle(0.4, 0.03, 800); //0.4, 0.03, 1600 ok
                 }
@@ -237,6 +240,15 @@ Settings.prototype.initMaterial = function() {
                 }
 
                 break;
+            }
+        case "JellyBox":
+            { //nozzle 0.4
+
+                this.scale = 0.20; //canvas = 1100 px, bed = 220 mm
+                this.filement = 1.85;
+                if (this.material == "MAXXFLEX" && this.style == "normal") {
+                    this.initStyle(0.2, 0.5, 800); // ok getest in knitting app  // ok getest in DUBAI KNITTING APP
+                }
             }
 
     }
@@ -345,6 +357,12 @@ Settings.prototype.initPrinter = function() {
                 this.bedtemp = 30;
                 break;
 
+            }
+        case "MAXXFLEX":
+            {
+                this.nozzletemp = 210;
+                this.bedtemp = 0;
+                break;
             }
     }
 }
