@@ -1,12 +1,15 @@
 function Grid() {
     this.p = [];
     this.newp = [];
+    this.gridsize;
 
 
 }
 Grid.prototype.init = function(marge, maxx, maxy) {
     var i = 0;
     var w = (width - (2 * marge)) / maxx;
+    this.gridsize = w;
+   
     var h = (height - (2 * marge)) / maxy;
     for (var y = 0; y < maxy; y++) {
         for (var x = 0; x < maxx; x++) {
@@ -207,12 +210,12 @@ Grid.prototype.changeToCenter = function() {
 }
 Grid.prototype.draw = function() {
     stroke(0,0,255);
-    strokeWeight(3);
+    //strokeWeight(3);
     for (var i = 0; i < this.p.length; i++) {
         point(this.p[i].x, this.p[i].y);
     }
     stroke(255, 0, 0);
-    strokeWeight(3);
+   // strokeWeight(3);
     for (var i = 0; i < this.newp.length; i++) {
         point(this.newp[i].x, this.newp[i].y);
     }

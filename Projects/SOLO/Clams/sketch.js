@@ -92,12 +92,13 @@ function draw() {
 
 
     } else if (layer == 1) {
-        createVertexPattern2(show, 0.05);
+        createVertexPattern(show, 0.05);
         print3D.print(layer);
 
 
 
-    } else {
+     } 
+    else {
         print3D.stop();
         noLoop();
     }
@@ -233,35 +234,35 @@ function createVertexPattern(show, scalefactor) {
 
             beginShape();
             vertex(0, -160);
-            vertex(70, -300);
-            vertex(100, -310);
-            vertex(120, -270);
-            vertex(160, 0);
-            vertex(140, 250);
-            vertex(100, 270);
+            vertex(100, -300);
+            vertex(150, -310);
+            vertex(180, -270);
+            vertex(240, 0);
+            vertex(110, 250);
+            vertex(80, 270);
             vertex(0, 100);
-            vertex(-120, 280);
-            vertex(-160, 300);
-            vertex(-220, 200);
-            vertex(-200, -150);
-            vertex(-70, -290);
+            vertex(-100, 240);
+            vertex(-190, 260);
+            vertex(-240, 200);
+            vertex(-280, -150);
+            vertex(-100, -290);
             vertex(-50, -290);
             vertex(0, -160);
             endShape();
         }
         append(path, createVector(0, -160).mult(sc).add(pos.x, pos.y));
-        append(path, createVector(70, -300).mult(sc).add(pos.x, pos.y));
-        append(path, createVector(100, -310).mult(sc).add(pos.x, pos.y));
-        append(path, createVector(120, -270).mult(sc).add(pos.x, pos.y));
-        append(path, createVector(160, 0).mult(sc).add(pos.x, pos.y));
-        append(path, createVector(140, 250).mult(sc).add(pos.x, pos.y));
-        append(path, createVector(100, 270).mult(sc).add(pos.x, pos.y));
+        append(path, createVector(100, -300).mult(sc).add(pos.x, pos.y));
+        append(path, createVector(150, -310).mult(sc).add(pos.x, pos.y));
+        append(path, createVector(180, -270).mult(sc).add(pos.x, pos.y));
+        append(path, createVector(240, 0).mult(sc).add(pos.x, pos.y));
+        append(path, createVector(110, 250).mult(sc).add(pos.x, pos.y));
+        append(path, createVector(80, 270).mult(sc).add(pos.x, pos.y));
         append(path, createVector(0, 100).mult(sc).add(pos.x, pos.y));
-        append(path, createVector(-120, 280).mult(sc).add(pos.x, pos.y));
-        append(path, createVector(-160, 300).mult(sc).add(pos.x, pos.y));
-        append(path, createVector(-220, 200).mult(sc).add(pos.x, pos.y));
-        append(path, createVector(-200, -150).mult(sc).add(pos.x, pos.y));
-        append(path, createVector(-70, -290).mult(sc).add(pos.x, pos.y));
+        append(path, createVector(-100, 240).mult(sc).add(pos.x, pos.y));
+        append(path, createVector(-190, 260).mult(sc).add(pos.x, pos.y));
+        append(path, createVector(-240, 200).mult(sc).add(pos.x, pos.y));
+        append(path, createVector(-280, -150).mult(sc).add(pos.x, pos.y));
+        append(path, createVector(-100, -290).mult(sc).add(pos.x, pos.y));
         append(path, createVector(-50, -290).mult(sc).add(pos.x, pos.y));
 
         append(path, createVector(0, -160).mult(sc).add(pos.x, pos.y));

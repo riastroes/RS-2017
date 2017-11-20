@@ -61,43 +61,28 @@ Layer.prototype.change = function(min, max) {
 }
 Layer.prototype.draw = function() {
     strokeWeight = 1;
+     noFill();
+    if (this.p.length > 1) {
 
-
-    noFill();
-    if (this.p.length > 0) {
-
-
-        beginShape();
-        if (this.p[0].z == 0) {
-            stroke(0);
-        }
-        if (this.p[0].z > 0) {
-            stroke(colors[3]);
-        }
-        if (this.p[0].z == -1) {
-            stroke(colors[2]);
-        }
-
-        vertex(this.p[0].x, this.p[0].y);
 
         for (var i = 1; i < this.p.length; i++) {
+            
+
             if (this.p[i].z == 0) {
                 stroke(colors[0]);
             }
             if (this.p[i].z > 0) {
-                stroke(0);
+                stroke(colors[2]);
             }
             if (this.p[i].z == -1) {
-                stroke(0, 0, 255);
+                stroke(0, 255,255 );
             }
 
-            if ((abs(this.p[i].x - this.p[i - 1].x) > 1 || abs(this.p[i].y - this.p[i - 1].y) > 1)) {
-
-                vertex(this.p[i].x, this.p[i].y);
-            }
+            line(this.p[i-1].x, this.p[i-1].y, this.p[i].x, this.p[i].y);
+            
 
         }
-        endShape();
+       
     }
 }
 
@@ -119,7 +104,7 @@ Layer.prototype.generate = function(layer, gcode) {
         var dvector = p5.Vector.sub(this.p[i], this.p[i - 1]);
         var d = dvector.mag() * this.scale;
         
-        if (z == -1) { //transport
+        if (this.p[i].z == -1) { //transport
             append(this.commands, "G0 X" + x + " Y" + y);
         } else  if(z == 0){
             gcode.extrude += (d * this.thickness);

@@ -90,6 +90,14 @@ Settings.prototype.initMaterial = function() {
                             }
                             break;
                         }
+                    case "PETG":
+                        {
+                            this.materialcode = "PETG";
+                            if (this.style == "fine") {
+                                this.initStyle(0.4, 0.07, 800); //
+                            }
+                            break;
+                        }
                     case "SAT1N":
                         {
                             this.materialcode = "SAT1N";
@@ -313,6 +321,12 @@ Settings.prototype.initPrinter = function() {
             {
                 this.nozzletemp = 230; // (230-250)
                 this.bedtemp = 30;
+                break;
+            }
+        case "PETG":
+            {
+                this.nozzletemp = 230; // (230-250)
+                this.bedtemp = 50;
                 break;
             }
         case "SAT1N":
