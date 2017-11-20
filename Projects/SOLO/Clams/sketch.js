@@ -92,34 +92,13 @@ function draw() {
 
 
     } else if (layer == 1) {
-<<<<<<< HEAD
         createVertexPattern(show, 0.05);
-=======
-        createVertexPattern1(show, 0.05);
         print3D.print(layer);
 
 
 
-    } else if (layer == 2) {
-        createVertexPattern2(show, 0.05);
->>>>>>> origin/master
-        print3D.print(layer);
-
-
-
-<<<<<<< HEAD
      } 
     else {
-=======
-
-    } else if (layer == 3) {
-        createVertexPattern3(show, 0.05);
-        print3D.print(layer);
-
-
-
-    } else {
->>>>>>> origin/master
         print3D.stop();
         noLoop();
     }
@@ -273,21 +252,12 @@ function createVertexPattern(show, scalefactor) {
         }
 
         append(path, createVector(0, -160).mult(sc).add(pos.x, pos.y));
-<<<<<<< HEAD
         append(path, createVector(100, -300).mult(sc).add(pos.x, pos.y));
         append(path, createVector(150, -310).mult(sc).add(pos.x, pos.y));
         append(path, createVector(180, -270).mult(sc).add(pos.x, pos.y));
         append(path, createVector(240, 0).mult(sc).add(pos.x, pos.y));
         append(path, createVector(110, 250).mult(sc).add(pos.x, pos.y));
         append(path, createVector(80, 270).mult(sc).add(pos.x, pos.y));
-=======
-        append(path, createVector(70, -300).mult(sc).add(pos.x, pos.y));
-        append(path, createVector(100, -310).mult(sc).add(pos.x, pos.y));
-        append(path, createVector(120, -170).mult(sc).add(pos.x, pos.y));
-        append(path, createVector(160, 0).mult(sc).add(pos.x, pos.y));
-        append(path, createVector(140, 250).mult(sc).add(pos.x, pos.y));
-        append(path, createVector(100, 270).mult(sc).add(pos.x, pos.y));
->>>>>>> origin/master
         append(path, createVector(0, 100).mult(sc).add(pos.x, pos.y));
         append(path, createVector(-100, 240).mult(sc).add(pos.x, pos.y));
         append(path, createVector(-190, 260).mult(sc).add(pos.x, pos.y));
