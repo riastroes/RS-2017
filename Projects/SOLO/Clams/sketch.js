@@ -37,7 +37,7 @@ function setup() {
 
 
     layer = 0;
-    maxlayers = 2;
+    maxlayers = 4;
     var startlayerheight = 1; // 1
     var maxskirt = 3; //0 whithout skirt
     //startlayerheight = 2;  // JellyBox
@@ -92,13 +92,34 @@ function draw() {
 
 
     } else if (layer == 1) {
+<<<<<<< HEAD
         createVertexPattern(show, 0.05);
+=======
+        createVertexPattern1(show, 0.05);
         print3D.print(layer);
 
 
 
+    } else if (layer == 2) {
+        createVertexPattern2(show, 0.05);
+>>>>>>> origin/master
+        print3D.print(layer);
+
+
+
+<<<<<<< HEAD
      } 
     else {
+=======
+
+    } else if (layer == 3) {
+        createVertexPattern3(show, 0.05);
+        print3D.print(layer);
+
+
+
+    } else {
+>>>>>>> origin/master
         print3D.stop();
         noLoop();
     }
@@ -250,13 +271,23 @@ function createVertexPattern(show, scalefactor) {
             vertex(0, -160);
             endShape();
         }
+
         append(path, createVector(0, -160).mult(sc).add(pos.x, pos.y));
+<<<<<<< HEAD
         append(path, createVector(100, -300).mult(sc).add(pos.x, pos.y));
         append(path, createVector(150, -310).mult(sc).add(pos.x, pos.y));
         append(path, createVector(180, -270).mult(sc).add(pos.x, pos.y));
         append(path, createVector(240, 0).mult(sc).add(pos.x, pos.y));
         append(path, createVector(110, 250).mult(sc).add(pos.x, pos.y));
         append(path, createVector(80, 270).mult(sc).add(pos.x, pos.y));
+=======
+        append(path, createVector(70, -300).mult(sc).add(pos.x, pos.y));
+        append(path, createVector(100, -310).mult(sc).add(pos.x, pos.y));
+        append(path, createVector(120, -170).mult(sc).add(pos.x, pos.y));
+        append(path, createVector(160, 0).mult(sc).add(pos.x, pos.y));
+        append(path, createVector(140, 250).mult(sc).add(pos.x, pos.y));
+        append(path, createVector(100, 270).mult(sc).add(pos.x, pos.y));
+>>>>>>> origin/master
         append(path, createVector(0, 100).mult(sc).add(pos.x, pos.y));
         append(path, createVector(-100, 240).mult(sc).add(pos.x, pos.y));
         append(path, createVector(-190, 260).mult(sc).add(pos.x, pos.y));
@@ -266,10 +297,73 @@ function createVertexPattern(show, scalefactor) {
         append(path, createVector(-50, -290).mult(sc).add(pos.x, pos.y));
 
         append(path, createVector(0, -160).mult(sc).add(pos.x, pos.y));
-
+        //append(path, createVector(0, 0).mult(sc).add(pos.x, pos.y));
         pop();
 
-        
+
+    }
+    print3D.addToLayer(layer, path);
+}
+
+function createVertexPattern1(show, scalefactor) {
+    this.path = [];
+    var pos = createVector(350, 100);
+    append(this.path, pos.copy());
+
+    pos.add(0, 300);
+    var sc = 0;
+
+    for (var s = 20; s > 0; s--) {
+        sc = s * scalefactor;
+        stroke(colors[2]);
+        noFill();
+        push();
+        translate(pos.x, pos.y);
+        scale(sc);
+        if (show) {
+
+            beginShape();
+            vertex(0, -160);
+            vertex(70, -300);
+            vertex(100, -310);
+            vertex(120, -270);
+            vertex(160, 0);
+            vertex(140, 250);
+            vertex(100, 270);
+            vertex(0, 100);
+            vertex(-120, 280);
+            vertex(-160, 300);
+            vertex(-220, 200);
+            vertex(-200, -150);
+            vertex(-70, -290);
+            vertex(-50, -290);
+            vertex(0, -160);
+            endShape();
+        }
+        //right clam
+        append(path, createVector(0, 0).mult(sc).add(pos.x, pos.y));
+        append(path, createVector(20, -150).mult(sc).add(pos.x, pos.y));
+        append(path, createVector(70, -250).mult(sc).add(pos.x, pos.y));
+        append(path, createVector(90, -250).mult(sc).add(pos.x, pos.y));
+        append(path, createVector(110, -260).mult(sc).add(pos.x, pos.y));
+        append(path, createVector(150, 0).mult(sc).add(pos.x, pos.y));
+        append(path, createVector(130, 240).mult(sc).add(pos.x, pos.y));
+        append(path, createVector(90, 260).mult(sc).add(pos.x, pos.y));
+        append(path, createVector(10, 90).mult(sc).add(pos.x, pos.y));
+        //left clam
+        append(path, createVector(-20, 90).mult(sc).add(pos.x, pos.y));
+        append(path, createVector(-110, 280).mult(sc).add(pos.x, pos.y));
+        append(path, createVector(-150, 300).mult(sc).add(pos.x, pos.y));
+        append(path, createVector(-210, 200).mult(sc).add(pos.x, pos.y));
+        append(path, createVector(-190, -150).mult(sc).add(pos.x, pos.y));
+        append(path, createVector(-80, -260).mult(sc).add(pos.x, pos.y));
+        append(path, createVector(-60, -260).mult(sc).add(pos.x, pos.y));
+
+        append(path, createVector(-20, -150).mult(sc).add(pos.x, pos.y));
+        append(path, createVector(0, -150).mult(sc).add(pos.x, pos.y));
+        pop();
+
+
     }
     print3D.addToLayer(layer, path);
 }
@@ -310,28 +404,93 @@ function createVertexPattern2(show, scalefactor) {
             endShape();
         }
         //right clam
-        append(path, createVector(20, -150).mult(sc).add(pos.x, pos.y));
-        append(path, createVector(60, -290).mult(sc).add(pos.x, pos.y));
-        append(path, createVector(90, -300).mult(sc).add(pos.x, pos.y));
-        append(path, createVector(110, -260).mult(sc).add(pos.x, pos.y));
-        append(path, createVector(150, 0).mult(sc).add(pos.x, pos.y));
-        append(path, createVector(130, 240).mult(sc).add(pos.x, pos.y));
-        append(path, createVector(90, 260).mult(sc).add(pos.x, pos.y));
-        append(path, createVector(10, 90).mult(sc).add(pos.x, pos.y));
+        append(path, createVector(0, -130).mult(sc).add(pos.x, pos.y));
+        append(path, createVector(60, -130).mult(sc).add(pos.x, pos.y));
+        //append(path, createVector(100, -270).mult(sc).add(pos.x, pos.y));
+        //append(path, createVector(90, -270).mult(sc).add(pos.x, pos.y));
+        append(path, createVector(90, -220).mult(sc).add(pos.x, pos.y));
+        append(path, createVector(130, 0).mult(sc).add(pos.x, pos.y));
+        append(path, createVector(130, 200).mult(sc).add(pos.x, pos.y));
+        append(path, createVector(110, 240).mult(sc).add(pos.x, pos.y));
+        append(path, createVector(30, 60).mult(sc).add(pos.x, pos.y));
         //left clam
-        append(path, createVector(-20, 90).mult(sc).add(pos.x, pos.y));
-        append(path, createVector(-110, 280).mult(sc).add(pos.x, pos.y));
-        append(path, createVector(-150, 300).mult(sc).add(pos.x, pos.y));
-        append(path, createVector(-210, 200).mult(sc).add(pos.x, pos.y));
-        append(path, createVector(-190, -150).mult(sc).add(pos.x, pos.y));
-        append(path, createVector(-80, -290).mult(sc).add(pos.x, pos.y));
-        append(path, createVector(-60, -290).mult(sc).add(pos.x, pos.y));
+        append(path, createVector(-80, 90).mult(sc).add(pos.x, pos.y));
+        append(path, createVector(-100, 240).mult(sc).add(pos.x, pos.y));
+        append(path, createVector(-130, 260).mult(sc).add(pos.x, pos.y));
+        append(path, createVector(-190, 200).mult(sc).add(pos.x, pos.y));
+        append(path, createVector(-170, -130).mult(sc).add(pos.x, pos.y));
+        append(path, createVector(-60, -220).mult(sc).add(pos.x, pos.y));
+        append(path, createVector(-40, -220).mult(sc).add(pos.x, pos.y));
 
-        append(path, createVector(-20, -150).mult(sc).add(pos.x, pos.y));
+        append(path, createVector(-20, -130).mult(sc).add(pos.x, pos.y));
+        append(path, createVector(0, -120).mult(sc).add(pos.x, pos.y));
+        pop();
+
+    }
+    print3D.addToLayer(layer, path);
+}
+
+function createVertexPattern3(show, scalefactor) {
+    this.path = [];
+    var pos = createVector(350, 100);
+    append(this.path, pos.copy());
+
+    pos.add(0, 300);
+    var sc = 0;
+
+    for (var s = 20; s > 0; s--) {
+        sc = s * scalefactor;
+        stroke(colors[2]);
+        noFill();
+        push();
+        translate(pos.x, pos.y);
+        scale(sc);
+        if (show) {
+
+            beginShape();
+            vertex(0, -160);
+            vertex(70, -300);
+            vertex(100, -310);
+            vertex(120, -270);
+            vertex(160, 0);
+            vertex(140, 250);
+            vertex(100, 270);
+            vertex(0, 100);
+            vertex(-120, 280);
+            vertex(-160, 300);
+            vertex(-220, 200);
+            vertex(-200, -150);
+            vertex(-70, -290);
+            vertex(-50, -290);
+            vertex(0, -160);
+            endShape();
+        }
+        //right clam
+        append(path, createVector(0, -100).mult(sc).add(pos.x, pos.y));
+        append(path, createVector(80, -110).mult(sc).add(pos.x, pos.y));
+        //append(path, createVector(100, -270).mult(sc).add(pos.x, pos.y));
+        //append(path, createVector(90, -270).mult(sc).add(pos.x, pos.y));
+        // append(path, createVector(70, -180).mult(sc).add(pos.x, pos.y));
+        append(path, createVector(110, 100).mult(sc).add(pos.x, pos.y));
+        // append(path, createVector(110, 160).mult(sc).add(pos.x, pos.y));
+        //append(path, createVector(130, 180).mult(sc).add(pos.x, pos.y));
+        append(path, createVector(30, 110).mult(sc).add(pos.x, pos.y));
+        //left clam
+        //append(path, createVector(-40, 70).mult(sc).add(pos.x, pos.y));
+        // append(path, createVector(-70, 210).mult(sc).add(pos.x, pos.y));
+        // append(path, createVector(-100, 200).mult(sc).add(pos.x, pos.y));
+        append(path, createVector(-130, 160).mult(sc).add(pos.x, pos.y));
+        append(path, createVector(-110, -110).mult(sc).add(pos.x, pos.y));
+        append(path, createVector(-80, -180).mult(sc).add(pos.x, pos.y));
+        append(path, createVector(0, -180).mult(sc).add(pos.x, pos.y));
+        // append(path, createVector(-20, -180).mult(sc).add(pos.x, pos.y));
+
+        // append(path, createVector(-20, -130).mult(sc).add(pos.x, pos.y));
+        // append(path, createVector(0, -100).mult(sc).add(pos.x, pos.y));
 
         pop();
 
-        
+
     }
     print3D.addToLayer(layer, path);
 }
