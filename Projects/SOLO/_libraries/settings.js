@@ -94,7 +94,7 @@ Settings.prototype.initMaterial = function() {
                         {
                             this.materialcode = "PETG";
                             if (this.style == "fine") {
-                                this.initStyle(0.4, 0.07, 800); //
+                                this.initStyle(0.4, 0.05, 800); //
                             }
                             break;
                         }

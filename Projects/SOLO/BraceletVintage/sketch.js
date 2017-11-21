@@ -16,21 +16,13 @@ var maxlayers;
 var show;
 
 var issaved;
-var model1, model2, model3, model4, model5, model6, model7;
+var model1;
 var name;
 
 
 
 function preload() {
-    model1 = loadImage("images/coralleaf1.jpg");
-    model2 = loadImage("images/coralleaf2.jpg");
-    model3 = loadImage("images/coralleafNecklace1.png")
-    model4 = loadImage("images/coralleafNecklace3.png")
-    model5 = loadImage("images/coralleafNecklace4.png")
-    model6 = loadImage("images/coralleaf3.jpg");
-    model7 = loadImage("images/coralleaf4.jpg");
-    model7 = loadImage("images/BraceletVintage.png");
-    
+    model1 = loadImage("images/braceletVintage2.png");
     
 
 }
@@ -39,23 +31,19 @@ function setup() {
 
     var canvas = createCanvas(1100, 1100);
     windowscale = 1;
-    model3.resize(1000, 1000);
-    model4.resize(1000, 1000);
-    model5.resize(1000, 1000);
-    model6.resize(1000, 1000);
-    model7.resize(1000, 1000);
+    
 
     palette = new Color();
     colors = palette.create();
 
 
     layer = 0;
-    maxlayers =1;
+    maxlayers =3;
     var startlayerheight = 1; // 1
     var maxskirt = 3; //0 whithout skirt
     //startlayerheight = 2;  // JellyBox
     //print3D = new Print3D("JellyBox", "MAXXFLEX", "normal", maxlayers, startlayerheight, maxskirt);
-    print3D = new Print3D("Anet", "PETG", "fine", maxlayers, startlayerheight, maxskirt);
+    print3D = new Print3D("Anet", "PURECOPER", "normal", maxlayers, startlayerheight, maxskirt);
     name = "CoralLeaf"
 
     maxw = 100;
@@ -96,7 +84,7 @@ function draw() {
         //grid.maskCircle(createVector(500, 500), 300);
         //image(model, marge, marge);
         grid.showMargin(marge);
-        grid.maskImage(marge, model7);
+        grid.maskImage(marge, model1);
         grid.reorder();
         //grid.draw();
 
@@ -169,6 +157,8 @@ function createCoralLeaf(){
             append(path, p.copy().add(-6,-6));
             append(path, p.copy().add(0,2));
             append(path,  p.copy().add(6,4));
+            append(path,  p.copy().add(3,6));
+            append(path,  p.copy().add(1,6));
         }
         else{  // van rechts naar links
             p = grid.p[i].copy();
@@ -181,11 +171,15 @@ function createCoralLeaf(){
             append(path, p.copy().add(6,-6));
             append(path, p.copy().add(0,2));
             append(path, p.copy().add(-6,4));
+            append(path,  p.copy().add(-3,6));
+            append(path,  p.copy().add(-1,6));
         }
     }
     var last = path[path.length-1].copy();
-    last.x = 0;
-    append(path, last);
+    last.x = 50;
+    append(path, last.copy());
+    last.add(0, -300)
+    append(path, last.copy());
     print3D.addToLayer(layer, path);
 
 }
