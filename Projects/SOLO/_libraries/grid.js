@@ -2,6 +2,7 @@ function Grid() {
     this.p = [];
     this.newp = [];
     this.gridsize;
+    this.gridcolors = [];
 
 
 }
@@ -89,6 +90,33 @@ Grid.prototype.mask = function() {
             n += 1;
         }
 
+    }
+    if (this.newp.length > 0) {
+
+        this.p = [];
+        for (var i = 0; i < this.newp.length; i++) {
+            this.p[i] = this.newp[i].copy();
+        }
+    }
+
+}
+Grid.prototype.maskColorImage = function(pmarge, img, acolor) {
+    this.newp = [];
+    var n = 0;
+    img.loadPixels();
+
+
+    for (var i = 0; i < this.p.length; i++) {
+        var r = (this.p[i].y - pmarge) % 4;
+        var s = (this.p[i].x - pmarge) % 4;
+        var index = (((this.p[i].y - pmarge) - r) * img.width * 4) + (((this.p[i].x - pmarge) - s) * 4)
+        if (img.pixels[index + 3] == 255){
+            if(img.pixels[index] -red(acolor)==0 && img.pixels[index+1] -green(acolor)==0  && img.pixels[index+2] -blue(acolor)==0 ){
+            this.newp[n] = this.p[i].copy();
+            n += 1;
+            }
+
+        }
     }
     if (this.newp.length > 0) {
 
@@ -208,18 +236,15 @@ Grid.prototype.changeToCenter = function() {
     }
 
 }
-Grid.prototype.draw = function() {
-    stroke(0,0,255);
+Grid.prototype.draw = function(acolor) {
     //strokeWeight(3);
+    stroke(acolor);
+   
     for (var i = 0; i < this.p.length; i++) {
         point(this.p[i].x, this.p[i].y);
     }
-    stroke(255, 0, 0);
-   // strokeWeight(3);
-    for (var i = 0; i < this.newp.length; i++) {
-        point(this.newp[i].x, this.newp[i].y);
-    }
-
+    //stroke(0);
+  
 
 }
 Grid.prototype.showMargin = function(marge){

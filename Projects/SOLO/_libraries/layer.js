@@ -60,7 +60,7 @@ Layer.prototype.change = function(min, max) {
 
 }
 Layer.prototype.draw = function() {
-    strokeWeight = 1;
+    strokeWeight(1);
      noFill();
     if (this.p.length > 1) {
 

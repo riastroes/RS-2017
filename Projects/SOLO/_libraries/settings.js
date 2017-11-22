@@ -78,7 +78,7 @@ Settings.prototype.initMaterial = function() {
                         {
                             this.materialcode = "PURECOPER";
                             if (this.style == "normal") {
-                                this.initStyle(0.25, 0.18, 800); //
+                                this.initStyle(1, 0.18, 800); //
                             }
                             break;
                         }
@@ -313,8 +313,8 @@ Settings.prototype.initPrinter = function() {
             }
         case "PURECOPER":
             {
-                this.nozzletemp = 161;
-                this.bedtemp = 70;
+                this.nozzletemp = 177;  // 161
+                this.bedtemp = 50;      // 70
                 break;
             }
         case "PETGCARBON":
