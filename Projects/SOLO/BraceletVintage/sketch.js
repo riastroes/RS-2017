@@ -42,11 +42,11 @@ function setup() {
     layer = 0;
     maxlayers = 4;
     var startlayerheight = 1; // 1
-    var maxskirt = 4; //0 whithout skirt
+    var maxskirt = 3; //0 whithout skirt
     //startlayerheight = 2;  // JellyBox
     //print3D = new Print3D("JellyBox", "MAXXFLEX", "normal", maxlayers, startlayerheight, maxskirt);
     print3D = new Print3D("Anet", "PURECOPER", "normal", maxlayers, startlayerheight, maxskirt);
-    name = "VintageBracelet"
+    
 
     maxw = 100;
     maxh = 100;
@@ -71,7 +71,7 @@ function mousePressed() {
 
 function draw() {
 
-    if (layer < 3) {
+    if (layer == 0) {
 
 
         show = true;
@@ -86,7 +86,12 @@ function draw() {
 
 
         //createBracelet();
+        // createSpiralWithHoleButton(200,350);
+        // createSpiralWithHoleButton(400,350);
+        // createSpiralWithHoleButton(600,350);
+
         createHanger();
+       
         print3D.print(layer);
 
 
@@ -121,6 +126,7 @@ function draw() {
 
 
 function createBracelet() {
+    name = "VintageBracelet"
     var path = [];
     var g = createVector(100, 500);
     var a = createVector(200, 500);
@@ -151,7 +157,7 @@ function createBracelet() {
     print3D.addToLayer(layer, path);
 }
 
-function createEllipse(path, pos, w, h, steps, angle) {
+function createEllipse(path, pos, w, h, steps, angle,z) {
     var p;
 
 
@@ -160,10 +166,10 @@ function createEllipse(path, pos, w, h, steps, angle) {
         p = pos.copy();
         p.z = -1;
         append(path, p.copy());
-        p.z = 0;
+        p.z = z;
         p.x += w * cos(hoek + angle);
         p.y += h * sin(hoek + angle);
-        createSmallEllipse(path, p, 20, 20, 12, PI);
+        //createSmallEllipse(path, p, 20, 20, 12, PI);
         createSmallEllipse(path, p, 10, 10, 12, PI);
         append(path, p.copy());
     }
@@ -193,7 +199,7 @@ function createPiEllipse(path, pos, w, h, steps, angle) {
 
 }
 
-function createSmallEllipse(path, pos, w, h, steps, angle) {
+function createSmallEllipse(path, pos, w, h, steps, angle, z) {
     var p;
 
 
@@ -202,6 +208,7 @@ function createSmallEllipse(path, pos, w, h, steps, angle) {
         p = pos.copy();
         p.x += w * cos(hoek + angle);
         p.y += h * sin(hoek + angle);
+        p.z = z;
         append(path, p.copy());
     }
 
@@ -214,18 +221,13 @@ function createHanger() {
     var path = [];
     name = "VintageHanger";
 
-
-    createPiEllipse(path, a, 50, 50, 12, PI);
-    createPiEllipse(path, a, 60, 60, 12, PI);
-    createPiEllipse(path, a, 70, 70, 12, PI);
-    createPiEllipse(path, a, 80, 80, 12, PI);
-    createPiEllipse(path, a, 90, 90, 12, PI);
-    createPiEllipse(path, a, 110, 110, 12, PI);
-    createPiEllipse(path, a, 120, 120, 12, PI);
-    createPiEllipse(path, a, 140, 140, 12, PI);
-    createPiEllipse(path, a, 160, 160, 12, PI);
-    createPiEllipse(path, a, 180, 180, 12, PI);
-
+    createEllipse(path, a, 10, 10, 12,0,0.4);
+    createEllipse(path, a, 30, 30, 12, -PI/4*3,0.4);
+    createEllipse(path, a, 50, 50, 24, -PI/4*3,0.8);
+    createEllipse(path, a, 60, 60, 24, -PI/4*3,1.2);
+    createEllipse(path, a, 80, 80, 36, -PI/4*3,1.6);
+    createEllipse(path, a, 90, 90, 36, -PI/4*3,2);
+    createEllipse(path, a, 115, 115,36, -PI/4*3,2.4);
 
 
 
@@ -237,4 +239,136 @@ function createHanger() {
     last.add(0, -300)
     append(path, last.copy());
     print3D.addToLayer(layer, path);
+}
+
+// function createHanger() {
+//     var a = createVector(550, 350);
+//     var path = [];
+//     name = "VintageHanger";
+
+
+//     createPiEllipse(path, a, 50, 50, 12, PI);
+//     createPiEllipse(path, a, 60, 60, 12, PI);
+//     createPiEllipse(path, a, 70, 70, 12, PI);
+//     createPiEllipse(path, a, 80, 80, 12, PI);
+//     createPiEllipse(path, a, 90, 90, 12, PI);
+//     createPiEllipse(path, a, 110, 110, 12, PI);
+//     createPiEllipse(path, a, 120, 120, 12, PI);
+//     createPiEllipse(path, a, 140, 140, 12, PI);
+//     createPiEllipse(path, a, 160, 160, 12, PI);
+//     createPiEllipse(path, a, 180, 180, 12, PI);
+
+
+
+
+//     var last = path[path.length - 1].copy();
+//     last.y += 300;
+//     append(path, last.copy());
+//     last.x = 50;
+//     append(path, last.copy());
+//     last.add(0, -300)
+//     append(path, last.copy());
+//     print3D.addToLayer(layer, path);
+// }
+
+function createSpiralButton(x, y) {
+    var a = createVector(x, y);
+    var path = [];
+   
+    name = "3VintageSpiralButton";
+    //gesloten spiralen
+
+    createSpiral(path, a, 60,60, 20, 10, 0);
+    createSpiral(path, a, 60,60, 20, 9, 0.6);
+    createSpiral(path, a, 60,60, 20, 8, 1.2);
+    createSpiral(path, a, 60,60, 20, 7, 1.8);
+    createSpiral(path, a, 60,60, 20, 6, 2.4);
+    createSpiral(path, a, 60,60, 20, 5, 3.0);
+    createSpiral(path, a ,60,60, 20, 4, 3.6);
+    createSpiral(path, a, 60,60, 20, 3, 4.2);
+    createSpiral(path, a, 60,60, 20, 2, 4.8);
+
+   
+
+
+    // var last = path[path.length - 1].copy();
+    // last.y += 300;
+    // append(path, last.copy());
+    // last.x = 50;
+    // append(path, last.copy());
+    // last.add(0, -300)
+    // append(path, last.copy());
+    print3D.addToLayer(layer, path);
+}
+
+function createSpiral(path, pos, w, h, steps, loops,z) {
+    var p = createVector(0,0);
+    
+    var ww, hh
+
+    for (var step = (steps * loops)-1; step >=0; step--) {
+        var hoek = step * (TWO_PI / ((steps) - 1));
+       
+        ww = (step /steps)*0.1 * w;
+        hh = (step /steps)*0.1 * h;
+       
+        p.x = pos.x +( ww * cos(hoek));
+        p.y = pos.y +( hh * sin(hoek));
+        p.z = z;
+        append(path, p.copy());
+    }
+
+    
+    
+
+}
+function createSpiralWithHoleButton(x, y) {
+    var a = createVector(x, y);
+    var path = [];
+   
+    name = "3VintageSpiralButton";
+    //gesloten spiralen
+
+    createSpiralWithHole(path, a, 60,60, 20, 10, 0);
+    createSpiralWithHole(path, a, 60,60, 20, 9, 0.6);
+    createSpiralWithHole(path, a, 60,60, 20, 8, 1.2);
+    createSpiralWithHole(path, a, 60,60, 20, 7, 1.8);
+    createSpiralWithHole(path, a, 60,60, 20, 6, 2.4);
+    createSpiralWithHole(path, a, 60,60, 20, 5, 3.0);
+    createSpiralWithHole(path, a ,60,60, 20, 4, 3.6);
+    createSpiralWithHole(path, a, 60,60, 20, 3, 4.2);
+    createSpiralWithHole(path, a, 60,60, 20, 2, 4.8);
+
+   
+
+
+    // var last = path[path.length - 1].copy();
+    // last.y += 300;
+    // append(path, last.copy());
+    // last.x = 50;
+    // append(path, last.copy());
+    // last.add(0, -300)
+    // append(path, last.copy());
+    print3D.addToLayer(layer, path);
+}
+function createSpiralWithHole(path, pos, w, h, steps, loops,z) {
+    var p = createVector(0,0);
+    
+    var ww, hh
+
+    for (var step = (steps * loops)-1; step >=0; step--) {
+        var hoek = step * (TWO_PI / ((steps) - 1));
+       
+        ww = 20 + (step /steps)*0.1 * w;
+        hh = 20 + (step /steps)*0.1 * h;
+       
+        p.x =  pos.x +( ww * cos(hoek));
+        p.y =  pos.y +( hh * sin(hoek));
+        p.z = z;
+        append(path, p.copy());
+    }
+
+    
+    
+
 }
