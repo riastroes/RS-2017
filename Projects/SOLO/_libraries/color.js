@@ -87,3 +87,12 @@ Color.prototype.stroke = function(h, s, l) {
     var rgb = hsluv.hsluvToRgb([h, s, l]);
     stroke(rgb[0] * 255, rgb[1] * 255, rgb[2] * 255);
 }
+Color.prototype.compare = function (acolor, bcolor, colormarge){
+    var ok = false;
+    if(abs(red(acolor) -  red(bcolor)) <= colormarge && 
+    abs(green(acolor) - green(bcolor)) <= colormarge && 
+    abs(blue(acolor) - blue(bcolor))  <= colormarge){
+        ok = true;
+    }
+    return ok;
+}

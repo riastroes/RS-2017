@@ -1,20 +1,40 @@
 function Grid() {
     this.p = [];
     this.newp = [];
-    this.gridsize;
+    this.gridwidth;
+    this.gridheight;
     this.gridcolors = [];
+
+    this.c = [];
+    this.palette = new Color();
+    this.colormarge = 20;
 
 
 }
 Grid.prototype.init = function(marge, maxx, maxy) {
     var i = 0;
     var w = (width - (2 * marge)) / maxx;
-    this.gridsize = w;
-   
+    this.gridwidth = w;
     var h = (height - (2 * marge)) / maxy;
+    this.gridheight = h;
     for (var y = 0; y < maxy; y++) {
         for (var x = 0; x < maxx; x++) {
             this.p[i] = createVector(marge + ((x * w) + (w / 2)), marge + ((y * h) + (h / 2)), 0);
+            i++;
+
+        }
+    }
+}
+Grid.prototype.init2 = function(margew, margeh, maxx, maxy) {
+    var i = 0;
+    var w = (width - (2 * margew)) / maxx;
+    this.gridwidth = w;
+   
+    var h = (height - (2 * margeh)) / maxy;
+    this.gridheight = h;
+    for (var y = 0; y < maxy; y++) {
+        for (var x = 0; x < maxx; x++) {
+            this.p[i] = createVector(margew + ((x * w) + (w / 2)), margeh + ((y * h) + (h / 2)), 0);
             i++;
 
         }
@@ -64,6 +84,54 @@ Grid.prototype.reorder = function() {
     this.p = [];
     for (var i = 0; i < this.newp.length; i++) {
         this.p[i] = this.newp[i].copy();
+    }
+
+}
+Grid.prototype.reorderc = function() {
+    this.newp = [];
+    var reversep = [];
+    var n = 0;
+    var r = 0;
+    var nrechts = true;
+
+    this.newp[0] = this.c[0].copy();
+    n = 1;
+
+    for (var i = 1; i < this.c.length; i++) {
+        
+        if (this.c[i].p.y != this.c[i - 1].p.y) {
+            nrechts = !nrechts;
+            if (reversep.length > 0) {
+
+                for (var j = reversep.length - 1; j >= 0; j--) {
+                    this.newp[n] = reversep[j].copy();
+                    n += 1;
+                }
+                reversep = [];
+                r = 0;
+            }
+        }
+
+        if (nrechts) { //naar rechts: this.p[i].x > this.p[i - 1].x
+            this.newp[n] = this.c[i].copy();
+            n += 1;
+        } else { //naar links
+            reversep[r] = this.c[i].copy();
+            r += 1;
+        }
+        
+
+    }
+    if (reversep.length > 0) {
+        for (var j = reversep.length - 1; j >= 0; j--) {
+            this.newp[n] = reversep[j].copy();
+            n += 1;
+        }
+    }
+
+    this.c = [];
+    for (var i = 0; i < this.newp.length; i++) {
+        this.c[i] = this.newp[i].copy();
     }
 
 }
@@ -127,6 +195,33 @@ Grid.prototype.maskColorImage = function(pmarge, img, acolor) {
     }
 
 }
+Grid.prototype.maskColorImage2 = function(pmargew, pmargeh, img, acolor) {
+    this.newp = [];
+    var n = 0;
+    img.loadPixels();
+
+
+    for (var i = 0; i < this.p.length; i++) {
+        var r = (this.p[i].y - pmargeh) % 4;
+        var s = (this.p[i].x - pmargew) % 4;
+        var index = (((this.p[i].y - pmargeh) - r) * img.width * 4) + (((this.p[i].x - pmargew) - s) * 4)
+        if (img.pixels[index + 3] == 255){
+            if(img.pixels[index] -red(acolor)==0 && img.pixels[index+1] -green(acolor)==0  && img.pixels[index+2] -blue(acolor)==0 ){
+            this.newp[n] = this.p[i].copy();
+            n += 1;
+            }
+
+        }
+    }
+    if (this.newp.length > 0) {
+
+        this.p = [];
+        for (var i = 0; i < this.newp.length; i++) {
+            this.p[i] = this.newp[i].copy();
+        }
+    }
+
+}
 Grid.prototype.maskImage = function(pmarge, img) {
     this.newp = [];
     var n = 0;
@@ -138,6 +233,31 @@ Grid.prototype.maskImage = function(pmarge, img) {
         var s = (this.p[i].x - pmarge) % 4;
         if ((img.pixels[(((this.p[i].y - pmarge) - r) * img.width * 4) + (((this.p[i].x - pmarge) - s) * 4) + 3] == 255) &&
             (img.pixels[(((this.p[i].y - pmarge) - r) * img.width * 4) + (((this.p[i].x - pmarge) - s) * 4)] < 200)) {
+            this.newp[n] = this.p[i].copy();
+            n += 1;
+
+        }
+    }
+    if (this.newp.length > 0) {
+
+        this.p = [];
+        for (var i = 0; i < this.newp.length; i++) {
+            this.p[i] = this.newp[i].copy();
+        }
+    }
+
+}
+Grid.prototype.maskImage2 = function(pmargew, pmargeh, img) {
+    this.newp = [];
+    var n = 0;
+    img.loadPixels();
+
+
+    for (var i = 0; i < this.p.length; i++) {
+        var r = (this.p[i].y - pmargeh) % 4;
+        var s = (this.p[i].x - pmargew) % 4;
+        if ((img.pixels[(((this.p[i].y - pmargeh) - r) * img.width * 4) + (((this.p[i].x - pmargew) - s) * 4) + 3] == 255) &&
+            (img.pixels[(((this.p[i].y - pmargeh) - r) * img.width * 4) + (((this.p[i].x - pmargew) - s) * 4)] < 200)) {
             this.newp[n] = this.p[i].copy();
             n += 1;
 
@@ -236,6 +356,73 @@ Grid.prototype.changeToCenter = function() {
     }
 
 }
+
+Grid.prototype.collectColors = function(pmargew, pmargeh, img, acolor) {
+    this.c = [];
+    var n = 0;
+    img.loadPixels();
+    var errors = 0
+    var count = 0;
+    var countwit = 0;
+    
+
+
+    for (var i = 0; i < this.p.length; i++) {
+        var r = (this.p[i].y - pmargeh) % 4;
+        var s = (this.p[i].x - pmargew) % 4;
+        var index = (((this.p[i].y - pmargeh) - r) * img.width * 4) + (((this.p[i].x - pmargew) - s) * 4)
+        var imgcolor = color(img.pixels[index],img.pixels[index+1],img.pixels[index+2],img.pixels[index+3]);
+        
+        if(this.palette.compare(imgcolor,acolor, this.colormarge) ){
+            this.c[i] = new GridSpot(this.p[i].copy(), acolor);
+            count++;
+        }
+        else if(this.palette.compare(imgcolor,color(255), this.colormarge) ){
+            //wit
+            var p = this.p[i].copy();
+            p.z = -1;
+            this.c[i] = new GridSpot(p, color(255));
+            countwit++;
+        }
+        else if(this.palette.compare(imgcolor,color(0,255,0), this.colormarge) ){
+            //green
+            var p = this.p[i].copy();
+            p.z = -1;
+            this.c[i] = new GridSpot(p, color(0,255,0));
+            countwit++;
+        }
+        else{
+            //andere kleuren
+            
+            var p = this.p[i].copy();
+            p.z = -1;
+            this.c[i] = new GridSpot(p, color(255,0,0));
+            errors++;
+        }
+           
+        
+    }
+    console.log("ONBEKENDE KLEUREN:" + errors + " van " + this.p.length);
+    console.log("KLEUR:" + count );
+    console.log("WIT:" + countwit );
+}
+Grid.prototype.showErrors = function()
+{
+    stroke(255,0,0);
+    for(var i = 0; i < this.c.length; i++){
+        if(this.palette.compare(this.c[i].color, color(255,0,0), 50)){
+            point(this.c[i].p.x, this.c[i].p.y);
+        }
+       
+    }
+    stroke(255,255,0)
+    for(var i = 0; i < this.c.length-1; i++){
+        if(floor(abs(this.c[i].p.x - this.c[i+1].p.x)) > this.gridsize){
+            console.log(abs(this.c[i].p.x - this.c[i+1].p.x));
+            line(this.c[i].p.x, this.c[i].p.y,this.c[i+1].p.x, this.c[i+1].p.y);
+        }
+    }
+}
 Grid.prototype.draw = function(acolor) {
     //strokeWeight(3);
     stroke(acolor);
@@ -247,9 +434,35 @@ Grid.prototype.draw = function(acolor) {
   
 
 }
+Grid.prototype.draw2 = function() {
+    strokeWeight(3);
+    //stroke(acolor);
+   
+    for (var i = 0; i < this.p.length; i++) {
+        stroke(this.c[i].color);
+        point(this.p[i].x, this.p[i].y);
+    }
+    //stroke(0);
+  
+
+}
 Grid.prototype.showMargin = function(marge){
     background(colors[2]);
     stroke(colors[0]);
     fill(colors[1]);
     rect(marge, marge, width- (2*marge), height - (2*marge));
+}
+Grid.prototype.showMargin2 = function(margew, margeh){
+    background(colors[2]);
+    stroke(colors[0]);
+    fill(colors[1]);
+    rect(margew, margeh, width- (2*margew), height - (2*margeh));
+}
+
+function GridSpot(pos, acolor){
+    this.p = pos.copy();
+    this.color = acolor;
+}
+GridSpot.prototype.copy = function(){
+    return this;
 }
