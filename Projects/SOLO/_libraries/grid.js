@@ -1,4 +1,5 @@
-function Grid() {
+function Grid(pos) {
+    this.pos = pos;
     this.p = [];
     this.newp = [];
     this.gridwidth;
@@ -25,20 +26,84 @@ Grid.prototype.init = function(marge, maxx, maxy) {
         }
     }
 }
-Grid.prototype.init2 = function(margew, margeh, maxx, maxy) {
+Grid.prototype.init2 = function( gridw, gridh, maxx, maxy) {
     var i = 0;
-    var w = (width - (2 * margew)) / maxx;
+    var w = gridw / maxx;
     this.gridwidth = w;
    
-    var h = (height - (2 * margeh)) / maxy;
+    var h = gridh / maxy;
     this.gridheight = h;
     for (var y = 0; y < maxy; y++) {
         for (var x = 0; x < maxx; x++) {
-            this.p[i] = createVector(margew + ((x * w) + (w / 2)), margeh + ((y * h) + (h / 2)), 0);
+            this.p[i] = createVector(this.pos.x + ((x * w) + (w / 2)), this.pos.y + ((y * h) + (h / 2)), 0);
             i++;
 
         }
     }
+}
+Grid.prototype.init2vertical = function( gridw, gridh, maxx, maxy) {
+    var i = 0;
+    var w = gridw / maxx;
+    this.gridwidth = w;
+   
+    var h = gridh / maxy;
+    this.gridheight = h;
+    for (var x = 0; x < maxx; x++) {
+        for (var y = 0; y < maxy; y++) {
+            this.p[i] = createVector(this.pos.x + ((x * w) + (w / 2)), this.pos.y + ((y * h) + (h / 2)), 0);
+            i++;
+
+        }
+    }
+}
+Grid.prototype.reordervertical = function() {
+    this.newp = [];
+    var reversep = [];
+    var n = 0;
+    var r = 0;
+    var nrechts = true;
+
+    this.newp[0] = this.p[this.p.length-1].copy();
+    n = 1;
+
+    for (var i = this.p.length-2; i >0; i--) {
+
+        if (this.p[i].x != this.p[i + 1].x) {
+            nrechts = !nrechts;
+            if (reversep.length > 0) {
+
+                for (var j = reversep.length - 1; j >= 0; j--) {
+                    this.newp[n] = reversep[j].copy();
+                    n += 1;
+                }
+                reversep = [];
+                r = 0;
+            }
+        }
+
+        if (nrechts) { //naar rechts: this.p[i].x > this.p[i - 1].x
+            this.newp[n] = this.p[i].copy();
+            n += 1;
+        } else { //naar links
+            reversep[r] = this.p[i].copy();
+            r += 1;
+        }
+
+
+    }
+    if (reversep.length > 0) {
+        for (var j = reversep.length - 1; j >= 0; j--) {
+            this.newp[n] = reversep[j].copy();
+            n += 1;
+        }
+    }
+    //append(this.newp, this.p[this.p.length-1]);
+    this.p = [];
+    for (var i = 0; i < this.newp.length; i++) {
+        this.p[i] = this.newp[i].copy();
+    }
+
+
 }
 Grid.prototype.reorder = function() {
     this.newp = [];
@@ -80,7 +145,7 @@ Grid.prototype.reorder = function() {
             n += 1;
         }
     }
-
+    //append(this.newp, this.p[this.p.length-1]);
     this.p = [];
     for (var i = 0; i < this.newp.length; i++) {
         this.p[i] = this.newp[i].copy();

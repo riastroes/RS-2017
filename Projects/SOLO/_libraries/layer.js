@@ -1,9 +1,8 @@
-function Layer(layer, settings, totlayerheight) {
+function Layer(layer, settings, startlayerheight) {
     this.layer = layer;
     this.layerheight = settings.layerheight;
-    this.startlayerheight = totlayerheight;
-    totlayerheight += this.layerheight;
-    this.totallayerheight = totlayerheight;
+    this.startlayerheight = startlayerheight;
+    this.totallayerheight = this.startlayerheight + ((layer+1) * this.layerheight);
 
     this.thickness = settings.thickness;
     this.speed = settings.speed;
@@ -111,7 +110,13 @@ Layer.prototype.generate = function(layer, gcode) {
             append(this.commands, "G1 X" + x + " Y" + y + " Z" + nz + " E" + gcode.extrude);
         }
         else  if(z > 0){
-            z = floor((this.startlayerheight + z) * 100)/100;
+            z = floor(z * 100)/100;
+            if(this.layer <= 1){
+                z = this.startlayerheight + z;
+            }
+            else{
+            z = this.startlayerheight + ((this.layer+1) * this.layerheight) + z;
+            }
             gcode.extrude += (d * this.thickness);
             append(this.commands, "G1 X" + x + " Y" + y + " Z" + z + " E" + gcode.extrude);
         }
