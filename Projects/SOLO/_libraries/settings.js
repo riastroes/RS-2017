@@ -37,6 +37,9 @@ Settings.prototype.initMaterial = function() {
                             } else if (this.style == "normal") {
                                 this.initStyle(0.4, 0.12, 800); //test OK
                             }
+                            else if (this.style == "kant") {
+                                this.initStyle(0.4, 0.04, 800); //test OK 0.3, 0.07, 800
+                            }
                             break;
                         }
                     case "PLAw":
@@ -193,6 +196,20 @@ Settings.prototype.initMaterial = function() {
                             }
                             if (this.style == "extrafine") {
                                 this.initStyle(0.08, 0.07, 800); //NIET GETEST
+                            }
+                            break;
+                        }
+                        case "NYLON":
+                        {
+                            this.materialcode = "RTRANS";
+                            if (this.style == "normal") {
+                                this.initStyle(0.4, 0.2, 800); //TEST OK
+                            }
+                            if (this.style == "fine") {
+                                this.initStyle(0.3, 0.07, 800); //NIET GETEST
+                            }
+                            if (this.style == "extrafine") {
+                                this.initStyle(0.2, 0.04, 800); //NIET GETEST
                             }
                             break;
                         }
@@ -362,6 +379,12 @@ Settings.prototype.initPrinter = function() {
         case "REFILLTRANSPARENT":
             {
                 this.nozzletemp = 200;
+                this.bedtemp = 30;
+                break;
+            }
+        case "NYLON":
+            {
+                this.nozzletemp = 260;
                 this.bedtemp = 30;
                 break;
             }

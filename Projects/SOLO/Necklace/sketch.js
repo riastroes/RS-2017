@@ -44,7 +44,7 @@ function setup() {
     
 
     maxw = 100;
-    maxh = 100; 
+    maxh = 20; 
     marge =50;
     grid = new Grid();
     grid.init(marge, maxw, maxh);

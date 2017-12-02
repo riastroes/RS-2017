@@ -58,7 +58,7 @@ function setup() {
     
 
     maxw =49;
-    maxh =6;
+    maxh =40;
     margew = 30;
     margeh = 200;
     pos = createVector(30, 200);
