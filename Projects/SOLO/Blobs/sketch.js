@@ -37,10 +37,10 @@ function setup() {
     palette.add(color(190, 50, 50));
 
     colors = palette.colors;
-    var startlayerheight =1;
+    var startlayerheight = 1;
     var maxskirt = 3;
 
-    print3D = new Print3D("Anet", "PLA", "normal",maxlayers, startlayerheight, maxskirt);
+    print3D = new Print3D("Anet", "PLA", "normal", maxlayers, startlayerheight, maxskirt);
 
     issaved = false;
 
@@ -61,18 +61,37 @@ function draw() {
 
 
     if (layer < maxlayers) {
-        if(layer == 0){
+        if (layer == 0) {
             //print3D.addPointToLayer(layer, createVector(1050,50));
         }
-        
-        var blob = new Blob(createVector(550,550), 100,7,5);
-        blob.create();
+
+        //var blob = new Blob(createVector(550, 550), 100, 10, 6);
+        //blob.create(20);
+
+        //var blob = new Blob(createVector(550, 550), 100, 10, 6);
+        //blob.create2(20);
+
+        //var blob = new Blob(createVector(550, 550), 50, 7, 6);
+        //blob.create3(20);
+
+
+        //var blob = new Blob(createVector(550, 550), 80, 7, 6);
+        // blob.create4(20);
+
+        var blob = new Blob(createVector(550, 550), 80, 7, 6);
+        blob.create5(20);
+
+
+        // blob.create();
+        //blob.create();
+        //blob.create();
+        // blob.create();
         print3D.addToLayer(layer, blob.path)
         print3D.print(layer);
 
 
     } else {
-       
+
         print3D.stop();
         noLoop();
 
@@ -81,6 +100,6 @@ function draw() {
 
 }
 
-function blob(pos){
+function blob(pos) {
 
 }
