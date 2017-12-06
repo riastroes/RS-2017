@@ -3,6 +3,8 @@
 /* Het begin van kant.*/
 
 
+
+
 var print3D;
 var maxlayers;
 var layer;
@@ -11,11 +13,12 @@ var layer;
 var palette;
 var colors;
 
-var maxw, maxh;
-var marge;
-var offset;
+// var maxw, maxh;
+// var marge;
+// var offset;
 
 var issaved;
+var name;
 
 
 function setup() {
@@ -51,10 +54,9 @@ function setup() {
 
 function mousePressed() {
     if (!issaved) {
-        print3D.gcode.save("Blobs");
+        print3D.gcode.save(name);
         issaved = true;
     }
-
 }
 
 function draw() {
@@ -78,15 +80,16 @@ function draw() {
         //var blob = new Blob(createVector(550, 550), 80, 7, 6);
         // blob.create4(20);
 
-        var blob = new Blob(createVector(550, 550), 80, 7, 6);
-        blob.create5(20);
+        var blobby = new Blobby(createVector(550, 550), 80, 7, 6);
+        blobby.create5(20);
+        name = "test";
 
 
         // blob.create();
         //blob.create();
         //blob.create();
         // blob.create();
-        print3D.addToLayer(layer, blob.path)
+        print3D.addToLayer(layer, blobby.path)
         print3D.print(layer);
 
 

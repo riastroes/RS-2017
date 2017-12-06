@@ -4,9 +4,6 @@
 
 
 var print3D;
-
-var start; //set first point to start
-var end; //set last point before you go to start
 var maxlayers;
 var layer;
 

@@ -1,4 +1,4 @@
-function Blob(pos, size, dim, force) {
+function Blobby(pos, size, dim, force) {
     this.path = [];
     this.next = 0;
     this.b = [];
@@ -16,7 +16,7 @@ function Blob(pos, size, dim, force) {
         this.b[i].y += radius * sin((i * this.angle) - PI);
     }
 }
-Blob.prototype.create = function(max) {
+Blobby.prototype.create = function(max) {
 
     for (var t = 0; t < max; t++) {
 
@@ -40,7 +40,7 @@ Blob.prototype.create = function(max) {
 
 }
 
-Blob.prototype.create2 = function(max) {
+Blobby.prototype.create2 = function(max) {
 
     for (var t = 0; t < max; t++) {
 
@@ -71,7 +71,7 @@ Blob.prototype.create2 = function(max) {
 
 
 }
-Blob.prototype.create3 = function(max) {
+Blobby.prototype.create3 = function(max) {
 
     for (var t = 0; t < max; t++) {
 
@@ -102,7 +102,7 @@ Blob.prototype.create3 = function(max) {
 
 
 }
-Blob.prototype.create4 = function(max) {
+Blobby.prototype.create4 = function(max) {
 
     for (var t = 0; t < max; t++) {
 
@@ -132,7 +132,7 @@ Blob.prototype.create4 = function(max) {
     }
 }
 
-Blob.prototype.create5 = function(max) {
+Blobby.prototype.create5 = function(max) {
 
     for (var t = 0; t < max; t++) {
 
