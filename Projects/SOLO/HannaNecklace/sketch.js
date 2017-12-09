@@ -23,7 +23,7 @@ var pos;
 
 
 function preload() {
-    model = loadImage("images/Hanna6.jpg");
+    model = loadImage("images/Hanna9.jpg");
 
 
 
@@ -33,7 +33,7 @@ function setup() {
 
     var canvas = createCanvas(1100, 1100);
     for (var i = 1; i < 4; i++) {
-        model.resize(1040, 200);
+        model.resize(1040, 150);
     }
 
     windowscale = 1;
@@ -47,17 +47,17 @@ function setup() {
 
     layer = 0;
     maxlayers = 1;
-    var startlayerheight = 0.4; // 1
+    var startlayerheight = 0.5; // 1
     var maxskirt = 2; //0 whithout skirt
     //startlayerheight = 2;  // JellyBox
     //print3D = new Print3D("JellyBox", "MAXXFLEX", "normal", maxlayers, startlayerheight, maxskirt);
-    print3D = new Print3D("Anet", "NYLON", "fine", maxlayers, startlayerheight, maxskirt);
+    print3D = new Print3D("Ultimaker2+", "PLAHENNEP", "fine", maxlayers, startlayerheight, maxskirt);
 
 
-    maxw = 180;
-    maxh = 40;
+    maxw = 180; //200
+    maxh = 25; //35
     margew = 30;
-    margeh = 200;
+    margeh = 150;
     pos = createVector(30, 200);
 
     print3D.start();
@@ -78,7 +78,7 @@ function mousePressed() {
 
 function draw() {
 
-    if (layer <maxlayers) {
+    if (layer < maxlayers) {
 
         // createRaster();
         //print3D.addPointToLayer(layer, createVector(20, 450));
@@ -106,15 +106,15 @@ function createRaster() {
 
 
 
-    grid = new Grid(createVector(margew, 200));
-    grid.init2vertical(1040, 200, maxw, maxh);
+    grid = new Grid(createVector(margew, 140));
+    grid.init2vertical(1040, 150, maxw, maxh);
     grid.showMargin2(margew, margeh);
     grid.reordervertical();
     createRasterVertical();
 
 
     grid = new Grid(pos);
-    grid.init2(1040, 200, maxw, maxh);
+    grid.init2(1040, 150, maxw, maxh);
     //grid.showMargin2(margew, margeh);
     grid.reorder();
     createRasterHorizontal();
@@ -148,16 +148,16 @@ function createPattern05(path, p, w, h) {
     var r = p.copy();
     stroke(255, 0, 0);
     //ellipse(r.x, r.y, 10, 10);
-    var angle = TWO_PI/4;
+    var angle = TWO_PI / 4;
     append(path, r.copy());
     //for(var z = 0.4; z <= 1.2; z+= 0.4 ){
     for (var i = 0; i < 4; i++) { //{ ? ? ? ** * ANGLE VERANDEREN IN 0 T / M 8 ETC.
-        r.x += (w * cos(i * angle));
-        r.y += (h * sin(i * angle));
-       
+        r.x += (w * cos(-i * angle));
+        r.y += (h * sin(-i * angle));
+
         append(path, r.copy());
     }
-//}
+    //}
 
 
 
@@ -168,26 +168,37 @@ function createPattern06(path, p, w, h) {
     var r = p.copy();
     stroke(0, 0, 255);
     //ellipse(p.x, p.y, w, h);
-    var angle = TWO_PI/4;
+    var angle = TWO_PI / 4;
     append(path, r.copy());
-   // for(var z = 0.4; z <= 1.2; z+= 0.4 ){
+    // for(var z = 0.4; z <= 1.2; z+= 0.4 ){
     for (var i = 0; i < 4; i++) {
-        r.x += w * cos(PI+( i *angle));
-        r.y += h * sin(PI+( i *angle));
-        
+        r.x += w * cos(PI + (i * angle));
+        r.y += h * sin(PI + (i * angle));
+
         append(path, r.copy());
     }
-   // }
+    // }
+}
+
+function createPattern07(path, p, w, h) {
+    //van rechts naar links
+    var r = p.copy();
+    r.z = 0;
+    append(path, r.copy());
+    var s = p.copy();
+    s.z = 3;
+    append(path, s.copy());
+
 }
 
 function createPatternHanna(path, p, w, h) {
     //with image pattern
     show = true;
-    grid = new Grid(createVector(margew, 200));
-    grid.init2(1040, 200, maxw, maxh);
+    grid = new Grid(createVector(margew, 150));
+    grid.init2(1040, 150, maxw, maxh);
     grid.showMargin2(margew, margeh);
     //grid.maskImage2(margew, margeh, model1, colors[0]);
-    grid.collectColors(30, 200, model, colors[0]);
+    grid.collectColors(30, 150, model, colors[0]);
     grid.reorder();
     grid.reorderc();
     //grid.showErrors();
@@ -201,19 +212,17 @@ function createPatternHanna(path, p, w, h) {
         if (grid.c[i].p.x <= grid.c[i + 1].p.x && grid.c[i].p.y == grid.c[i].p.y) { //van links naar rechts
             if (this.palette.compare(grid.c[i].color, acolor, grid.colormarge)) {
                 //append(path, grid.c[i].p.copy());
-                createPattern05(path, grid.c[i].p.copy(), 3,5);
-            } else if (this.palette.compare(grid.c[i].color, bcolor, grid.colormarge)) {
-                //createPattern01(path, grid.c[i].p);
+                createPattern05(path, grid.c[i].p.copy(), 3, 5);
             } else {
-                //append(path, grid.c[i].p.copy());
+                grid.c[i].p.z = 0;
+                append(path, grid.c[i].p.copy());
             }
         } else {
             if (this.palette.compare(grid.c[i].color, acolor, grid.colormarge)) {
-                createPattern06(path, grid.c[i].p.copy(), 3,5);
-            } else if (this.palette.compare(grid.c[i].color, bcolor, grid.colormarge)) {
-                //createPattern01(path, grid.c[i].p);
+                createPattern06(path, grid.c[i].p.copy(), 3, 5);
             } else {
-                //append(path, grid.c[i].p.copy());
+                grid.c[i].p.z = 0;
+                append(path, grid.c[i].p.copy());
             }
         }
     }

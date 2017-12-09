@@ -2,7 +2,7 @@ function Layer(layer, settings, startlayerheight) {
     this.layer = layer;
     this.layerheight = settings.layerheight;
     this.startlayerheight = startlayerheight;
-    this.totallayerheight = this.startlayerheight + ((layer+1) * this.layerheight);
+    this.totallayerheight = this.startlayerheight + ((layer + 1) * this.layerheight);
 
     this.thickness = settings.thickness;
     this.speed = settings.speed;
@@ -60,12 +60,12 @@ Layer.prototype.change = function(min, max) {
 }
 Layer.prototype.draw = function() {
     strokeWeight(1);
-     noFill();
+    noFill();
     if (this.p.length > 1) {
 
 
         for (var i = 1; i < this.p.length; i++) {
-            
+
 
             if (this.p[i].z == 0) {
                 stroke(colors[0]);
@@ -74,20 +74,20 @@ Layer.prototype.draw = function() {
                 stroke(colors[2]);
             }
             if (this.p[i].z == -1) {
-                stroke(0, 255,255 );
+                stroke(0, 255, 255);
             }
 
-            line(this.p[i-1].x, this.p[i-1].y, this.p[i].x, this.p[i].y);
-            
+            line(this.p[i - 1].x, this.p[i - 1].y, this.p[i].x, this.p[i].y);
+
 
         }
-       
+
     }
 }
 
 Layer.prototype.generate = function(layer, gcode) {
     //var nz = (layer * this.layerheight); // nz = normaal niveau
-    var nz = floor(this.totallayerheight*100)/100  // nz = normaal niveau;
+    var nz = floor(this.totallayerheight * 100) / 100 // nz = normaal niveau;
     append(this.commands, "G0 Z" + nz);
 
 
@@ -102,20 +102,21 @@ Layer.prototype.generate = function(layer, gcode) {
 
         var dvector = p5.Vector.sub(this.p[i], this.p[i - 1]);
         var d = dvector.mag() * this.scale;
-        
+
         if (this.p[i].z == -1) { //transport
+
             append(this.commands, "G0 X" + x + " Y" + y);
-        } else  if(z == 0){
+
+
+        } else if (z == 0) {
             gcode.extrude += (d * this.thickness);
             append(this.commands, "G1 X" + x + " Y" + y + " Z" + nz + " E" + gcode.extrude);
-        }
-        else  if(z > 0){
-            z = floor(z * 100)/100;
-            if(this.layer <= 1){
+        } else if (z > 0) {
+            z = floor(z * 100) / 100;
+            if (this.layer <= 1) {
                 z = this.startlayerheight + z;
-            }
-            else{
-            z = this.startlayerheight + ((this.layer+1) * this.layerheight) + z;
+            } else {
+                z = this.startlayerheight + ((this.layer + 1) * this.layerheight) + z;
             }
             gcode.extrude += (d * this.thickness);
             append(this.commands, "G1 X" + x + " Y" + y + " Z" + z + " E" + gcode.extrude);
