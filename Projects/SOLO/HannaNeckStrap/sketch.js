@@ -24,9 +24,6 @@ var pos;
 
 function preload() {
     model = loadImage("images/Hanna9.jpg");
-
-
-
 }
 
 function setup() {
@@ -37,13 +34,9 @@ function setup() {
     }
 
     windowscale = 1;
-
-
     palette = new Color();
     colors = palette.create();
     strokeWeight(2);
-
-
 
     layer = 0;
     maxlayers = 1;
@@ -87,7 +80,7 @@ function draw() {
         stroke(0);
         text(floor(grid.gridwidth) + " x " + floor(grid.gridheight), 50, 50)
 
-        name = "RibbonHanna"
+        name = "HannaNeckStrap";
         print3D.print(layer);
 
     }
@@ -99,97 +92,38 @@ function draw() {
 
 }
 
-function createRaster() {
-
-    //print3D.print(layer);
-    print3D.addPointToLayer(layer, createVector(1080, 150));
-
-
-
-    grid = new Grid(createVector(margew, 140));
-    grid.init2vertical(1040, 150, maxw, maxh);
-    grid.showMargin2(margew, margeh);
-    grid.reordervertical();
-    createRasterVertical();
-
-
-    grid = new Grid(pos);
-    grid.init2(1040, 150, maxw, maxh);
-    //grid.showMargin2(margew, margeh);
-    grid.reorder();
-    createRasterHorizontal();
-
-
-    print3D.print(layer);
-}
-
-function createRasterHorizontal() {
-    var path = [];
-
-    for (var i = 0; i < grid.p.length; i++) {
-        append(path, grid.p[i]);
-    }
-    print3D.addToLayer(layer, path);
-}
-
-function createRasterVertical() {
-    var path = [];
-
-    for (var i = 0; i < grid.p.length; i++) {
-        append(path, grid.p[i]);
-    }
-    print3D.addToLayer(layer, path);
-}
 
 
 
 function createPattern05(path, p, w, h) {
     //van links naar rechts
     var r = p.copy();
-    stroke(255, 0, 0);
-    //ellipse(r.x, r.y, 10, 10);
     var angle = TWO_PI / 4;
     append(path, r.copy());
-    //for(var z = 0.4; z <= 1.2; z+= 0.4 ){
     for (var i = 0; i < 4; i++) { //{ ? ? ? ** * ANGLE VERANDEREN IN 0 T / M 8 ETC.
         r.x += (w * cos(-i * angle));
         r.y += (h * sin(-i * angle));
 
         append(path, r.copy());
     }
-    //}
-
-
-
 }
 
 function createPattern06(path, p, w, h) {
     //van rechts naar links
     var r = p.copy();
-    stroke(0, 0, 255);
-    //ellipse(p.x, p.y, w, h);
     var angle = TWO_PI / 4;
     append(path, r.copy());
-    // for(var z = 0.4; z <= 1.2; z+= 0.4 ){
+
     for (var i = 0; i < 4; i++) {
         r.x += w * cos(PI + (i * angle));
         r.y += h * sin(PI + (i * angle));
 
         append(path, r.copy());
     }
-    // }
-}
-
-function createPattern07(path, p, w, h) {
-    //van rechts naar links
-    var r = p.copy();
-    r.z = 0;
-    append(path, r.copy());
-    var s = p.copy();
-    s.z = 3;
-    append(path, s.copy());
 
 }
+
+
 
 function createPatternHanna(path, p, w, h) {
     //with image pattern
@@ -211,7 +145,6 @@ function createPatternHanna(path, p, w, h) {
     for (var i = 0; i < grid.c.length - 1; i++) {
         if (grid.c[i].p.x <= grid.c[i + 1].p.x && grid.c[i].p.y == grid.c[i].p.y) { //van links naar rechts
             if (this.palette.compare(grid.c[i].color, acolor, grid.colormarge)) {
-                //append(path, grid.c[i].p.copy());
                 createPattern05(path, grid.c[i].p.copy(), 3, 5);
             } else {
                 grid.c[i].p.z = 0;
