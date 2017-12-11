@@ -337,6 +337,12 @@ Settings.prototype.initPrinter = function() {
                 this.bedtemp = 30;
                 break;
             }
+         case "NYLON":
+            {
+                this.nozzletemp = 260;
+                this.bedtemp = 50;
+                break;
+            }
     }
 }
 
