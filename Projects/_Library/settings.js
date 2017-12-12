@@ -206,7 +206,7 @@ Settings.prototype.initMaterial = function() {
                                 this.initStyle(0.4, 0.2, 800); //TEST OK
                             }
                             if (this.style == "fine") {
-                                this.initStyle(0.3, 0.05, 600); //NIET GETEST
+                                this.initStyle(0.3, 0.07, 600); //NIET GETEST
                             }
                             if (this.style == "extrafine") {
                                 this.initStyle(0.2, 0.04, 800); //NIET GETEST
