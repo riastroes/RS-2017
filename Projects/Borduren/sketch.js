@@ -28,7 +28,7 @@ function preload() {
 function setup() {
 
     var canvas = createCanvas(1100, 1100);
-    
+
 
     windowscale = 1;
     palette = new Color();
@@ -36,7 +36,7 @@ function setup() {
     strokeWeight(2);
 
     layer = 0;
-    maxlayers =3;
+    maxlayers = 3;
     var startlayerheight = 0.2; // 1
     var maxskirt = 2; //0 whithout skirt
 
@@ -107,29 +107,33 @@ function borduren() {
     var acolor = colors[0];
     var apos, bpos;
     var last;
+    var w = grid.gridwidth / 2;
+    var h = grid.gridheight / 2;
     for (var i = 0; i < grid.c.length - 1; i++) {
-        
+
         if (this.palette.compare(grid.c[i].color, acolor, grid.colormarge)) {
 
-            if(apos){
+            if (apos) {
                 bpos = apos.copy();
-            }
-            else{
+            } else {
                 bpos = grid.c[i].p.copy();
             }
             apos = grid.c[i].p.copy();
-            
-            if(apos.x < bpos.x && apos.y != bpos.y){
-               //ellipse(apos.x, apos.y, 10,10);
-                //append(path, bpos.add(-grid.gridwidth, grid.gridheight));
+            if (apos.y != bpos.y && apos.x < bpos.x) {
+                append(path, bpos.copy().add(-w, h));
+                append(path, apos.copy().add(-w, -h));
+            } else if (apos.y != bpos.y && apos.x > bpos.x) {
+                stroke(255, 0, 0);
+                ellipse(apos.x, apos.y, 10, 10);
+                append(path, bpos.copy().add(w, h));
+                append(path, apos.copy().add(w, -h));
+            } else if (grid.c[i].p.x < grid.c[i + 1].p.x) { //van links naar rechts
+                createKruissteekLR(path, grid.c[i].p.copy(), w, h);
+            } else if (grid.c[i].p.x > grid.c[i + 1].p.x) {
+                createKruissteekRL(path, grid.c[i].p.copy(), w, h);
+            }
 
-            }
-            if (grid.c[i].p.x < grid.c[i + 1].p.x  ) { //van links naar rechts
-                 createKruissteekLR(path, grid.c[i].p.copy(), grid.gridwidth/2, grid.gridheight/2);
-            } else if (grid.c[i].p.x > grid.c[i + 1].p.x){
-                createKruissteekRL(path, grid.c[i].p.copy(), grid.gridwidth/2, grid.gridheight/2);
-            }
-           
+
         }
     }
     print3D.addToLayer(layer, path);
@@ -143,7 +147,7 @@ function createKruissteekLR(path, pos, w, h) {
     var s2 = pos.copy().add(w, h);
     append(path, s2);
     stroke(255, 0, 0);
-   // ellipse(s2.x, s2.y, 10, 10);
+    // ellipse(s2.x, s2.y, 10, 10);
     var s3 = pos.copy().add(-w, h);
     append(path, s3);
     var s4 = pos.copy().add(w, -h);
