@@ -6,7 +6,14 @@ function Color() {
 
 }
 Color.prototype.add = function(acolor) {
-    append(this.colors, acolor);
+    var i = this.colors.length;
+    
+    this.colors[i] = acolor;
+}
+Color.prototype.addHSL = function(hue, saturation, lightness) {
+    var i = this.colors.length;
+    var rgb = hsluv.hsluvToRgb([hue, saturation, lightness]);
+    this.colors[i] = color(rgb[0] * 255, rgb[1] * 255, rgb[2] * 255);
 }
 Color.prototype.random = function(max, alpha) {
     if (alpha == undefined) {
@@ -16,13 +23,15 @@ Color.prototype.random = function(max, alpha) {
         this.colors[i] = color(random(255), random(255), random(255), alpha);
     }
 }
-Color.prototype.createPalette = function() {
+Color.prototype.create = function() {
     //create your colors here
-    this.add(color(0));
-    this.add(color(255));
-    this.add(color(255, 0, 0));
-    this.add(color(0, 0, 255));
-    this.add(color(0, 255, 0));
+    this.colors[0] = color(0);
+    this.colors[1] = color(255);
+    this.add(color(255,0,0)); //red
+    this.add(color(0,0,255));
+    this.add(color(0,255,255));
+    this.add(color(255,0,255));
+    this.add(color(255,255,0));
     return this.colors;
 }
 Color.prototype.addHuePalette = function(count, saturation, lightness) {
@@ -77,4 +86,13 @@ Color.prototype.fill = function(h, s, l) {
 Color.prototype.stroke = function(h, s, l) {
     var rgb = hsluv.hsluvToRgb([h, s, l]);
     stroke(rgb[0] * 255, rgb[1] * 255, rgb[2] * 255);
+}
+Color.prototype.compare = function (acolor, bcolor, colormarge){
+    var ok = false;
+    if(abs(red(acolor) -  red(bcolor)) <= colormarge && 
+    abs(green(acolor) - green(bcolor)) <= colormarge && 
+    abs(blue(acolor) - blue(bcolor))  <= colormarge){
+        ok = true;
+    }
+    return ok;
 }

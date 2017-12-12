@@ -37,6 +37,9 @@ Settings.prototype.initMaterial = function() {
                             } else if (this.style == "normal") {
                                 this.initStyle(0.4, 0.12, 800); //test OK
                             }
+                            else if (this.style == "kant") {
+                                this.initStyle(0.4, 0.04, 800); //test OK 0.3, 0.07, 800
+                            }
                             break;
                         }
                     case "PLAw":
@@ -78,7 +81,7 @@ Settings.prototype.initMaterial = function() {
                         {
                             this.materialcode = "PURECOPER";
                             if (this.style == "normal") {
-                                this.initStyle(0.25, 0.18, 800); //
+                                this.initStyle(1, 0.18, 800); //
                             }
                             break;
                         }
@@ -90,11 +93,19 @@ Settings.prototype.initMaterial = function() {
                             }
                             break;
                         }
+                    case "PETG":
+                        {
+                            this.materialcode = "PETG";
+                            if (this.style == "fine") {
+                                this.initStyle(0.4, 0.05, 800); //
+                            }
+                            break;
+                        }
                     case "SAT1N":
                         {
                             this.materialcode = "SAT1N";
                             if (this.style == "fine") {
-                                this.initStyle(0.5, 0.10, 600); //test OK mooi
+                                this.initStyle(0.5, 0.10, 800); //test OK mooi
                                 //this.initStyle(0.5, 0.12, 600); //test OK mooi  
                                 //this.initStyle(0.5, 0.15, 600); //test OK
                                 //this.initStyle(0.4, 0.1, 600);//test ok 
@@ -188,6 +199,20 @@ Settings.prototype.initMaterial = function() {
                             }
                             break;
                         }
+                        case "NYLON":
+                        {
+                            this.materialcode = "RTRANS";
+                            if (this.style == "normal") {
+                                this.initStyle(0.4, 0.2, 800); //TEST OK
+                            }
+                            if (this.style == "fine") {
+                                this.initStyle(0.3, 0.05, 600); //NIET GETEST
+                            }
+                            if (this.style == "extrafine") {
+                                this.initStyle(0.2, 0.04, 800); //NIET GETEST
+                            }
+                            break;
+                        }
 
                 }
                 break;
@@ -207,7 +232,10 @@ Settings.prototype.initMaterial = function() {
                     this.initStyle(0.2, 0.5, 800); // ok getest in knitting app  // ok getest in DUBAI KNITTING APP
                 }
                 if (this.material == "PLAFLEX" && this.style == "normal") {
-                    this.initStyle(0.2, 1, 800); // ok getest in knitting app  // ok getest in DUBAI KNITTING APP
+                    this.initStyle(0.2, 1, 1600); // ok getest in knitting app  // ok getest in DUBAI KNITTING APP
+                }
+                if (this.material == "PLAFLEX" && this.style == "blob") {
+                    this.initStyle(0.2, 2, 1800); // 
                 }
                 if (this.material == "PETGCARBON" && this.style == "fine") {
                     this.initStyle(0.4, 0.03, 800); //0.4, 0.03, 1600 ok
@@ -218,7 +246,9 @@ Settings.prototype.initMaterial = function() {
                 if (this.material == "PETGCARBON" && this.style == "fat") {
                     this.initStyle(0.3, 1, 1200); //0.4, 0.03, 1600 ok
                 }
-
+                if (this.material == "TRANS" && this.style == "normal") {
+                    this.initStyle(0.3, 2, 1600); // test dunner
+                }
 
                 if (this.material == "PLABRO" && this.style == "fine") {
                     this.initStyle(0.5, 0.04, 800); //test ok armband.
@@ -236,6 +266,15 @@ Settings.prototype.initMaterial = function() {
 
                 break;
             }
+        case "JellyBox":
+            { //nozzle 0.4
+
+                this.scale = 0.20; //canvas = 1100 px, bed = 220 mm
+                this.filement = 1.85;
+                if (this.material == "MAXXFLEX" && this.style == "normal") {
+                    this.initStyle(0.2, 0.5, 800); // ok getest in knitting app  // ok getest in DUBAI KNITTING APP
+                }
+            }
 
     }
 }
@@ -244,7 +283,7 @@ Settings.prototype.initPrinter = function() {
         case "PLA":
             {
                 this.nozzletemp = 210;
-                this.bedtemp = 50;
+                this.bedtemp = 30;
                 break;
             }
         case "PLAw":
@@ -291,14 +330,20 @@ Settings.prototype.initPrinter = function() {
             }
         case "PURECOPER":
             {
-                this.nozzletemp = 161;
-                this.bedtemp = 70;
+                this.nozzletemp = 177;  // 161
+                this.bedtemp = 50;      // 70
                 break;
             }
         case "PETGCARBON":
             {
-                this.nozzletemp = 255;
+                this.nozzletemp = 230; // (230-250)
                 this.bedtemp = 30;
+                break;
+            }
+        case "PETG":
+            {
+                this.nozzletemp = 230; // (230-250)
+                this.bedtemp = 50;
                 break;
             }
         case "SAT1N":
@@ -337,10 +382,23 @@ Settings.prototype.initPrinter = function() {
                 this.bedtemp = 30;
                 break;
             }
-         case "NYLON":
+        case "NYLON":
             {
                 this.nozzletemp = 260;
                 this.bedtemp = 50;
+                break;
+            }
+        case "TRANS":
+            {
+                this.nozzletemp = 200;
+                this.bedtemp = 30;
+                break;
+
+            }
+        case "MAXXFLEX":
+            {
+                this.nozzletemp = 210;
+                this.bedtemp = 0;
                 break;
             }
     }
