@@ -127,7 +127,9 @@ function borduren() {
                 ellipse(apos.x, apos.y, 10, 10);
                 append(path, bpos.copy().add(w, h));
                 append(path, apos.copy().add(w, -h));
-            } else if (grid.c[i].p.x < grid.c[i + 1].p.x) { //van links naar rechts
+            }
+
+            if (grid.c[i].p.x < grid.c[i + 1].p.x) { //van links naar rechts
                 createKruissteekLR(path, grid.c[i].p.copy(), w, h);
             } else if (grid.c[i].p.x > grid.c[i + 1].p.x) {
                 createKruissteekRL(path, grid.c[i].p.copy(), w, h);

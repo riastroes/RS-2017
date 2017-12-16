@@ -23,15 +23,14 @@ var pos;
 
 
 function preload() {
-    model = loadImage("images/Hanna9.jpg");
-
+    model = loadImage("images/Zen02.jpeg");
 }
 
 function setup() {
 
     var canvas = createCanvas(1100, 1100);
     for (var i = 1; i < 4; i++) {
-        model.resize(1040, 150);
+        model.resize(600, 600);
     }
 
     windowscale = 1;
@@ -45,12 +44,11 @@ function setup() {
     var maxskirt = 2; //0 whithout skirt
     //startlayerheight = 2;  // JellyBox
     //print3D = new Print3D("JellyBox", "MAXXFLEX", "normal", maxlayers, startlayerheight, maxskirt);
-    //print3D = new Print3D("Ultimaker2+", "PLAHENNEP", "fine", maxlayers, startlayerheight, maxskirt);
-    print3D = new Print3D("Ultimaker2+", "PLABRO", "fine", maxlayers, startlayerheight, maxskirt);
+    print3D = new Print3D("Ultimaker2+", "PLA", "fine", maxlayers, startlayerheight, maxskirt);
 
 
-    maxw = 180; //200
-    maxh = 25; //35
+    maxw = 120; //200
+    maxh = 120; //35
     margew = 30;
     margeh = 150;
     pos = createVector(30, 200);
@@ -131,7 +129,7 @@ function createPatternHanna(path, p, w, h) {
     //with image pattern
     show = true;
     grid = new Grid(createVector(margew, 150));
-    grid.init2(1040, 150, maxw, maxh);
+    grid.init2(600, 600, maxw, maxh);
     grid.showMargin2(margew, margeh);
     //grid.maskImage2(margew, margeh, model1, colors[0]);
     grid.collectColors(30, 150, model, colors[0]);
