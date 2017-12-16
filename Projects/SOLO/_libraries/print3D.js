@@ -51,7 +51,7 @@ Print3D.prototype.print = function(layer) {
 
 
     this.layers[layer].generate(layer, this.gcode); // generate commands
-    var acolor = colors[0];
+    var acolor = color(0);
     this.layers[layer].draw(acolor);
 
 

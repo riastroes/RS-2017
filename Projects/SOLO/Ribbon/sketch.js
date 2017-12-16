@@ -36,7 +36,7 @@ function setup() {
 
     var canvas = createCanvas(1100, 1100);
     for(var i = 1; i <2; i++){
-        model[i].resize(1040,100);
+        model[i].resize(1040,200);
     }
    
     windowscale = 1;
@@ -44,7 +44,7 @@ function setup() {
 
     palette = new Color();
     colors = palette.create();
-    strokeWeight(2);
+   
     
 
 
@@ -52,9 +52,7 @@ function setup() {
     maxlayers =2;
     var startlayerheight = 0; // 1
     var maxskirt = 2; //0 whithout skirt
-    //startlayerheight = 2;  // JellyBox
-    //print3D = new Print3D("JellyBox", "MAXXFLEX", "normal", maxlayers, startlayerheight, maxskirt);
-    print3D = new Print3D("Anet", "SAT1N", "fine", maxlayers, startlayerheight, maxskirt);
+    print3D = new Print3D("Anet", "PLAFLEX", "fine", maxlayers, startlayerheight, maxskirt);
     
 
     maxw =49;
@@ -121,14 +119,14 @@ function createRaster(){
     
 
     grid = new Grid(createVector(margew, 200));
-    grid.init2vertical(1040, 100, maxw, maxh);
+    grid.init2vertical(1040, 200, maxw, maxh);
     grid.showMargin2(margew, margeh);
     grid.reordervertical();
     createRasterVertical();
     
 
     grid = new Grid(pos);
-    grid.init2(1040, 100, maxw, maxh);
+    grid.init2(1040, 200, maxw, maxh);
     //grid.showMargin2(margew, margeh);
     grid.reorder();
     createRasterHorizontal();
@@ -231,7 +229,7 @@ function createRibbon3(){
     //with image pattern
     show = true;
     grid = new Grid(createVector(margew, 200));
-    grid.init2(1040, 100, maxw, maxh);
+    grid.init2(1040, 200, maxw, maxh);
     grid.showMargin2(margew, margeh);
     //grid.maskImage2(margew, margeh, model1, colors[0]);
     grid.collectColors(30, 200, model[1], colors[0]);
@@ -277,7 +275,7 @@ function createPattern05(path, p, w, h){
     stroke(255,0,0);
     ellipse(r.x, r.y, 10,10);
     append(path, r.copy());
-    for(var angle = PI; angle <= (TWO_PI) + PI; angle +=  (TWO_PI / 8)){  ???*** ANGLE VERANDEREN IN 0 T/M 8 ETC.
+    for(var angle = PI; angle <= (TWO_PI) + PI; angle +=  (TWO_PI / 8)){  
         r.x += (w * cos(angle));
         r.y +=( h * sin(angle));
         
