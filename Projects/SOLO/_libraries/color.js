@@ -14,6 +14,7 @@ Color.prototype.addHSL = function(hue, saturation, lightness) {
     var i = this.colors.length;
     var rgb = hsluv.hsluvToRgb([hue, saturation, lightness]);
     this.colors[i] = color(rgb[0] * 255, rgb[1] * 255, rgb[2] * 255);
+    return this.colors[i];
 }
 Color.prototype.random = function(max, alpha) {
     if (alpha == undefined) {
@@ -32,6 +33,9 @@ Color.prototype.create = function() {
     this.add(color(0,255,255));
     this.add(color(255,0,255));
     this.add(color(255,255,0));
+    this.add(color(150,0,0));
+    this.add(color(0,150,0));
+    this.add(color(0,0,150));
     return this.colors;
 }
 Color.prototype.addHuePalette = function(count, saturation, lightness) {

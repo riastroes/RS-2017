@@ -23,12 +23,11 @@ var name;
 var pos;
 var path;
 var next;
-var m;
 
 
 
 function preload() {
-    model = loadImage("images/line05.jpg");
+    model = loadImage("images/line04.jpg");
 }
 
 function setup() {
@@ -68,16 +67,15 @@ function setup() {
     path = [];
     path[next] = [];
     
-    findPath(next, pos);  //dit is een recursieve functie
+    findPath(next, pos);
     model.updatePixels();
     image(model, offset.x, offset.y);
-
-    console.log("aantal paden:" + path.length);
-    //optimizePath(1500);
-    //console.log("path.length" + path.length);
-    m = showMaxPath();
+    var m = showMaxPath();
     
-    
+    showDifferencePath(m, colors[2]);
+    showDifferencePath(m, colors[3]);
+    showDifferencePath(m,  colors[4]);
+    showDifferencePath(m, colors[5]);
     
 
     print3D.start();
@@ -97,10 +95,8 @@ function mousePressed() {
 }
 
 function draw() {
-    var max = addDifferencePath(m, colors[0]);
-    if( max < 10){
-        
-        if (layer < maxlayers) {
+
+    if (layer < maxlayers) {
 
         // createRaster();
         //print3D.addPointToLayer(layer, createVector(20, 450));
@@ -112,49 +108,42 @@ function draw() {
         name = "Zen";
         //print3D.print(layer);
 
-        }
-        if (layer + 1 == maxlayers) {
-            print3D.stop();
-            noLoop();
-        }
-        layer++
     }
-    
-   
+    if (layer + 1 == maxlayers) {
+        print3D.stop();
+        noLoop();
+    }
+    layer++;
 
 }
 
 function findPath(current, p){
    
     append(path[current], p);
+    //kijk naar de buren
     var buren = getBuren(p);
     
     for(var b = 0; b < buren.length; b++){
-        if(checkColor(buren[b])){
-            next++;
-            path[next] = [];
-            path[next] = path[next].concat(path[current]);
-            if((next) <8000){
-                
-                var i = (buren[b].y * 1000 * 4) + (buren[b].x * 4);
-                model.pixels[i] = 255;
-                model.pixels[i+1] = 0;
-                model.pixels[i+2] = 0;
-                model.pixels[i+3] = 255;
-            
-                findPath(next, buren[b]);
-            }
+        next++;
+        path[next] = [];
+        path[next] = path[next].concat(path[current]);
+        if((next) <8000){
+            console.log(next);
+            var i = (buren[b].y * 1000 * 4) + (buren[b].x * 4);
+            model.pixels[i] = 255;
+            model.pixels[i+1] = 0;
+            model.pixels[i+2] = 0;
+            model.pixels[i+3] = 255;
+          
+            findPath(next, buren[b]);
         }
-        var i = (buren[b].y * 1000 * 4) + (buren[b].x * 4);
-        model.pixels[i] = 255;
-        model.pixels[i+1] = 0;
-        model.pixels[i+2] = 0;
-        model.pixels[i+3] = 255;
+        
     }
+    
 }
 function getBuren(pos){
     var buren = [];
-    
+    var goedeburen = [];
     buren[0] = pos.copy().add(1,0);
     buren[1] = pos.copy().add(1,-1);
     buren[2] = pos.copy().add(0,-1);
@@ -164,11 +153,16 @@ function getBuren(pos){
     buren[6] = pos.copy().add(0,1);
     buren[7] = pos.copy().add(1,1);
 
-    
-    return buren;
+    var i = 0;
+    for(var b = 0; b < buren.length; b++){
+        if(checkColor(buren[b])){
+            goedeburen[i]= buren[b].copy();
+            i++;
+        }
+    }
+
+    return goedeburen;
 }
-
-
 function findStart() {
     model.loadPixels();
     var colormarge = 50;
@@ -206,23 +200,9 @@ function findStart() {
          
     return pos;
 }
-function optimizePath(thresshold){
-    
-    var newpath = [];
-    var index = 0;
-    for(var i = 0; i < path.length; i++){
-        if(path[i].length > thresshold){
-            newpath[index] = path[i];
-            index++;
-        }
-    }
-    path = [];
-    path = newpath;
-}
 function showMaxPath(){
     var foundmax = 0;
     var max = 0;
-
     for(var i = 0; i < path.length; i++){
         if(max < path[i].length){
             max = path[i].length;
@@ -231,7 +211,7 @@ function showMaxPath(){
     }
 
     console.log("langste pad: " + foundmax);
-    
+    console.log(path[foundmax])
     for(var i = 0; i < path[foundmax].length; i++){
         stroke(0);
         ellipse( path[foundmax][i].x, path[foundmax][i].y, 10,10);
@@ -239,18 +219,18 @@ function showMaxPath(){
     return foundmax;
 }
 
-function addDifferencePath(m, acolor){
+function showDifferencePath(m, acolor){
     var diffpath= [];
-    //verzamel alle verschil-paden t.o.v. het langste pad
+   
     for(i = 0; i < path.length; i++){
         diffpath[i] = [];
         for(var j = 0; j < path[i].length; j++){
-            if(!contains(path[m], path[i][j])){
+            if(!contains(path[m],path[i][j])){
                 append(diffpath[i], path[i][j]);
             }
         }
     }
-    //bepaal wat de langste is (het grootste verschil)
+
     var max = 0;
     var maxd = 0;
     for(var d =0; d < diffpath.length; d++){
@@ -259,16 +239,13 @@ function addDifferencePath(m, acolor){
             maxd = d;
         }
     }
-    console.log("langste diffpad: " + maxd +   " lengte: " + max);
-    
+    console.log("langste diffpad: " + maxd);
+    console.log(diffpath[maxd])
     for(var i = 0; i < diffpath[maxd].length; i++){
         stroke(acolor);
         ellipse( diffpath[maxd][i].x, diffpath[maxd][i].y, 10,10);
     }
-
-    //voeg dit grootste verschil-pad toe aan het langste pad.
     path[m] = path[m].concat(diffpath[maxd]);
-    return max;
 }
 function findNextOnEllipse(pos, radius, steps){
     var next = [];
@@ -304,22 +281,15 @@ function contains(a, obj) {
 function checkColor(next){
     var found = false;
     var i = (next.y * 1000 * 4) + (next.x * 4);
-    //var acolor = color(255,255,255,255);
+    var acolor = color(model.pixels[0], model.pixels[1], model.pixels[2], model.pixels[3]);
     var colormarge = 10;
    
 
-   // if (abs(model.pixels[i] - red(acolor)) < colormarge &&
-   // abs(model.pixels[i + 1] - green(acolor)) < colormarge &&
-    //abs(model.pixels[i + 2] - blue(acolor)) < colormarge &&
-    //model.pixels[i + 3] == alpha(acolor)) {
+    if (abs(model.pixels[i] - red(acolor)) < colormarge &&
+    abs(model.pixels[i + 1] - green(acolor)) < colormarge &&
+    abs(model.pixels[i + 2] - blue(acolor)) < colormarge &&
+    model.pixels[i + 3] == alpha(acolor)) {
         //background
-   // }
-    //else 
-    if(model.pixels[i] == 255 &&
-        model.pixels[i+1] == 255 &&
-        model.pixels[i+2] == 255 &&
-        model.pixels[i+3] == 255){
-            //white pixel
     }
     else if(model.pixels[i] == 255 &&
         model.pixels[i+1] == 0 &&
