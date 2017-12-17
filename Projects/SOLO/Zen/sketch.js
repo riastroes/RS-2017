@@ -17,26 +17,33 @@ var show;
 
 var issaved;
 var model;
+var offset;
+
 var name;
 var pos;
 
 
 
 function preload() {
-    model = loadImage("images/Zen02.jpeg");
+    model = loadImage("images/line01.jpg");
 }
 
 function setup() {
 
     var canvas = createCanvas(1100, 1100);
-    for (var i = 1; i < 4; i++) {
-        model.resize(600, 600);
-    }
+    model.resize(1000, 1000);
+    offset = createVector(50, 50);
+
+    stroke(0);
+    //rect(offset.x - 1, offset.y - 1, 1000 + 2, 1000 + 2);
+    image(model, offset.x, offset.y);
+
 
     windowscale = 1;
     palette = new Color();
     colors = palette.create();
-    strokeWeight(2);
+
+
 
     layer = 0;
     maxlayers = 1;
@@ -44,14 +51,14 @@ function setup() {
     var maxskirt = 2; //0 whithout skirt
     //startlayerheight = 2;  // JellyBox
     //print3D = new Print3D("JellyBox", "MAXXFLEX", "normal", maxlayers, startlayerheight, maxskirt);
-    print3D = new Print3D("Ultimaker2+", "PLA", "fine", maxlayers, startlayerheight, maxskirt);
+    print3D = new Print3D("Annet", "PLA", "fine", maxlayers, startlayerheight, maxskirt);
 
 
     maxw = 120; //200
     maxh = 120; //35
     margew = 30;
     margeh = 150;
-    pos = createVector(30, 200);
+    pos = findStart();
 
     print3D.start();
 
@@ -75,13 +82,13 @@ function draw() {
 
         // createRaster();
         //print3D.addPointToLayer(layer, createVector(20, 450));
-        createPatternHanna();
+        //createPatternHanna();
         //print3D.addPointToLayer(layer, createVector(1080, 450));
-        stroke(0);
-        text(floor(grid.gridwidth) + " x " + floor(grid.gridheight), 50, 50)
+        //stroke(0);
+        //text(floor(grid.gridwidth) + " x " + floor(grid.gridheight), 50, 50)
 
-        name = "HannaNeckStrap";
-        print3D.print(layer);
+        name = "Zen";
+        //print3D.print(layer);
 
     }
     if (layer + 1 == maxlayers) {
@@ -92,6 +99,44 @@ function draw() {
 
 }
 
+function findStart() {
+    model.loadPixels();
+    var colormarge = 10;
+    var d = pixelDensity();
+    var found = false;
+    var pos = createVector(0, 0);
+    var acolor = color(model.pixels[0], model.pixels[1], model.pixels[2], model.pixels[3]);
+    //first black pixel
+    for (var i = 0; i < model.pixels.length; i += 4) {
+        if (abs(model.pixels[i] - red(acolor)) < colormarge &&
+            abs(model.pixels[i + 1] - green(acolor)) < colormarge &&
+            abs(model.pixels[i + 2] - blue(acolor)) < colormarge &&
+            model.pixels[i + 3] == alpha(acolor)) {
+
+            //background image
+
+        } else {
+            found = true;
+            pos.x = ((i / 4) % 1000);
+            pos.y = floor((i / 4) / 1000);
+
+            console.log(pos.x + ", " + pos.y);
+            stroke(0);
+            ellipse(pos.x + offset.x, pos.y + offset.y, 10, 10);
+
+            model.pixels[i] = 255;
+            model.pixels[i + 1] = 0;
+            model.pixels[i + 2] = 0;
+            model.pixels[i + 3] = 255;
+            break;
+
+        }
+    }
+    model.updatePixels();
+
+
+    return pos;
+}
 
 
 
