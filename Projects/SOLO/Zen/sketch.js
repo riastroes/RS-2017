@@ -19,7 +19,7 @@ var printpath;
 var issaved;
 var model;
 var offset;
-
+var buren;
 var name;
 var pos;
 var path;
@@ -27,31 +27,30 @@ var next;
 var m;
 var lastpos;
 var ready;
-
+var log;
 
 
 function preload() {
-    model = loadImage("images/blad03.jpg");
-    name = "blad03";
+    model = loadImage("images/onlinetree.png");
+    name = "onlinetree.png";
 }
 
 function setup() {
 
-    var canvas = createCanvas(1100, 1100);
+    var canvas = createCanvas(1400, 1100);
     model.resize(1000, 1000);
     model.loadPixels();
+    prepaire(model);
+    model.updatePixels();
     offset = createVector(50, 50);
 
-    stroke(0);
-    //rect(offset.x - 1, offset.y - 1, 1000 + 2, 1000 + 2);
     image(model, offset.x, offset.y);
+   
+    log = new Log(createVector(1120,80), 250,1000);
+    log.write("Logbook");
 
-
-    windowscale = 1;
     palette = new Color();
     colors = palette.create();
-
-
 
     layer = 0;
     maxlayers = 1;
@@ -68,9 +67,6 @@ function setup() {
     ready = false;
     issaved = false;
 
-
-
-
 }
 
 function mousePressed() {
@@ -84,37 +80,35 @@ function draw() {
 
     pos = findStart(lastpos);
     if(pos != undefined){
-        console.log("lastpos: " + lastpos.x +','+ lastpos.y);
-        console.log("pos: " + pos.x +','+ pos.y);
+        //log.write("lastpos: " + lastpos.x +','+ lastpos.y);
+        log.write("pos: " + pos.x +','+ pos.y);
         next = 0;
         path = [];
         path[next] = [];
         
-        findPath(next, pos);  //dit is een recursieve functie
+        findPath(next, pos, 100);  //dit is een recursieve functie
         repaintRedLines();
-        model.updatePixels();
-        image(model, offset.x, offset.y);
-        stroke(0);
-        ellipse(pos.x +  offset.x, pos.y +  offset.y, 10,10);
-        console.log("aantal paden:" + path.length);
+        //model.updatePixels();
+        //image(model, offset.x, offset.y);
+        //stroke(0);
+        //ellipse(pos.x +  offset.x, pos.y +  offset.y, 10,10);
+        log.write("aantal paden:" + path.length);
 
-        m = getMaxPath();
+        m = getMaxPath(10);
         
         
         if( path[m].length > 10){
             lastpos = path[m][path[m].length-1].copy();
             printpath = printpath.concat(path[m]);
-            console.log("printpath lengte:" + printpath.length);
-            showPrintpath(printpath);
+            log.write("printpath lengte:" + printpath.length);
+            //showPrintpath(printpath);
         }
-        fill(255);
-        rect(20,10, 100, 30);
-        fill(0);
-        text(frameCount,  20,30);
+        log.write(frameCount);
     }
 
-    if(frameCount ==1000 || pos == undefined){  
-        path = optimizePath(printpath,10);
+    if(frameCount ==1000 && pos != undefined){  
+        path = [];
+        path = optimizePath3(printpath,3);
         ready = true;
         if (layer < maxlayers) {
 
@@ -133,40 +127,49 @@ function draw() {
    
 
 }
-
-function findPath(current, p){
+function prepaire(img){
+    //make black and white;
+    for( var i= 0; i < img.pixels.length; i+=4){
+        if(img.pixels[i] != 255){
+            img.pixels[i] = 0;
+            img.pixels[i+1] = 0;
+            img.pixels[i+2] = 0;
+            img.pixels[i+3] = 255;
+        }
+    }
+}
+function findPath(current, p, buffersize){
    
     append(path[current], p);
-    var buren = getBuren(p);
+    var i = (p.y * 1000 * 4) + (p.x * 4);
+    model.pixels[i] = 255;
+    model.pixels[i+1] = 0;
+    model.pixels[i+2] = 0;
+    model.pixels[i+3] = 255;
+    getBuren(p);
     
     for(var b = 0; b < buren.length; b++){
         if(checkColor(buren[b], "black")){
             next++;
             path[next] = [];
             path[next] = path[next].concat(path[current]);
-            if((next) <7000){
+            if((next) <buffersize){
                 
                 var i = (buren[b].y * 1000 * 4) + (buren[b].x * 4);
                 //maak rood
-                model.pixels[i] = 255;
-                model.pixels[i+1] = 0;
-                model.pixels[i+2] = 0;
-                model.pixels[i+3] = 255;
+                // model.pixels[i] = 255;
+                // model.pixels[i+1] = 0;
+                // model.pixels[i+2] = 0;
+                // model.pixels[i+3] = 255;
             
-                findPath(next, buren[b]);
+                findPath(next, buren[b], buffersize);
             }
         }
-        else{
-        // var i = (buren[b].y * 1000 * 4) + (buren[b].x * 4);
-        // model.pixels[i] = 255;
-        // model.pixels[i+1] = 0;
-        // model.pixels[i+2] = 0;
-        // model.pixels[i+3] = 255;
-        }
+        
     }
 }
 function getBuren(pos){
-    var buren = [];
+    buren = [];
     
     buren[0] = pos.copy().add(1,0);
     buren[1] = pos.copy().add(1,-1);
@@ -177,8 +180,6 @@ function getBuren(pos){
     buren[6] = pos.copy().add(0,1);
     buren[7] = pos.copy().add(1,1);
 
-    
-    return buren;
 }
 function repaintRedLines(){
     for (var i = 0; i < model.pixels.length; i += 4) {
@@ -207,7 +208,7 @@ function findStart(last) {
     for (var i = 0; i < model.pixels.length; i += 4) {
         pos.x = floor((i / 4) % 1000);
         pos.y = floor((i / 4) / 1000);
-        if(checkColor(pos, "black or red")){
+        if(checkColor(pos, "black")){
             if(dist(pos.x, pos.y, last.x, last.y) < max){
                 found = true;
                 max = dist(pos.x, pos.y, last.x, last.y);
@@ -250,13 +251,67 @@ function optimizePath(oldpath, steps){
         newpath[index] = oldpath[i].copy();
         index++;
     }
+    return newpath;
+}
+function optimizePath(oldpath, steps){
+    //eke 10e punt wordt meegenomen
+    var newpath = [];
+    var index = 0;
+    
+    for(var i = 0; i < oldpath.length; i += steps){
+        newpath[index] = oldpath[i].copy();
+        index++;
+    }
+    return newpath;
+}
+function optimizePath2(oldpath, steps){
+    //elke punt dat steps verder ligt dan vorige punt, wordt meegenomen
+    //en niet met een even y positie
+    var newpath = [];
+    var index = 1;
+    append(newpath, oldpath[0].copy());
+    for(var i = 1; i < oldpath.length; i += 1){
+        if(oldpath[i].y % 2 == 0){
+            if(dist(newpath[index-1].x, newpath[index-1].y, oldpath[i].x, oldpath[i].y)>steps){
+                
+                newpath[index] = oldpath[i].copy();
+
+                index++;
+            }
+        }
+     }
+    
     oldpath = [];
     oldpath = newpath;
     return oldpath;
 }
-function getMaxPath(){
+
+function optimizePath3(oldpath,steps){
+    //alleen even x posities
+    //alleen even y posities
+    var newpath = [];
+    var index = 1;
+    append(newpath, oldpath[0].copy());
+    for(var i = 1; i < oldpath.length; i += 1){
+        if(oldpath[i].x % steps == 0){
+            if(oldpath[i].y % steps == 0){
+                //if(dist(newpath[index-1].x, newpath[index-1].y, oldpath[i].x, oldpath[i].y)>steps){
+                    
+                    newpath[index] = oldpath[i].copy();
+
+                    index++;
+               // }
+            }
+        }
+     }
+    
+    oldpath = [];
+    oldpath = newpath;
+    return oldpath;
+}
+function getMaxPath(min){
     var foundmax = 0;
-    var max = 0;
+    var max = min;
 
     for(var i = 0; i < path.length; i++){
         if(max < path[i].length){
@@ -265,61 +320,27 @@ function getMaxPath(){
         }
     }
 
-    console.log("langste pad: " + foundmax);
+    log.write("langste pad: " + foundmax);
     
     for(var i = 0; i < path[foundmax].length; i++){
         var a = (path[foundmax][i].y * 1000 * 4) + (path[foundmax][i].x * 4);
         path[foundmax][i].x += offset.x;
         path[foundmax][i].y += offset.y;
+        //maak groen
         model.pixels[a] = 0;
         model.pixels[a+1] = 255;
         model.pixels[a+2] = 0;
         model.pixels[a+3] = 255;
         
     }
+    model.updatePixels();
+    image(model, offset.x, offset.y);
     return foundmax;
 }
 
-function addDifferencePath(m, acolor){
-    var diffpath= [];
-    //verzamel alle verschil-paden t.o.v. het langste pad
-    for(i = 0; i < path.length; i++){
-        diffpath[i] = [];
-        for(var j = 0; j < path[i].length; j++){
-            if(!contains(path[m], path[i][j])){
-                append(diffpath[i], path[i][j]);
-            }
-        }
-    }
-    //bepaal wat de langste is (het grootste verschil)
-    var max = 0;
-    var maxd = 0;
-    for(var d =0; d < diffpath.length; d++){
-        if(diffpath[d].length > max){
-            max = diffpath[d].length;
-            maxd = d;
-        }
-    }
-    console.log("langste diffpad: " + maxd +   " lengte: " + max);
-    
-    for(var i = 0; i < diffpath[maxd].length; i++){
-        stroke(acolor);
-        ellipse( diffpath[maxd][i].x, diffpath[maxd][i].y, 10,10);
-    }
 
-    //voeg dit grootste verschil-pad toe aan het langste pad.
-    path[m] = path[m].concat(diffpath[maxd]);
-    return max;
-}
 
-function contains(a, obj) {
-    for (var i = 0; i < a.length; i++) {
-        if (a[i] === obj) {
-            return true;
-        }
-    }
-    return false;
-}
+
 function checkColor(next, colorname){
     var found = false;
     var i = (next.y * 1000 * 4) + (next.x * 4);
@@ -381,69 +402,6 @@ function inPos(next){
     }
     return found;
 }
-function createPattern05(path, p, w, h) {
-    //van links naar rechts
-    var r = p.copy();
-    var angle = TWO_PI / 4;
-    append(path, r.copy());
-    for (var i = 0; i < 4; i++) { //{ ? ? ? ** * ANGLE VERANDEREN IN 0 T / M 8 ETC.
-        r.x += (w * cos(-i * angle));
-        r.y += (h * sin(-i * angle));
+function log(atext){
 
-        append(path, r.copy());
-    }
-}
-
-function createPattern06(path, p, w, h) {
-    //van rechts naar links
-    var r = p.copy();
-    var angle = TWO_PI / 4;
-    append(path, r.copy());
-
-    for (var i = 0; i < 4; i++) {
-        r.x += w * cos(PI + (i * angle));
-        r.y += h * sin(PI + (i * angle));
-
-        append(path, r.copy());
-    }
-
-}
-
-
-
-function createPatternHanna(path, p, w, h) {
-    //with image pattern
-    show = true;
-    grid = new Grid(createVector(margew, 150));
-    grid.init2(600, 600, maxw, maxh);
-    grid.showMargin2(margew, margeh);
-    //grid.maskImage2(margew, margeh, model1, colors[0]);
-    grid.collectColors(30, 150, model, colors[0]);
-    grid.reorder();
-    grid.reorderc();
-    //grid.showErrors();
-    grid.colormarge = 30;
-
-    var acolor = colors[0];
-    var bcolor = color(255, 255, 0);
-
-    var path = [];
-    for (var i = 0; i < grid.c.length - 1; i++) {
-        if (grid.c[i].p.x <= grid.c[i + 1].p.x && grid.c[i].p.y == grid.c[i].p.y) { //van links naar rechts
-            if (this.palette.compare(grid.c[i].color, acolor, grid.colormarge)) {
-                createPattern05(path, grid.c[i].p.copy(), 3, 5);
-            } else {
-                grid.c[i].p.z = 0;
-                append(path, grid.c[i].p.copy());
-            }
-        } else {
-            if (this.palette.compare(grid.c[i].color, acolor, grid.colormarge)) {
-                createPattern06(path, grid.c[i].p.copy(), 3, 5);
-            } else {
-                grid.c[i].p.z = 0;
-                append(path, grid.c[i].p.copy());
-            }
-        }
-    }
-    print3D.addToLayer(layer, path);
 }
