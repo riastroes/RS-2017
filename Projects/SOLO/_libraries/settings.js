@@ -36,8 +36,7 @@ Settings.prototype.initMaterial = function() {
                                 this.initStyle(0.4, 0.07, 800); //test OK 0.3, 0.07, 800
                             } else if (this.style == "normal") {
                                 this.initStyle(0.4, 0.12, 800); //test OK
-                            }
-                            else if (this.style == "kant") {
+                            } else if (this.style == "kant") {
                                 this.initStyle(0.4, 0.04, 800); //test OK 0.3, 0.07, 800
                             }
                             break;
@@ -60,6 +59,9 @@ Settings.prototype.initMaterial = function() {
                             } else if (this.style == "fine") {
 
                                 this.initStyle(0.4, 0.12, 800); //test OK
+                            } else if (this.style == "dik") {
+
+                                this.initStyle(0.3, 0.2, 800); //test OK
                             }
                             break;
                         }
@@ -199,7 +201,7 @@ Settings.prototype.initMaterial = function() {
                             }
                             break;
                         }
-                        case "NYLON":
+                    case "NYLON":
                         {
                             this.materialcode = "RTRANS";
                             if (this.style == "normal") {
@@ -330,8 +332,8 @@ Settings.prototype.initPrinter = function() {
             }
         case "PURECOPER":
             {
-                this.nozzletemp = 177;  // 161
-                this.bedtemp = 50;      // 70
+                this.nozzletemp = 177; // 161
+                this.bedtemp = 50; // 70
                 break;
             }
         case "PETGCARBON":
